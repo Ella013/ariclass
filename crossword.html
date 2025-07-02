@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentence Unscrambler</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <title>Crossword Puzzle Generator - AriClass</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/crossword.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="utility-nav">
@@ -26,6 +24,7 @@
             </div>
         </div>
     </div>
+
     <header>
         <div class="main-header">
             <div class="container">
@@ -48,7 +47,8 @@
                         <a href="/worksheets">Worksheets</a>
                         <ul class="dropdown-menu">
                             <li><a href="word-search.html">Word Search</a></li>
-                            <li><a href="unscramble.html">Unscramble</a></li>
+                            <li><a href="unscramble.html">Sentence Unscramble</a></li>
+                            <li><a href="crossword.html">Crossword Puzzle</a></li>
                         </ul>
                     </li>
                     <li><a href="/how-to-use">How to Use</a></li>
@@ -58,7 +58,8 @@
     </header>
 
     <div class="generator-container">
-        <h1>Sentence Unscrambler</h1>
+        <h1>Crossword Puzzle</h1>
+        
         <div class="generator-content">
             <!-- Input Section -->
             <div class="input-section">
@@ -74,63 +75,65 @@
                     </div>
                 </div>
 
-                <!-- Sentence Input -->
+                <!-- Word and Clue Input -->
                 <div class="word-input">
-                    <h2>Enter Your Sentences</h2>
-                    <textarea id="sentence-list" class="vocab-textarea" 
-                        placeholder="Enter sentences here. Each sentence should end with a period (.), question mark (?), or exclamation mark (!)."></textarea>
-                    <button id="clearButton" class="clear-btn">
-                        <i class="fas fa-trash-alt"></i> Clear All
-                    </button>
+                    <h2>Enter Words and Clues</h2>
+                    <div class="word-clue-container">
+                        <div class="word-clue-pair">
+                            <input type="text" class="word-input-field" placeholder="Enter word">
+                            <input type="text" class="clue-input-field" placeholder="Enter clue">
+                            <button class="remove-pair"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="word-input-buttons">
+                        <button id="add-word-btn" class="add-btn">
+                            <i class="fas fa-plus"></i> Add Word
+                        </button>
+                        <button id="clear-all-btn" class="clear-btn">
+                            <i class="fas fa-trash-alt"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Puzzle Size Selection -->
+                <div class="options">
+                    <div class="option-group">
+                        <h2>Puzzle Size</h2>
+                        <div class="size-options">
+                            <div class="size-option">
+                                <input type="radio" id="size-small" name="puzzle-size" value="small" checked>
+                                <label for="size-small">Small (10x10)</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="size-medium" name="puzzle-size" value="medium">
+                                <label for="size-medium">Medium (15x15)</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="size-large" name="puzzle-size" value="large">
+                                <label for="size-large">Large (20x20)</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Options -->
                 <div class="options">
                     <div class="option-group">
+                        <h2>Display Options</h2>
                         <label>
-                            <input type="checkbox" id="capitalize-first" checked>
-                            Capitalize first word in scrambled sentence
+                            <input type="checkbox" id="show-numbers" checked>
+                            Show question numbers
                         </label>
-                    </div>
-                    <div class="option-group">
-                        <h2>Layout Format</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="one-column" name="column-format" value="1" checked>
-                                <label for="one-column">1 Column</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="two-columns" name="column-format" value="2">
-                                <label for="two-columns">2 Columns</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="option-group">
-                        <h2>Spacing Between Questions</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="spacing-compact" name="question-spacing" value="compact">
-                                <label for="spacing-compact">Compact</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="spacing-normal" name="question-spacing" value="normal" checked>
-                                <label for="spacing-normal">Normal</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="spacing-wide" name="question-spacing" value="wide">
-                                <label for="spacing-wide">Wide</label>
-                            </div>
-                        </div>
+                        <label>
+                            <input type="checkbox" id="show-grid" checked>
+                            Show grid lines
+                        </label>
                     </div>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="random-generate-btn">
-                        <i class="fas fa-random"></i> Generate Random Worksheet
-                    </button>
                     <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-magic"></i> Generate Worksheet
+                        <i class="fas fa-magic"></i> Generate Puzzle
                     </button>
                 </div>
             </div>
@@ -140,9 +143,12 @@
                 <div class="preview-label">Preview</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <button id="print-btn" class="print-btn">
-                            <i class="fas fa-print"></i> Print Worksheet
-                        </button>
+                        <div class="print-controls">
+                            <button id="printButton">Print Worksheet</button>
+                            <label>
+                                <input type="checkbox" id="showAnswerKey"> Show Answer Key
+                            </label>
+                        </div>
                     </div>
                     <div id="puzzle-preview"></div>
                 </div>
@@ -150,43 +156,53 @@
         </div>
 
         <div class="description-section">
-            <h2>How to Create Your Unscramble Worksheet</h2>
+            <h2>How to Create Your Crossword Puzzle</h2>
             <div class="description-content">
                 <div class="instruction-block">
                     <h3>Simple Steps to Create</h3>
                     <ol>
-                        <li>Enter a title for your worksheet at the top</li>
-                        <li>Type or paste your sentences in the text box</li>
-                        <li>Make sure each sentence ends with a period (.)</li>
-                        <li>Click "Generate Worksheet" to create your activity</li>
+                        <li>Enter a title for your worksheet</li>
+                        <li>Choose the puzzle size that fits your needs</li>
+                        <li>Add words and their corresponding clues</li>
+                        <li>Customize display options as needed</li>
+                        <li>Click "Generate Puzzle" to create your crossword</li>
                         <li>Print your worksheet using the print button</li>
                     </ol>
                 </div>
                 <div class="instruction-block">
                     <h3>Educational Benefits</h3>
                     <ul>
-                        <li>Improves sentence structure understanding</li>
-                        <li>Enhances word order comprehension</li>
-                        <li>Perfect for ESL/EFL students</li>
-                        <li>Develops logical thinking skills</li>
-                        <li>Reinforces proper sentence formation</li>
+                        <li>Enhances vocabulary and spelling skills</li>
+                        <li>Develops problem-solving abilities</li>
+                        <li>Improves reading comprehension</li>
+                        <li>Encourages critical thinking</li>
+                        <li>Makes learning fun and engaging</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
                     <h3>Tips for Teachers</h3>
                     <ul>
-                        <li>Start with simple, short sentences for beginners</li>
                         <li>Use vocabulary from current lesson topics</li>
-                        <li>Include a mix of sentence types</li>
-                        <li>Print with answer key for easy grading</li>
-                        <li>Use as warm-up or review activities</li>
+                        <li>Write clear and concise clues</li>
+                        <li>Consider your students' level when choosing words</li>
+                        <li>Use a mix of easy and challenging words</li>
+                        <li>Create themed puzzles for specific units</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/unscramble.js"></script>
+    <div class="worksheet-buttons">
+        <button class="worksheet-button print">
+            <i class="fas fa-print"></i> Print Worksheet
+        </button>
+        <button class="worksheet-button answers">
+            <i class="fas fa-eye"></i> Show Answers
+        </button>
+    </div>
+
+    <script src="js/crossword.js"></script>
 
     <footer>
         <div class="footer-content">
@@ -201,7 +217,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="word-search.html">Word Search</a></li>
                     <li><a href="unscramble.html">Sentence Unscramble</a></li>
-                    <li><a href="#worksheets">All Worksheets</a></li>
+                    <li><a href="crossword.html">Crossword Puzzle</a></li>
                 </ul>
             </nav>
 
@@ -218,10 +234,6 @@
                 <h3>Contact Us</h3>
                 <a href="mailto:contact@ariclass.com">contact@ariclass.com</a>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>© 2025 Ariclass. All rights reserved.</p>
         </div>
     </footer>
 </body>

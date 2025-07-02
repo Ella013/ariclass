@@ -55,17 +55,31 @@ body {
     background: white;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.25rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-.title-input .option-group {
-    margin-top: 0.75rem;
+.title-input h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .title-input input[type="text"] {
     margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+}
+
+.title-input .option-group {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    text-align: left;
 }
 
 .title-input input {
@@ -94,10 +108,9 @@ body {
 }
 
 .word-input h2 {
-    color: var(--text-color);
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin: 0 0 1rem 0;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .vocab-item {

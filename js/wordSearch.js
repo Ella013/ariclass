@@ -85,10 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Initialize with one word input
-    addWordInput();
-
-    // Generate empty puzzle on page load
+    // Initialize with empty puzzle
     generateEmptyPuzzle();
 
     // Event Listeners
@@ -129,14 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add keyboard event listener to vocab list
     vocabList.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
-            const currentInput = e.target;
-            const word = currentInput.value.trim();
-
-            if (word !== '') {
-                if (vocabList.children.length < 10) {
-                    addWordInput();
-                }
-            }
             e.preventDefault();
         }
     });
@@ -307,32 +296,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function validateWords() {
-        const words = getWords();
-        const maxLength = getMaxWordLength();
+    function getMaxWordLength() {
+        const gridSize = getGridSize(selectedLevel);
+        return gridSize - 1;  // Maximum word length should be one less than grid size
+    }
+
+    function validateWord(word) {
+        if (!word) return false;
         
-        // Check word count
-        if (words.length > 10) {
-            showWarning('Maximum 10 words allowed. Please remove some words.');
-            return false;
-        }
-
-        // Check if any word is empty
-        if (words.length === 0) {
-            showWarning('Please enter at least one word');
-            return false;
-        }
-
-        // Check word length
-        const tooLongWords = words.filter(word => word.length > maxLength);
-        if (tooLongWords.length > 0) {
+        const maxLength = getMaxWordLength();
+        if (word.length > maxLength) {
             showWarning(`Please enter words with ${maxLength} letters or fewer`);
+            return false;
+        }
+
+        // Check for non-letter characters
+        if (!/^[a-zA-Z]+$/.test(word)) {
+            showWarning('Please use only letters (A-Z)');
             return false;
         }
 
         // Remove any existing warning if validation passes
         clearWarning();
-
         return true;
     }
 
@@ -424,9 +409,25 @@ document.addEventListener('DOMContentLoaded', function() {
         printBtn.disabled = false;
     }
 
-    function validateWord(word) {
+    function validateWords() {
+        const words = getWords();
         const maxLength = getMaxWordLength();
-        if (word.length > maxLength) {
+        
+        // Check word count
+        if (words.length > 10) {
+            showWarning('Maximum 10 words allowed. Please remove some words.');
+            return false;
+        }
+
+        // Check if any word is empty
+        if (words.length === 0) {
+            showWarning('Please enter at least one word');
+            return false;
+        }
+
+        // Check word length
+        const tooLongWords = words.filter(word => word.length > maxLength);
+        if (tooLongWords.length > 0) {
             showWarning(`Please enter words with ${maxLength} letters or fewer`);
             return false;
         }
@@ -676,15 +677,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add new function for random puzzle generation
+    function getRandomWords() {
+        const wordLists = {
+            easy: ['CAT', 'DOG', 'HAT', 'BAT', 'RAT', 'MAT', 'SAT', 'PAT', 'FAT', 'CAP'],
+            medium: ['APPLE', 'BEACH', 'CHAIR', 'DANCE', 'EAGLE', 'FLAME', 'GRAPE', 'HOUSE', 'JUICE', 'KNIFE'],
+            hard: ['AMAZING', 'BICYCLE', 'CAPTAIN', 'DOLPHIN', 'ELEPHANT', 'FANTASY', 'GARDEN', 'HARMONY', 'ISLAND', 'JOURNEY']
+        };
+
+        let difficulty;
+        switch(selectedLevel) {
+            case '1':
+                difficulty = 'easy';
+                break;
+            case '2':
+                difficulty = 'medium';
+                break;
+            default:
+                difficulty = 'hard';
+        }
+
+        const availableWords = wordLists[difficulty];
+        const numWords = Math.floor(Math.random() * 5) + 5; // Random number between 5 and 9
+        const selectedWords = [];
+        
+        while (selectedWords.length < numWords) {
+            const randomIndex = Math.floor(Math.random() * availableWords.length);
+            const word = availableWords[randomIndex];
+            if (!selectedWords.includes(word)) {
+                selectedWords.push(word);
+            }
+        }
+
+        return selectedWords;
+    }
+
     function generateRandomPuzzle() {
         const randomWords = getRandomWords();
-        if (!validateWords(randomWords)) return;
-        
-        // Set the random words to the input
-        const wordList = document.getElementById('word-list');
-        wordList.value = randomWords.join('\n');
-        
-        // Generate the puzzle with these words
+        vocabList.value = randomWords.join('\n');
         generatePuzzle();
     }
 }); 

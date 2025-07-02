@@ -1,0 +1,300 @@
+/* Crossword specific styles */
+.word-clue-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.word-clue-pair {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.word-input-field,
+.clue-input-field {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.word-input-field {
+    width: 30%;
+    text-transform: uppercase;
+}
+
+.clue-input-field {
+    width: 65%;
+}
+
+.remove-pair {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.remove-pair:hover {
+    color: #ff0000;
+}
+
+.word-input-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.add-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-btn:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Puzzle Grid Styles */
+.crossword-grid {
+    display: grid;
+    gap: 0;
+    width: fit-content;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.crossword-cell {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #000;
+    position: relative;
+    background: white;
+}
+
+.cell-blocked {
+    display: none; /* Hide blocked cells completely */
+}
+
+.cell-number {
+    position: absolute;
+    top: 0.1rem;
+    left: 0.1rem;
+    font-size: 0.7rem;
+    color: #000;
+}
+
+.cell-letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Clue Lists */
+.clue-lists {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem;
+    justify-content: center;
+}
+
+.clue-list {
+    flex: 1;
+    max-width: 400px;
+}
+
+.clue-list h3 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.clue-list ol {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.clue-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* Size Options */
+.size-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.size-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.size-option input[type="radio"] {
+    margin: 0;
+}
+
+.size-option label {
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Answer Sheet Styles */
+.page-break {
+    page-break-before: always;
+    margin-top: 3rem;
+}
+
+.answer-sheet {
+    margin-top: 3rem;
+}
+
+.answer-sheet-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Print Styles */
+@media print {
+    .input-section,
+    .preview-actions,
+    .preview-label {
+        display: none !important;
+    }
+
+    .preview-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    .crossword-grid {
+        page-break-inside: avoid;
+    }
+
+    .clue-lists {
+        page-break-before: always;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .clue-lists {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .word-clue-pair {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .word-input-field,
+    .clue-input-field {
+        width: 100%;
+    }
+
+    .remove-pair {
+        align-self: flex-end;
+    }
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.print-button {
+    background-color: #FFD600;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.answer-button {
+    background-color: #FFE5E5;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #000;
+}
+
+.print-button i,
+.answer-button i {
+    font-size: 1rem;
+}
+
+.print-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.print-controls button {
+    padding: 0.3rem 0.8rem;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.print-controls label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.print-controls input[type="checkbox"] {
+    margin: 0;
+}
+
+.worksheet-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.worksheet-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.worksheet-button.print {
+    background-color: #FFD600;
+}
+
+.worksheet-button.answers {
+    background-color: #FFE5E5;
+} 
