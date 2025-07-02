@@ -1,0 +1,1422 @@
+/* Generator Page Styles */
+:root {
+    --border-color: #e0e0e0;
+    --background-light: #fff9e6;
+    --primary-color: #ffd700;
+    --text-color: #333;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.generator-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 20px;
+}
+
+.generator-container h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.generator-content {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: visible;
+    justify-content: center;
+}
+
+/* Input Section */
+.input-section {
+    flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.input-section h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Title Input */
+.title-input {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.title-input .option-group {
+    margin-top: 0.75rem;
+}
+
+.title-input input[type="text"] {
+    margin-bottom: 0;
+}
+
+.title-input input {
+    width: calc(100% - 2rem);
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.title-input input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+/* Word Input */
+.word-input {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.word-input h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+}
+
+.vocab-item {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.english-word {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    width: calc(100% - 60px);
+    box-sizing: border-box;
+}
+
+.english-word:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.remove-word {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.remove-word:hover {
+    background: #ff2222;
+    transform: translateY(-1px);
+}
+
+.vocab-textarea {
+    width: 100%;
+    height: 150px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: none;
+    margin-bottom: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.vocab-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.add-word-btn {
+    width: 100%;
+    background: var(--background-light);
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.add-word-btn:hover {
+    background: #fff5d6;
+    transform: translateY(-1px);
+}
+
+/* Options */
+.options {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.option-group {
+    margin-bottom: 1.2rem;
+}
+
+.option-group:first-child {
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.option-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+}
+
+.option-group input[type="radio"],
+.option-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--primary-color);
+}
+
+/* Case Options */
+.case-options {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.case-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.case-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--primary-color);
+}
+
+.case-option label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.case-icon {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Preview Section */
+.preview-section {
+    flex: 1;
+    max-width: 700px;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 1070px;
+    position: relative;
+}
+
+.preview-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow: visible;
+    padding-top: 0.5rem;
+}
+
+#puzzle-preview {
+    width: 210mm;
+    height: 297mm;  /* A4 height */
+    background: white;
+    position: relative;
+    transform: scale(0.73);
+    transform-origin: top center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.06);
+    padding: 20mm;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 0;
+    display: block;
+    min-height: 297mm;
+}
+
+/* Preview Header */
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.preview-header h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.preview-actions {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 2rem;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 5rem;
+    left: 0;
+    z-index: 10;
+}
+
+.print-btn, .answer-btn {
+    background: var(--primary-color);
+    border: none;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.print-btn:hover, .answer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.answer-btn.active {
+    background: var(--background-light);
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    box-shadow: none;
+    transform: none;
+}
+
+.puzzle-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    border: 1px solid var(--border-color);
+}
+
+/* Word highlight styles */
+.puzzle-grid {
+    margin: 0 auto 8mm auto;
+    border: 1px solid #000;
+    display: table;
+    width: 165mm;
+    height: 165mm;
+    position: relative;
+    transform: none;
+}
+
+.puzzle-grid .puzzle-row {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
+.puzzle-cell {
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14pt;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+/* Grid Sizes for Different Levels */
+.puzzle-grid.level-1 .puzzle-cell {
+    width: calc(165mm / 8);
+    height: calc(165mm / 8);
+    font-size: 24pt;
+}
+
+.puzzle-grid.level-2 .puzzle-cell {
+    width: calc(165mm / 11);
+    height: calc(165mm / 11);
+    font-size: 18pt;
+}
+
+.puzzle-grid.level-3 .puzzle-cell {
+    width: calc(165mm / 15);
+    height: calc(165mm / 15);
+    font-size: 14pt;
+}
+
+/* Word List */
+.word-list {
+    margin-top: 8mm;
+    padding-bottom: 10mm;
+    text-align: center;
+    max-height: 60mm;
+    overflow-y: auto;
+}
+
+.word-list h3 {
+    margin-bottom: 3mm;
+    font-size: 14pt;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.word-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2mm;
+    max-height: 50mm;
+    overflow-y: auto;
+}
+
+.word-list li {
+    font-size: 12pt;
+    display: inline;
+}
+
+.word-list li::before {
+    content: "• ";
+}
+
+.word-list li:not(:last-child) {
+    margin-right: 6mm;
+}
+
+/* Action Buttons */
+.action-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.action-button {
+    background: white;
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-button:hover {
+    background: var(--background-light);
+}
+
+.action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Navigation styles moved to style.css */
+
+/* Print Styles */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    /* Hide elements that should not be printed */
+    .navbar,
+    .utility-nav,
+    .main-header,
+    .top-menu,
+    .generator-container > h1,
+    .input-section,
+    .preview-header,
+    .description-section,
+    .action-buttons,
+    .print-btn,
+    .preview-actions,
+    footer {
+        display: none !important;
+    }
+
+    /* Reset styles for the print containers */
+    body,
+    .generator-container,
+    .generator-content,
+    .preview-section,
+    .preview-wrapper {
+        background: white !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    /* Style the actual printable area */
+    #puzzle-preview {
+        transform: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 20mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        background: white !important;
+        display: block !important;
+    }
+
+    #puzzle-preview .student-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        margin-bottom: 10mm !important;
+        width: 100% !important;
+    }
+
+    #puzzle-preview .preview-logo {
+        height: 12mm !important;
+        width: auto !important;
+        object-fit: contain !important;
+    }
+
+    #puzzle-preview .puzzle-title {
+        text-align: center !important;
+        font-size: 24pt !important;
+        font-weight: bold !important;
+        margin: 8mm 0 !important;
+        display: block !important;
+    }
+
+    #puzzle-preview .puzzle-grid {
+        margin: 0 auto 8mm auto !important;
+        border: 1px solid #000 !important;
+        display: table !important;
+        width: 165mm !important;
+        height: 165mm !important;
+        position: relative !important;
+        left: 0 !important;
+        transform: none !important;
+        border-collapse: collapse !important;
+    }
+
+    #puzzle-preview .puzzle-grid .puzzle-row {
+        display: flex !important;
+        justify-content: center !important;
+        width: fit-content !important;
+    }
+
+    #puzzle-preview .puzzle-cell {
+        border: 1px solid #000 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #puzzle-preview .puzzle-grid.level-1 .puzzle-cell {
+        width: calc(165mm / 8) !important;
+        height: calc(165mm / 8) !important;
+        font-size: 24pt !important;
+    }
+
+    #puzzle-preview .puzzle-grid.level-2 .puzzle-cell {
+        width: calc(165mm / 11) !important;
+        height: calc(165mm / 11) !important;
+        font-size: 18pt !important;
+    }
+
+    #puzzle-preview .puzzle-grid.level-3 .puzzle-cell {
+        width: calc(165mm / 15) !important;
+        height: calc(165mm / 15) !important;
+        font-size: 14pt !important;
+    }
+
+    #puzzle-preview .word-list {
+        margin-top: 8mm !important;
+        padding-bottom: 10mm !important;
+        text-align: center !important;
+        columns: none !important;
+    }
+
+    #puzzle-preview .word-list ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0 2mm !important;
+    }
+
+    #puzzle-preview .word-list li {
+        font-size: 12pt !important;
+        display: inline !important;
+        margin: 0 !important;
+    }
+
+    #puzzle-preview .word-list li::before {
+        content: "• " !important;
+    }
+
+    #puzzle-preview .word-list li:not(:last-child) {
+        margin-right: 6mm !important;
+    }
+
+    .answer-btn {
+        display: none !important;
+    }
+    
+    .puzzle-cell.answer-highlight::before {
+        display: none !important;
+    }
+}
+
+/* Description Section */
+.description-section {
+    margin-top: 4rem;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.description-section h2 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.description-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.instruction-block {
+    padding: 1.5rem;
+    background: var(--background-light);
+    border-radius: 8px;
+}
+
+.instruction-block h3 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.instruction-block ol,
+.instruction-block ul {
+    padding-left: 1.5rem;
+    margin: 0;
+}
+
+.instruction-block li {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.instruction-block ol li {
+    list-style-type: decimal;
+}
+
+.instruction-block ul li {
+    list-style-type: disc;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .generator-content {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-wrapper {
+        padding: 1rem;
+        min-height: calc(297mm * 0.3);
+    }
+
+    .puzzle-preview {
+        transform: scale(0.25);
+    }
+
+    .description-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Logo Input */
+.logo-input {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.logo-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.logo-option h3 {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.logo-controls {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.logo-text {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.logo-text:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.logo-upload {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.logo-upload:hover {
+    border-color: var(--primary-color);
+    background: var(--background-light);
+}
+
+.logo-upload i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+/* Preview Logo Styles */
+.puzzle-header,
+.puzzle-footer {
+    position: relative;
+    text-align: center;
+    margin-bottom: 10mm;
+}
+
+.puzzle-header img,
+.puzzle-footer img {
+    max-height: 15mm;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+.puzzle-header .logo-text,
+.puzzle-footer .logo-text {
+    font-size: 14pt;
+    color: var(--text-color);
+}
+
+.preview-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.puzzle-header {
+    text-align: left;
+    padding: 0;
+    margin-bottom: 5mm;
+}
+
+@media print {
+    .preview-logo {
+        height: 12mm;
+    }
+    
+    .puzzle-header {
+        padding: 0;
+        margin-bottom: 5mm;
+    }
+}
+
+.clear-btn {
+    width: 100%;
+    background: #ff6b6b;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.clear-btn:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+.clear-btn i {
+    font-size: 1.1rem;
+}
+
+/* Level Selection Styles */
+.level-options {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.level-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.level-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--primary-color);
+}
+
+.level-option label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Preview Logo Styles */
+.puzzle-header,
+.puzzle-footer {
+    position: relative;
+    text-align: center;
+    margin-bottom: 10mm;
+}
+
+.puzzle-header img,
+.puzzle-footer img {
+    max-height: 15mm;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+.puzzle-header .logo-text,
+.puzzle-footer .logo-text {
+    font-size: 14pt;
+    color: var(--text-color);
+}
+
+.preview-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.puzzle-header {
+    text-align: left;
+    padding: 0;
+    margin-bottom: 5mm;
+}
+
+@media print {
+    .preview-logo {
+        height: 12mm;
+    }
+    
+    .puzzle-header {
+        padding: 0;
+        margin-bottom: 5mm;
+    }
+}
+
+/* Add container for buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview {
+    margin: 0 auto;  /* Center horizontally */
+    position: relative;
+    top: 50%;       /* Move down by 50% of container height */
+    transform: translateY(-50%);  /* Move up by 50% of element height */
+}
+
+/* Remove the unnecessary styles */
+.preview-container, .preview {
+    display: none;
+}
+
+/* Generate Button */
+.generate-btn {
+    background: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 1.2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    margin: 0.5rem;
+    display: inline-flex;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;  /* Changed to space-between to put logo left and info right */
+    align-items: flex-start;
+    margin-bottom: 10mm;
+}
+
+.header-left {
+    display: flex;
+    align-items: flex-start;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+    text-align: right;
+}
+
+.info-line {
+    display: flex;
+    align-items: baseline;
+    font-size: 12pt;
+    gap: 3mm;
+    justify-content: flex-end;
+}
+
+.info-line label {
+    font-weight: normal;
+    min-width: 15mm;
+}
+
+.info-line .input-field {
+    min-width: 50mm;
+    height: 5mm;
+    border-bottom: 0.2mm solid #999;
+}
+
+/* Puzzle Title */
+.puzzle-title {
+    text-align: center;
+    font-size: 24pt;
+    font-weight: bold;
+    margin: 8mm 0;
+}
+
+/* Preview Label */
+.preview-label {
+    font-size: 2.1rem;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
+@media print {
+    .preview-label {
+        display: none !important;
+    }
+}
+
+.puzzle-cell.answer-highlight {
+    color: #ff4444;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Unscramble Worksheet Styles */
+.worksheet-instructions {
+    text-align: center;
+    font-size: 12pt;
+    margin: 8mm 0;
+    color: var(--text-color);
+}
+
+.sentence-list {
+    padding: 0 15mm;
+    margin-top: 10mm;
+}
+
+.sentence-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8mm;
+}
+
+.sentence-line {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    margin-bottom: 4mm;
+}
+
+.sentence-number {
+    font-size: 12pt;
+    font-weight: bold;
+    min-width: 15pt;
+}
+
+.scrambled-words {
+    font-size: 12pt;
+    line-height: 1.5;
+}
+
+/* Clean single answer line */
+.answer-line {
+    border-bottom: 1px solid #000;
+    height: 2em;
+    margin: 2mm 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    box-sizing: border-box;
+}
+
+.answer-line.answer-shown {
+    border-bottom: none;
+    height: auto;
+    min-height: 30px;
+    margin: 2mm 0;
+    padding: 4px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ff4444;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.page-break {
+    page-break-before: always;
+}
+
+.answer-key {
+    padding: 15mm;
+}
+
+.answer-key h2 {
+    text-align: center;
+    font-size: 16pt;
+    margin-bottom: 10mm;
+}
+
+.answer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6mm;
+}
+
+.answer-item {
+    font-size: 12pt;
+    display: flex;
+    gap: 4mm;
+}
+
+.answer-number {
+    font-weight: bold;
+}
+
+.empty-state {
+    text-align: center;
+    color: #666;
+    font-size: 12pt;
+    margin-top: 20mm;
+}
+
+@media print {
+    .worksheet-instructions {
+        margin: 8mm 0 !important;
+    }
+
+    .sentence-list {
+        padding: 0 !important;
+    }
+
+    .sentence-item {
+        margin-bottom: 8mm !important;
+        page-break-inside: avoid !important;
+    }
+
+    .answer-key {
+        padding: 0 !important;
+    }
+
+    .answer-key h2 {
+        margin-bottom: 10mm !important;
+    }
+
+    .answer-line.answer-shown {
+        border-bottom: none;
+        height: auto;
+        min-height: 30px;
+        margin: 2mm 0;
+        padding: 4px 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #ff4444;
+    }
+}
+
+/* Add specific button color overrides */
+#random-generate-btn {
+    background: #fff3b0;  /* Light yellow tone */
+}
+
+.answer-btn {
+    background: #ffcdd2;  /* Light red/muted pink-red tone */
+}
+
+.answer-btn.active {
+    background: var(--background-light);
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Two-column layout */
+.two-column-layout {
+    width: 48%;
+    float: left;
+    padding-right: 2%;
+    border-right: 1px solid #ccc;
+}
+
+.column-right {
+    float: right;
+    padding-right: 0;
+    padding-left: 2%;
+    border-right: none;
+}
+
+/* Clear floats */
+.puzzle-preview::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Adjust spacing between questions */
+.sentence-item {
+    margin-bottom: 8mm;
+}
+
+/* Clean single answer line */
+.answer-line {
+    border-bottom: 1px solid #000;
+    height: 2em;
+    margin: 2mm 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    box-sizing: border-box;
+}
+
+.answer-line:last-child {
+    margin-bottom: 0;
+}
+
+.answer-line.answer-shown {
+    border-bottom: none;
+    height: auto;
+    min-height: 30px;
+    margin: 2mm 0;
+    padding: 4px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ff4444;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+@media print {
+    .answer-line.answer-shown {
+        border-bottom: none;
+        height: auto;
+        min-height: 30px;
+        margin: 2mm 0;
+        padding: 4px 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #ff4444;
+    }
+}
+
+/* Two-column layout container */
+.sentence-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 4%;
+    width: 100%;
+    margin-top: 10mm;
+}
+
+/* Column styles */
+.sentence-list {
+    padding: 0;
+}
+
+.sentence-container .sentence-list {
+    flex: 0 0 48%;
+    position: relative;
+}
+
+/* Add vertical line between columns */
+.sentence-container .column-left {
+    padding-right: 2%;
+    border-right: 0.5mm solid #ccc;
+}
+
+.sentence-container .column-right {
+    padding-left: 2%;
+}
+
+/* Ensure consistent spacing in both layouts */
+.sentence-item {
+    margin-bottom: 8mm;
+    break-inside: avoid;
+    width: 100%;
+}
+
+.sentence-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 2mm;
+    margin-bottom: 4mm;
+    width: 100%;
+}
+
+.scrambled-words {
+    font-size: 12pt;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* Spacing Classes */
+.spacing-compact .sentence-item {
+    margin-bottom: 4mm;
+}
+
+.spacing-normal .sentence-item {
+    margin-bottom: 8mm;
+}
+
+.spacing-wide .sentence-item {
+    margin-bottom: 12mm;
+}
+
+@media print {
+    .answer-line {
+        border-bottom: 1px solid #000 !important;
+        height: 2em !important;
+        margin: 2mm 0 !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        min-height: 30px !important;
+        box-sizing: border-box !important;
+    }
+
+    .answer-line:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    .answer-line.answer-shown {
+        border-bottom: none !important;
+        height: auto !important;
+        min-height: 30px !important;
+        margin: 2mm 0 !important;
+        padding: 4px 0 !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        color: #ff4444 !important;
+    }
+
+    .sentence-container {
+        display: flex !important;
+        gap: 4% !important;
+        width: 100% !important;
+        margin-top: 10mm !important;
+    }
+
+    .sentence-container .sentence-list {
+        flex: 0 0 48% !important;
+        position: relative !important;
+    }
+
+    .sentence-container .column-left {
+        padding-right: 2% !important;
+        border-right: 0.5mm solid #ccc !important;
+    }
+
+    .sentence-container .column-right {
+        padding-left: 2% !important;
+    }
+}
+
+.sentence-limit-warning {
+    color: #ff4444;
+    font-size: 14px;
+    margin: 12px auto;
+    padding: 4px 0;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.word-search-warning {
+    color: #ff4444;
+    font-size: 14px;
+    margin: 12px auto;
+    padding: 4px 0;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    width: 100%;
+} 

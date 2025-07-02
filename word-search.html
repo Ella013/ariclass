@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create custom word search puzzles for English learning. Perfect for teachers and students.">
+    <title>AriClass - English Worksheet Generator</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select">
+                <select id="language-selector">
+                    <option value="en">English</option>
+                    <option value="ko">한국어</option>
+                    <option value="ja">日本語</option>
+                    <option value="zh-CN">简体中文</option>
+                    <option value="zh-TW">繁體中文</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+            <div class="logo">
+                    <a href="index.html">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <h1>AriClass Worksheet Generator</h1>
+                    <p>Create custom English learning worksheets in seconds. Perfect for teachers and students!</p>
+                </div>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="/worksheets">Worksheets</a>
+                        <ul class="dropdown-menu">
+                <li><a href="word-search.html">Word Search</a></li>
+                            <li><a href="unscramble.html">Unscramble</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/how-to-use">How to Use</a></li>
+            </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>Word Search</h1>
+        
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Worksheet Title</h2>
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title">
+                </div>
+
+                <div class="word-input">
+                    <h2>Enter Your Words</h2>
+                    <textarea id="vocab-list" class="vocab-textarea" placeholder="Enter your words (press Enter for each word)&#10;Maximum 10 words"></textarea>
+                    <button id="add-word-btn" class="clear-btn">
+                        <i class="fas fa-trash"></i>
+                        Clear
+                    </button>
+                </div>
+
+                <div class="options">
+                    <div class="option-group">
+                        <div class="level-options">
+                            <div class="level-option">
+                                <input type="radio" id="level1" name="level" value="1">
+                                <label for="level1">Level 1 (Easy)</label>
+                            </div>
+                            <div class="level-option">
+                                <input type="radio" id="level2" name="level" value="2">
+                                <label for="level2">Level 2 (Medium)</label>
+                            </div>
+                            <div class="level-option">
+                                <input type="radio" id="level3" name="level" value="3" checked>
+                                <label for="level3">Level 3 (Hard)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <div style="display: flex; gap: 2rem;">
+                            <label>
+                                <input type="radio" name="case" id="uppercase-words" checked>
+                                UPPERCASE
+                            </label>
+                            <label>
+                                <input type="radio" name="case" id="lowercase-words">
+                                lowercase
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-word-list" checked>
+                            Show word list
+                        </label>
+                    </div>
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="diagonal-words" checked>
+                            Include diagonal words
+                        </label>
+                    </div>
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="reverse-words" checked>
+                            Include reverse words
+                        </label>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn">
+                        <i class="fas fa-random"></i> Generate Random Puzzle
+                    </button>
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> Generate Puzzle
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-label">Preview</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>How to Create Your Word Search Puzzle</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Simple Steps to Create</h3>
+                    <ol>
+                        <li>Enter a title for your worksheet at the top</li>
+                        <li>Type or paste your words in the "Enter Your Words" box (up to 10 words)</li>
+                        <li>Choose uppercase or lowercase letters</li>
+                        <li>Select additional options like diagonal or reverse words</li>
+                        <li>Click "Generate Puzzle" to create your word search</li>
+                        <li>Print your worksheet using the print button</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Educational Benefits</h3>
+                    <ul>
+                        <li>Enhances vocabulary recognition and spelling skills</li>
+                        <li>Improves pattern recognition and visual scanning abilities</li>
+                        <li>Perfect for ESL/EFL students and young learners</li>
+                        <li>Creates engaging activities for classroom or homework</li>
+                        <li>Customizable difficulty levels through various options</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Tips for Teachers</h3>
+                    <ul>
+                        <li>Use themed word lists to reinforce specific vocabulary topics</li>
+                        <li>Start with shorter words for beginners</li>
+                        <li>Enable diagonal and reverse words for advanced students</li>
+                        <li>Print multiple copies for classroom activities</li>
+                        <li>Use as warm-up activities or lesson supplements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/wordSearch.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable English worksheets for kids.</p>
+            </div>
+            
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="word-search.html">Word Search</a></li>
+                    <li><a href="unscramble.html">Sentence Unscramble</a></li>
+                    <li><a href="#worksheets">All Worksheets</a></li>
+                </ul>
+            </nav>
+
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:contact@ariclass.com">contact@ariclass.com</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

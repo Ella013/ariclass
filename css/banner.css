@@ -1,0 +1,46 @@
+/* Banner Styles */
+.banner-section {
+    background-color: var(--primary-color);
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+.banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.banner-slide {
+    text-align: center;
+    padding: 2rem;
+    display: none;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.banner-slide.active {
+    display: block;
+}
+
+.banner-slide h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.banner-slide p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} 
