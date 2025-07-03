@@ -16,6 +16,63 @@ document.addEventListener('DOMContentLoaded', function() {
     let answerMode = false;
     let lastSeed = 1;
 
+    // Random sentence database
+    const randomSentences = [
+        "The cat sleeps on the warm windowsill.",
+        "My brother plays soccer in the park.",
+        "She reads an interesting book every day.",
+        "They went to the beach last summer.",
+        "The dog chases the yellow ball.",
+        "I like to eat ice cream after dinner.",
+        "The birds sing in the morning.",
+        "He rides his bike to school.",
+        "We watched a movie at the theater.",
+        "The flowers bloom in the garden.",
+        "The children play in the playground.",
+        "My sister bakes delicious cookies.",
+        "The teacher writes on the blackboard.",
+        "The sun shines brightly today.",
+        "They built a sandcastle on the beach.",
+        "The rabbit hops through the field.",
+        "We visited the zoo on Saturday.",
+        "The boy draws pictures with crayons.",
+        "The fish swim in the blue pond.",
+        "She walks her dog in the park."
+    ];
+
+    // Function to get random sentences based on layout and spacing
+    function getRandomSentences() {
+        const layout = twoColumns.checked ? '2column' : '1column';
+        const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
+        const hasTitle = showTitle.checked;
+
+        // Calculate max sentences based on current layout
+        let maxSentences;
+        if (layout === '1column') {
+            if (spacing === 'compact') maxSentences = hasTitle ? 8 : 9;
+            else if (spacing === 'normal') maxSentences = hasTitle ? 7 : 8;
+            else maxSentences = hasTitle ? 6 : 7; // wide
+        } else {
+            if (spacing === 'compact') maxSentences = hasTitle ? 10 : 11;
+            else maxSentences = hasTitle ? 8 : 9; // normal & wide
+        }
+
+        // Shuffle and select random sentences
+        const shuffledSentences = [...randomSentences]
+            .sort(() => Math.random() - 0.5)
+            .slice(0, maxSentences)
+            .map(text => ({ text: text.slice(0, -1), punctuation: text.slice(-1) }));
+
+        return shuffledSentences;
+    }
+
+    // Modify randomGenerateBtn click handler
+    randomGenerateBtn.addEventListener('click', () => {
+        const sentences = getRandomSentences();
+        sentenceList.value = sentences.map(s => s.text + s.punctuation).join('\n');
+        generateWorksheet(true);
+    });
+
     // Spacing controls
     const spacingOptions = document.querySelectorAll('input[name="question-spacing"]');
 
@@ -41,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event Listeners
     generateBtn.addEventListener('click', () => generateWorksheet(false));
-    randomGenerateBtn.addEventListener('click', () => generateWorksheet(true));
     printBtn.addEventListener('click', printWorksheet);
     clearButton.addEventListener('click', clearAll);
     capitalizeFirst.addEventListener('change', updateCapitalization);
@@ -359,6 +415,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function printWorksheet() {
+        // Get current spacing class
+        const currentSpacing = document.querySelector('input[name="question-spacing"]:checked').value;
+        const spacingClass = `spacing-${currentSpacing}`;
+
+        // Apply spacing class to each sentence item
+        puzzlePreview.querySelectorAll('.sentence-item').forEach(item => {
+            item.classList.add(spacingClass);
+        });
+
+        // Print
         window.print();
     }
 }); 

@@ -198,8 +198,6 @@ body {
     transform: scaleX(1);
 }
 
-
-
 .nav-links .dropdown {
     position: relative;
 }
@@ -671,4 +669,36 @@ footer {
     font-size: 1.1rem;
     color: var(--text-secondary);
     line-height: 1.5;
+}
+
+@media print {
+    /* Hide non-printable elements */
+    .controls, .preview-actions, .word-input {
+        display: none !important;
+    }
+
+    /* Show only the preview content */
+    .preview-container {
+        position: static !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+
+    /* Maintain spacing in print */
+    .sentence-item.spacing-compact {
+        margin-bottom: 1rem !important;
+    }
+    
+    .sentence-item.spacing-normal {
+        margin-bottom: 2rem !important;
+    }
+    
+    .sentence-item.spacing-wide {
+        margin-bottom: 3rem !important;
+    }
+
+    /* Ensure proper page breaks */
+    .sentence-item {
+        page-break-inside: avoid;
+    }
 } 

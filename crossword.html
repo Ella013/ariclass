@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crossword Puzzle Generator - AriClass</title>
+    <meta name="description" content="Create custom crossword puzzles for English learning. Perfect for teachers and students.">
+    <title>AriClass - English Worksheet Generator</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
     <link rel="stylesheet" href="css/crossword.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="utility-nav">
@@ -24,7 +30,6 @@
             </div>
         </div>
     </div>
-
     <header>
         <div class="main-header">
             <div class="container">
@@ -61,51 +66,45 @@
         <h1>Crossword Puzzle</h1>
         
         <div class="generator-content">
-            <!-- Input Section -->
             <div class="input-section">
-                <!-- Title Input -->
                 <div class="title-input">
                     <h2>Worksheet Title</h2>
                     <input type="text" id="worksheet-title" placeholder="Enter worksheet title">
                     <div class="option-group">
                         <label>
                             <input type="checkbox" id="show-title" checked>
-                            Show worksheet title
+                            Show Title
                         </label>
                     </div>
                 </div>
 
-                <!-- Word and Clue Input -->
                 <div class="word-input">
-                    <h2>Enter Words and Clues</h2>
-                    <div class="word-clue-container">
-                        <div class="word-clue-pair">
-                            <input type="text" class="word-input-field" placeholder="Enter word">
-                            <input type="text" class="clue-input-field" placeholder="Enter clue">
-                            <button class="remove-pair"><i class="fas fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="word-input-buttons">
-                        <button id="add-word-btn" class="add-btn">
-                            <i class="fas fa-plus"></i> Add Word
-                        </button>
-                        <button id="clear-all-btn" class="clear-btn">
-                            <i class="fas fa-trash-alt"></i> Clear All
+                    <div class="section-header">
+                        <h2>Enter Words and Clues</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="Reset all words">
+                            <i class="fas fa-undo-alt"></i>
                         </button>
                     </div>
+                    <div class="word-clue-container"></div>
+                    <button id="add-word-btn" class="add-word-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Word
+                    </button>
+                    <button id="clear-all-btn" class="clear-btn">
+                        <i class="fas fa-trash"></i>
+                        Clear All
+                    </button>
                 </div>
 
-                <!-- Puzzle Size Selection -->
-                <div class="options">
+                <div class="options" id="puzzle-options">
                     <div class="option-group">
-                        <h2>Puzzle Size</h2>
-                        <div class="size-options">
+                        <div class="puzzle-size-options">
                             <div class="size-option">
-                                <input type="radio" id="size-small" name="puzzle-size" value="small" checked>
+                                <input type="radio" id="size-small" name="puzzle-size" value="small">
                                 <label for="size-small">Small (10x10)</label>
                             </div>
                             <div class="size-option">
-                                <input type="radio" id="size-medium" name="puzzle-size" value="medium">
+                                <input type="radio" id="size-medium" name="puzzle-size" value="medium" checked>
                                 <label for="size-medium">Medium (15x15)</label>
                             </div>
                             <div class="size-option">
@@ -116,39 +115,26 @@
                     </div>
                 </div>
 
-                <!-- Options -->
-                <div class="options">
-                    <div class="option-group">
-                        <h2>Display Options</h2>
-                        <label>
-                            <input type="checkbox" id="show-numbers" checked>
-                            Show question numbers
-                        </label>
-                        <label>
-                            <input type="checkbox" id="show-grid" checked>
-                            Show grid lines
-                        </label>
-                    </div>
-                </div>
-
                 <div class="button-container">
+                    <button class="generate-btn" id="generate-random-btn">
+                        <i class="fas fa-random"></i> Generate Random Puzzle
+                    </button>
                     <button class="generate-btn" id="generate-btn">
                         <i class="fas fa-magic"></i> Generate Puzzle
                     </button>
                 </div>
             </div>
 
-            <!-- Preview Section -->
             <div class="preview-section">
                 <div class="preview-label">Preview</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <div class="print-controls">
-                            <button id="printButton">Print Worksheet</button>
-                            <label>
-                                <input type="checkbox" id="showAnswerKey"> Show Answer Key
-                            </label>
-                        </div>
+                        <button id="print-btn" class="print-btn" disabled>
+                            <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                        <button class="answer-btn">
+                            <i class="fas fa-eye"></i> Show Answers
+                        </button>
                     </div>
                     <div id="puzzle-preview"></div>
                 </div>
@@ -162,9 +148,9 @@
                     <h3>Simple Steps to Create</h3>
                     <ol>
                         <li>Enter a title for your worksheet</li>
-                        <li>Choose the puzzle size that fits your needs</li>
                         <li>Add words and their corresponding clues</li>
-                        <li>Customize display options as needed</li>
+                        <li>Choose the puzzle size based on your needs</li>
+                        <li>Select additional display options</li>
                         <li>Click "Generate Puzzle" to create your crossword</li>
                         <li>Print your worksheet using the print button</li>
                     </ol>
@@ -174,32 +160,23 @@
                     <ul>
                         <li>Enhances vocabulary and spelling skills</li>
                         <li>Develops problem-solving abilities</li>
-                        <li>Improves reading comprehension</li>
-                        <li>Encourages critical thinking</li>
-                        <li>Makes learning fun and engaging</li>
+                        <li>Perfect for ESL/EFL students</li>
+                        <li>Creates engaging classroom activities</li>
+                        <li>Reinforces reading comprehension</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
                     <h3>Tips for Teachers</h3>
                     <ul>
-                        <li>Use vocabulary from current lesson topics</li>
-                        <li>Write clear and concise clues</li>
-                        <li>Consider your students' level when choosing words</li>
-                        <li>Use a mix of easy and challenging words</li>
-                        <li>Create themed puzzles for specific units</li>
+                        <li>Write clear and age-appropriate clues</li>
+                        <li>Use themed vocabulary for specific lessons</li>
+                        <li>Start with smaller puzzles for beginners</li>
+                        <li>Include a mix of easy and challenging words</li>
+                        <li>Use as review activities or homework</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="worksheet-buttons">
-        <button class="worksheet-button print">
-            <i class="fas fa-print"></i> Print Worksheet
-        </button>
-        <button class="worksheet-button answers">
-            <i class="fas fa-eye"></i> Show Answers
-        </button>
     </div>
 
     <script src="js/crossword.js"></script>
@@ -218,6 +195,7 @@
                     <li><a href="word-search.html">Word Search</a></li>
                     <li><a href="unscramble.html">Sentence Unscramble</a></li>
                     <li><a href="crossword.html">Crossword Puzzle</a></li>
+                    <li><a href="#worksheets">All Worksheets</a></li>
                 </ul>
             </nav>
 
@@ -234,6 +212,10 @@
                 <h3>Contact Us</h3>
                 <a href="mailto:contact@ariclass.com">contact@ariclass.com</a>
             </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
         </div>
     </footer>
 </body>

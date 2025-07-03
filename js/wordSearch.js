@@ -1,6 +1,8 @@
 // Add these variables at the top of the file, outside any function
 let answerMode = false;
 let currentAnswers = [];
+let currentWords = []; // Store current words
+let currentGrid = null; // Store current grid state
 
 // Add fixed letters for each grid size
 const fixedLetters = {
@@ -68,6 +70,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const levelInputs = document.querySelectorAll('input[name="level"]');
     let selectedLevel = '3'; // Default to level 3
 
+    // Set show word list checked by default
+    showWordList.checked = true;
+
+    // Add show word list change event listener
+    showWordList.addEventListener('change', function() {
+        const wordListElement = document.querySelector('.word-list');
+        if (wordListElement) {
+            wordListElement.style.display = this.checked ? 'block' : 'none';
+        }
+    });
+
     // Create and add answer button
     const previewActions = document.querySelector('.preview-actions');
     const answerBtn = document.createElement('button');
@@ -97,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Add event listeners for case change
-    uppercaseWords.addEventListener('change', generateEmptyPuzzle);
-    lowercaseWords.addEventListener('change', generateEmptyPuzzle);
+    uppercaseWords.addEventListener('change', updateCase);
+    lowercaseWords.addEventListener('change', updateCase);
 
     // Add case toggle button listener
     caseToggleBtn.addEventListener('click', function() {
@@ -107,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             uppercaseWords.checked = true;
         }
-        generateEmptyPuzzle();
+        updateCase();
     });
 
     // Logo image upload handlers
@@ -471,38 +484,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function placeWords(grid, words) {
-        const size = grid.length;
-        const placedWords = [];
+        const positions = [];
+        const gridSize = grid.length;
         const directions = getDirections();
-
-        // Sort words by length (longest first)
-        words.sort((a, b) => b.length - a.length);
-
-        for (let word of words) {
+        
+        for (const word of words) {
             let placed = false;
-            let attempts = 0;
-            const maxAttempts = 100;
-
-            while (!placed && attempts < maxAttempts) {
-                const direction = directions[Math.floor(Math.random() * directions.length)];
-                const startX = Math.floor(Math.random() * size);
-                const startY = Math.floor(Math.random() * size);
-
-                if (canPlaceWord(grid, word, startX, startY, direction)) {
-                    placeWord(grid, word, startX, startY, direction);
-                    placedWords.push(word);
-                    placed = true;
+            let wordPositions = [];
+            
+            // Try all possible positions
+            for (let attempts = 0; attempts < 100 && !placed; attempts++) {
+                const startX = Math.floor(Math.random() * gridSize);
+                const startY = Math.floor(Math.random() * gridSize);
+                
+                // Try all possible directions
+                for (const [dx, dy] of directions) {
+                    if (canPlaceWord(grid, word, startX, startY, [dx, dy])) {
+                        wordPositions = placeWord(grid, word, startX, startY, [dx, dy]);
+                        placed = true;
+                        break;
+                    }
                 }
-
-                attempts++;
             }
-
+            
             if (!placed) {
-                return placedWords; // Return partial list of placed words
+                return [false, []];
             }
+            
+            positions.push(wordPositions);
         }
-
-        return placedWords;
+        
+        return [true, positions];
     }
 
     function canPlaceWord(grid, word, startX, startY, [dx, dy]) {
@@ -528,40 +540,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function placeWord(grid, word, startX, startY, [dx, dy]) {
+        const positions = [];
         for (let i = 0; i < word.length; i++) {
-            const x = startX + dx * i;
-            const y = startY + dy * i;
+            const x = startX + (dx * i);
+            const y = startY + (dy * i);
             grid[y][x] = word[i];
+            positions.push({ row: y, col: x });
         }
+        return positions;
     }
 
     function fillEmptySpaces(grid, useFixed = true) {
         const gridSize = grid.length;
-        const letters = uppercaseWords.checked ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : 'abcdefghijklmnopqrstuvwxyz';
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         
-        if (useFixed) {
-            const fixedGrid = fixedLetters[gridSize.toString()];
-            for (let y = 0; y < gridSize; y++) {
-                for (let x = 0; x < gridSize; x++) {
-                    if (grid[y][x] === '') {
-                        grid[y][x] = uppercaseWords.checked ? fixedGrid[y][x] : fixedGrid[y][x].toLowerCase();
-                    }
-                }
-            }
-        } else {
-            for (let y = 0; y < gridSize; y++) {
-                for (let x = 0; x < gridSize; x++) {
-                    if (grid[y][x] === '') {
-                        grid[y][x] = letters[Math.floor(Math.random() * letters.length)];
+        for (let y = 0; y < gridSize; y++) {
+            for (let x = 0; x < gridSize; x++) {
+                if (grid[y][x] === '') {
+                    if (useFixed && fixedLetters[gridSize] && fixedLetters[gridSize][y] && fixedLetters[gridSize][y][x]) {
+                        let letter = fixedLetters[gridSize][y][x];
+                        grid[y][x] = uppercaseWords.checked ? letter.toUpperCase() : letter.toLowerCase();
+                    } else {
+                        const randomIndex = Math.floor(Math.random() * letters.length);
+                        let letter = letters[randomIndex];
+                        grid[y][x] = uppercaseWords.checked ? letter : letter.toLowerCase();
                     }
                 }
             }
         }
+        return grid;
     }
 
     function displayPuzzle(grid, words = [], answers = []) {
-        // Update currentAnswers before generating HTML
+        // Store current state
+        currentGrid = grid;
+        currentWords = words;
         currentAnswers = answers;
+
         let html = '';
         
         // Add header section with logo and student info
@@ -611,16 +626,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         html += '</div>';
 
-        if (showWordList.checked && words.length > 0) {
-            html += '<div class="word-list">';
-            html += '<h3>Find these words:</h3>';
-            html += '<ul>';
-            for (let word of words) {
-                html += `<li>${word}</li>`;
-            }
-            html += '</ul>';
-            html += '</div>';
+        // Add word list section with display style based on checkbox
+        html += `<div class="word-list" style="display: ${showWordList.checked ? 'block' : 'none'}">`;
+        html += '<h3>Find these words:</h3>';
+        html += '<ul>';
+        for (const word of words) {
+            html += `<li>${word}</li>`;
         }
+        html += '</ul>';
+        html += '</div>';
 
         puzzlePreview.innerHTML = html;
     }
@@ -712,8 +726,64 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function generateRandomPuzzle() {
-        const randomWords = getRandomWords();
-        vocabList.value = randomWords.join('\n');
-        generatePuzzle();
+        const words = getRandomWords().map(word => 
+            uppercaseWords.checked ? word.toUpperCase() : word.toLowerCase()
+        );
+        
+        if (!words || words.length === 0) {
+            showWarning('Failed to generate random words');
+            return;
+        }
+
+        const gridSize = getGridSize(selectedLevel);
+        const grid = createEmptyGrid(gridSize);
+        
+        // Place words and store their positions
+        const [success, wordPositions] = placeWords(grid, words);
+        if (!success) {
+            showWarning('Failed to place all words in the puzzle');
+            return;
+        }
+
+        fillEmptySpaces(grid);
+
+        // Apply case setting to the entire grid
+        const finalGrid = grid.map(row =>
+            row.map(cell =>
+                uppercaseWords.checked ? cell.toUpperCase() : cell.toLowerCase()
+            )
+        );
+        
+        // Store current state and display puzzle
+        currentGrid = finalGrid;
+        currentWords = words;
+        currentAnswers = wordPositions.map((positions, index) => ({
+            word: words[index],
+            positions: positions
+        }));
+        displayPuzzle(finalGrid, words, currentAnswers);
+        
+        // Update vocab list with random words
+        vocabList.value = words.join('\n');
+        printBtn.disabled = false;
+    }
+
+    function updateCase() {
+        if (!currentGrid) {
+            generateEmptyPuzzle();
+            return;
+        }
+
+        const newGrid = currentGrid.map(row => 
+            row.map(cell => 
+                uppercaseWords.checked ? cell.toUpperCase() : cell.toLowerCase()
+            )
+        );
+
+        const newWords = currentWords.map(word => 
+            uppercaseWords.checked ? word.toUpperCase() : word.toLowerCase()
+        );
+
+        displayPuzzle(newGrid, newWords, currentAnswers);
     }
 }); 
