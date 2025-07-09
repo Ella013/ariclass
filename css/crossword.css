@@ -9,7 +9,7 @@
 }
 
 .generate-btn {
-    background: var(--primary-color);
+    background: rgba(255, 215, 0, 0.85);
     color: var(--text-color);
     border: none;
     padding: 1.2rem;
@@ -31,46 +31,66 @@
 .generate-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 1;
 }
 
 #generate-random-btn {
-    background: var(--background-light);
+    background: rgba(255, 215, 0, 0.3);
+}
+
+#generate-random-btn:hover {
+    opacity: 1;
 }
 
 .word-clue-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     margin-bottom: 1rem;
-    height: 280px; /* 5개의 word-clue pair가 보이는 높이로 고정 */
+    height: 400px;
     overflow-y: auto;
-    padding-right: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    counter-reset: word-number;
 }
 
 .word-clue-pair {
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
-    align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+    padding-right: 0;
+}
+
+.word-clue-pair::before {
+    content: counter(word-number);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-150%);
+    font-weight: 500;
+    color: #666;
+    min-width: 1rem;
+    text-align: left;
 }
 
 .word-input-field,
 .clue-input-field {
-    padding: 0.8rem;
+    padding: 0.8rem 2.5rem 0.8rem 0.8rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.2s ease;
+    width: 100%;
 }
 
 .word-input-field {
-    width: 35%;
     font-weight: 500;
 }
 
 .clue-input-field {
-    width: 60%;
-    flex-grow: 1;
+    margin-left: 0;
 }
 
 .word-input-field:focus,
@@ -94,6 +114,9 @@
     height: 32px;
     border-radius: 50%;
     transition: all 0.2s ease;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.4rem;
 }
 
 .remove-pair:hover {
@@ -103,7 +126,7 @@
 
 .word-input-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     margin-top: 1rem;
 }
 
@@ -118,12 +141,60 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-right: 1rem;
 }
 
 .add-btn:hover {
     background-color: var(--primary-color-dark);
 }
 
+#add-word-btn {
+    background: rgba(255, 215, 0, 0.3);
+    color: #000;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+}
+
+#add-word-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.clear-btn {
+    background: rgba(255, 68, 68, 0.7);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.clear-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #ff2525;
+}
 
 
 /* Puzzle Grid Styles */
@@ -215,8 +286,12 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
 .clue-lists {
     display: flex;
     gap: 2rem;
-    margin: 2rem;
+    margin: 2rem auto;
     justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 1rem;
 }
 
 .clue-list {
@@ -239,26 +314,7 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
 }
 
 /* Size Options */
-.size-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
 
-.size-option {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.size-option input[type="radio"] {
-    margin: 0;
-}
-
-.size-option label {
-    cursor: pointer;
-    font-size: 1rem;
-}
 
 /* Answer Sheet Styles */
 .page-break {
@@ -278,15 +334,65 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
 
 /* Print Styles */
 @media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    /* Hide elements that should not be printed */
+    body * {
+        visibility: hidden;
+    }
+    
+    .navbar,
+    .utility-nav,
+    .main-header,
+    .top-menu,
+    .generator-container > h1,
     .input-section,
+    .preview-header,
+    .description-section,
+    .action-buttons,
+    .print-btn,
     .preview-actions,
-    .preview-label {
+    footer {
         display: none !important;
     }
 
-    .preview-section {
-        margin: 0;
-        padding: 0;
+    /* Reset styles for the print containers */
+    body,
+    .generator-container,
+    .generator-content,
+    .preview-section,
+    .preview-wrapper {
+        background: white !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    #puzzle-preview,
+    #puzzle-preview * {
+        visibility: visible;
+    }
+    
+    #puzzle-preview {
+        transform: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 20mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        background: white !important;
+        display: block !important;
     }
 
     .crossword-grid {
@@ -294,7 +400,13 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
     }
 
     .clue-lists {
-        page-break-before: always;
+        position: relative;
+        margin: 2rem auto;
+        page-break-inside: avoid;
+    }
+    
+    .answer-btn {
+        display: none !important;
     }
 }
 
@@ -303,6 +415,11 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
     .clue-lists {
         flex-direction: column;
         gap: 1rem;
+        margin: 1rem auto;
+    }
+    
+    .clue-list {
+        max-width: 100%;
     }
 
     .word-clue-pair {
@@ -413,6 +530,7 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    counter-reset: word-number;
 }
 
 .word-input h2 {
@@ -422,6 +540,14 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
     color: var(--text-color);
     font-size: 1.3rem;
     font-weight: 500;
+}
+
+.word-clue-container {
+    counter-reset: word-number;
+}
+
+.word-clue-pair {
+    counter-increment: word-number;
 }
 
 .word-clue-container::-webkit-scrollbar {
@@ -470,4 +596,74 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
 .reset-btn:hover {
     color: #ff4444;
     transform: rotate(-45deg);
+} 
+
+#puzzle-preview {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+#puzzle-preview .crossword-grid {
+    margin-bottom: 80px;
+}
+
+#puzzle-preview .clue-lists {
+    position: relative;
+    display: flex;
+    gap: 4rem;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+#puzzle-preview .across-clues,
+#puzzle-preview .down-clues {
+    flex: 1;
+    width: 50%;
+    max-width: 350px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#puzzle-preview .clue-list-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+#puzzle-preview .clue-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#puzzle-preview .clue-item {
+    margin-bottom: 5px;
+    text-align: left;
+    padding-right: 15px;
+}
+
+#puzzle-preview .clue-number {
+    margin-right: 8px;
+    display: inline-block;
+}
+
+#puzzle-preview .clue-text {
+    display: inline-block;
+}
+
+/* Print styles for clue lists */
+@media print {
+    #puzzle-preview {
+        padding-bottom: 20px;
+    }
+    
+    #puzzle-preview .clue-lists {
+        position: relative;
+        page-break-inside: avoid;
+    }
 } 

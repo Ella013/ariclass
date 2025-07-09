@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentence Unscrambler</title>
+    <meta name="description" content="Create matching lists worksheets for English learning. Perfect for teachers and students.">
+    <title>AriClass - English Worksheet Generator</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="css/matching-lists.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -48,7 +52,9 @@
                         <a href="/worksheets">Worksheets</a>
                         <ul class="dropdown-menu">
                             <li><a href="word-search.html">Word Search</a></li>
-                            <li><a href="unscramble.html">Unscramble</a></li>
+                            <li><a href="unscramble.html">Sentence Unscramble</a></li>
+                            <li><a href="crossword.html">Crossword Puzzle</a></li>
+                            <li><a href="matching-lists.html">Matching Lists</a></li>
                         </ul>
                     </li>
                     <li><a href="/how-to-use">How to Use</a></li>
@@ -58,90 +64,60 @@
     </header>
 
     <div class="generator-container">
-        <h1>Sentence Unscrambler</h1>
+        <h1>Matching Lists</h1>
+        
         <div class="generator-content">
-            <!-- Input Section -->
             <div class="input-section">
-                <!-- Title Input -->
                 <div class="title-input">
                     <h2>Worksheet Title</h2>
                     <input type="text" id="worksheet-title" placeholder="Enter worksheet title">
                     <div class="option-group">
                         <label>
                             <input type="checkbox" id="show-title" checked>
-                            Show worksheet title
+                            Show Title
                         </label>
                     </div>
                 </div>
 
-                <!-- Sentence Input -->
                 <div class="word-input">
-                    <h2>Enter Your Sentences</h2>
-                    <textarea id="sentence-list" class="vocab-textarea" 
-                        placeholder="Enter sentences here. Each sentence should end with a period (.), question mark (?), or exclamation mark (!)."></textarea>
-                    <button id="clearButton" class="clear-btn">
-                        <i class="fas fa-trash-alt"></i> Clear All
+                    <div class="section-header">
+                        <h2>Enter Word Pairs</h2>
+                        <button id="reset-pairs-btn" class="reset-btn" title="Reset all pairs">
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                    </div>
+                    <div class="word-pairs-container">
+                        <div class="word-pair-container"></div>
+                    </div>
+                    <button id="add-pair-btn" class="add-word-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Word Pair
                     </button>
-                </div>
-
-                <!-- Options -->
-                <div class="options">
-                    <div class="option-group">
-                        <label>
-                            <input type="checkbox" id="capitalize-first" checked>
-                            Capitalize first word in scrambled sentence
-                        </label>
-                    </div>
-                    <div class="option-group">
-                        <h2>Layout Format</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="one-column" name="column-format" value="1" checked>
-                                <label for="one-column">1 Column</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="two-columns" name="column-format" value="2">
-                                <label for="two-columns">2 Columns</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="option-group">
-                        <h2>Spacing Between Questions</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="spacing-compact" name="question-spacing" value="compact">
-                                <label for="spacing-compact">Compact</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="spacing-normal" name="question-spacing" value="normal" checked>
-                                <label for="spacing-normal">Normal</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="spacing-wide" name="question-spacing" value="wide">
-                                <label for="spacing-wide">Wide</label>
-                            </div>
-                        </div>
-                    </div>
+                    <button id="clear-all-btn" class="clear-btn">
+                        <i class="fas fa-trash"></i>
+                        Clear All
+                    </button>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="random-generate-btn">
+                    <button class="generate-btn" id="generate-random-btn">
                         <i class="fas fa-random"></i> Randomly generated
                     </button>
                     <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-magic"></i> Generate Worksheet
+                        <i class="fas fa-magic"></i> Generate List
                     </button>
                 </div>
             </div>
 
-            <!-- Preview Section -->
             <div class="preview-section">
                 <div class="preview-label">Preview</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
                         <button id="print-btn" class="print-btn">
                             <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                        <button class="answer-btn">
+                            <i class="fas fa-eye"></i> Show Answers
                         </button>
                     </div>
                     <div id="puzzle-preview"></div>
@@ -150,43 +126,42 @@
         </div>
 
         <div class="description-section">
-            <h2>How to Create Your Unscramble Worksheet</h2>
+            <h2>How to Create Your Matching Lists</h2>
             <div class="description-content">
                 <div class="instruction-block">
                     <h3>Simple Steps to Create</h3>
                     <ol>
-                        <li>Enter a title for your worksheet at the top</li>
-                        <li>Type or paste your sentences in the text box</li>
-                        <li>Make sure each sentence ends with a period (.)</li>
-                        <li>Click "Generate Worksheet" to create your activity</li>
+                        <li>Enter a title for your worksheet</li>
+                        <li>Add pairs of matching words or phrases</li>
+                        <li>Click "Generate List" to create your worksheet</li>
                         <li>Print your worksheet using the print button</li>
                     </ol>
                 </div>
                 <div class="instruction-block">
                     <h3>Educational Benefits</h3>
                     <ul>
-                        <li>Improves sentence structure understanding</li>
-                        <li>Enhances word order comprehension</li>
+                        <li>Enhances vocabulary understanding</li>
+                        <li>Improves word association skills</li>
                         <li>Perfect for ESL/EFL students</li>
-                        <li>Develops logical thinking skills</li>
-                        <li>Reinforces proper sentence formation</li>
+                        <li>Creates engaging matching activities</li>
+                        <li>Reinforces learning connections</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
                     <h3>Tips for Teachers</h3>
                     <ul>
-                        <li>Start with simple, short sentences for beginners</li>
-                        <li>Use vocabulary from current lesson topics</li>
-                        <li>Include a mix of sentence types</li>
-                        <li>Print with answer key for easy grading</li>
-                        <li>Use as warm-up or review activities</li>
+                        <li>Use clear and related pairs</li>
+                        <li>Include a mix of easy and challenging matches</li>
+                        <li>Group related concepts together</li>
+                        <li>Use as review activities</li>
+                        <li>Combine with other learning activities</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/unscramble.js"></script>
+    <script src="js/matching-lists.js"></script>
 
     <footer>
         <div class="footer-content">
@@ -201,7 +176,8 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="word-search.html">Word Search</a></li>
                     <li><a href="unscramble.html">Sentence Unscramble</a></li>
-                    <li><a href="#worksheets">All Worksheets</a></li>
+                    <li><a href="crossword.html">Crossword Puzzle</a></li>
+                    <li><a href="matching-lists.html">Matching Lists</a></li>
                 </ul>
             </nav>
 

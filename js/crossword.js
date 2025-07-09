@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const addWordBtn = document.getElementById('add-word-btn');
     const clearAllBtn = document.getElementById('clear-all-btn');
     const wordClueContainer = document.querySelector('.word-clue-container');
-    // Numbers are always shown
-    // Remove grid and answer key options
+    const answerBtn = document.querySelector('.answer-btn');
+    let showingAnswers = false;
     let currentPuzzle = null;
 
     // Initialize with five empty word-clue pairs
@@ -26,16 +26,76 @@ document.addEventListener('DOMContentLoaded', function() {
     printBtn.addEventListener('click', printWorksheet);
     showTitle.addEventListener('change', updatePreview);
 
-    // Add event listeners for puzzle size options
-    document.querySelectorAll('input[name="puzzle-size"]').forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (currentPuzzle) {
-                generatePuzzle(); // Regenerate puzzle with new size
-            } else {
-                displayEmptyPreview(); // Update empty preview with new size
-            }
+    // Add Show Answers button event listener
+    answerBtn.addEventListener('click', function() {
+        if (!currentPuzzle) return;
+        showingAnswers = !showingAnswers;
+        
+        // Update button text
+        this.innerHTML = showingAnswers ? 
+            '<i class="fas fa-eye-slash"></i> Hide Answers' : 
+            '<i class="fas fa-eye"></i> Show Answers';
+            
+        // Update preview with or without answers
+        let html = '';
+        
+        // Add header section
+        html += '<div class="student-header">';
+        html += '<div class="header-left">';
+        html += '<div class="puzzle-header">';
+        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="info-group">';
+        html += '<div class="info-line">';
+        html += '<label>Name:</label>';
+        html += '<div class="input-field"></div>';
+        html += '</div>';
+        html += '<div class="info-line">';
+        html += '<label>Date:</label>';
+        html += '<div class="input-field"></div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+
+        // Add title if show-title is checked
+        if (showTitle.checked) {
+            const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
+            html += `<div class="puzzle-title">${title}</div>`;
+        }
+
+        // Add puzzle grid with or without answers
+        html += currentPuzzle.generateHTML(true, true, showingAnswers);
+
+        // Add clue lists
+        html += '<div class="clue-lists">';
+        
+        // Across clues
+        html += '<div class="across-clues">';
+        html += '<div class="clue-list-title">Across:</div>';
+        html += '<div class="clue-list">';
+        currentPuzzle.acrossClues.sort((a, b) => a.number - b.number).forEach(clue => {
+            html += `<div class="clue-item"><span class="clue-number">${clue.number}.</span> <span class="clue-text">${clue.clue}</span></div>`;
         });
+        html += '</div>';
+        html += '</div>';
+        
+        // Down clues
+        html += '<div class="down-clues">';
+        html += '<div class="clue-list-title">Down:</div>';
+        html += '<div class="clue-list">';
+        currentPuzzle.downClues.sort((a, b) => a.number - b.number).forEach(clue => {
+            html += `<div class="clue-item"><span class="clue-number">${clue.number}.</span> <span class="clue-text">${clue.clue}</span></div>`;
+        });
+        html += '</div>';
+        html += '</div>';
+        
+        html += '</div>';
+
+        puzzlePreview.innerHTML = html;
     });
+
+
     
     // Reset button event listener
     const resetWordsBtn = document.getElementById('reset-words-btn');
@@ -58,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate random puzzle
     function generateRandomPuzzle() {
         // Clear existing words
-        clearAll();
+        wordClueContainer.innerHTML = '';
 
         // Select a random category
         const categories = Object.keys(randomWords);
@@ -70,34 +130,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const numWords = Math.floor(Math.random() * 4) + 5; // 5 to 8 words
         const selectedWords = shuffledWords.slice(0, numWords);
 
-        // Clear existing word-clue pairs
-        wordClueContainer.innerHTML = '';
+        // Add first word
+        addWordCluePair();
+        let pairs = document.querySelectorAll('.word-clue-pair');
+        let firstPair = pairs[0];
+        firstPair.querySelector('.word-input-field').value = selectedWords[0];
+        firstPair.querySelector('.clue-input-field').value = `Clue for ${selectedWords[0]}`;
 
-        // Add words and clues
-        selectedWords.forEach((word, index) => {
-            const pair = document.createElement('div');
-            pair.className = 'word-clue-pair';
-            pair.innerHTML = `
-                <input type="text" class="word-input-field" value="${word}">
-                <input type="text" class="clue-input-field" value="Clue for ${word}">
-                <button class="remove-pair"><i class="fas fa-times"></i></button>
-            `;
-            wordClueContainer.appendChild(pair);
-
-            // Add event listeners to the new pair
-            const removeButton = pair.querySelector('.remove-pair');
-            if (index === 0) {
-                removeButton.style.visibility = 'hidden';
-            }
-            removeButton.addEventListener('click', function() {
-                if (document.querySelectorAll('.word-clue-pair').length > 1) {
-                    pair.remove();
-                }
-            });
-        });
+        // Add remaining words
+        for (let i = 1; i < selectedWords.length; i++) {
+            addWordCluePair();
+            pairs = document.querySelectorAll('.word-clue-pair');
+            const currentPair = pairs[pairs.length - 1];
+            currentPair.querySelector('.word-input-field').value = selectedWords[i];
+            currentPair.querySelector('.clue-input-field').value = `Clue for ${selectedWords[i]}`;
+        }
 
         // Generate the puzzle
         generatePuzzle();
+    }
+
+    // Helper function to update remove button visibility
+    function updateRemoveButtonVisibility() {
+        const pairs = document.querySelectorAll('.word-clue-pair');
+        if (pairs.length > 0) {
+            pairs[0].querySelector('.remove-pair').style.visibility = 'hidden';
+            for (let i = 1; i < pairs.length; i++) {
+                pairs[i].querySelector('.remove-pair').style.visibility = 'visible';
+            }
+        }
     }
 
     // Show initial preview
@@ -161,6 +222,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Display empty preview
     function displayEmptyPreview() {
+        // Generate a sample puzzle using random words
+        const categories = Object.keys(randomWords);
+        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+        const words = randomWords[randomCategory];
+        const shuffledWords = words.sort(() => Math.random() - 0.5);
+        const selectedWords = shuffledWords.slice(0, 5);
+        const sampleWordsAndClues = selectedWords.map(word => ({
+            word: word,
+            clue: `Sample clue for ${word}`
+        }));
+
+        const samplePuzzle = new CrosswordPuzzle(15, sampleWordsAndClues);
+        samplePuzzle.generate();
+        currentPuzzle = samplePuzzle;  // Set the current puzzle to the sample puzzle
+
         let html = '';
         
         // Add header section with logo and student info
@@ -188,74 +264,32 @@ document.addEventListener('DOMContentLoaded', function() {
             html += `<div class="puzzle-title">${title}</div>`;
         }
 
-        // Create a sample crossword layout based on selected size
-        const size = getPuzzleSize();
-        const sampleLayout = Array(size).fill().map(() => Array(size).fill(null));
-        
-        // Define the visible cells (1 means visible, null means blocked)
-        // First word (horizontal)
-        sampleLayout[0][0] = '1';
-        sampleLayout[0][1] = 1;
-        sampleLayout[0][2] = 1;
-        
-        // Second word (vertical)
-        sampleLayout[0][0] = '2';
-        sampleLayout[1][0] = 1;
-        
-        // Third word (horizontal)
-        sampleLayout[1][0] = '3';
-        sampleLayout[1][1] = 1;
-        sampleLayout[1][2] = 1;
-        sampleLayout[1][3] = 1;
-        sampleLayout[1][4] = 1;
-        
-        // Fourth word (vertical)
-        sampleLayout[2][3] = '4';
-        sampleLayout[3][3] = 1;
-        
-        // Fifth word (horizontal)
-        sampleLayout[3][0] = '5';
-        sampleLayout[3][1] = 1;
-        sampleLayout[3][2] = 1;
-        sampleLayout[3][3] = 1;
-        sampleLayout[3][4] = 1;
-        sampleLayout[3][5] = 1;
-        sampleLayout[3][6] = 1;
-
-        // Add puzzle grid with the sample layout
-        const displaySize = Math.min(size, 8); // Limit display size for empty preview
-        html += `<div class="crossword-grid" style="grid-template-columns: repeat(${displaySize}, 2rem);">`;
-        for (let y = 0; y < Math.min(5, size); y++) {
-            for (let x = 0; x < displaySize; x++) {
-                const cell = sampleLayout[y] && sampleLayout[y][x];
-                if (cell === undefined) continue;
-                
-                const cellClass = cell === null ? 'cell-blocked' : 'crossword-cell';
-                const numberHtml = typeof cell === 'string' ? `<span class="cell-number">${cell}</span>` : '';
-                html += `<div class="${cellClass}">${numberHtml}</div>`;
-            }
-        }
-        html += '</div>';
+        // Add the generated sample puzzle grid (without letters)
+        html += samplePuzzle.generateHTML(true, true, false);
 
         // Add clue lists
         html += '<div class="clue-lists">';
         html += '<div class="across-clues">';
         html += '<div class="clue-list-title">Across:</div>';
-        html += '<ul class="clue-list">';
-        html += '<li class="clue-item"><span class="clue-number">1.</span>Enter your words and clues to generate a crossword puzzle</li>';
-        html += '</ul>';
+        html += '<div class="clue-list">';
+        samplePuzzle.acrossClues.sort((a, b) => a.number - b.number).forEach(clue => {
+            html += `<div class="clue-item"><span class="clue-number">${clue.number}.</span> <span class="clue-text">${clue.clue}</span></div>`;
+        });
+        html += '</div>';
         html += '</div>';
         
         html += '<div class="down-clues">';
         html += '<div class="clue-list-title">Down:</div>';
-        html += '<ul class="clue-list">';
-        html += '<li class="clue-item"><span class="clue-number">1.</span>Enter your words and clues to generate a crossword puzzle</li>';
-        html += '</ul>';
+        html += '<div class="clue-list">';
+        samplePuzzle.downClues.sort((a, b) => a.number - b.number).forEach(clue => {
+            html += `<div class="clue-item"><span class="clue-number">${clue.number}.</span> <span class="clue-text">${clue.clue}</span></div>`;
+        });
+        html += '</div>';
         html += '</div>';
         html += '</div>';
 
         puzzlePreview.innerHTML = html;
-        printBtn.disabled = true;
+        printBtn.disabled = false;  // Enable print button
     }
 
     // Clear all word-clue pairs
@@ -267,26 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Get puzzle size
     function getPuzzleSize() {
-        const sizeRadios = document.querySelectorAll('input[name="puzzle-size"]');
-        let selectedSize = 15; // Default size
-
-        sizeRadios.forEach(radio => {
-            if (radio.checked) {
-                switch (radio.value) {
-                    case 'small':
-                        selectedSize = 10;
-                        break;
-                    case 'medium':
-                        selectedSize = 15;
-                        break;
-                    case 'large':
-                        selectedSize = 20;
-                        break;
-                }
-            }
-        });
-
-        return selectedSize;
+        return 15; // Fixed size
     }
 
     // Get words and clues
@@ -426,7 +441,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update preview
     function updatePreview() {
-        if (!currentPuzzle) return;
+        const puzzle = currentPuzzle;
+        if (!puzzle) return;
 
         let html = '';
         
@@ -456,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Add puzzle grid
-        html += currentPuzzle.generateHTML(true, true, false);
+        html += puzzle.generateHTML(true, true, false);
 
         // Add clue lists
         html += '<div class="clue-lists">';
@@ -464,74 +480,45 @@ document.addEventListener('DOMContentLoaded', function() {
         // Across clues
         html += '<div class="across-clues">';
         html += '<div class="clue-list-title">Across:</div>';
-        html += '<ul class="clue-list">';
-        currentPuzzle.acrossClues.forEach(clue => {
-            html += `<li class="clue-item"><span class="clue-number">${clue.number}.</span>${clue.clue}</li>`;
+        html += '<div class="clue-list">';
+        puzzle.acrossClues.sort((a, b) => a.number - b.number).forEach(clue => {
+            html += `<div class="clue-item"><span class="clue-number">${clue.number}.</span> <span class="clue-text">${clue.clue}</span></div>`;
         });
-        html += '</ul>';
         html += '</div>';
-
+        html += '</div>';
+        
         // Down clues
         html += '<div class="down-clues">';
         html += '<div class="clue-list-title">Down:</div>';
-        html += '<ul class="clue-list">';
-        currentPuzzle.downClues.forEach(clue => {
-            html += `<li class="clue-item"><span class="clue-number">${clue.number}.</span>${clue.clue}</li>`;
+        html += '<div class="clue-list">';
+        puzzle.downClues.sort((a, b) => a.number - b.number).forEach(clue => {
+            html += `<div class="clue-item"><span class="clue-number">${clue.number}.</span> <span class="clue-text">${clue.clue}</span></div>`;
         });
-        html += '</ul>';
         html += '</div>';
+        html += '</div>';
+        
         html += '</div>';
 
         puzzlePreview.innerHTML = html;
+        printBtn.disabled = false;
     }
 
     // Print worksheet
     function printWorksheet() {
-        const showAnswers = document.getElementById('showAnswers').checked;
-        const content = document.getElementById('worksheetContent');
+        // Get the worksheet title or use default
+        const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
         
-        // Create a new window for printing
-        const printWindow = window.open('', '_blank');
+        // Store the original title
+        const originalTitle = document.title;
         
-        // Copy the current stylesheet links
-        const stylesheets = document.getElementsByTagName('link');
-        let styleLinks = '';
-        for (let i = 0; i < stylesheets.length; i++) {
-            if (stylesheets[i].rel === 'stylesheet') {
-                styleLinks += stylesheets[i].outerHTML;
-            }
-        }
+        // Set the document title to worksheet title (this will be used as the default filename)
+        document.title = title;
         
-        // Generate the content with or without answers
-        const crosswordPuzzle = new CrosswordPuzzle(/* your parameters here */);
-        const puzzleHTML = crosswordPuzzle.generateHTML(true, true, showAnswers);
+        // Print
+        window.print();
         
-        // Set the content of the print window
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Crossword Puzzle</title>
-                ${styleLinks}
-                <style>
-                    @media print {
-                        @page {
-                            margin: 1cm;
-                        }
-                    }
-                </style>
-            </head>
-            <body>
-                ${content.innerHTML}
-            </body>
-            </html>
-        `);
-        
-        // Wait for stylesheets to load then print
-        printWindow.document.addEventListener('load', () => {
-            printWindow.print();
-            printWindow.close();
-        }, true);
+        // Restore the original title
+        document.title = originalTitle;
     }
 });
 
@@ -732,7 +719,19 @@ class CrosswordPuzzle {
             return false;
         }
 
-        const number = this.getNextNumber();
+        // Check if there's already a number at this position
+        let number = null;
+        for (const existingWord of this.placedWords) {
+            if (existingWord.startX === startX && existingWord.startY === startY) {
+                number = existingWord.number;
+                break;
+            }
+        }
+        
+        // If no existing number was found, get a new one
+        if (number === null) {
+            number = this.getNextNumber();
+        }
         
         // Place the word
         for (let i = 0; i < word.length; i++) {

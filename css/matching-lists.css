@@ -1,0 +1,336 @@
+/* Matching Lists specific styles */
+#generate-random-btn {
+    background: rgba(255, 215, 0, 0.3);
+}
+
+#add-pair-btn {
+    background: rgba(255, 215, 0, 0.3);
+    color: #000;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+}
+
+.clear-btn {
+    background: rgba(255, 68, 68, 0.7);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.word-pair-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    height: 400px;
+    overflow-y: auto;
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    counter-reset: pair-number;
+}
+
+.word-pair {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+    counter-increment: pair-number;
+}
+
+.word-pair::before {
+    content: counter(pair-number);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    color: #666;
+    min-width: 1rem;
+    text-align: left;
+}
+
+.word-input-field {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.word-input-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
+.remove-pair {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.remove-pair:hover {
+    color: #ff0000;
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    margin: 0;
+    text-align: center;
+}
+
+.reset-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0.3rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    color: #ff4444;
+    transform: rotate(-45deg);
+}
+
+/* Matching Lists Preview Styles */
+.matching-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.list-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.list-column.left {
+    align-items: flex-end;
+}
+
+.list-column.right {
+    align-items: flex-start;
+}
+
+.list-item {
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+}
+
+/* Add connection point styles */
+.list-item::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #666;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.list-column.left .list-item::after {
+    right: -20px;
+}
+
+.list-column.right .list-item::after {
+    left: -20px;
+}
+
+/* Line drawing canvas */
+.matching-list {
+    position: relative;
+}
+
+#connection-canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Active state for connection points */
+.list-item.active::after {
+    background: var(--primary-color);
+}
+
+/* Drawing line style */
+.drawing-line {
+    position: absolute;
+    height: 2px;
+    background: var(--primary-color);
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.list-item::before {
+    content: counter(item);
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    color: #666;
+}
+
+.list-column.right .list-item::before {
+    content: counter(item, upper-alpha);
+    left: auto;
+    right: -2rem;
+}
+
+/* Print Styles */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    /* Hide elements that should not be printed */
+    .navbar,
+    .utility-nav,
+    .main-header,
+    .top-menu,
+    .generator-container > h1,
+    .input-section,
+    .preview-header,
+    .description-section,
+    .action-buttons,
+    .print-btn,
+    .preview-actions,
+    footer {
+        display: none !important;
+    }
+
+    /* Reset styles for the print containers */
+    body,
+    .generator-container,
+    .generator-content,
+    .preview-section,
+    .preview-wrapper {
+        background: white !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    #puzzle-preview {
+        transform: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 20mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        background: white !important;
+        display: block !important;
+    }
+
+    .matching-list {
+        page-break-inside: avoid;
+    }
+
+    .answer-btn {
+        display: none !important;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .matching-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .list-column.left,
+    .list-column.right {
+        align-items: center;
+    }
+
+    .list-item {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .word-pair {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .word-input-field {
+        width: calc(100% - 3rem);
+    }
+} 
