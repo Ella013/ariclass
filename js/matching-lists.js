@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const pair = document.createElement('div');
         pair.className = 'word-pair';
         pair.innerHTML = `
-            <input type="text" class="word-input-field" placeholder="Left word/phrase" maxlength="30">
-            <input type="text" class="word-input-field" placeholder="Right word/phrase" maxlength="30">
+            <input type="text" class="word-input-field" placeholder="Left word" maxlength="30">
+            <input type="text" class="word-input-field" placeholder="Right word" maxlength="30">
             <button class="remove-pair"><i class="fas fa-times"></i></button>
         `;
 
