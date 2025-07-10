@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'COW', right: 'CALF' },
             { left: 'CHICKEN', right: 'CHICK' },
             { left: 'PIG', right: 'PIGLET' },
-            { left: 'GOAT', right: 'KID' }
+            { left: 'GOAT', right: 'KID' },
+            { left: 'DUCK', right: 'DUCKLING' },
+            { left: 'GOOSE', right: 'GOSLING' },
+            { left: 'DEER', right: 'FAWN' },
+            { left: 'LION', right: 'CUB' }
         ],
         opposites: [
             { left: 'HOT', right: 'COLD' },
@@ -32,14 +36,45 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'LIGHT', right: 'DARK' },
             { left: 'HAPPY', right: 'SAD' },
             { left: 'STRONG', right: 'WEAK' },
-            { left: 'RICH', right: 'POOR' }
+            { left: 'RICH', right: 'POOR' },
+            { left: 'YOUNG', right: 'OLD' },
+            { left: 'CLEAN', right: 'DIRTY' },
+            { left: 'SOFT', right: 'HARD' },
+            { left: 'SWEET', right: 'SOUR' }
+        ],
+        time: [
+            { left: 'MORNING', right: 'SUNRISE' },
+            { left: 'EVENING', right: 'SUNSET' },
+            { left: 'SPRING', right: 'BLOOM' },
+            { left: 'SUMMER', right: 'BEACH' },
+            { left: 'AUTUMN', right: 'HARVEST' },
+            { left: 'WINTER', right: 'SNOW' },
+            { left: 'TODAY', right: 'PRESENT' },
+            { left: 'YESTERDAY', right: 'PAST' },
+            { left: 'TOMORROW', right: 'FUTURE' },
+            { left: 'DAWN', right: 'BEGIN' },
+            { left: 'DUSK', right: 'END' },
+            { left: 'NOON', right: 'MIDDAY' }
         ]
     };
 
-    // Initialize with five empty word pairs
+    // Initialize with five empty word pairs and empty preview
     for (let i = 0; i < 5; i++) {
         addWordPair();
     }
+    displayEmptyPreview();
+
+    // Add font size change event listener
+    const fontSizeInputs = document.querySelectorAll('input[name="font-size"]');
+    fontSizeInputs.forEach(input => {
+        input.addEventListener('change', generateList);
+    });
+
+    // Add letter case change event listener
+    const letterCaseInputs = document.querySelectorAll('input[name="letter-case"]');
+    letterCaseInputs.forEach(input => {
+        input.addEventListener('change', generateList);
+    });
 
     // Event Listeners
     addPairBtn.addEventListener('click', addWordPair);
@@ -58,8 +93,57 @@ document.addEventListener('DOMContentLoaded', function() {
             '<i class="fas fa-eye-slash"></i> Hide Answers' : 
             '<i class="fas fa-eye"></i> Show Answers';
             
-        // Update preview
-        updatePreview();
+        // Get the current canvas and its drawing functions
+        const canvas = document.getElementById('connection-canvas');
+        if (canvas) {
+            const matchingList = document.querySelector('.matching-list');
+            
+            // Clear existing lines
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (showingAnswers) {
+                // Draw answer lines
+                const wordPairs = getWordPairs();
+                const leftColumn = document.querySelectorAll('.list-column.left .list-item');
+                const rightColumn = document.querySelectorAll('.list-column.right .list-item');
+                const isUpperCase = document.querySelector('input[name="letter-case"]:checked').value === 'uppercase';
+                
+                // Process each left item in order
+                leftColumn.forEach((leftItem, index) => {
+                    const currentPair = wordPairs[index];
+                    if (!currentPair) return;
+
+                    // Find matching right item based on the original pair
+                    const expectedRightWord = isUpperCase ? currentPair.right.toUpperCase() : currentPair.right.toLowerCase();
+                    const rightItem = Array.from(rightColumn).find(item => item.textContent === expectedRightWord);
+
+                    if (leftItem && rightItem) {
+                        // Calculate dot positions
+                        const leftRect = leftItem.getBoundingClientRect();
+                        const rightRect = rightItem.getBoundingClientRect();
+                        const canvasRect = canvas.getBoundingClientRect();
+                        
+                        const start = {
+                            x: leftRect.right - canvasRect.left + 15, // Position at the dot
+                            y: leftRect.top - canvasRect.top + leftRect.height / 2
+                        };
+                        const end = {
+                            x: rightRect.left - canvasRect.left - 15, // Position at the dot
+                            y: rightRect.top - canvasRect.top + rightRect.height / 2
+                        };
+                        
+                        // Draw red answer lines
+                        ctx.beginPath();
+                        ctx.moveTo(start.x, start.y);
+                        ctx.lineTo(end.x, end.y);
+                        ctx.strokeStyle = 'red';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
+                });
+            }
+        }
     });
 
     // Reset button event listener
@@ -100,21 +184,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add event listeners for word inputs
         const inputs = pair.querySelectorAll('.word-input-field');
-        inputs[0].addEventListener('keypress', function(e) {
+        inputs[0].addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 inputs[1].focus();
             }
         });
 
-        inputs[1].addEventListener('keypress', function(e) {
+        inputs[1].addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                addWordPair();
-                // Focus on the left input of the newly added pair
-                const pairs = document.querySelectorAll('.word-pair');
-                const lastPair = pairs[pairs.length - 1];
-                lastPair.querySelector('.word-input-field').focus();
+                const currentPairs = document.querySelectorAll('.word-pair');
+                const currentIndex = Array.from(currentPairs).indexOf(pair);
+                
+                // If this is the last pair and both inputs have values, add a new pair
+                if (currentIndex === currentPairs.length - 1 && 
+                    inputs[0].value.trim() !== '' && 
+                    inputs[1].value.trim() !== '') {
+                    addWordPair();
+                    // Focus on the left input of the newly added pair
+                    const pairs = document.querySelectorAll('.word-pair');
+                    const lastPair = pairs[pairs.length - 1];
+                    lastPair.querySelector('.word-input-field').focus();
+                } else if (currentIndex < currentPairs.length - 1) {
+                    // If not the last pair, move to the next pair's left input
+                    const nextPair = currentPairs[currentIndex + 1];
+                    nextPair.querySelector('.word-input-field').focus();
+                }
+                
+                // Update the preview if both inputs have values
+                if (inputs[0].value.trim() !== '' && inputs[1].value.trim() !== '') {
+                    generateList();
+                }
             }
         });
 
@@ -149,9 +250,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
         const pairs = randomPairs[randomCategory];
 
-        // Shuffle pairs and select 5-8 random pairs
+        // Shuffle pairs and select 8-12 random pairs
         const shuffledPairs = pairs.sort(() => Math.random() - 0.5);
-        const numPairs = Math.floor(Math.random() * 4) + 5; // 5 to 8 pairs
+        const numPairs = Math.floor(Math.random() * 5) + 8; // 8 to 12 pairs
         const selectedPairs = shuffledPairs.slice(0, numPairs);
 
         // Add pairs to the container
@@ -179,8 +280,35 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Shuffle the right column
-        const shuffledRightWords = wordPairs.map(pair => pair.right).sort(() => Math.random() - 0.5);
+        // Get selected font size and letter case
+        const selectedFontSize = document.querySelector('input[name="font-size"]:checked').value;
+        const isUpperCase = document.querySelector('input[name="letter-case"]:checked').value === 'uppercase';
+
+        // Store the current right column order if it exists
+        const rightColumn = document.querySelectorAll('.list-column.right .list-item');
+        let currentOrder = [];
+        if (rightColumn.length > 0) {
+            currentOrder = Array.from(rightColumn).map(item => item.textContent.replace('•', '').trim());
+        }
+
+        // Convert words based on case selection
+        const processedWordPairs = wordPairs.map(pair => ({
+            left: isUpperCase ? pair.left.toUpperCase() : pair.left.toLowerCase(),
+            right: isUpperCase ? pair.right.toUpperCase() : pair.right.toLowerCase()
+        }));
+
+        // Use existing order or create new shuffled order
+        let shuffledRightWords;
+        if (currentOrder.length === processedWordPairs.length && currentOrder.length > 0) {
+            // Only maintain order if the number of pairs hasn't changed
+            shuffledRightWords = currentOrder.map(word => 
+                isUpperCase ? word.toUpperCase() : word.toLowerCase()
+            );
+        } else {
+            // Create new shuffled order
+            shuffledRightWords = [...processedWordPairs].map(pair => pair.right)
+                .sort(() => Math.random() - 0.5);
+        }
 
         let html = '';
         
@@ -209,25 +337,32 @@ document.addEventListener('DOMContentLoaded', function() {
             html += `<div class="puzzle-title">${title}</div>`;
         }
 
-        // Add matching lists
-        html += '<div class="matching-list">';
-        html += '<canvas id="connection-canvas"></canvas>';
+        // Add matching lists with font size class
+        html += `<div class="matching-list font-${selectedFontSize}">`;
         
         // Left column (numbers)
         html += '<div class="list-column left">';
-        wordPairs.forEach((pair, index) => {
-            html += `<div class="list-item" data-index="${index}" data-word="${pair.left}">${pair.left}</div>`;
+        processedWordPairs.forEach((pair, index) => {
+            html += `<div class="list-item" data-pair-index="${index}">
+                <span class="number">${index + 1}.</span>
+                <span class="word">${pair.left}</span>
+                <span class="dot">•</span>
+            </div>`;
         });
         html += '</div>';
         
         // Right column (letters)
         html += '<div class="list-column right">';
         shuffledRightWords.forEach((word, index) => {
-            const originalPair = wordPairs.find(pair => pair.right === word);
-            const originalIndex = wordPairs.indexOf(originalPair);
-            html += `<div class="list-item" data-index="${originalIndex}" data-word="${word}">${word}</div>`;
+            html += `<div class="list-item">
+                <span class="dot">•</span>
+                <span class="word">${word}</span>
+            </div>`;
         });
         html += '</div>';
+
+        // Add canvas after the columns
+        html += '<canvas id="connection-canvas"></canvas>';
         
         html += '</div>';
 
@@ -252,6 +387,8 @@ document.addEventListener('DOMContentLoaded', function() {
         function updateCanvasSize() {
             canvas.width = matchingList.offsetWidth;
             canvas.height = matchingList.offsetHeight;
+            // Redraw lines after resize
+            drawConnections();
         }
         updateCanvasSize();
         window.addEventListener('resize', updateCanvasSize);
@@ -274,13 +411,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function drawConnections() {
             clearCanvas();
-            lines.forEach(line => {
-                drawLine(line.start, line.end);
-            });
+            if (!showingAnswers) { // Only draw user connections when not showing answers
+                lines.forEach(line => {
+                    drawLine(line.start, line.end);
+                });
+            }
         }
 
         // Click handlers
         function handleItemClick(e) {
+            if (showingAnswers) return; // Disable clicking when showing answers
             const item = e.target.closest('.list-item');
             if (!item) return;
 
@@ -298,21 +438,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     const leftItem = isLeft ? selectedItem : item;
                     const rightItem = isLeft ? item : selectedItem;
 
-                    if (leftItem.dataset.index === rightItem.dataset.index) {
-                        // Correct match
-                        const start = {
-                            x: leftItem.offsetLeft + leftItem.offsetWidth + 6,
-                            y: leftItem.offsetTop + leftItem.offsetHeight / 2
-                        };
-                        const end = {
-                            x: rightItem.offsetLeft - 6,
-                            y: rightItem.offsetTop + rightItem.offsetHeight / 2
-                        };
+                    // Calculate dot positions
+                    const leftRect = leftItem.getBoundingClientRect();
+                    const rightRect = rightItem.getBoundingClientRect();
+                    const canvasRect = canvas.getBoundingClientRect();
 
-                        lines.push({ start, end });
-                        connections.set(leftItem.dataset.index, true);
-                        drawConnections();
-                    }
+                    const start = {
+                        x: leftRect.right - canvasRect.left + 15, // Position at the dot
+                        y: leftRect.top - canvasRect.top + leftRect.height / 2
+                    };
+                    const end = {
+                        x: rightRect.left - canvasRect.left - 15, // Position at the dot
+                        y: rightRect.top - canvasRect.top + rightRect.height / 2
+                    };
+
+                    lines.push({ start, end });
+                    drawConnections();
                 }
 
                 // Reset selection
@@ -328,13 +469,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Display empty preview
     function displayEmptyPreview() {
-        // Generate a sample list using random pairs
-        const categories = Object.keys(randomPairs);
-        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-        const pairs = randomPairs[randomCategory];
-        const shuffledPairs = pairs.sort(() => Math.random() - 0.5);
-        const selectedPairs = shuffledPairs.slice(0, 5);
-
         let html = '';
         
         // Add header section with logo and student info
@@ -361,26 +495,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const title = worksheetTitle.value.trim() || 'Matching Lists';
             html += `<div class="puzzle-title">${title}</div>`;
         }
-
-        // Add matching lists
-        html += '<div class="matching-list">';
-        
-        // Left column (numbers)
-        html += '<div class="list-column left">';
-        selectedPairs.forEach((pair, index) => {
-            html += `<div class="list-item" style="counter-reset: item ${index + 1}">${pair.left}</div>`;
-        });
-        html += '</div>';
-        
-        // Right column (letters)
-        html += '<div class="list-column right">';
-        const shuffledRight = selectedPairs.map(pair => pair.right).sort(() => Math.random() - 0.5);
-        shuffledRight.forEach((word, index) => {
-            html += `<div class="list-item" style="counter-reset: item ${index + 1}">${word}</div>`;
-        });
-        html += '</div>';
-        
-        html += '</div>';
 
         puzzlePreview.innerHTML = html;
         printBtn.disabled = false;
@@ -417,5 +531,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show initial preview
-    displayEmptyPreview();
+    // displayEmptyPreview(); // This line is now handled by the initialization
 }); 

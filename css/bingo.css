@@ -1,0 +1,212 @@
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.settings {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.word-input {
+    margin-bottom: 20px;
+}
+
+.word-input textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.bingo-settings {
+    margin: 20px 0;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.setting-group select {
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.player-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-counter button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.player-counter button:hover {
+    background: var(--primary-dark);
+}
+
+.player-counter span {
+    font-size: 16px;
+    min-width: 30px;
+    text-align: center;
+    font-weight: 500;
+}
+
+button {
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Preview Styles */
+.preview-wrapper {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.preview-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0;
+    padding: 20px 0;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+}
+
+#previewArea {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding: 0 20px;
+    min-width: min-content;
+}
+
+.bingo-page {
+    background: white;
+    width: 297mm;  /* A4 landscape width */
+    height: 210mm;  /* A4 landscape height */
+    position: relative;
+    display: flex;
+    padding: 20mm;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent page from shrinking */
+    transform: scale(0.7); /* Make the page smaller to fit better */
+    transform-origin: top left;
+    margin-right: -80mm; /* Compensate for the scale to reduce gap between pages */
+}
+
+.page-divider {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    border-left: 2px dashed #999;
+}
+
+.bingo-board {
+    flex: 1;
+    padding: 10mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bingo-board h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.bingo-grid {
+    border: 2px solid #000;
+    display: grid;
+    gap: 1px;
+    background: #000;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+}
+
+.bingo-cell {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    min-height: 60px;
+    word-break: break-word;
+}
+
+/* Print styles */
+@media print {
+    .preview-wrapper {
+        padding: 0;
+        background: none;
+    }
+
+    .preview-scroll {
+        overflow: visible;
+        padding: 0;
+    }
+
+    #previewArea {
+        display: block;
+        padding: 0;
+    }
+
+    .bingo-page {
+        transform: none;
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+        width: 100%;
+        height: auto;
+    }
+
+    .page-divider {
+        border-left: 1px dashed #999;
+    }
+
+    .bingo-grid {
+        border: 1px solid #000;
+    }
+} 
