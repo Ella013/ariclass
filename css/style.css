@@ -304,8 +304,8 @@ body {
 
 .worksheet-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
     padding: 0 2rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -314,7 +314,7 @@ body {
 .worksheet-card {
     background: white;
     border-radius: 12px;
-    padding: 2.5rem;
+    padding: 1.5rem;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -328,33 +328,33 @@ body {
 .worksheet-card img {
     width: 100%;
     height: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-radius: 8px;
 }
 
 .worksheet-card h3 {
-    font-size: 1.6rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
     color: var(--text-color);
 }
 
 .worksheet-card p {
     color: var(--text-secondary);
-    margin-bottom: 2rem;
-    line-height: 1.6;
-    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
 .create-btn {
     display: inline-block;
-    padding: 0.9rem 2.2rem;
+    padding: 0.8rem 1.8rem;
     background-color: #FFD700;
     color: #333;
     text-decoration: none;
     border-radius: 25px;
     font-weight: 500;
     transition: background-color 0.2s ease;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
 }
 
 .create-btn:hover {

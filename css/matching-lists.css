@@ -148,8 +148,8 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 2rem 4rem;
-    gap: 12rem;
+    padding: 2rem;
+    gap: 12rem;  /* 8rem에서 12rem으로 간격 증가 */
 }
 
 .list-column {
@@ -162,23 +162,32 @@
 
 .list-column.left {
     align-items: flex-start;
-    width: 200px;
+    width: 120px;
+    position: relative;
+}
+
+.list-column.left .list-item {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    width: 100%;
 }
 
 .list-column.right {
     align-items: flex-end;
     width: auto;
+    position: relative;
 }
 
 .list-column.right .list-item {
+    width: 120px;
+    justify-content: flex-end;
+    padding-right: 0;
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
-/* Remove the existing dot */
-.list-column.right .list-item::before {
-    content: none;
+.list-column.right .connection-point {
+    left: -0.5rem;
 }
 
 /* List item styles */
@@ -189,44 +198,49 @@
     min-height: 2rem;
 }
 
-.list-column.left .list-item {
+.list-column.right .list-item {
+    width: 140px;
+    justify-content: flex-end;
+    padding-right: 0;
+}
+
+/* Connection point styles */
+.connection-point {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #666;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.list-column.left .connection-point {
+    right: -4.5rem;
+}
+
+.list-column.right .connection-point {
+    left: -0.5rem;
+}
+
+.connection-point:hover {
+    background: #333;
+}
+
+/* Make sure list items have proper positioning */
+.list-item {
+    position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
+    min-height: 2rem;
+    width: fit-content;
 }
 
 .list-item .number {
     margin-right: 0.5rem;
     min-width: 1.5rem;
-}
-
-/* Adjust spacing for dots */
-.list-item .dot {
-    display: inline-flex;
-    align-items: center;
-    font-size: 24px;
-    line-height: 1;
-    margin: 0 10px;
-}
-
-/* Add connection point styles */
-.list-item::after {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #666;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.list-column.left .list-item::after {
-    left: calc(100% + 0.3rem);
-}
-
-.list-column.right .list-item::after {
-    right: calc(100% + 1rem);
 }
 
 /* Align right column items */
@@ -236,7 +250,7 @@
 }
 
 .list-column.right .list-item {
-    width: 200px;
+    width: 160px;
     justify-content: flex-end;
 }
 
@@ -310,15 +324,19 @@
     .utility-nav,
     .main-header,
     .top-menu,
-    .generator-container > h1,
     .input-section,
-    .preview-header,
-    .description-section,
-    .action-buttons,
-    .print-btn,
+    .preview-label,
     .preview-actions,
+    .description-section,
     footer {
         display: none !important;
+    }
+
+    /* Ensure connection points are visible in print */
+    .connection-point {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
     }
 
     /* Reset styles for the print containers */

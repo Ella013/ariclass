@@ -11,50 +11,142 @@ document.addEventListener('DOMContentLoaded', function() {
     const wordPairContainer = document.querySelector('.word-pair-container');
     const answerBtn = document.querySelector('.answer-btn');
     let showingAnswers = false;
+    let keyPressed = false;
+
+    // Add keyboard event listeners
+    document.addEventListener('keydown', function(e) {
+        if (e.key.toLowerCase() === 'a' && !keyPressed) {
+            keyPressed = true;
+            showAnswerLines(true);
+        }
+    });
+
+    document.addEventListener('keyup', function(e) {
+        if (e.key.toLowerCase() === 'a') {
+            keyPressed = false;
+            showAnswerLines(false);
+        }
+    });
+
+    function showAnswerLines(show) {
+        const matchingList = document.querySelector('.matching-list');
+        if (!matchingList) return;
+
+        if (show) {
+            // Get all word pairs
+            const wordPairs = getWordPairs();
+            const rightWords = wordPairs.map(pair => pair.right);
+            
+            // Get all list items
+            const leftItems = matchingList.querySelectorAll('.list-column.left .list-item');
+            const rightItems = matchingList.querySelectorAll('.list-column.right .list-item');
+
+            // Create canvas for drawing lines
+            let canvas = matchingList.querySelector('#connection-canvas');
+            if (!canvas) {
+                canvas = document.createElement('canvas');
+                canvas.id = 'connection-canvas';
+                canvas.style.position = 'absolute';
+                canvas.style.top = '0';
+                canvas.style.left = '0';
+                canvas.style.pointerEvents = 'none';
+                canvas.style.zIndex = '1';
+                matchingList.appendChild(canvas);
+            }
+
+            // Set canvas size
+            const rect = matchingList.getBoundingClientRect();
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            // Get canvas context
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 1;
+
+            // Draw lines between matching pairs
+            leftItems.forEach((leftItem, index) => {
+                // Find the matching right item using the pair index
+                const rightItem = Array.from(rightItems).find(item => 
+                    item.getAttribute('data-pair-index') === leftItem.getAttribute('data-index')
+                );
+
+                if (!leftItem || !rightItem) return;
+
+                // Get the actual connection points
+                const leftDot = leftItem.querySelector('.connection-point');
+                const rightDot = rightItem.querySelector('.connection-point');
+
+                // Get the exact positions using list item and connection point offsets
+                const matchingListRect = matchingList.getBoundingClientRect();
+                const leftItemRect = leftItem.getBoundingClientRect();
+                const rightItemRect = rightItem.getBoundingClientRect();
+
+                const leftDotX = leftItemRect.left - matchingListRect.left + leftDot.offsetLeft + leftDot.offsetWidth / 2;
+                const leftDotY = leftItemRect.top - matchingListRect.top + leftDot.offsetTop + leftDot.offsetHeight / 2;
+                const rightDotX = rightItemRect.left - matchingListRect.left + rightDot.offsetLeft + rightDot.offsetWidth / 2;
+                const rightDotY = rightItemRect.top - matchingListRect.top + rightDot.offsetTop + rightDot.offsetHeight / 2;
+
+                // Draw a straight line
+                ctx.beginPath();
+                ctx.moveTo(leftDotX, leftDotY);
+                ctx.lineTo(rightDotX, rightDotY);
+                ctx.stroke();
+            });
+        } else {
+            // Remove canvas when hiding answers
+            const canvas = matchingList.querySelector('#connection-canvas');
+            if (canvas) {
+                canvas.remove();
+            }
+        }
+    }
 
     // Sample word pairs for random generation
     const randomPairs = {
         animals: [
-            { left: 'DOG', right: 'PUPPY' },
-            { left: 'CAT', right: 'KITTEN' },
-            { left: 'SHEEP', right: 'LAMB' },
-            { left: 'HORSE', right: 'FOAL' },
-            { left: 'COW', right: 'CALF' },
-            { left: 'CHICKEN', right: 'CHICK' },
-            { left: 'PIG', right: 'PIGLET' },
-            { left: 'GOAT', right: 'KID' },
-            { left: 'DUCK', right: 'DUCKLING' },
-            { left: 'GOOSE', right: 'GOSLING' },
-            { left: 'DEER', right: 'FAWN' },
-            { left: 'LION', right: 'CUB' }
+            { left: 'dog', right: 'puppy' },
+            { left: 'cat', right: 'kitten' },
+            { left: 'sheep', right: 'lamb' },
+            { left: 'horse', right: 'foal' },
+            { left: 'cow', right: 'calf' },
+            { left: 'chicken', right: 'chick' },
+            { left: 'pig', right: 'piglet' },
+            { left: 'goat', right: 'kid' },
+            { left: 'duck', right: 'duckling' },
+            { left: 'goose', right: 'gosling' },
+            { left: 'deer', right: 'fawn' },
+            { left: 'lion', right: 'cub' }
         ],
         opposites: [
-            { left: 'HOT', right: 'COLD' },
-            { left: 'BIG', right: 'SMALL' },
-            { left: 'FAST', right: 'SLOW' },
-            { left: 'HIGH', right: 'LOW' },
-            { left: 'LIGHT', right: 'DARK' },
-            { left: 'HAPPY', right: 'SAD' },
-            { left: 'STRONG', right: 'WEAK' },
-            { left: 'RICH', right: 'POOR' },
-            { left: 'YOUNG', right: 'OLD' },
-            { left: 'CLEAN', right: 'DIRTY' },
-            { left: 'SOFT', right: 'HARD' },
-            { left: 'SWEET', right: 'SOUR' }
+            { left: 'hot', right: 'cold' },
+            { left: 'big', right: 'small' },
+            { left: 'fast', right: 'slow' },
+            { left: 'high', right: 'low' },
+            { left: 'light', right: 'dark' },
+            { left: 'happy', right: 'sad' },
+            { left: 'strong', right: 'weak' },
+            { left: 'rich', right: 'poor' },
+            { left: 'young', right: 'old' },
+            { left: 'clean', right: 'dirty' },
+            { left: 'soft', right: 'hard' },
+            { left: 'sweet', right: 'sour' }
         ],
         time: [
-            { left: 'MORNING', right: 'SUNRISE' },
-            { left: 'EVENING', right: 'SUNSET' },
-            { left: 'SPRING', right: 'BLOOM' },
-            { left: 'SUMMER', right: 'BEACH' },
-            { left: 'AUTUMN', right: 'HARVEST' },
-            { left: 'WINTER', right: 'SNOW' },
-            { left: 'TODAY', right: 'PRESENT' },
-            { left: 'YESTERDAY', right: 'PAST' },
-            { left: 'TOMORROW', right: 'FUTURE' },
-            { left: 'DAWN', right: 'BEGIN' },
-            { left: 'DUSK', right: 'END' },
-            { left: 'NOON', right: 'MIDDAY' }
+            { left: 'morning', right: 'sunrise' },
+            { left: 'evening', right: 'sunset' },
+            { left: 'spring', right: 'bloom' },
+            { left: 'summer', right: 'beach' },
+            { left: 'autumn', right: 'harvest' },
+            { left: 'winter', right: 'snow' },
+            { left: 'today', right: 'present' },
+            { left: 'yesterday', right: 'past' },
+            { left: 'tomorrow', right: 'future' },
+            { left: 'dawn', right: 'begin' },
+            { left: 'dusk', right: 'end' },
+            { left: 'noon', right: 'midday' }
         ]
     };
 
@@ -92,58 +184,9 @@ document.addEventListener('DOMContentLoaded', function() {
         this.innerHTML = showingAnswers ? 
             '<i class="fas fa-eye-slash"></i> Hide Answers' : 
             '<i class="fas fa-eye"></i> Show Answers';
-            
-        // Get the current canvas and its drawing functions
-        const canvas = document.getElementById('connection-canvas');
-        if (canvas) {
-            const matchingList = document.querySelector('.matching-list');
-            
-            // Clear existing lines
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            if (showingAnswers) {
-                // Draw answer lines
-                const wordPairs = getWordPairs();
-                const leftColumn = document.querySelectorAll('.list-column.left .list-item');
-                const rightColumn = document.querySelectorAll('.list-column.right .list-item');
-                const isUpperCase = document.querySelector('input[name="letter-case"]:checked').value === 'uppercase';
-                
-                // Process each left item in order
-                leftColumn.forEach((leftItem, index) => {
-                    const currentPair = wordPairs[index];
-                    if (!currentPair) return;
 
-                    // Find matching right item based on the original pair
-                    const expectedRightWord = isUpperCase ? currentPair.right.toUpperCase() : currentPair.right.toLowerCase();
-                    const rightItem = Array.from(rightColumn).find(item => item.textContent === expectedRightWord);
-
-                    if (leftItem && rightItem) {
-                        // Calculate dot positions
-                        const leftRect = leftItem.getBoundingClientRect();
-                        const rightRect = rightItem.getBoundingClientRect();
-                        const canvasRect = canvas.getBoundingClientRect();
-                        
-                        const start = {
-                            x: leftRect.right - canvasRect.left + 15, // Position at the dot
-                            y: leftRect.top - canvasRect.top + leftRect.height / 2
-                        };
-                        const end = {
-                            x: rightRect.left - canvasRect.left - 15, // Position at the dot
-                            y: rightRect.top - canvasRect.top + rightRect.height / 2
-                        };
-                        
-                        // Draw red answer lines
-                        ctx.beginPath();
-                        ctx.moveTo(start.x, start.y);
-                        ctx.lineTo(end.x, end.y);
-                        ctx.strokeStyle = 'red';
-                        ctx.lineWidth = 2;
-                        ctx.stroke();
-                    }
-                });
-            }
-        }
+        // Show or hide answer lines
+        showAnswerLines(showingAnswers);
     });
 
     // Reset button event listener
@@ -275,40 +318,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateList() {
         const wordPairs = getWordPairs();
         
-        if (wordPairs.length < 2) {
-            alert('Please enter at least 2 word pairs.');
+        if (wordPairs.length === 0) {
+            displayEmptyPreview();
             return;
         }
 
-        // Get selected font size and letter case
-        const selectedFontSize = document.querySelector('input[name="font-size"]:checked').value;
-        const isUpperCase = document.querySelector('input[name="letter-case"]:checked').value === 'uppercase';
+        // Get selected font size
+        const fontSizeInput = document.querySelector('input[name="font-size"]:checked');
+        const fontSize = fontSizeInput ? fontSizeInput.value : 'medium';
 
-        // Store the current right column order if it exists
-        const rightColumn = document.querySelectorAll('.list-column.right .list-item');
-        let currentOrder = [];
-        if (rightColumn.length > 0) {
-            currentOrder = Array.from(rightColumn).map(item => item.textContent.replace('•', '').trim());
-        }
+        // Get selected case
+        const letterCaseInput = document.querySelector('input[name="letter-case"]:checked');
+        const letterCase = letterCaseInput ? letterCaseInput.value : 'uppercase';
 
-        // Convert words based on case selection
-        const processedWordPairs = wordPairs.map(pair => ({
-            left: isUpperCase ? pair.left.toUpperCase() : pair.left.toLowerCase(),
-            right: isUpperCase ? pair.right.toUpperCase() : pair.right.toLowerCase()
-        }));
-
-        // Use existing order or create new shuffled order
-        let shuffledRightWords;
-        if (currentOrder.length === processedWordPairs.length && currentOrder.length > 0) {
-            // Only maintain order if the number of pairs hasn't changed
-            shuffledRightWords = currentOrder.map(word => 
-                isUpperCase ? word.toUpperCase() : word.toLowerCase()
-            );
-        } else {
-            // Create new shuffled order
-            shuffledRightWords = [...processedWordPairs].map(pair => pair.right)
-                .sort(() => Math.random() - 0.5);
-        }
+        // Create shuffled right column
+        const rightWords = wordPairs.map(pair => pair.right);
+        const shuffledRight = shuffleArray([...rightWords]);
 
         let html = '';
         
@@ -337,134 +362,37 @@ document.addEventListener('DOMContentLoaded', function() {
             html += `<div class="puzzle-title">${title}</div>`;
         }
 
-        // Add matching lists with font size class
-        html += `<div class="matching-list font-${selectedFontSize}">`;
-        
-        // Left column (numbers)
-        html += '<div class="list-column left">';
-        processedWordPairs.forEach((pair, index) => {
-            html += `<div class="list-item" data-pair-index="${index}">
-                <span class="number">${index + 1}.</span>
-                <span class="word">${pair.left}</span>
-                <span class="dot">•</span>
-            </div>`;
-        });
-        html += '</div>';
-        
-        // Right column (letters)
-        html += '<div class="list-column right">';
-        shuffledRightWords.forEach((word, index) => {
-            html += `<div class="list-item">
-                <span class="dot">•</span>
-                <span class="word">${word}</span>
-            </div>`;
-        });
-        html += '</div>';
+        // Create matching list HTML
+        html += `
+            <div class="matching-list font-${fontSize}">
+                <div class="list-column left">
+                    ${wordPairs.map((pair, index) => `
+                        <div class="list-item" data-index="${index + 1}">
+                            <span class="number">${index + 1}.</span>
+                            ${letterCase === 'uppercase' ? pair.left.toUpperCase() : pair.left.toLowerCase()}
+                            <span class="connection-point"></span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="list-column right">
+                    ${shuffledRight.map((word, index) => {
+                        // Find the original pair that contains this word
+                        const originalPair = wordPairs.find(pair => pair.right === word);
+                        // Get the index of the original pair
+                        const pairIndex = wordPairs.indexOf(originalPair);
+                        return `
+                        <div class="list-item" data-pair-index="${pairIndex}">
+                            <span class="connection-point"></span>
+                            ${letterCase === 'uppercase' ? word.toUpperCase() : word.toLowerCase()}
+                        </div>
+                    `}).join('')}
+                </div>
+            </div>
+        `;
 
-        // Add canvas after the columns
-        html += '<canvas id="connection-canvas"></canvas>';
-        
-        html += '</div>';
-
+        // Update preview
         puzzlePreview.innerHTML = html;
         printBtn.disabled = false;
-
-        // Initialize line drawing functionality
-        initializeLineDrawing();
-    }
-
-    // Initialize line drawing
-    function initializeLineDrawing() {
-        const canvas = document.getElementById('connection-canvas');
-        const matchingList = document.querySelector('.matching-list');
-        const leftItems = document.querySelectorAll('.list-column.left .list-item');
-        const rightItems = document.querySelectorAll('.list-column.right .list-item');
-        let selectedItem = null;
-        let connections = new Map();
-        let lines = [];
-
-        // Set canvas size
-        function updateCanvasSize() {
-            canvas.width = matchingList.offsetWidth;
-            canvas.height = matchingList.offsetHeight;
-            // Redraw lines after resize
-            drawConnections();
-        }
-        updateCanvasSize();
-        window.addEventListener('resize', updateCanvasSize);
-
-        // Drawing functions
-        function drawLine(start, end) {
-            const ctx = canvas.getContext('2d');
-            ctx.beginPath();
-            ctx.moveTo(start.x, start.y);
-            ctx.lineTo(end.x, end.y);
-            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
-            ctx.lineWidth = 2;
-            ctx.stroke();
-        }
-
-        function clearCanvas() {
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function drawConnections() {
-            clearCanvas();
-            if (!showingAnswers) { // Only draw user connections when not showing answers
-                lines.forEach(line => {
-                    drawLine(line.start, line.end);
-                });
-            }
-        }
-
-        // Click handlers
-        function handleItemClick(e) {
-            if (showingAnswers) return; // Disable clicking when showing answers
-            const item = e.target.closest('.list-item');
-            if (!item) return;
-
-            if (!selectedItem) {
-                // First item selected
-                selectedItem = item;
-                item.classList.add('active');
-            } else {
-                // Second item selected
-                const isLeft = selectedItem.closest('.list-column.left');
-                const isRightClick = item.closest('.list-column.right');
-
-                if (isLeft && isRightClick || !isLeft && !isRightClick) {
-                    // Valid connection attempt
-                    const leftItem = isLeft ? selectedItem : item;
-                    const rightItem = isLeft ? item : selectedItem;
-
-                    // Calculate dot positions
-                    const leftRect = leftItem.getBoundingClientRect();
-                    const rightRect = rightItem.getBoundingClientRect();
-                    const canvasRect = canvas.getBoundingClientRect();
-
-                    const start = {
-                        x: leftRect.right - canvasRect.left + 15, // Position at the dot
-                        y: leftRect.top - canvasRect.top + leftRect.height / 2
-                    };
-                    const end = {
-                        x: rightRect.left - canvasRect.left - 15, // Position at the dot
-                        y: rightRect.top - canvasRect.top + rightRect.height / 2
-                    };
-
-                    lines.push({ start, end });
-                    drawConnections();
-                }
-
-                // Reset selection
-                selectedItem.classList.remove('active');
-                selectedItem = null;
-            }
-        }
-
-        // Add click listeners
-        leftItems.forEach(item => item.addEventListener('click', handleItemClick));
-        rightItems.forEach(item => item.addEventListener('click', handleItemClick));
     }
 
     // Display empty preview
@@ -532,4 +460,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show initial preview
     // displayEmptyPreview(); // This line is now handled by the initialization
+
+    // Helper function to shuffle array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 }); 
