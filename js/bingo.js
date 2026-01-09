@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const wordInput = document.getElementById('wordInput');
-    const randomWordsBtn = document.getElementById('randomWordsBtn');
-    const boardSizeSelect = document.getElementById('boardSize');
-    const shuffleBtn = document.getElementById('shuffleBtn');
-    const generateBtn = document.getElementById('generateBtn');
+    const randomGenerateBtn = document.getElementById('random-generate-btn');
+    const boardSizeRadios = document.querySelectorAll('input[name="board-size"]');
+    const generateBtn = document.getElementById('generate-btn');
     const previewArea = document.getElementById('previewArea');
     const decreasePlayerBtn = document.getElementById('decreasePlayer');
     const increasePlayerBtn = document.getElementById('increasePlayer');
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const worksheetTitle = document.getElementById('worksheet-title');
     const showTitleCheckbox = document.getElementById('show-title');
     const printBtn = document.getElementById('print-btn');
-    const resetWordsBtn = document.getElementById('reset-words-btn');
+    const clearButton = document.getElementById('clearButton');
 
     // State
     let playerCount = 2;
@@ -31,11 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event Listeners
     decreasePlayerBtn.addEventListener('click', () => updatePlayerCount(-1));
     increasePlayerBtn.addEventListener('click', () => updatePlayerCount(1));
-    randomWordsBtn.addEventListener('click', generateRandomWords);
-    shuffleBtn.addEventListener('click', shuffleAndGenerate);
+    randomGenerateBtn.addEventListener('click', generateRandomWords);
     generateBtn.addEventListener('click', generateWorksheet);
     printBtn.addEventListener('click', printWorksheet);
-    resetWordsBtn.addEventListener('click', resetWords);
+    clearButton.addEventListener('click', resetWords);
     
     // Save original words when input changes
     wordInput.addEventListener('input', () => {
@@ -105,6 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return board;
     }
 
+    function getBoardSize() {
+        const selectedRadio = document.querySelector('input[name="board-size"]:checked');
+        return selectedRadio ? parseInt(selectedRadio.value) : 4;
+    }
+
     function createBingoPage(boardsPerPage = 2) {
         const page = document.createElement('div');
         page.className = 'bingo-page';
@@ -116,20 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create boards for this page
         for (let i = 0; i < boardsPerPage; i++) {
-            const size = parseInt(boardSizeSelect.value);
+            const size = getBoardSize();
             page.appendChild(createBingoBoard(size, words));
         }
 
         return page;
-    }
-
-    function shuffleAndGenerate() {
-        if (originalWords.length === 0) {
-            alert('Please enter some words first!');
-            return;
-        }
-        words = shuffleArray([...originalWords]);
-        generateWorksheet();
     }
 
     function generateWorksheet() {

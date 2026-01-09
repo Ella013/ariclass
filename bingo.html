@@ -80,36 +80,40 @@
                 </div>
 
                 <div class="word-input">
-                    <div class="section-header">
-                        <h2>Enter Words</h2>
-                        <button id="reset-words-btn" class="reset-btn" title="Reset all words">
-                            <i class="fas fa-undo-alt"></i>
-                        </button>
-                    </div>
-                    <textarea id="wordInput" placeholder="Enter words (one per line)"></textarea>
-                    <button id="randomWordsBtn" class="generate-btn">
-                        <i class="fas fa-random"></i> Randomly Generate
+                    <h2>Enter Words</h2>
+                    <textarea id="wordInput" class="vocab-textarea" placeholder="Enter words (one per line)"></textarea>
+                    <button id="clearButton" class="clear-btn">
+                        <i class="fas fa-trash"></i>
+                        Clear
                     </button>
                 </div>
 
-                <div class="bingo-settings">
-                    <h2>Game Settings</h2>
-                    <div class="setting-group">
-                        <label>Board Size:</label>
-                        <select id="boardSize">
-                            <option value="3">3 x 3</option>
-                            <option value="4" selected>4 x 4</option>
-                            <option value="5">5 x 5</option>
-                        </select>
+                <div class="options">
+                    <div class="option-group">
+                        <h2>Board Size</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="board-3" name="board-size" value="3">
+                                <label for="board-3">3 x 3</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="board-4" name="board-size" value="4" checked>
+                                <label for="board-4">4 x 4</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="board-5" name="board-size" value="5">
+                                <label for="board-5">5 x 5</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="setting-group">
-                        <label>Number of Players:</label>
+                    <div class="option-group">
+                        <h2>Number of Players</h2>
                         <div class="player-counter">
-                            <button id="decreasePlayer">
+                            <button id="decreasePlayer" type="button">
                                 <i class="fas fa-minus"></i>
                             </button>
                             <span id="playerCount">2</span>
-                            <button id="increasePlayer">
+                            <button id="increasePlayer" type="button">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
@@ -117,10 +121,10 @@
                 </div>
 
                 <div class="button-container">
-                    <button id="shuffleBtn" class="generate-btn">
-                        <i class="fas fa-random"></i> Shuffle Words
+                    <button class="generate-btn" id="random-generate-btn">
+                        <i class="fas fa-random"></i> Randomly generated
                     </button>
-                    <button id="generateBtn" class="generate-btn">
+                    <button class="generate-btn" id="generate-btn">
                         <i class="fas fa-magic"></i> Generate Bingo
                     </button>
                 </div>
