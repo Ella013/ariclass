@@ -301,6 +301,10 @@
         padding: 20mm !important;
         display: flex !important; /* Show all pages when printing */
     }
+    
+    .bingo-page:last-child {
+        page-break-after: auto !important;
+    }
 
     .page-divider {
         border-left: 1px dashed #999;
