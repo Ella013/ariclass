@@ -32,75 +32,34 @@ document.addEventListener('DOMContentLoaded', function() {
         const matchingList = document.querySelector('.matching-list');
         if (!matchingList) return;
 
+        // Get all right items
+        const rightItems = matchingList.querySelectorAll('.list-column.right .list-item');
+
         if (show) {
-            // Get all word pairs
-            const wordPairs = getWordPairs();
-            const rightWords = wordPairs.map(pair => pair.right);
-            
-            // Get all list items
-            const leftItems = matchingList.querySelectorAll('.list-column.left .list-item');
-            const rightItems = matchingList.querySelectorAll('.list-column.right .list-item');
-
-            // Create canvas for drawing lines
-            let canvas = matchingList.querySelector('#connection-canvas');
-            if (!canvas) {
-                canvas = document.createElement('canvas');
-                canvas.id = 'connection-canvas';
-                canvas.style.position = 'absolute';
-                canvas.style.top = '0';
-                canvas.style.left = '0';
-                canvas.style.pointerEvents = 'none';
-                canvas.style.zIndex = '1';
-                matchingList.appendChild(canvas);
-            }
-
-            // Set canvas size
-            const rect = matchingList.getBoundingClientRect();
-            canvas.style.width = rect.width + 'px';
-            canvas.style.height = rect.height + 'px';
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-
-            // Get canvas context
-            const ctx = canvas.getContext('2d');
-            ctx.strokeStyle = '#666';
-            ctx.lineWidth = 1;
-
-            // Draw lines between matching pairs
-            leftItems.forEach((leftItem, index) => {
-                // Find the matching right item using the pair index
-                const rightItem = Array.from(rightItems).find(item => 
-                    item.getAttribute('data-pair-index') === leftItem.getAttribute('data-index')
-                );
-
-                if (!leftItem || !rightItem) return;
-
-                // Get the actual connection points
-                const leftDot = leftItem.querySelector('.connection-point');
-                const rightDot = rightItem.querySelector('.connection-point');
-
-                // Get the exact positions using list item and connection point offsets
-                const matchingListRect = matchingList.getBoundingClientRect();
-                const leftItemRect = leftItem.getBoundingClientRect();
-                const rightItemRect = rightItem.getBoundingClientRect();
-
-                const leftDotX = leftItemRect.left - matchingListRect.left + leftDot.offsetLeft + leftDot.offsetWidth / 2;
-                const leftDotY = leftItemRect.top - matchingListRect.top + leftDot.offsetTop + leftDot.offsetHeight / 2;
-                const rightDotX = rightItemRect.left - matchingListRect.left + rightDot.offsetLeft + rightDot.offsetWidth / 2;
-                const rightDotY = rightItemRect.top - matchingListRect.top + rightDot.offsetTop + rightDot.offsetHeight / 2;
-
-                // Draw a straight line
-                ctx.beginPath();
-                ctx.moveTo(leftDotX, leftDotY);
-                ctx.lineTo(rightDotX, rightDotY);
-                ctx.stroke();
+            // Show answer numbers next to right words
+            rightItems.forEach((rightItem) => {
+                const pairIndex = rightItem.getAttribute('data-pair-index');
+                
+                // Remove existing answer number if any
+                const existingAnswer = rightItem.querySelector('.answer-number');
+                if (existingAnswer) {
+                    existingAnswer.remove();
+                }
+                
+                // Add answer number
+                const answerNumber = document.createElement('span');
+                answerNumber.className = 'answer-number';
+                answerNumber.textContent = pairIndex;
+                rightItem.appendChild(answerNumber);
             });
         } else {
-            // Remove canvas when hiding answers
-            const canvas = matchingList.querySelector('#connection-canvas');
-            if (canvas) {
-                canvas.remove();
-            }
+            // Hide answer numbers
+            rightItems.forEach((rightItem) => {
+                const answerNumber = rightItem.querySelector('.answer-number');
+                if (answerNumber) {
+                    answerNumber.remove();
+                }
+            });
         }
     }
 
@@ -378,8 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${shuffledRight.map((word, index) => {
                         // Find the original pair that contains this word
                         const originalPair = wordPairs.find(pair => pair.right === word);
-                        // Get the index of the original pair
-                        const pairIndex = wordPairs.indexOf(originalPair);
+                        // Get the index of the original pair (1-based to match left items)
+                        const pairIndex = wordPairs.indexOf(originalPair) + 1;
                         return `
                         <div class="list-item" data-pair-index="${pairIndex}">
                             <span class="connection-point"></span>
