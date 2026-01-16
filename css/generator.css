@@ -663,6 +663,33 @@ body {
     .puzzle-cell.answer-highlight::before {
         display: none !important;
     }
+
+    /* Copyright footer for print */
+    .copyright-footer {
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 0 !important;
+        right: 0 !important;
+        text-align: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    #puzzle-preview {
+        padding-bottom: 15mm !important;
+    }
+
+    .bingo-page {
+        padding-bottom: 15mm !important;
+    }
+}
+
+/* Hide copyright footer on screen */
+.copyright-footer {
+    display: none;
 }
 
 /* Description Section */

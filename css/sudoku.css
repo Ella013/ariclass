@@ -1,0 +1,177 @@
+/* Sudoku specific styles */
+
+/* Center align Difficulty Level option group */
+.options .option-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.options .option-group h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.options .option-group .case-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Sudoku Grid Styles */
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 0;
+    border: 2px solid #000;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20mm;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 1;
+    box-shadow: none !important;
+    outline: none !important;
+    border-collapse: collapse;
+}
+
+.sudoku-cell {
+    border: none;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20pt;
+    font-weight: bold;
+    background: white !important;
+    min-height: 45px;
+    box-sizing: border-box;
+    color: #000;
+    box-shadow: none !important;
+    outline: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Remove right border for last column */
+.sudoku-cell:nth-child(9n) {
+    border-right: none;
+    background: white !important;
+}
+
+/* Remove bottom border for last row */
+.sudoku-cell:nth-child(n+73) {
+    border-bottom: none;
+    background: white !important;
+}
+
+/* Thicker borders for 3x3 boxes - every 3rd column (columns 3, 6) */
+.sudoku-cell:nth-child(3n):not(:nth-child(9n)) {
+    border-right: 2px solid #000;
+    background: white !important;
+}
+
+/* Thicker borders for 3x3 boxes - every 3rd row (rows 3, 6) */
+.sudoku-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid #000;
+    background: white !important;
+}
+
+/* Given numbers (pre-filled) */
+.sudoku-cell.given {
+    color: #000 !important;
+    font-weight: bold;
+    background: white !important;
+}
+
+/* User input numbers (empty cells) */
+.sudoku-cell.empty {
+    color: #000 !important;
+    background: white !important;
+}
+
+/* Answer numbers (when showing answers) */
+.sudoku-cell.answer {
+    color: #ff4444 !important;
+    font-weight: bold;
+    background: white !important;
+}
+
+/* Print Styles */
+@media print {
+    .sudoku-grid {
+        max-width: 600px !important;
+        margin: 20mm auto 0 auto !important;
+        border: 2px solid #000 !important;
+        box-shadow: none !important;
+    }
+
+    .sudoku-cell {
+        font-size: 20pt !important;
+        min-height: 45px !important;
+        background: white !important;
+        color: #000 !important;
+        border-right: 1px solid #666 !important;
+        border-bottom: 1px solid #666 !important;
+        border-top: none !important;
+        border-left: none !important;
+        box-shadow: none !important;
+    }
+
+    .sudoku-cell:nth-child(9n) {
+        border-right: none !important;
+    }
+
+    .sudoku-cell:nth-child(n+73) {
+        border-bottom: none !important;
+    }
+
+    .sudoku-cell:nth-child(3n):not(:nth-child(9n)) {
+        border-right: 2px solid #000 !important;
+    }
+
+    .sudoku-cell:nth-child(n+19):nth-child(-n+27),
+    .sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+        border-bottom: 2px solid #000 !important;
+    }
+
+    .sudoku-cell.given,
+    .sudoku-cell.empty,
+    .sudoku-cell.answer {
+        background: white !important;
+    }
+
+    .sudoku-cell.answer {
+        color: #ff4444 !important;
+    }
+
+    .copyright-footer {
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 0 !important;
+        right: 0 !important;
+        text-align: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    #puzzle-preview {
+        padding-bottom: 15mm !important;
+    }
+}
+
+/* Hide copyright footer on screen */
+.copyright-footer {
+    display: none;
+}

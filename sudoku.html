@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create custom crossword puzzles for English learning. Perfect for teachers and students.">
-    <title>AriClass - English Worksheet Generator</title>
-    <!-- Favicon -->
+    <meta name="description" content="Create custom sudoku puzzles for math practice. Perfect for teachers and students.">
+    <title>Sudoku - AriClass</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
-    <link rel="stylesheet" href="css/crossword.css">
+    <link rel="stylesheet" href="css/sudoku.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
@@ -69,41 +67,49 @@
     </header>
 
     <div class="generator-container">
-        <h1>Crossword Puzzle</h1>
-        
+        <h1>Sudoku</h1>
         <div class="generator-content">
+            <!-- Input Section -->
             <div class="input-section">
+                <!-- Title Input -->
                 <div class="title-input">
                     <h2>Worksheet Title</h2>
-                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title">
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Sudoku Puzzle">
                     <div class="option-group">
                         <label>
                             <input type="checkbox" id="show-title" checked>
-                            Show Title
+                            Show worksheet title
                         </label>
                     </div>
                 </div>
 
-                <div class="word-input">
-                    <div class="section-header">
-                        <h2>Enter Words and Clues</h2>
-                        <button id="reset-words-btn" class="reset-btn" title="Reset all words">
-                            <i class="fas fa-undo-alt"></i>
-                        </button>
+                <!-- Game Settings -->
+                <div class="options">
+                    <div class="option-group">
+                        <h2>Difficulty Level</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="difficulty-easy" name="difficulty" value="easy" checked>
+                                <label for="difficulty-easy">Easy</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="difficulty-medium" name="difficulty" value="medium">
+                                <label for="difficulty-medium">Medium</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="difficulty-hard" name="difficulty" value="hard">
+                                <label for="difficulty-hard">Hard</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="difficulty-expert" name="difficulty" value="expert">
+                                <label for="difficulty-expert">Expert</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="word-clue-container"></div>
-                    <button id="add-word-btn" class="add-word-btn">
-                        <i class="fas fa-plus"></i>
-                        Add Word
-                    </button>
-                    <button id="clear-all-btn" class="clear-btn">
-                        <i class="fas fa-trash"></i>
-                        Clear All
-                    </button>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="generate-random-btn">
+                    <button class="generate-btn" id="random-generate-btn">
                         <i class="fas fa-random"></i> Randomly generated
                     </button>
                     <button class="generate-btn" id="generate-btn">
@@ -112,15 +118,16 @@
                 </div>
             </div>
 
+            <!-- Preview Section -->
             <div class="preview-section">
                 <div class="preview-label">Preview</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <button id="print-btn" class="print-btn" disabled>
+                        <button id="print-btn" class="print-btn">
                             <i class="fas fa-print"></i> Print Worksheet
                         </button>
-                        <button class="answer-btn">
-                            <i class="fas fa-eye"></i> Show Answers
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-check-circle"></i> Show Answers
                         </button>
                     </div>
                     <div id="puzzle-preview"></div>
@@ -129,44 +136,43 @@
         </div>
 
         <div class="description-section">
-            <h2>How to Create Your Crossword Puzzle</h2>
+            <h2>How to Create Your Sudoku Puzzle</h2>
             <div class="description-content">
                 <div class="instruction-block">
                     <h3>Simple Steps to Create</h3>
                     <ol>
-                        <li>Enter a title for your worksheet</li>
-                        <li>Add words and their corresponding clues</li>
-                        <li>Choose the puzzle size based on your needs</li>
-                        <li>Select additional display options</li>
-                        <li>Click "Generate Puzzle" to create your crossword</li>
+                        <li>Enter a title for your worksheet at the top</li>
+                        <li>Select the difficulty level (Easy, Medium, Hard, or Expert)</li>
+                        <li>Click "Generate Puzzle" to create your sudoku puzzle</li>
+                        <li>Use "Show Answers" to display the solution</li>
                         <li>Print your worksheet using the print button</li>
                     </ol>
                 </div>
                 <div class="instruction-block">
                     <h3>Educational Benefits</h3>
                     <ul>
-                        <li>Enhances vocabulary and spelling skills</li>
-                        <li>Develops problem-solving abilities</li>
-                        <li>Perfect for ESL/EFL students</li>
-                        <li>Creates engaging classroom activities</li>
-                        <li>Reinforces reading comprehension</li>
+                        <li>Improves logical thinking and problem-solving skills</li>
+                        <li>Enhances number recognition and pattern recognition</li>
+                        <li>Perfect for math practice and cognitive development</li>
+                        <li>Develops concentration and attention to detail</li>
+                        <li>Creates engaging activities for classroom or homework</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
                     <h3>Tips for Teachers</h3>
                     <ul>
-                        <li>Write clear and age-appropriate clues</li>
-                        <li>Use themed vocabulary for specific lessons</li>
-                        <li>Start with smaller puzzles for beginners</li>
-                        <li>Include a mix of easy and challenging words</li>
-                        <li>Use as review activities or homework</li>
+                        <li>Start with Easy level for beginners</li>
+                        <li>Use Medium level for students familiar with sudoku</li>
+                        <li>Challenge advanced students with Hard or Expert levels</li>
+                        <li>Print with answer key for easy grading</li>
+                        <li>Use as warm-up activities or math enrichment exercises</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/crossword.js"></script>
+    <script src="js/sudoku.js"></script>
 
     <footer>
         <div class="footer-content">
@@ -182,7 +188,9 @@
                     <li><a href="word-search.html">Word Search</a></li>
                     <li><a href="unscramble.html">Unscramble</a></li>
                     <li><a href="crossword.html">Crossword Puzzle</a></li>
-                    <li><a href="#worksheets">All Worksheets</a></li>
+                    <li><a href="matching-lists.html">Matching Lists</a></li>
+                    <li><a href="bingo.html">Bingo Game</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
                 </ul>
             </nav>
 
@@ -206,4 +214,4 @@
         </div>
     </footer>
 </body>
-</html> 
+</html>

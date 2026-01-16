@@ -361,6 +361,10 @@ document.addEventListener('DOMContentLoaded', function() {
             html += '</div>';
         }
 
+        // Add copyright footer
+        const currentYear = new Date().getFullYear();
+        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
+
         puzzlePreview.innerHTML = html;
     }
 

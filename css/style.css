@@ -304,8 +304,8 @@ body {
 
 .worksheet-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.8rem;
     padding: 0 2rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -314,7 +314,7 @@ body {
 .worksheet-card {
     background: white;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 0.8rem;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -328,33 +328,33 @@ body {
 .worksheet-card img {
     width: 100%;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     border-radius: 8px;
 }
 
 .worksheet-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--text-color);
 }
 
 .worksheet-card p {
     color: var(--text-secondary);
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
     line-height: 1.5;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
 }
 
 .create-btn {
     display: inline-block;
-    padding: 0.8rem 1.8rem;
+    padding: 0.5rem 1.2rem;
     background-color: #FFD700;
     color: #333;
     text-decoration: none;
     border-radius: 25px;
     font-weight: 500;
     transition: background-color 0.2s ease;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
 }
 
 .create-btn:hover {
@@ -502,6 +502,12 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .worksheet-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: 2rem;
@@ -509,6 +515,12 @@ footer {
 
     .nav-links {
         display: none;
+    }
+
+    .worksheet-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 1rem;
     }
 
     .worksheet-types {
@@ -530,6 +542,12 @@ footer {
 
     .footer-nav-list {
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .worksheet-grid {
+        grid-template-columns: 1fr;
     }
 }
 

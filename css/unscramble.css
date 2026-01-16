@@ -2,22 +2,60 @@
     background: var(--primary-color);
 }
 
-/* Center align Layout Format and Spacing Between Questions */
-.options .option-group:nth-child(2),
-.options .option-group:nth-child(3) {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Center align first option group (checkbox) */
+.options .option-group:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.options .option-group:nth-child(2) h2,
+.options .option-group:first-child label {
+    justify-content: center;
+}
+
+/* Center align Layout Format (second option group) */
+.options .option-group:nth-child(2) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.options .option-group:nth-child(2) h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.options .option-group:nth-child(2) .case-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Center align Spacing Between Questions (third option group) */
+.options .option-group:nth-child(3) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
 .options .option-group:nth-child(3) h2 {
     text-align: center;
     width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 0;
 }
 
-.options .option-group:nth-child(2) .case-options,
 .options .option-group:nth-child(3) .case-options {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
-} 
+    align-items: center;
+    gap: 1.5rem;
+}

@@ -349,6 +349,10 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
+        // Add copyright footer
+        const currentYear = new Date().getFullYear();
+        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
+
         // Update preview
         puzzlePreview.innerHTML = html;
         printBtn.disabled = false;
@@ -382,6 +386,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const title = worksheetTitle.value.trim() || 'Matching Lists';
             html += `<div class="puzzle-title">${title}</div>`;
         }
+
+        // Add copyright footer
+        const currentYear = new Date().getFullYear();
+        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
 
         puzzlePreview.innerHTML = html;
         printBtn.disabled = false;

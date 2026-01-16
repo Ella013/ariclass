@@ -201,6 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             board.appendChild(grid);
+            
+            // Add copyright footer
+            const copyrightFooter = document.createElement('div');
+            copyrightFooter.className = 'copyright-footer';
+            const currentYear = new Date().getFullYear();
+            copyrightFooter.textContent = `© ${currentYear} AriClass. All rights reserved.`;
+            board.appendChild(copyrightFooter);
+            
             page.appendChild(board);
             previewArea.appendChild(page);
         }
@@ -283,6 +291,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         board.appendChild(grid);
+        
+        // Add copyright footer
+        const copyrightFooter = document.createElement('div');
+        copyrightFooter.className = 'copyright-footer';
+        const currentYear = new Date().getFullYear();
+        copyrightFooter.textContent = `© ${currentYear} AriClass. All rights reserved.`;
+        board.appendChild(copyrightFooter);
+        
         return board;
     }
 
