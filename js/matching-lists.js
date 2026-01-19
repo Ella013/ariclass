@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const answerNumber = rightItem.querySelector('.answer-number');
                 if (answerNumber) {
                     answerNumber.remove();
-                }
+            }
             });
         }
     }

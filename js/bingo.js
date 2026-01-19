@@ -264,11 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedLayout && savedLayout.length === size * size) {
             cellWords = savedLayout;
         } else {
-            // If we don't have enough words, we'll reuse them
-            let boardWords = [...words];
-            while (boardWords.length < size * size) {
-                boardWords = [...boardWords, ...words];
-            }
+        // If we don't have enough words, we'll reuse them
+        let boardWords = [...words];
+        while (boardWords.length < size * size) {
+            boardWords = [...boardWords, ...words];
+        }
             cellWords = shuffleArray(boardWords).slice(0, size * size);
         }
 
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < playerCount; i++) {
                 const savedLayout = savedBoardLayouts[i] || null;
                 const page = createBingoPage(1, savedLayout);
-                previewArea.appendChild(page);
+            previewArea.appendChild(page);
             }
         } else {
             // Create new layouts and save them

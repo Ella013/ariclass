@@ -1,0 +1,155 @@
+/* Maze specific styles */
+
+/* Center align Maze Size option group */
+.options .option-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.options .option-group h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.options .option-group .case-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Maze Grid Styles */
+.maze-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20mm;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.maze-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    display: inline-block;
+}
+
+/* SVG-based line maze */
+.maze-svg {
+    background: #fff;
+    border: none;
+    box-shadow: none !important;
+    outline: none !important;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG wall lines */
+.maze-svg line {
+    stroke: #000;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+}
+
+.maze-svg rect {
+    stroke: #000;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+}
+
+/* SVG start/end markers */
+.maze-svg circle {
+    fill: #000;
+    opacity: 0.2;
+}
+
+.maze-svg text {
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+}
+
+/* Solution path (drawn directly in SVG) */
+.maze-svg path {
+    stroke: #e53935;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Difficulty Select */
+.difficulty-select {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: white;
+    color: var(--text-color);
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.difficulty-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+
+/* Print Styles */
+@media print {
+    .maze-container {
+        max-width: 600px !important;
+        margin: 20mm auto 0 auto !important;
+    }
+    
+    .maze-wrapper {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 600px !important;
+        display: inline-block !important;
+    }
+
+    .maze-svg {
+        background: #fff !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    .maze-svg line {
+        stroke: #000 !important;
+    }
+
+    .maze-svg path {
+        stroke: #e53935 !important;
+    }
+
+    .copyright-footer {
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 0 !important;
+        right: 0 !important;
+        text-align: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    #puzzle-preview {
+        padding-bottom: 15mm !important;
+    }
+}
+
+/* Hide copyright footer on screen */
+.copyright-footer {
+    display: none;
+}
