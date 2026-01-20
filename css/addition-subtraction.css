@@ -1,0 +1,279 @@
+/* Addition & Subtraction Worksheet Styles */
+
+#puzzle-preview .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem 1.2rem;
+    margin: 0.8rem 0 1.2rem 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#puzzle-preview .problem-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 90px;
+}
+
+#puzzle-preview .problem-number {
+    position: absolute;
+    top: 0.2rem;
+    left: 0.3rem;
+    font-size: 11pt;
+    color: #888;
+    font-weight: 500;
+}
+
+#puzzle-preview .problem-content {
+    /* 문제 폭 = (연산자 1칸 + 최대 자리수) */
+    width: calc(var(--cols) * 1.7rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 1.8rem;
+    margin: 0 auto;
+}
+
+#puzzle-preview .problem-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0.12rem;
+    font-size: 21pt;
+    line-height: 1.35;
+    font-weight: 500;
+    width: 100%;
+}
+
+#puzzle-preview .op-col {
+    display: inline-block;
+    width: 1.7rem; /* digit width와 동일 */
+    text-align: left;
+    padding-right: 0.3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 21pt;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+#puzzle-preview .problem-row.operator {
+    margin-bottom: 0.1rem;
+}
+
+#puzzle-preview .problem-row.line {
+    border-top: 2pt solid #333;
+    width: 100%;
+    margin: 0.1rem 0;
+    min-width: 0;
+    max-width: none;
+}
+
+#puzzle-preview .problem-row.answer {
+    margin-top: 0.15rem;
+}
+
+#puzzle-preview .digit {
+    display: inline-block;
+    width: 1.7rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 21pt;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+#puzzle-preview .digit.empty {
+    min-height: 1.7rem;
+}
+
+#puzzle-preview .answer-digit {
+    color: #0066cc;
+    font-weight: 600;
+}
+
+/* Answers under each problem: reserve space always, show/hide without reflow */
+#puzzle-preview .problem-row.answer {
+    /* fixed row height so problems never move when answers toggle */
+    height: 1.6em;
+    margin-top: 0.15rem;
+}
+
+/* Reduce top vertical whitespace so everything fits within A4 preview */
+#puzzle-preview .student-header {
+    margin-bottom: 6mm;
+}
+
+#puzzle-preview .puzzle-title {
+    margin: 5mm 0;
+}
+
+#puzzle-preview .title-slot {
+    /* keep a fixed slot so problems never shift when title is hidden */
+    min-height: 10mm;
+}
+
+#puzzle-preview.title-off .title-slot {
+    visibility: hidden;
+}
+
+#puzzle-preview .problem-row.answer .answer-slot {
+    opacity: 0;
+    color: #0066cc;
+    font-weight: 600;
+}
+
+#puzzle-preview.answers-on .problem-row.answer .answer-slot {
+    opacity: 1;
+}
+
+/* Print (multi-page):
+   We print via #print-pages so we can generate N pages while keeping preview as 1 page. */
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    #print-pages, #print-pages * {
+        visibility: visible !important;
+    }
+
+    #print-pages {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #print-pages .print-page {
+        width: 210mm;
+        height: 297mm;
+        padding: 20mm;
+        box-sizing: border-box;
+        page-break-after: always;
+        background: white;
+    }
+
+    #print-pages .print-page:last-child {
+        page-break-after: auto;
+    }
+
+    /* Make print pages match preview layout */
+    #print-pages .problems-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem 1.2rem;
+        margin: 0.8rem 0 1.2rem 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #print-pages .problem-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 90px;
+    }
+
+    #print-pages .problem-number {
+        position: absolute;
+        top: 0.2rem;
+        left: 0.3rem;
+        font-size: 11pt;
+        color: #888;
+        font-weight: 500;
+    }
+
+    #print-pages .problem-content {
+        width: calc(var(--cols) * 1.7rem);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 1.8rem;
+        margin: 0 auto;
+    }
+
+    #print-pages .problem-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 0.12rem;
+        font-size: 21pt;
+        line-height: 1.35;
+        font-weight: 500;
+        width: 100%;
+    }
+
+    #print-pages .op-col {
+        display: inline-block;
+        width: 1.7rem;
+        text-align: left;
+        padding-right: 0.3rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 21pt;
+        line-height: 1.35;
+        font-weight: 600;
+    }
+
+    #print-pages .problem-row.line {
+        border-top: 2pt solid #333;
+        width: 100%;
+        margin: 0.1rem 0;
+    }
+
+    #print-pages .student-header {
+        margin-bottom: 6mm;
+    }
+
+    #print-pages .puzzle-title {
+        margin: 5mm 0;
+    }
+
+    #print-pages .title-slot {
+        min-height: 10mm;
+    }
+
+    #print-pages .print-page.title-off .title-slot {
+        visibility: hidden;
+    }
+
+    #print-pages .problem-row.answer {
+        height: 1.6em;
+        margin-top: 0.15rem;
+    }
+
+    #print-pages .digit {
+        display: inline-block;
+        width: 1.7rem;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 21pt;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+
+    #print-pages .answer-slot {
+        opacity: 0;
+        color: #0066cc;
+        font-weight: 600;
+    }
+
+    #print-pages .print-page.answers-on .answer-slot {
+        opacity: 1;
+    }
+}
+
+/* Mobile: keep PC layout exactly, allow horizontal scrolling instead of reflow */
+@media (max-width: 768px) {
+    .generator-container {
+        margin: 1rem auto !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .generator-content {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        min-width: 1100px; /* ensures left settings + right preview are fully visible like PC */
+    }
+}

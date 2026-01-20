@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create custom addition and subtraction worksheets with vertical format. Perfect for teachers and students.">
+    <title>AriClass - Addition & Subtraction Worksheet Generator</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="css/addition-subtraction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select">
+                <select id="language-selector">
+                    <option value="en">English</option>
+                    <option value="ko">한국어</option>
+                    <option value="ja">日本語</option>
+                    <option value="zh-CN">简体中文</option>
+                    <option value="zh-TW">繁體中文</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+            <div class="logo">
+                    <a href="index.html">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <h1>AriClass Worksheet Generator</h1>
+                    <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
+                </div>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Worksheets</a>
+                        <ul class="dropdown-menu">
+                <li><a href="word-search.html">Word Search</a></li>
+                            <li><a href="unscramble.html">Unscramble</a></li>
+                            <li><a href="crossword.html">Crossword Puzzle</a></li>
+                            <li><a href="matching-lists.html">Matching Lists</a></li>
+                            <li><a href="bingo.html">Bingo Game</a></li>
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Maze Puzzle</a></li>
+                            <li><a href="addition-subtraction.html">Addition & Subtraction</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">How to Use</a></li>
+            </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>Addition & Subtraction</h1>
+        
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Worksheet Title</h2>
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            Show worksheet title
+                        </label>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option-group">
+                        <div style="display: flex; gap: 2rem;">
+                            <label>
+                                <input type="radio" name="operation" id="addition-only" value="addition" checked>
+                                Addition Only
+                            </label>
+                            <label>
+                                <input type="radio" name="operation" id="subtraction-only" value="subtraction">
+                                Subtraction Only
+                            </label>
+                            <label>
+                                <input type="radio" name="operation" id="mixed" value="mixed">
+                                Mixed
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <div class="level-options">
+                            <div class="level-option">
+                                <input type="radio" id="level1" name="level" value="1" checked>
+                                <label for="level1">Level 1 (Easy)</label>
+                            </div>
+                            <div class="level-option">
+                                <input type="radio" id="level2" name="level" value="2">
+                                <label for="level2">Level 2 (Medium)</label>
+                            </div>
+                            <div class="level-option">
+                                <input type="radio" id="level3" name="level" value="3">
+                                <label for="level3">Level 3 (Hard)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>
+                            Pages:
+                            <input type="number" id="num-pages" min="1" max="10" value="1" style="width: 80px; padding: 0.4rem; margin-left: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px;">
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> Generate Worksheet
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-label">Preview</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> Show Answers
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>How to Create Your Addition & Subtraction Worksheet</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Simple Steps to Create</h3>
+                    <ol>
+                        <li>Enter a title for your worksheet at the top</li>
+                        <li>Choose operation type (Addition, Subtraction, or Mixed)</li>
+                        <li>Select difficulty level (Easy, Medium, or Hard)</li>
+                        <li>Set the number of problems (5-30)</li>
+                        <li>Click "Generate Worksheet" to create your problems</li>
+                        <li>Print your worksheet using the print button</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Educational Benefits</h3>
+                    <ul>
+                        <li>Improves mental math and calculation skills</li>
+                        <li>Reinforces number sense and place value understanding</li>
+                        <li>Perfect for elementary and middle school students</li>
+                        <li>Creates engaging practice for classroom or homework</li>
+                        <li>Customizable difficulty levels for different skill levels</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Tips for Teachers</h3>
+                    <ul>
+                        <li>Start with easier levels for beginners</li>
+                        <li>Use mixed operations to challenge students</li>
+                        <li>Print multiple copies for classroom activities</li>
+                        <li>Use as daily warm-up exercises</li>
+                        <li>Adjust number of problems based on time available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/addition-subtraction.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
+            </div>
+            
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="word-search.html">Word Search</a></li>
+                    <li><a href="unscramble.html">Unscramble</a></li>
+                    <li><a href="crossword.html">Crossword Puzzle</a></li>
+                    <li><a href="matching-lists.html">Matching Lists</a></li>
+                    <li><a href="bingo.html">Bingo Game</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Maze Puzzle</a></li>
+                    <li><a href="addition-subtraction.html">Addition & Subtraction</a></li>
+                </ul>
+            </nav>
+
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
