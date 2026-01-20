@@ -129,29 +129,21 @@ document.addEventListener('DOMContentLoaded', function() {
         printBtn.disabled = false;
     }
     
-    // Validate maze difficulty based on "regret distance" (되돌아가기 비용)
-    // Wrong choice should require at least 40% of total path length to return to mainPath/End
+    // Basic difficulty validation: 일단 '정상적인 미로'를 보장하는 최소 조건만 사용
     function validateMazeDifficulty(walls, size, mainPath) {
+        // 1) 경로는 반드시 존재해야 함
         if (!mainPath || mainPath.length === 0) return false;
-        
-        const mainPathLength = mainPath.length;
-        const minRegretDistance = Math.floor(mainPathLength * 0.4); // 40% of main path
-        
-        // Check 1: Wrong choices require minimum regret distance (return cost)
-        if (!checkMinimumRegretDistance(walls, size, mainPath, minRegretDistance)) {
-            return false; // Wrong choices don't require enough regret distance
-        }
-        
-        // Check 2: Early decision points (first 10-15 moves should have ambiguity)
-        if (!hasEarlyAmbiguity(walls, size, mainPath)) {
-            return false; // Answer is too obvious in first 10-15 moves
-        }
-        
-        return true; // All difficulty checks passed
+
+        // 2) 너무 짧은 미로는 거절 (최소 전체 셀의 30% 이상은 지나가게)
+        const minLength = Math.floor(size * size * 0.3);
+        if (mainPath.length < minLength) return false;
+
+        // 나머지 고급 난이도 검증은 잠시 비활성화 (우선 '정상 동작'에 집중)
+        return true;
     }
     
-    // Check if wrong choices require minimum regret distance (return cost to mainPath/End)
-    function checkMinimumRegretDistance(walls, size, mainPath, minRegret) {
+    // Check if there are decision points near start (without using mainPath)
+    function hasEarlyDecisionPoints(walls, size) {
         const directions = [
             [-1, 0, 'top'],
             [0, 1, 'right'],
@@ -159,56 +151,103 @@ document.addEventListener('DOMContentLoaded', function() {
             [0, -1, 'left']
         ];
         
-        const isOnMainPath = Array(size).fill(null).map(() => Array(size).fill(false));
-        for (const [row, col] of mainPath) {
-            isOnMainPath[row][col] = true;
-        }
-        
-        let validWrongChoices = 0;
-        const requiredChoices = 2; // Need at least 2 wrong choices that meet criteria
-        
-        // Check decision points on main path (first 60% of path)
-        const checkRange = Math.floor(mainPath.length * 0.6);
-        
-        for (let i = 1; i < checkRange && i < mainPath.length - 1; i++) {
-            const [row, col] = mainPath[i];
-            
-            // Find branches (wrong choices) from this point
-            const branches = [];
-            for (const [dr, dc, wallKey] of directions) {
-                const branchRow = row + dr;
-                const branchCol = col + dc;
+        // Check cells near start (within 5 cells)
+        let decisionPoints = 0;
+        for (let row = 0; row < Math.min(6, size); row++) {
+            for (let col = 0; col < Math.min(6, size); col++) {
+                if (row === 0 && col === 0) continue; // Skip start
                 
-                if (branchRow >= 0 && branchRow < size && 
-                    branchCol >= 0 && branchCol < size &&
-                    !isOnMainPath[branchRow][branchCol] &&
-                    !walls[row][col][wallKey]) { // Path exists (wrong choice)
-                    branches.push([branchRow, branchCol]);
-                }
-            }
-            
-            // Check each branch
-            for (const [branchRow, branchCol] of branches) {
-                // Calculate regret distance: minimum additional travel to return to mainPath/End
-                const regretDistance = calculateRegretDistance(walls, size, branchRow, branchCol, 
-                                                               isOnMainPath, mainPath);
-                
-                if (regretDistance >= minRegret) {
-                    validWrongChoices++;
-                    if (validWrongChoices >= requiredChoices) {
-                        return true; // Found enough valid wrong choices
+                let openings = 0;
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    
+                    if (newRow >= 0 && newRow < size && 
+                        newCol >= 0 && newCol < size &&
+                        !walls[row][col][wallKey]) {
+                        openings++;
                     }
                 }
+                
+                // Junction (3+ openings) is a decision point
+                if (openings >= 3) {
+                    decisionPoints++;
+                }
             }
         }
         
-        return false; // Not enough valid wrong choices
+        return decisionPoints >= 2; // Need at least 2 decision points near start
     }
     
-    // Calculate regret distance (되돌아가기 비용): minimum additional distance 
-    // to return to mainPath or End after taking a wrong branch
-    // This includes loop traversal - we need to find the shortest path back
-    function calculateRegretDistance(walls, size, startRow, startCol, isOnMainPath, mainPath) {
+    // Count dead ends (cells with only 1 opening)
+    function countDeadEnds(walls, size) {
+        const directions = [
+            [-1, 0, 'top'],
+            [0, 1, 'right'],
+            [1, 0, 'bottom'],
+            [0, -1, 'left']
+        ];
+        
+        let deadEndCount = 0;
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                let openings = 0;
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    
+                    if (newRow >= 0 && newRow < size && 
+                        newCol >= 0 && newCol < size &&
+                        !walls[row][col][wallKey]) {
+                        openings++;
+                    }
+                }
+                
+                if (openings === 1) {
+                    deadEndCount++;
+                }
+            }
+        }
+        
+        return deadEndCount;
+    }
+    
+    // Count junctions (cells with 3+ openings)
+    function countJunctions(walls, size) {
+        const directions = [
+            [-1, 0, 'top'],
+            [0, 1, 'right'],
+            [1, 0, 'bottom'],
+            [0, -1, 'left']
+        ];
+        
+        let junctionCount = 0;
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                let openings = 0;
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    
+                    if (newRow >= 0 && newRow < size && 
+                        newCol >= 0 && newCol < size &&
+                        !walls[row][col][wallKey]) {
+                        openings++;
+                    }
+                }
+                
+                if (openings >= 3) {
+                    junctionCount++;
+                }
+            }
+        }
+        
+        return junctionCount;
+    }
+    
+    // Check for visually deceptive false paths with sufficient regret distance
+    // Humans judge by visual straightness and proximity to end, not graph distance
+    function checkVisualFalsePaths(walls, size) {
         const directions = [
             [-1, 0, 'top'],
             [0, 1, 'right'],
@@ -218,67 +257,157 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const endRow = size - 1;
         const endCol = size - 1;
+        const minRegret = Math.floor(size * 0.4); // 40% of size
+        const requiredFalsePaths = 2; // Need at least 2 visually deceptive false paths
         
-        // Use BFS to find shortest path from wrong choice back to mainPath or End
-        const queue = [[startRow, startCol, 0]]; // [row, col, distance]
-        const visited = Array(size).fill(null).map(() => Array(size).fill(false));
-        visited[startRow][startCol] = true;
+        // Find all decision points near start (first 20% of maze area)
+        const startArea = Math.floor(size * 0.2);
+        const decisionPoints = [];
         
-        // Mark the starting cell as visited to avoid immediate backtrack
-        // But allow revisiting mainPath cells (they're the target)
-        
-        while (queue.length > 0) {
-            const [row, col, distance] = queue.shift();
-            
-            // If we reached mainPath (but not the starting point), return distance
-            // This is the "regret distance" - cost to get back to correct path
-            if (isOnMainPath[row][col] && distance > 0) {
-                // Also check if we can reach End from this mainPath point
-                // The regret is the distance we traveled + remaining distance to End
-                const remainingToEnd = calculateDistanceToEnd(mainPath, row, col);
-                return distance; // Return cost to get back to mainPath
-            }
-            
-            // If we reached End directly, return distance
-            if (row === endRow && col === endCol && distance > 0) {
-                return distance;
-            }
-            
-            // Explore neighbors
-            for (const [dr, dc, wallKey] of directions) {
-                const newRow = row + dr;
-                const newCol = col + dc;
+        for (let row = 0; row <= startArea; row++) {
+            for (let col = 0; col <= startArea; col++) {
+                if (row === 0 && col === 0) continue; // Skip start
                 
-                if (newRow >= 0 && newRow < size && 
-                    newCol >= 0 && newCol < size && 
-                    !walls[row][col][wallKey]) {
+                let openings = 0;
+                const branches = [];
+                
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
                     
-                    // Allow revisiting mainPath cells (they're targets)
-                    // But prevent revisiting non-mainPath cells to avoid infinite loops
-                    if (isOnMainPath[newRow][newCol] || !visited[newRow][newCol]) {
-                        if (!isOnMainPath[newRow][newCol]) {
-                            visited[newRow][newCol] = true;
+                    if (newRow >= 0 && newRow < size && 
+                        newCol >= 0 && newCol < size &&
+                        !walls[row][col][wallKey]) {
+                        openings++;
+                        branches.push([newRow, newCol]);
+                    }
+                }
+                
+                // Junction (3+ openings) is a decision point
+                if (openings >= 3) {
+                    decisionPoints.push([row, col, branches]);
+                }
+            }
+        }
+        
+        if (decisionPoints.length === 0) return false;
+        
+        // Check each decision point for visually deceptive false paths
+        let validFalsePathCount = 0;
+        
+        for (const [decRow, decCol, branches] of decisionPoints) {
+            // For each branch, check if it's visually deceptive
+            for (const [branchRow, branchCol] of branches) {
+                // Calculate visual properties of this branch path
+                const visualDist = euclideanDistance(branchRow, branchCol, endRow, endCol);
+                const startDist = euclideanDistance(0, 0, endRow, endCol);
+                
+                // Check if this branch appears closer to end or more direct
+                // (visual distance improvement)
+                const visualImprovement = startDist - visualDist;
+                
+                // Calculate path straightness (how direct it appears)
+                // Build a path from start through this branch
+                const pathStraightness = calculatePathVisualStraightness(
+                    [[0, 0], [decRow, decCol], [branchRow, branchCol]], 
+                    endRow, endCol
+                );
+                
+                // A visually deceptive path should:
+                // 1. Appear closer to end (visual distance improvement > 0)
+                // 2. OR appear more straight (straightness > 0.5)
+                const isVisuallyDeceptive = visualImprovement > 0 || pathStraightness > 0.5;
+                
+                if (isVisuallyDeceptive) {
+                    // Calculate regret distance: minimum travel to return to end
+                    const regretDistance = calculateRegretDistanceToEnd(
+                        walls, size, branchRow, branchCol, endRow, endCol
+                    );
+                    
+                    if (regretDistance >= minRegret) {
+                        validFalsePathCount++;
+                        if (validFalsePathCount >= requiredFalsePaths) {
+                            return true;
                         }
-                        queue.push([newRow, newCol, distance + 1]);
                     }
                 }
             }
         }
         
-        // If we can't return to mainPath/End, this is a dead end
-        // Return a large value (the path we traveled is all regret)
-        return Infinity; // Can't return - this is a pure dead end
+        return false; // Not enough visually deceptive false paths
     }
     
-    // Helper: Calculate distance along mainPath from a given cell to End
-    function calculateDistanceToEnd(mainPath, row, col) {
-        for (let i = 0; i < mainPath.length; i++) {
-            const [r, c] = mainPath[i];
-            if (r === row && c === col) {
-                return mainPath.length - i - 1;
+    // Calculate visual straightness of a path (how direct it appears)
+    // Returns value between 0 (very indirect) and 1 (perfectly straight)
+    function calculatePathVisualStraightness(path, endRow, endCol) {
+        if (path.length < 2) return 0;
+        
+        const start = path[0];
+        const end = path[path.length - 1];
+        
+        // Direct distance from start to end
+        const directDist = euclideanDistance(start[0], start[1], endRow, endCol);
+        
+        // Actual path distance (sum of Euclidean distances between consecutive points)
+        let pathDist = 0;
+        for (let i = 0; i < path.length - 1; i++) {
+            pathDist += euclideanDistance(
+                path[i][0], path[i][1],
+                path[i + 1][0], path[i + 1][1]
+            );
+        }
+        
+        // Also consider how close the path end is to the actual end
+        const pathEndDist = euclideanDistance(end[0], end[1], endRow, endCol);
+        const startToEndDist = euclideanDistance(start[0], start[1], endRow, endCol);
+        
+        // Straightness = direct distance / path distance (closer to 1 is better)
+        // Also factor in how close path end is to actual end
+        const distanceRatio = pathDist > 0 ? directDist / pathDist : 0;
+        const proximityRatio = startToEndDist > 0 ? 
+            (startToEndDist - pathEndDist) / startToEndDist : 0;
+        
+        // Combined score: both straightness and proximity matter
+        return (distanceRatio * 0.6 + proximityRatio * 0.4);
+    }
+    
+    // Calculate regret distance: minimum travel to return to end after wrong choice
+    // This is the "movement loss" - how much extra distance must be traveled
+    function calculateRegretDistanceToEnd(walls, size, startRow, startCol, endRow, endCol) {
+        const directions = [
+            [-1, 0, 'top'],
+            [0, 1, 'right'],
+            [1, 0, 'bottom'],
+            [0, -1, 'left']
+        ];
+        
+        // Use BFS to find shortest path from wrong choice to end
+        const queue = [[startRow, startCol, 0]];
+        const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+        visited[startRow][startCol] = true;
+        
+        while (queue.length > 0) {
+            const [row, col, distance] = queue.shift();
+            
+            if (row === endRow && col === endCol) {
+                return distance; // Return regret distance
+            }
+            
+            for (const [dr, dc, wallKey] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                if (newRow >= 0 && newRow < size && 
+                    newCol >= 0 && newCol < size &&
+                    !visited[newRow][newCol] &&
+                    !walls[row][col][wallKey]) {
+                    visited[newRow][newCol] = true;
+                    queue.push([newRow, newCol, distance + 1]);
+                }
             }
         }
-        return Infinity;
+        
+        return Infinity; // Cannot reach end - this is a dead end
     }
     
     // Find false candidate paths (paths that go far before failing)
@@ -517,8 +646,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return pathCount.count;
     }
 
-    // Generate maze with decision-making structure from the start
-    // Creates multiple competing paths instead of a single DFS tree
+    // Generate a basic, stable maze using classic DFS backtracking (perfect maze)
+    // 목표: 일단 '정상적인 미로'를 확실하게 만들어주기 위한 기본 버전
     function generateMazeGrid(size) {
         // Initialize: all cells have all 4 walls initially
         const walls = Array(size).fill(null).map(() => 
@@ -534,18 +663,602 @@ document.addEventListener('DOMContentLoaded', function() {
         walls[0][0].top = false; // Start: remove top wall
         walls[size - 1][size - 1].bottom = false; // End: remove bottom wall
         
-        // Generate maze with multiple competing paths from the start
-        generateCompetingPaths(walls, size);
+        // 기본 DFS 백트래킹으로 완전 미로 생성 (유일 경로 보장)
+        generateBasicDFS(walls, size);
         
-        // Ensure all walls are connected to outer border or other walls
+        // 가끔 가짜 경로(데드엔드)를 추가해서 헷갈리게 함
+        addFalsePaths(walls, size);
+        
+        // 빈 공간(고립된 셀)이 생기지 않도록 모든 셀을 연결
+        ensureAllCellsReachable(walls, size);
+        
+        // 최종 검증: 모든 셀이 통로에 연결되어 있고 빈칸이 없는지 확인
+        validateNoEmptyCells(walls, size);
+        
+        // 벽 대칭성만 정리 (렌더링 안정성)
         ensureWallsConnected(walls, size);
         
         return walls;
     }
     
-    // Generate maze with multiple competing paths from the start
-    // Creates decision points where multiple paths compete, not a single tree
-    function generateCompetingPaths(walls, size) {
+    // 완전 미로에 가끔 가짜 경로(데드엔드)를 추가
+    // 다른 길로 들어갈 수 있지만 결국 막혀있게 만듦
+    function addFalsePaths(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        // 가짜 경로 개수: size에 비례
+        const numFalsePaths = Math.floor(size * 0.2); // 예: 10x10이면 2개, 20x20이면 4개
+        
+        let pathsCreated = 0;
+        let attempts = 0;
+        const maxAttempts = size * size * 3;
+        
+        while (pathsCreated < numFalsePaths && attempts < maxAttempts) {
+            attempts++;
+            
+            // start(0,0)에서 reachable한 셀만 선택 (빈 공간 방지)
+            const reachableCells = getReachableCells(walls, size);
+            if (reachableCells.length === 0) break; // 더 이상 reachable한 셀이 없으면 종료
+            
+            // reachable한 셀 중에서 랜덤 선택
+            const [row, col] = reachableCells[Math.floor(Math.random() * reachableCells.length)];
+            
+            // 이 셀이 통로에 있는지 확인 (최소 1개 이상 벽이 열려있어야 함)
+            let openWalls = 0;
+            for (const [dr, dc, wallKey] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
+                    if (!walls[row][col][wallKey]) {
+                        openWalls++;
+                    }
+                }
+            }
+            
+            // 통로에 있는 셀이 아니면 스킵
+            if (openWalls === 0) continue;
+            
+            // 이 셀에서 아직 막혀있는 방향 찾기
+            const closedDirections = [];
+            for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                if (newRow >= 0 && newRow < size && 
+                    newCol >= 0 && newCol < size &&
+                    walls[row][col][wallKey]) { // 벽이 막혀있으면
+                    closedDirections.push([newRow, newCol, wallKey, oppositeWallKey]);
+                }
+            }
+            
+            if (closedDirections.length === 0) continue;
+            
+            // 랜덤하게 하나 선택해서 가짜 경로 시작
+            const [startRow, startCol, startWallKey, startOppositeWallKey] = 
+                closedDirections[Math.floor(Math.random() * closedDirections.length)];
+            
+            // 벽을 열어서 가짜 경로 시작
+            walls[row][col][startWallKey] = false;
+            walls[startRow][startCol][startOppositeWallKey] = false;
+            
+            // 가짜 경로를 2~5칸 정도 연장한 뒤 막다른 길로 만들기
+            let currentRow = startRow;
+            let currentCol = startCol;
+            const pathLength = 2 + Math.floor(Math.random() * 4); // 2~5칸
+            const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+            visited[row][col] = true;
+            visited[startRow][startCol] = true;
+            
+            for (let step = 0; step < pathLength; step++) {
+                // 다음 칸으로 갈 수 있는 방향 찾기
+                const nextDirections = [];
+                for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                    const nextRow = currentRow + dr;
+                    const nextCol = currentCol + dc;
+                    
+                    if (nextRow >= 0 && nextRow < size && 
+                        nextCol >= 0 && nextCol < size &&
+                        !visited[nextRow][nextCol] &&
+                        walls[currentRow][currentCol][wallKey]) { // 벽이 막혀있으면
+                        nextDirections.push([nextRow, nextCol, wallKey, oppositeWallKey]);
+                    }
+                }
+                
+                if (nextDirections.length === 0) {
+                    // 더 갈 곳이 없으면 여기서 끝 (데드엔드)
+                    break;
+                }
+                
+                // 랜덤하게 하나 선택
+                const [nextRow, nextCol, nextWallKey, nextOppositeWallKey] = 
+                    nextDirections[Math.floor(Math.random() * nextDirections.length)];
+                
+                // 벽 열기
+                walls[currentRow][currentCol][nextWallKey] = false;
+                walls[nextRow][nextCol][nextOppositeWallKey] = false;
+                visited[nextRow][nextCol] = true;
+                currentRow = nextRow;
+                currentCol = nextCol;
+            }
+            
+            // 마지막 셀을 진짜 데드엔드로 만들기 (주변 벽을 모두 닫기)
+            // 단, 들어온 방향은 열어둬야 함
+            for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                const neighborRow = currentRow + dr;
+                const neighborCol = currentCol + dc;
+                
+                if (neighborRow >= 0 && neighborRow < size && 
+                    neighborCol >= 0 && neighborCol < size) {
+                    // 이미 열린 벽이 아니면 닫기
+                    if (walls[currentRow][currentCol][wallKey] === false) {
+                        // 이 방향은 이미 열려있음 (들어온 경로)
+                        continue;
+                    }
+                    // 나머지는 벽을 닫아서 데드엔드로 만들기
+                    // (이미 막혀있으면 그대로)
+                }
+            }
+            
+            pathsCreated++;
+        }
+    }
+    
+    // start(0,0)에서 reachable한 모든 셀 반환
+    function getReachableCells(walls, size) {
+        const directions = [
+            [-1, 0, 'top'],
+            [0, 1, 'right'],
+            [1, 0, 'bottom'],
+            [0, -1, 'left']
+        ];
+        
+        const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+        const queue = [[0, 0]];
+        visited[0][0] = true;
+        const reachable = [[0, 0]];
+        
+        while (queue.length > 0) {
+            const [row, col] = queue.shift();
+            
+            for (const [dr, dc, wallKey] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                if (newRow >= 0 && newRow < size && 
+                    newCol >= 0 && newCol < size &&
+                    !visited[newRow][newCol] &&
+                    !walls[row][col][wallKey]) { // 벽이 열려있으면
+                    visited[newRow][newCol] = true;
+                    queue.push([newRow, newCol]);
+                    reachable.push([newRow, newCol]);
+                }
+            }
+        }
+        
+        return reachable;
+    }
+    
+    // 모든 셀이 start에서 reachable하도록 보장 (빈 공간 제거)
+    function ensureAllCellsReachable(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        // 최대 5번 반복하여 모든 셀을 연결 시도
+        for (let attempt = 0; attempt < 5; attempt++) {
+            const reachableCells = getReachableCells(walls, size);
+            const reachableSet = new Set();
+            for (const [r, c] of reachableCells) {
+                reachableSet.add(`${r},${c}`);
+            }
+            
+            // 고립된 셀 찾기
+            const isolatedCells = [];
+            for (let row = 0; row < size; row++) {
+                for (let col = 0; col < size; col++) {
+                    if (!reachableSet.has(`${row},${col}`)) {
+                        isolatedCells.push([row, col]);
+                    }
+                }
+            }
+            
+            // 고립된 셀이 없으면 완료
+            if (isolatedCells.length === 0) break;
+            
+            // 고립된 셀을 가장 가까운 reachable 셀에 연결
+            for (const [isoRow, isoCol] of isolatedCells) {
+                // 가장 가까운 reachable 셀 찾기 (거리 제한 확대)
+                let nearestReachable = null;
+                let minDist = Infinity;
+                
+                for (const [rRow, rCol] of reachableCells) {
+                    const dist = Math.abs(isoRow - rRow) + Math.abs(isoCol - rCol);
+                    if (dist < minDist && dist <= 5) { // 5칸 이내로 확대
+                        minDist = dist;
+                        nearestReachable = [rRow, rCol];
+                    }
+                }
+                
+                if (nearestReachable) {
+                    // 고립된 셀에서 reachable 셀까지 경로 만들기
+                    let currentRow = isoRow;
+                    let currentCol = isoCol;
+                    const [targetRow, targetCol] = nearestReachable;
+                    
+                    while ((currentRow !== targetRow || currentCol !== targetCol) && 
+                           Math.abs(currentRow - targetRow) + Math.abs(currentCol - targetCol) <= 5) {
+                        let bestDir = null;
+                        let bestDist = Infinity;
+                        
+                        for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                            const nextRow = currentRow + dr;
+                            const nextCol = currentCol + dc;
+                            
+                            if (nextRow >= 0 && nextRow < size && 
+                                nextCol >= 0 && nextCol < size &&
+                                walls[currentRow][currentCol][wallKey]) {
+                                
+                                const dist = Math.abs(nextRow - targetRow) + 
+                                           Math.abs(nextCol - targetCol);
+                                
+                                if (dist < bestDist) {
+                                    bestDist = dist;
+                                    bestDir = [nextRow, nextCol, wallKey, oppositeWallKey];
+                                }
+                            }
+                        }
+                        
+                        if (bestDir) {
+                            const [nextRow, nextCol, wallKey, oppositeWallKey] = bestDir;
+                            walls[currentRow][currentCol][wallKey] = false;
+                            walls[nextRow][nextCol][oppositeWallKey] = false;
+                            currentRow = nextRow;
+                            currentCol = nextCol;
+                            
+                            // 도달했으면 종료
+                            if (currentRow === targetRow && currentCol === targetCol) break;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // 최종 검증: 모든 셀이 통로에 연결되어 있고 빈칸이 없는지 확인
+    function validateNoEmptyCells(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        // 1. 모든 셀이 최소 1개의 열린 벽을 가지는지 확인
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                let openWalls = 0;
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
+                        if (!walls[row][col][wallKey]) {
+                            openWalls++;
+                        }
+                    }
+                }
+                
+                // 모든 벽이 닫혀있는 빈칸 발견 시 가장 가까운 통로에 연결
+                if (openWalls === 0) {
+                    const reachableCells = getReachableCells(walls, size);
+                    if (reachableCells.length > 0) {
+                        // 가장 가까운 reachable 셀 찾기
+                        let nearest = null;
+                        let minDist = Infinity;
+                        
+                        for (const [rRow, rCol] of reachableCells) {
+                            const dist = Math.abs(row - rRow) + Math.abs(col - rCol);
+                            if (dist < minDist && dist <= 5) {
+                                minDist = dist;
+                                nearest = [rRow, rCol];
+                            }
+                        }
+                        
+                        if (nearest) {
+                            // 빈칸에서 가장 가까운 통로까지 벽 열기
+                            const [targetRow, targetCol] = nearest;
+                            let currentRow = row;
+                            let currentCol = col;
+                            
+                            while ((currentRow !== targetRow || currentCol !== targetCol) && 
+                                   Math.abs(currentRow - targetRow) + Math.abs(currentCol - targetCol) <= 5) {
+                                let bestDir = null;
+                                let bestDist = Infinity;
+                                
+                                for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                                    const nextRow = currentRow + dr;
+                                    const nextCol = currentCol + dc;
+                                    
+                                    if (nextRow >= 0 && nextRow < size && 
+                                        nextCol >= 0 && nextCol < size &&
+                                        walls[currentRow][currentCol][wallKey]) {
+                                        
+                                        const dist = Math.abs(nextRow - targetRow) + 
+                                                   Math.abs(nextCol - targetCol);
+                                        
+                                        if (dist < bestDist) {
+                                            bestDist = dist;
+                                            bestDir = [nextRow, nextCol, wallKey, oppositeWallKey];
+                                        }
+                                    }
+                                }
+                                
+                                if (bestDir) {
+                                    const [nextRow, nextCol, wallKey, oppositeWallKey] = bestDir;
+                                    walls[currentRow][currentCol][wallKey] = false;
+                                    walls[nextRow][nextCol][oppositeWallKey] = false;
+                                    currentRow = nextRow;
+                                    currentCol = nextCol;
+                                    
+                                    if (currentRow === targetRow && currentCol === targetCol) break;
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 2. 모든 셀이 start에서 reachable한지 최종 확인 및 강제 연결
+        let finalReachable = getReachableCells(walls, size);
+        let attempts = 0;
+        while (finalReachable.length < size * size && attempts < 10) {
+            ensureAllCellsReachable(walls, size);
+            finalReachable = getReachableCells(walls, size);
+            attempts++;
+        }
+        
+        // 3. 여전히 고립된 셀이 있으면 직접 연결
+        if (finalReachable.length < size * size) {
+            const reachableSet = new Set();
+            for (const [r, c] of finalReachable) {
+                reachableSet.add(`${r},${c}`);
+            }
+            
+            for (let row = 0; row < size; row++) {
+                for (let col = 0; col < size; col++) {
+                    if (!reachableSet.has(`${row},${col}`)) {
+                        // 가장 가까운 reachable 셀 찾기
+                        let nearest = null;
+                        let minDist = Infinity;
+                        
+                        for (const [rRow, rCol] of finalReachable) {
+                            const dist = Math.abs(row - rRow) + Math.abs(col - rCol);
+                            if (dist < minDist) {
+                                minDist = dist;
+                                nearest = [rRow, rCol];
+                            }
+                        }
+                        
+                        if (nearest) {
+                            // 직접 연결
+                            const [targetRow, targetCol] = nearest;
+                            let currentRow = row;
+                            let currentCol = col;
+                            
+                            while (currentRow !== targetRow || currentCol !== targetCol) {
+                                let bestDir = null;
+                                let bestDist = Infinity;
+                                
+                                for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                                    const nextRow = currentRow + dr;
+                                    const nextCol = currentCol + dc;
+                                    
+                                    if (nextRow >= 0 && nextRow < size && 
+                                        nextCol >= 0 && nextCol < size &&
+                                        walls[currentRow][currentCol][wallKey]) {
+                                        
+                                        const dist = Math.abs(nextRow - targetRow) + 
+                                                   Math.abs(nextCol - targetCol);
+                                        
+                                        if (dist < bestDist) {
+                                            bestDist = dist;
+                                            bestDir = [nextRow, nextCol, wallKey, oppositeWallKey];
+                                        }
+                                    }
+                                }
+                                
+                                if (bestDir) {
+                                    const [nextRow, nextCol, wallKey, oppositeWallKey] = bestDir;
+                                    walls[currentRow][currentCol][wallKey] = false;
+                                    walls[nextRow][nextCol][oppositeWallKey] = false;
+                                    currentRow = nextRow;
+                                    currentCol = nextCol;
+                                    
+                                    if (currentRow === targetRow && currentCol === targetCol) break;
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Classic recursive-backtracker (iterative) perfect maze generator
+    // 직선이 너무 길지 않도록 MAX_STRAIGHT로 살짝만 제어
+    // 모든 셀을 반드시 방문하도록 보장
+    function generateBasicDFS(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+        const stack = [];
+        
+        const MAX_STRAIGHT = 6;
+        
+        // stack element: [row, col, lastDirIndex, straightLen]
+        stack.push([0, 0, -1, 0]);
+        visited[0][0] = true;
+        let visitedCount = 1;
+        
+        while (stack.length > 0) {
+            const top = stack[stack.length - 1];
+            const row = top[0];
+            const col = top[1];
+            const lastDirIndex = top[2];
+            const straightLen = top[3];
+            
+            // 후보 방향 수집
+            const candidates = [];
+            for (let dirIndex = 0; dirIndex < directions.length; dirIndex++) {
+                const [dr, dc, wallKey, oppositeWallKey] = directions[dirIndex];
+                const nr = row + dr;
+                const nc = col + dc;
+                
+                if (nr < 0 || nr >= size || nc < 0 || nc >= size) continue;
+                if (visited[nr][nc]) continue;
+                
+                // 직선이 너무 길어지는 것만 막기
+                if (lastDirIndex === dirIndex && straightLen >= MAX_STRAIGHT) {
+                    continue;
+                }
+                
+                candidates.push([nr, nc, wallKey, oppositeWallKey, dirIndex]);
+            }
+            
+            if (candidates.length === 0) {
+                // 더 갈 곳이 없으면 백트래킹
+                stack.pop();
+                continue;
+            }
+            
+            // 랜덤으로 한 방향 선택
+            const [nr, nc, wallKey, oppositeWallKey, dirIndex] =
+                candidates[Math.floor(Math.random() * candidates.length)];
+            
+            // 벽을 열어 통로 생성
+            walls[row][col][wallKey] = false;
+            walls[nr][nc][oppositeWallKey] = false;
+            
+            visited[nr][nc] = true;
+            visitedCount++;
+            
+            const nextStraight =
+                lastDirIndex === dirIndex ? straightLen + 1 : 1;
+            
+            stack.push([nr, nc, dirIndex, nextStraight]);
+        }
+        
+        // 모든 셀을 방문하지 못한 경우, 방문하지 못한 셀들을 연결
+        if (visitedCount < size * size) {
+            connectUnvisitedCells(walls, size, visited);
+        }
+    }
+    
+    // 방문하지 못한 셀들을 기존 통로에 연결
+    function connectUnvisitedCells(walls, size, visited) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        // 방문하지 못한 셀 찾기
+        const unvisited = [];
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                if (!visited[row][col]) {
+                    unvisited.push([row, col]);
+                }
+            }
+        }
+        
+        // 각 방문하지 못한 셀을 가장 가까운 방문한 셀에 연결
+        for (const [uvRow, uvCol] of unvisited) {
+            let nearestVisited = null;
+            let minDist = Infinity;
+            
+            // 가장 가까운 방문한 셀 찾기
+            for (let row = 0; row < size; row++) {
+                for (let col = 0; col < size; col++) {
+                    if (visited[row][col]) {
+                        const dist = Math.abs(uvRow - row) + Math.abs(uvCol - col);
+                        if (dist < minDist && dist <= 3) {
+                            minDist = dist;
+                            nearestVisited = [row, col];
+                        }
+                    }
+                }
+            }
+            
+            if (nearestVisited) {
+                // 방문하지 못한 셀에서 방문한 셀까지 경로 만들기
+                let currentRow = uvRow;
+                let currentCol = uvCol;
+                const [targetRow, targetCol] = nearestVisited;
+                
+                while ((currentRow !== targetRow || currentCol !== targetCol) && 
+                       Math.abs(currentRow - targetRow) + Math.abs(currentCol - targetCol) <= 3) {
+                    let bestDir = null;
+                    let bestDist = Infinity;
+                    
+                    for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                        const nextRow = currentRow + dr;
+                        const nextCol = currentCol + dc;
+                        
+                        if (nextRow >= 0 && nextRow < size && 
+                            nextCol >= 0 && nextCol < size &&
+                            walls[currentRow][currentCol][wallKey]) {
+                            
+                            const dist = Math.abs(nextRow - targetRow) + 
+                                       Math.abs(nextCol - targetCol);
+                            
+                            if (dist < bestDist) {
+                                bestDist = dist;
+                                bestDir = [nextRow, nextCol, wallKey, oppositeWallKey];
+                            }
+                        }
+                    }
+                    
+                    if (bestDir) {
+                        const [nextRow, nextCol, wallKey, oppositeWallKey] = bestDir;
+                        walls[currentRow][currentCol][wallKey] = false;
+                        walls[nextRow][nextCol][oppositeWallKey] = false;
+                        visited[nextRow][nextCol] = true;
+                        currentRow = nextRow;
+                        currentCol = nextCol;
+                        
+                        if (currentRow === targetRow && currentCol === targetCol) break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    // Generate multiple competing paths from start (NOT a tree structure)
+    // Multiple paths expand simultaneously, creating natural competition
+    function generateMultipleCompetingPaths(walls, size) {
         const directions = [
             [-1, 0, 'top', 'bottom'],
             [0, 1, 'right', 'left'],
@@ -635,15 +1348,226 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Ensure all cells are reachable (connect isolated regions)
         connectIsolatedRegions(walls, size, inNetwork);
+    }
+    
+    // Create visually deceptive decoy paths
+    // These paths must be STRAIGHTER and CLOSER to end than the solution
+    // NOT calculated - must be visually more appealing
+    function createVisualDecoyPaths(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
         
-        // Add strategic dead ends and loops to create more decision points
-        addDecisionPoints(walls, size);
+        const endRow = size - 1;
+        const endCol = size - 1;
+        const numDecoys = 2 + Math.floor(Math.random() * 2); // 2-3 decoys
         
-        // Add decoy paths that visually appear closer to end or more direct than main path
-        addVisualDecoys(walls, size);
+        // Find decision points near start (first 30% of maze)
+        const startArea = Math.floor(size * 0.3);
+        const decisionPoints = [];
         
-        // Add loops connecting different regions (not around mainPath)
-        addRegionConnectingLoops(walls, size);
+        for (let row = 0; row <= startArea; row++) {
+            for (let col = 0; col <= startArea; col++) {
+                if (row === 0 && col === 0) continue;
+                
+                let openings = 0;
+                const branches = [];
+                
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    
+                    if (newRow >= 0 && newRow < size && 
+                        newCol >= 0 && newCol < size &&
+                        !walls[row][col][wallKey]) {
+                        openings++;
+                        branches.push([newRow, newCol]);
+                    }
+                }
+                
+                if (openings >= 2) { // Decision point
+                    decisionPoints.push([row, col, branches]);
+                }
+            }
+        }
+        
+        if (decisionPoints.length === 0) return;
+        
+        decisionPoints.sort(() => Math.random() - 0.5);
+        
+        for (let i = 0; i < Math.min(numDecoys, decisionPoints.length); i++) {
+            const [decRow, decCol, branches] = decisionPoints[i];
+            
+            // Find a branch that can become a visually deceptive decoy
+            for (const [branchRow, branchCol] of branches) {
+                // Check if this branch can be extended toward end in a straight line
+                const currentDist = euclideanDistance(branchRow, branchCol, endRow, endCol);
+                const startDist = euclideanDistance(decRow, decCol, endRow, endCol);
+                
+                // This branch should be visually closer to end
+                if (currentDist < startDist) {
+                    // Create a straight path toward end (visually deceptive)
+                    let currentRow = branchRow;
+                    let currentCol = branchCol;
+                    const targetLength = Math.floor(size * 0.5); // Decoy should be substantial
+                    const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+                    visited[decRow][decCol] = true;
+                    visited[branchRow][branchCol] = true;
+                    
+                    for (let step = 0; step < targetLength; step++) {
+                        // Find direction that gets closest to end (visually)
+                        let bestDir = null;
+                        let bestDist = Infinity;
+                        
+                        for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                            const nextRow = currentRow + dr;
+                            const nextCol = currentCol + dc;
+                            
+                            if (nextRow >= 0 && nextRow < size && 
+                                nextCol >= 0 && nextCol < size &&
+                                !visited[nextRow][nextCol] &&
+                                walls[currentRow][currentCol][wallKey]) {
+                                
+                                const dist = euclideanDistance(nextRow, nextCol, endRow, endCol);
+                                
+                                if (dist < bestDist) {
+                                    bestDist = dist;
+                                    bestDir = [nextRow, nextCol, wallKey, oppositeWallKey];
+                                }
+                            }
+                        }
+                        
+                        if (bestDir) {
+                            const [nextRow, nextCol, wallKey, oppositeWallKey] = bestDir;
+                            walls[currentRow][currentCol][wallKey] = false;
+                            walls[nextRow][nextCol][oppositeWallKey] = false;
+                            visited[nextRow][nextCol] = true;
+                            currentRow = nextRow;
+                            currentCol = nextCol;
+                            
+                            // If we're very close to end, create dead end (strong decoy)
+                            if (bestDist <= 3 && Math.random() < 0.6) {
+                                break; // Create dead end near end
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                    break; // One decoy per decision point
+                }
+            }
+        }
+    }
+    
+    // Create long false paths: choice → long travel → failure
+    // These paths go far before revealing they're wrong
+    function createLongFalsePaths(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        const endRow = size - 1;
+        const endCol = size - 1;
+        const numFalsePaths = 2 + Math.floor(Math.random() * 2); // 2-3 false paths
+        const minFalsePathLength = Math.floor(size * 0.5); // At least 50% of size
+        
+        // Find decision points in first 40% of maze
+        const startArea = Math.floor(size * 0.4);
+        const decisionPoints = [];
+        
+        for (let row = 0; row <= startArea; row++) {
+            for (let col = 0; col <= startArea; col++) {
+                if (row === 0 && col === 0) continue;
+                
+                let openings = 0;
+                const branches = [];
+                
+                for (const [dr, dc, wallKey] of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    
+                    if (newRow >= 0 && newRow < size && 
+                        newCol >= 0 && newCol < size &&
+                        !walls[row][col][wallKey]) {
+                        openings++;
+                        branches.push([newRow, newCol]);
+                    }
+                }
+                
+                if (openings >= 2) {
+                    decisionPoints.push([row, col, branches]);
+                }
+            }
+        }
+        
+        if (decisionPoints.length === 0) return;
+        
+        decisionPoints.sort(() => Math.random() - 0.5);
+        
+        for (let i = 0; i < Math.min(numFalsePaths, decisionPoints.length); i++) {
+            const [decRow, decCol, branches] = decisionPoints[i];
+            
+            if (branches.length === 0) continue;
+            
+            // Select a random branch
+            const [branchRow, branchCol] = branches[Math.floor(Math.random() * branches.length)];
+            
+            // Create a long path that goes far before failing
+            let currentRow = branchRow;
+            let currentCol = branchCol;
+            const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+            visited[decRow][decCol] = true;
+            visited[branchRow][branchCol] = true;
+            
+            // Travel long distance (away from end to create false sense of progress)
+            for (let step = 0; step < minFalsePathLength; step++) {
+                const available = [];
+                
+                for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                    const nextRow = currentRow + dr;
+                    const nextCol = currentCol + dc;
+                    
+                    if (nextRow >= 0 && nextRow < size && 
+                        nextCol >= 0 && nextCol < size &&
+                        !visited[nextRow][nextCol] &&
+                        walls[currentRow][currentCol][wallKey]) {
+                        
+                        // Prefer directions that don't immediately go to end
+                        // Create a path that feels like progress but isn't
+                        const distToEnd = euclideanDistance(nextRow, nextCol, endRow, endCol);
+                        available.push([nextRow, nextCol, wallKey, oppositeWallKey, distToEnd]);
+                    }
+                }
+                
+                if (available.length > 0) {
+                    // Sort by distance to end (prefer medium distance - not too close, not too far)
+                    available.sort((a, b) => {
+                        const midDist = size * 0.5;
+                        const aScore = Math.abs(a[4] - midDist);
+                        const bScore = Math.abs(b[4] - midDist);
+                        return aScore - bScore; // Prefer medium distance
+                    });
+                    
+                    const [nextRow, nextCol, wallKey, oppositeWallKey] = available[0];
+                    walls[currentRow][currentCol][wallKey] = false;
+                    walls[nextRow][nextCol][oppositeWallKey] = false;
+                    visited[nextRow][nextCol] = true;
+                    currentRow = nextRow;
+                    currentCol = nextCol;
+                } else {
+                    break;
+                }
+            }
+            
+            // Create dead end (failure point)
+            // The path has traveled far, now it fails
+        }
     }
     
     // Connect isolated regions to the main network
@@ -718,63 +1642,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 }
-            }
-        }
-    }
-    
-    // Add decision points (junctions and loops) to create more interesting choices
-    function addDecisionPoints(walls, size) {
-        const directions = [
-            [-1, 0, 'top', 'bottom'],
-            [0, 1, 'right', 'left'],
-            [1, 0, 'bottom', 'top'],
-            [0, -1, 'left', 'right']
-        ];
-        
-        // Find cells that could become decision points (currently have 2 walls)
-        const candidateCells = [];
-        for (let row = 1; row < size - 1; row++) {
-            for (let col = 1; col < size - 1; col++) {
-                let wallCount = 0;
-                if (walls[row][col].top) wallCount++;
-                if (walls[row][col].right) wallCount++;
-                if (walls[row][col].bottom) wallCount++;
-                if (walls[row][col].left) wallCount++;
-                
-                // Cells with 2 walls can become junctions (3 openings)
-                if (wallCount === 2) {
-                    candidateCells.push([row, col]);
-                }
-            }
-        }
-        
-        // Randomly select some candidates to become decision points
-        const numDecisions = Math.min(Math.floor(size * 0.15), candidateCells.length);
-        candidateCells.sort(() => Math.random() - 0.5);
-        
-        for (let i = 0; i < numDecisions; i++) {
-            const [row, col] = candidateCells[i];
-            
-            // Find a neighbor to connect (create a loop/junction)
-            const neighbors = [];
-            for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
-                const newRow = row + dr;
-                const newCol = col + dc;
-                
-                if (newRow >= 0 && newRow < size && 
-                    newCol >= 0 && newCol < size &&
-                    walls[row][col][wallKey]) {
-                    neighbors.push([newRow, newCol, wallKey, oppositeWallKey]);
-                }
-            }
-            
-            if (neighbors.length > 0) {
-                // Connect to one neighbor to create a junction
-                const [newRow, newCol, wallKey, oppositeWallKey] = 
-                    neighbors[Math.floor(Math.random() * neighbors.length)];
-                
-                walls[row][col][wallKey] = false;
-                walls[newRow][newCol][oppositeWallKey] = false;
             }
         }
     }
@@ -896,8 +1763,159 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Add decoy paths that visually appear closer to end or more direct than main path
+    // Add decision points (junctions and loops) to create more interesting choices
+    function addDecisionPoints(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        // Find cells that could become decision points (currently have 2 walls)
+        const candidateCells = [];
+        for (let row = 1; row < size - 1; row++) {
+            for (let col = 1; col < size - 1; col++) {
+                let wallCount = 0;
+                if (walls[row][col].top) wallCount++;
+                if (walls[row][col].right) wallCount++;
+                if (walls[row][col].bottom) wallCount++;
+                if (walls[row][col].left) wallCount++;
+                
+                // Cells with 2 walls can become junctions (3 openings)
+                if (wallCount === 2) {
+                    candidateCells.push([row, col]);
+                }
+            }
+        }
+        
+        // Randomly select some candidates to become decision points
+        const numDecisions = Math.min(Math.floor(size * 0.15), candidateCells.length);
+        candidateCells.sort(() => Math.random() - 0.5);
+        
+        for (let i = 0; i < numDecisions; i++) {
+            const [row, col] = candidateCells[i];
+            
+            // Find a neighbor to connect (create a loop/junction)
+            const neighbors = [];
+            for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                if (newRow >= 0 && newRow < size && 
+                    newCol >= 0 && newCol < size &&
+                    walls[row][col][wallKey]) {
+                    neighbors.push([newRow, newCol, wallKey, oppositeWallKey]);
+                }
+            }
+            
+            if (neighbors.length > 0) {
+                // Connect to one neighbor to create a junction
+                const [newRow, newCol, wallKey, oppositeWallKey] = 
+                    neighbors[Math.floor(Math.random() * neighbors.length)];
+                
+                walls[row][col][wallKey] = false;
+                walls[newRow][newCol][oppositeWallKey] = false;
+            }
+        }
+    }
+    
+    // Add random branches without using mainPath
+    // Creates additional paths and dead ends to increase complexity
+    function addRandomBranches(walls, size) {
+        const directions = [
+            [-1, 0, 'top', 'bottom'],
+            [0, 1, 'right', 'left'],
+            [1, 0, 'bottom', 'top'],
+            [0, -1, 'left', 'right']
+        ];
+        
+        // Find cells that are on paths (have at least one open wall)
+        const pathCells = [];
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                let openWalls = 0;
+                if (!walls[row][col].top) openWalls++;
+                if (!walls[row][col].right) openWalls++;
+                if (!walls[row][col].bottom) openWalls++;
+                if (!walls[row][col].left) openWalls++;
+                
+                if (openWalls > 0) {
+                    pathCells.push([row, col]);
+                }
+            }
+        }
+        
+        // Add random branches from random path cells
+        const numBranches = Math.floor(size * 0.3); // 30% of size
+        pathCells.sort(() => Math.random() - 0.5);
+        
+        for (let i = 0; i < Math.min(numBranches, pathCells.length); i++) {
+            const [row, col] = pathCells[i];
+            
+            // Skip start and end cells
+            if ((row === 0 && col === 0) || (row === size - 1 && col === size - 1)) {
+                continue;
+            }
+            
+            // Find available walls to open (create branch)
+            const availableWalls = [];
+            for (const [dr, dc, wallKey, oppositeWallKey] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                if (newRow >= 0 && newRow < size && 
+                    newCol >= 0 && newCol < size &&
+                    walls[row][col][wallKey]) {
+                    availableWalls.push([newRow, newCol, wallKey, oppositeWallKey]);
+                }
+            }
+            
+            if (availableWalls.length > 0 && Math.random() < 0.4) { // 40% chance to add branch
+                const [newRow, newCol, wallKey, oppositeWallKey] = 
+                    availableWalls[Math.floor(Math.random() * availableWalls.length)];
+                
+                walls[row][col][wallKey] = false;
+                walls[newRow][newCol][oppositeWallKey] = false;
+                
+                // Optionally extend the branch a bit (30% chance)
+                if (Math.random() < 0.3) {
+                    let currentRow = newRow;
+                    let currentCol = newCol;
+                    const branchLength = 2 + Math.floor(Math.random() * 3); // 2-4 cells
+                    
+                    for (let step = 0; step < branchLength; step++) {
+                        const nextWalls = [];
+                        for (const [dr, dc, nextWallKey, nextOppositeWallKey] of directions) {
+                            const nextRow = currentRow + dr;
+                            const nextCol = currentCol + dc;
+                            
+                            if (nextRow >= 0 && nextRow < size && 
+                                nextCol >= 0 && nextCol < size &&
+                                walls[currentRow][currentCol][nextWallKey]) {
+                                nextWalls.push([nextRow, nextCol, nextWallKey, nextOppositeWallKey]);
+                            }
+                        }
+                        
+                        if (nextWalls.length > 0) {
+                            const [nextRow, nextCol, nextWallKey, nextOppositeWallKey] = 
+                                nextWalls[Math.floor(Math.random() * nextWalls.length)];
+                            walls[currentRow][currentCol][nextWallKey] = false;
+                            walls[nextRow][nextCol][nextOppositeWallKey] = false;
+                            currentRow = nextRow;
+                            currentCol = nextCol;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // OLD: Add decoy paths that visually appear closer to end or more direct than main path
     // Uses visual distance (Euclidean) and straightness, not DFS distance
+    // DEPRECATED: This function uses mainPath and is no longer called
     function addVisualDecoys(walls, size) {
         const endRow = size - 1;
         const endCol = size - 1;
@@ -1960,6 +2978,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Prefers paths with branches and backtracking for more interesting solutions
     // Find solution using BFS (single shortest path, not all paths)
     // This avoids exponential path explosion when loops exist
+    // Returns the shortest path from start to end using BFS
     function findSolution(maze, size) {
         const directions = [
             [-1, 0, 'top'],    // up

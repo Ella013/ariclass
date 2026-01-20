@@ -325,12 +325,12 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-.worksheet-card.disabled-card {
+.worksheet-card.disabled {
     opacity: 0.6;
-    filter: grayscale(0.5);
+    filter: grayscale(0.3);
 }
 
-.worksheet-card.disabled-card:hover {
+.worksheet-card.disabled:hover {
     transform: none;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
