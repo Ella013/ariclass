@@ -340,6 +340,11 @@
         display: none !important;
     }
 
+    /* Tighten matching list padding so 15 items fit on one A4 page */
+    .matching-list {
+        padding: 0.5rem 2rem !important;
+    }
+
     /* Ensure connection points are visible in print */
     .connection-point {
         -webkit-print-color-adjust: exact !important;

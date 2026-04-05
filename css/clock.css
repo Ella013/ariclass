@@ -1,0 +1,144 @@
+/* Clock / Telling Time Styles */
+
+/* Center-align all option groups in the input section */
+#clock-page .option-group h2,
+.clock-options .option-group h2 {
+    text-align: center;
+}
+
+.clock-options .case-options {
+    justify-content: center;
+}
+
+.clock-grid {
+    display: grid;
+    gap: 6mm;
+    margin: 4mm auto;
+    width: 100%;
+}
+
+.clock-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.clock-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.clock-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.clock-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 11pt;
+    color: #888;
+    font-weight: 500;
+}
+
+.clock-svg {
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    display: block;
+}
+
+.time-answer {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.time-blank {
+    display: inline-block;
+    width: 2rem;
+    border-bottom: 1.5px solid #333;
+    text-align: center;
+}
+
+.time-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 0.05rem;
+    margin-top: 0.2rem;
+}
+
+/* Print Styles */
+@media print {
+    @page { size: A4; margin: 0; }
+
+    .navbar, .utility-nav, .main-header, .top-menu,
+    .input-section, .preview-label, .preview-actions,
+    .description-section, footer {
+        display: none !important;
+    }
+
+    body, .generator-container, .generator-content,
+    .preview-section, .preview-wrapper {
+        background: white !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    #puzzle-preview {
+        transform: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 20mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        box-sizing: border-box !important;
+        background: white !important;
+        display: block !important;
+        position: relative !important;
+    }
+
+    .clock-grid {
+        gap: 4mm;
+    }
+
+    .clock-grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .clock-cell {
+        gap: 2mm;
+    }
+
+    .clock-svg {
+        width: 52mm !important;
+        height: 52mm !important;
+        max-width: none;
+    }
+
+    .time-answer, .time-label {
+        font-size: 11pt;
+    }
+
+    .time-blank {
+        width: 1.5rem;
+    }
+
+    .copyright-footer {
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        text-align: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        display: block !important;
+    }
+}

@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create custom bingo games for English learning. Perfect for teachers and students.">
-    <title>AriClass - English Worksheet Generator</title>
-    <!-- Favicon -->
+    <meta name="description" content="Create custom multiplication and division worksheets. Perfect for teachers and students.">
+    <title>AriClass - Multiplication & Division Worksheet Generator</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
-    <link rel="stylesheet" href="css/bingo.css">
+    <link rel="stylesheet" href="css/addition-subtraction.css">
+    <link rel="stylesheet" href="css/multiplication-table.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
      crossorigin="anonymous"></script>
 </head>
@@ -45,6 +43,7 @@
                     <h1>AriClass Worksheet Generator</h1>
                     <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
                 </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
             </div>
         </div>
         <nav class="top-menu">
@@ -61,108 +60,94 @@
                             <li><a href="bingo.html">Bingo Game</a></li>
                             <li><a href="sudoku.html">Sudoku</a></li>
                             <li><a href="maze.html">Maze Puzzle</a></li>
+                            <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                            <li><a href="multiplication-table.html">Multiplication &amp; Division</a></li>
+                            <li><a href="clock.html">Telling Time</a></li>
                         </ul>
                     </li>
                     <li><a href="how-to-use.html">How to Use</a></li>
                 </ul>
             </div>
         </nav>
-    
-    <!-- Mobile Nav Drawer -->
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="index.html">Home</a>
-        <a href="word-search.html">Word Search</a>
-        <a href="unscramble.html">Unscramble</a>
-        <a href="crossword.html">Crossword Puzzle</a>
-        <a href="matching-lists.html">Matching Lists</a>
-        <a href="bingo.html">Bingo Game</a>
-        <a href="sudoku.html">Sudoku</a>
-        <a href="maze.html">Maze Puzzle</a>
-        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
-        <a href="how-to-use.html">How to Use</a>
-    </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="word-search.html">Word Search</a>
+            <a href="unscramble.html">Unscramble</a>
+            <a href="crossword.html">Crossword Puzzle</a>
+            <a href="matching-lists.html">Matching Lists</a>
+            <a href="bingo.html">Bingo Game</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Maze Puzzle</a>
+            <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+            <a href="multiplication-table.html">Multiplication &amp; Division</a>
+            <a href="clock.html">Telling Time</a>
+            <a href="how-to-use.html">How to Use</a>
+        </nav>
     </header>
 
     <div class="generator-container">
-        <h1>Bingo Game Generator</h1>
-        
+        <h1>Multiplication &amp; Division</h1>
+
         <div class="generator-content">
             <div class="input-section">
+
                 <div class="title-input">
                     <h2>Worksheet Title</h2>
-                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Bingo Game">
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title">
                     <div class="option-group">
                         <label>
                             <input type="checkbox" id="show-title" checked>
-                            Show Title
+                            Show worksheet title
                         </label>
                     </div>
                 </div>
 
-                <div class="word-input">
-                        <h2>Enter Words</h2>
-                    <textarea id="wordInput" class="vocab-textarea" placeholder="Enter words (one per line)"></textarea>
-                    <button id="clearButton" class="clear-btn">
-                        <i class="fas fa-trash"></i>
-                        Clear
-                    </button>
-                </div>
-
                 <div class="options">
                     <div class="option-group">
-                        <h2>Board Size</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="board-3" name="board-size" value="3">
-                                <label for="board-3">3 x 3</label>
+                        <div style="display: flex; gap: 2rem;">
+                            <label>
+                                <input type="radio" name="operation" id="multiplication-only" value="multiplication" checked>
+                                Multiplication Only
+                            </label>
+                            <label>
+                                <input type="radio" name="operation" id="division-only" value="division">
+                                Division Only
+                            </label>
+                            <label>
+                                <input type="radio" name="operation" id="mixed" value="mixed">
+                                Mixed
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <div class="level-options">
+                            <div class="level-option">
+                                <input type="radio" id="level1" name="level" value="1" checked>
+                                <label for="level1">Level 1 (Easy)</label>
                             </div>
-                            <div class="case-option">
-                                <input type="radio" id="board-4" name="board-size" value="4" checked>
-                                <label for="board-4">4 x 4</label>
+                            <div class="level-option">
+                                <input type="radio" id="level2" name="level" value="2">
+                                <label for="level2">Level 2 (Medium)</label>
                             </div>
-                            <div class="case-option">
-                                <input type="radio" id="board-5" name="board-size" value="5">
-                                <label for="board-5">5 x 5</label>
+                            <div class="level-option">
+                                <input type="radio" id="level3" name="level" value="3">
+                                <label for="level3">Level 3 (Hard)</label>
                             </div>
                         </div>
                     </div>
+
                     <div class="option-group">
-                        <h2>Font Size</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="font-small" name="font-size" value="small">
-                                <label for="font-small">Small</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="font-medium" name="font-size" value="medium" checked>
-                                <label for="font-medium">Medium</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="font-large" name="font-size" value="large">
-                                <label for="font-large">Large</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="option-group">
-                        <h2>Number of Players <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Each player gets a unique bingo card. When you print, one page is generated per player.</span></span></h2>
-                        <div class="player-counter">
-                            <button id="decreasePlayer" type="button">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <span id="playerCount">2</span>
-                            <button id="increasePlayer" type="button">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+                        <label>
+                            Pages:
+                            <input type="number" id="num-pages" min="1" max="10" value="1" style="width: 80px; padding: 0.4rem; margin-left: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px;">
+                        </label>
                     </div>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="random-generate-btn">
-                        <i class="fas fa-random"></i> Randomly generated
-                    </button>
                     <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-magic"></i> Generate Bingo
+                        <i class="fas fa-magic"></i> Generate Worksheet
                     </button>
                 </div>
             </div>
@@ -174,6 +159,9 @@
                         <button id="print-btn" class="print-btn">
                             <i class="fas fa-print"></i> Print Worksheet
                         </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> Show Answers
+                        </button>
                     </div>
                     <div id="puzzle-preview"></div>
                 </div>
@@ -181,44 +169,42 @@
         </div>
 
         <div class="description-section">
-            <h2>How to Create Your Bingo Game</h2>
+            <h2>How to Create Your Multiplication &amp; Division Worksheet</h2>
             <div class="description-content">
                 <div class="instruction-block">
                     <h3>Simple Steps to Create</h3>
                     <ol>
                         <li>Enter a title for your worksheet</li>
-                        <li>Add vocabulary words or use random generation</li>
-                        <li>Choose the bingo board size (3x3, 4x4, or 5x5)</li>
-                        <li>Select the number of players (2-6)</li>
-                        <li>Click "Generate Bingo" to create your game</li>
+                        <li>Choose operation type (Multiplication, Division, or Mixed)</li>
+                        <li>Select difficulty level (Easy, Medium, or Hard)</li>
+                        <li>Set the number of pages</li>
+                        <li>Click "Generate Worksheet"</li>
                         <li>Print your worksheet using the print button</li>
                     </ol>
                 </div>
                 <div class="instruction-block">
-                    <h3>Educational Benefits</h3>
+                    <h3>Difficulty Levels</h3>
                     <ul>
-                        <li>Enhances vocabulary recognition</li>
-                        <li>Promotes active participation</li>
-                        <li>Perfect for group activities</li>
-                        <li>Improves reading skills</li>
-                        <li>Makes learning fun and engaging</li>
+                        <li><strong>Level 1:</strong> 1-digit × 1-digit (up to 9×9)</li>
+                        <li><strong>Level 2:</strong> 2-digit × 1-digit (e.g. 47×6)</li>
+                        <li><strong>Level 3:</strong> 2-digit × 2-digit (e.g. 34×28)</li>
+                        <li>Division problems always have whole number answers</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
                     <h3>Tips for Teachers</h3>
                     <ul>
-                        <li>Use themed vocabulary sets</li>
-                        <li>Start with smaller boards for younger students</li>
-                        <li>Prepare enough words for larger boards</li>
-                        <li>Use as review activities</li>
-                        <li>Make multiple sets for different groups</li>
+                        <li>Start with Level 1 for beginners</li>
+                        <li>Use Mixed to practice both operations</li>
+                        <li>Print multiple pages for timed drills</li>
+                        <li>Use "Show Answers" to create an answer key</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/bingo.js"></script>
+    <script src="js/multiplication-table.js"></script>
 
     <footer>
         <div class="footer-content">
@@ -226,20 +212,16 @@
                 <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
                 <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
             </div>
-            
             <nav class="footer-nav">
                 <h3>Quick Links</h3>
                 <ul class="footer-nav-list">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="word-search.html">Word Search</a></li>
-                    <li><a href="unscramble.html">Unscramble</a></li>
-                    <li><a href="crossword.html">Crossword Puzzle</a></li>
-                    <li><a href="bingo.html">Bingo Game</a></li>
+                    <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                    <li><a href="multiplication-table.html">Multiplication &amp; Division</a></li>
+                    <li><a href="clock.html">Telling Time</a></li>
                     <li><a href="sudoku.html">Sudoku</a></li>
-                    <li><a href="maze.html">Maze Puzzle</a></li>
                 </ul>
             </nav>
-
             <nav class="footer-nav">
                 <h3>Information</h3>
                 <ul class="footer-nav-list">
@@ -248,13 +230,11 @@
                     <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
                 </ul>
             </nav>
-
             <div class="footer-contact">
                 <h3>Contact Us</h3>
                 <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <p>© 2025 Ariclass. All rights reserved.</p>
         </div>
@@ -272,4 +252,4 @@
         })();
     </script>
 </body>
-</html> 
+</html>

@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const answerBtn = document.querySelector('.answer-btn');
     let showingAnswers = false;
     let keyPressed = false;
+    let isRandomGenerated = false; // tracks whether current list came from random generation
+
+    // Max pairs that fit on one A4 page per font size
+    // Row height is fixed at 2rem regardless of font size, so all sizes fit 15 items
+    function getMaxPairsForFont() {
+        return 15;
+    }
 
     // Add keyboard event listeners
     document.addEventListener('keydown', function(e) {
@@ -77,7 +84,15 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'duck', right: 'duckling' },
             { left: 'goose', right: 'gosling' },
             { left: 'deer', right: 'fawn' },
-            { left: 'lion', right: 'cub' }
+            { left: 'lion', right: 'cub' },
+            { left: 'bear', right: 'cub' },
+            { left: 'wolf', right: 'pup' },
+            { left: 'rabbit', right: 'kit' },
+            { left: 'fox', right: 'kit' },
+            { left: 'kangaroo', right: 'joey' },
+            { left: 'swan', right: 'cygnet' },
+            { left: 'elephant', right: 'calf' },
+            { left: 'frog', right: 'tadpole' }
         ],
         opposites: [
             { left: 'hot', right: 'cold' },
@@ -91,7 +106,15 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'young', right: 'old' },
             { left: 'clean', right: 'dirty' },
             { left: 'soft', right: 'hard' },
-            { left: 'sweet', right: 'sour' }
+            { left: 'sweet', right: 'sour' },
+            { left: 'wide', right: 'narrow' },
+            { left: 'full', right: 'empty' },
+            { left: 'open', right: 'closed' },
+            { left: 'early', right: 'late' },
+            { left: 'noisy', right: 'quiet' },
+            { left: 'rough', right: 'smooth' },
+            { left: 'brave', right: 'coward' },
+            { left: 'wet', right: 'dry' }
         ],
         time: [
             { left: 'morning', right: 'sunrise' },
@@ -105,7 +128,15 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'tomorrow', right: 'future' },
             { left: 'dawn', right: 'begin' },
             { left: 'dusk', right: 'end' },
-            { left: 'noon', right: 'midday' }
+            { left: 'noon', right: 'midday' },
+            { left: 'second', right: 'moment' },
+            { left: 'minute', right: 'sixty' },
+            { left: 'hour', right: 'sixty' },
+            { left: 'week', right: 'seven' },
+            { left: 'month', right: 'thirty' },
+            { left: 'year', right: 'twelve' },
+            { left: 'century', right: 'hundred' },
+            { left: 'decade', right: 'ten' }
         ]
     };
 
@@ -118,7 +149,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add font size change event listener
     const fontSizeInputs = document.querySelectorAll('input[name="font-size"]');
     fontSizeInputs.forEach(input => {
-        input.addEventListener('change', generateList);
+        input.addEventListener('change', function() {
+            if (isRandomGenerated) {
+                generateRandomList();
+            } else {
+                generateList();
+            }
+        });
     });
 
     // Add letter case change event listener
@@ -130,7 +167,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event Listeners
     addPairBtn.addEventListener('click', addWordPair);
     clearAllBtn.addEventListener('click', clearAll);
-    generateBtn.addEventListener('click', generateList);
+    generateBtn.addEventListener('click', function() {
+        isRandomGenerated = false;
+        generateList();
+    });
     generateRandomBtn.addEventListener('click', generateRandomList);
     printBtn.addEventListener('click', printWorksheet);
     showTitle.addEventListener('change', updatePreview);
@@ -244,6 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Generate random list
     function generateRandomList() {
+        isRandomGenerated = true;
+
         // Clear existing pairs
         wordPairContainer.innerHTML = '';
 
@@ -252,9 +294,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
         const pairs = randomPairs[randomCategory];
 
-        // Shuffle pairs and select 8-12 random pairs
+        // Shuffle pairs and select max pairs for current font size
         const shuffledPairs = pairs.sort(() => Math.random() - 0.5);
-        const numPairs = Math.floor(Math.random() * 5) + 8; // 8 to 12 pairs
+        const numPairs = getMaxPairsForFont();
         const selectedPairs = shuffledPairs.slice(0, numPairs);
 
         // Add pairs to the container
@@ -266,6 +308,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input type="text" class="word-input-field" placeholder="Right word/phrase" value="${pair.right}" maxlength="30">
                 <button class="remove-pair"><i class="fas fa-times"></i></button>
             `;
+            const removeBtn = pairElement.querySelector('.remove-pair');
+            removeBtn.addEventListener('click', function() {
+                if (document.querySelectorAll('.word-pair').length > 1) {
+                    pairElement.remove();
+                    isRandomGenerated = false;
+                    updatePreview();
+                }
+            });
             wordPairContainer.appendChild(pairElement);
         });
 

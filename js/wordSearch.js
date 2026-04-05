@@ -70,6 +70,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const levelInputs = document.querySelectorAll('input[name="level"]');
     let selectedLevel = '3'; // Default to level 3
 
+    function getMaxWords() {
+        if (selectedLevel === '1') return 10;
+        if (selectedLevel === '2') return 15;
+        return 20; // level 3
+    }
+
+    function updatePlaceholder() {
+        const textarea = document.getElementById('vocab-list');
+        if (textarea) {
+            textarea.placeholder = `Enter your words (press Enter for each word)\nMaximum ${getMaxWords()} words`;
+        }
+    }
+
     // Set show word list checked by default
     showWordList.checked = true;
 
@@ -93,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     levelInputs.forEach(input => {
         input.addEventListener('change', (e) => {
             selectedLevel = e.target.value;
-            console.log('Level changed to:', selectedLevel);
+            updatePlaceholder();
             generateEmptyPuzzle();
         });
     });
@@ -250,8 +263,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function addWordInput() {
         const wordCount = vocabList.children.length;
-        if (wordCount >= 10) {
-            alert('Maximum 10 words allowed');
+        if (wordCount >= getMaxWords()) {
+            alert(`Maximum ${getMaxWords()} words allowed for Level ${selectedLevel}`);
             return;
         }
 
@@ -276,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const words = text.split('\n')
             .map(word => word.trim())
             .filter(word => word.length > 0)
-            .slice(0, 10); // Maximum 10 words
+            .slice(0, getMaxWords()); // Maximum words by level
             
         return words.map(word => 
             uppercaseWords.checked ? word.toUpperCase() : word.toLowerCase()
@@ -342,86 +355,32 @@ document.addEventListener('DOMContentLoaded', function() {
         const words = getWords();
         if (!validateWords()) return;
 
-        // Create puzzle grid
         const gridSize = getGridSize(selectedLevel);
-        const grid = createEmptyGrid(gridSize);
-        
-        // Initialize answers array
-        const answers = [];
-        
-        // Fixed starting positions and directions for each word
-        const fixedPlacements = [
-            { direction: [0, 1], startPos: { x: 1, y: 1 } },  // horizontal right
-            { direction: [1, 0], startPos: { x: 2, y: 0 } },  // vertical down
-            { direction: [1, 1], startPos: { x: 0, y: 0 } },  // diagonal down-right
-            { direction: [-1, 1], startPos: { x: gridSize-1, y: 0 } },  // diagonal up-right
-            { direction: [0, -1], startPos: { x: gridSize-2, y: 2 } },  // horizontal left
-            { direction: [-1, 0], startPos: { x: 3, y: gridSize-1 } },  // vertical up
-            { direction: [-1, -1], startPos: { x: gridSize-1, y: gridSize-1 } },  // diagonal up-left
-            { direction: [1, -1], startPos: { x: 0, y: gridSize-1 } },  // diagonal down-left
-            { direction: [0, 1], startPos: { x: 2, y: 3 } },  // another horizontal right
-            { direction: [1, 0], startPos: { x: 4, y: 2 } }   // another vertical down
-        ];
 
-        // Place words using fixed positions
-        for (let i = 0; i < words.length; i++) {
-            const word = words[i];
-            let placed = false;
-            let currentPlacementIndex = i % fixedPlacements.length;
-            
-            while (!placed) {
-                const placement = fixedPlacements[currentPlacementIndex];
-                const { direction, startPos } = placement;
+        // Retry the whole placement up to 10 times in case random positions collide.
+        // placeWords() returns [false, []] cleanly when a word can't be placed,
+        // so there is no risk of an infinite loop.
+        let grid, wordPositions, success;
+        let attempts = 0;
+        do {
+            grid = createEmptyGrid(gridSize);
+            [success, wordPositions] = placeWords(grid, words);
+            attempts++;
+        } while (!success && attempts < 10);
 
-                if (canPlaceWord(grid, word, startPos.x, startPos.y, direction)) {
-                    const positions = [];
-                    for (let j = 0; j < word.length; j++) {
-                        const x = startPos.x + direction[0] * j;
-                        const y = startPos.y + direction[1] * j;
-                        positions.push({
-                            row: y,
-                            col: x
-                        });
-                        grid[y][x] = word[j];
-                    }
-                    answers.push({
-                        word: word,
-                        positions: positions
-                    });
-                    placed = true;
-                } else {
-                    // Try next placement
-                    currentPlacementIndex = (currentPlacementIndex + 1) % fixedPlacements.length;
-                    
-                    // If we've tried all fixed placements, try random positions with the same direction
-                    if (currentPlacementIndex === i % fixedPlacements.length) {
-                        const randomX = Math.floor(Math.random() * gridSize);
-                        const randomY = Math.floor(Math.random() * gridSize);
-                        if (canPlaceWord(grid, word, randomX, randomY, direction)) {
-                            const positions = [];
-                            for (let j = 0; j < word.length; j++) {
-                                const x = randomX + direction[0] * j;
-                                const y = randomY + direction[1] * j;
-                                positions.push({
-                                    row: y,
-                                    col: x
-                                });
-                                grid[y][x] = word[j];
-                            }
-                            answers.push({
-                                word: word,
-                                positions: positions
-                            });
-                            placed = true;
-                        }
-                    }
-                }
-            }
+        if (!success) {
+            showWarning('Could not place all words. Try using fewer or shorter words.');
+            return;
         }
 
-        fillEmptySpaces(grid, true);  // Use fixed letters
+        fillEmptySpaces(grid, true);
+
+        const answers = words.map((word, i) => ({
+            word: word,
+            positions: wordPositions[i]
+        }));
+
         currentAnswers = answers;
-        
         displayPuzzle(grid, words, answers);
         printBtn.disabled = false;
     }
@@ -431,8 +390,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const maxLength = getMaxWordLength();
         
         // Check word count
-        if (words.length > 10) {
-            showWarning('Maximum 10 words allowed. Please remove some words.');
+        if (words.length > getMaxWords()) {
+            showWarning(`Maximum ${getMaxWords()} words allowed for Level ${selectedLevel}. Please remove some words.`);
             return false;
         }
 
@@ -497,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let wordPositions = [];
             
             // Try all possible positions
-            for (let attempts = 0; attempts < 100 && !placed; attempts++) {
+            for (let attempts = 0; attempts < 300 && !placed; attempts++) {
                 const startX = Math.floor(Math.random() * gridSize);
                 const startY = Math.floor(Math.random() * gridSize);
                 
@@ -702,32 +661,30 @@ document.addEventListener('DOMContentLoaded', function() {
     function getRandomWords() {
         const wordLists = {
             easy: ['CAT', 'DOG', 'HAT', 'BAT', 'RAT', 'MAT', 'SAT', 'PAT', 'FAT', 'CAP'],
-            medium: ['APPLE', 'BEACH', 'CHAIR', 'DANCE', 'EAGLE', 'FLAME', 'GRAPE', 'HOUSE', 'JUICE', 'KNIFE'],
-            hard: ['AMAZING', 'BICYCLE', 'CAPTAIN', 'DOLPHIN', 'ELEPHANT', 'FANTASY', 'GARDEN', 'HARMONY', 'ISLAND', 'JOURNEY']
+            medium: ['APPLE', 'BEACH', 'CHAIR', 'DANCE', 'EAGLE', 'FLAME', 'GRAPE', 'HOUSE',
+                     'JUICE', 'KNIFE', 'LEMON', 'MANGO', 'NIGHT', 'OCEAN', 'PIANO'],
+            hard: ['AMAZING', 'BICYCLE', 'CAPTAIN', 'DOLPHIN', 'ELEPHANT', 'FANTASY',
+                   'GARDEN', 'HARMONY', 'ISLAND', 'JOURNEY', 'KITCHEN', 'LANTERN',
+                   'MONSTER', 'NETWORK', 'ORBITAL', 'PYRAMID', 'QUANTUM', 'RAINBOW',
+                   'STUDENT', 'THUNDER']
         };
 
         let difficulty;
         switch(selectedLevel) {
-            case '1':
-                difficulty = 'easy';
-                break;
-            case '2':
-                difficulty = 'medium';
-                break;
-            default:
-                difficulty = 'hard';
+            case '1': difficulty = 'easy';   break;
+            case '2': difficulty = 'medium'; break;
+            default:  difficulty = 'hard';
         }
 
         const availableWords = wordLists[difficulty];
-        const numWords = Math.floor(Math.random() * 5) + 5; // Random number between 5 and 9
+        const numWords = getMaxWords(); // Use the level's maximum word count
         const selectedWords = [];
-        
-        while (selectedWords.length < numWords) {
-            const randomIndex = Math.floor(Math.random() * availableWords.length);
-            const word = availableWords[randomIndex];
-            if (!selectedWords.includes(word)) {
-                selectedWords.push(word);
-            }
+
+        // Shuffle a copy and take the first numWords
+        const shuffled = [...availableWords].sort(() => Math.random() - 0.5);
+        for (const word of shuffled) {
+            if (selectedWords.length >= numWords) break;
+            selectedWords.push(word);
         }
 
         return selectedWords;
