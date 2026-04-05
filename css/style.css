@@ -518,15 +518,94 @@ footer {
     }
 }
 
+/* Hamburger Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    flex-shrink: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile Nav Drawer */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: white;
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem 0 1rem;
+}
+
+.mobile-nav.open {
+    display: flex;
+}
+
+.mobile-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    display: block;
+}
+
+.mobile-nav a:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav a:hover {
+    background: var(--primary-light);
+    color: #b8960a;
+}
+
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: 2rem;
     }
 
-    .nav-links {
+    /* Header: 로고 + 햄버거 가로 배치 */
+    .main-header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .main-header .logo-img {
+        height: 52px;
+    }
+
+    .site-description {
         display: none;
     }
 
+    /* 상단 nav 숨기고 햄버거 보이기 */
+    .top-menu .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* 카드 그리드 */
     .worksheet-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
@@ -558,6 +637,10 @@ footer {
 @media (max-width: 480px) {
     .worksheet-grid {
         grid-template-columns: 1fr;
+    }
+
+    .main-header {
+        padding: 0.75rem 0;
     }
 }
 

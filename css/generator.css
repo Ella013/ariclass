@@ -769,6 +769,65 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    /* 제너레이터 레이아웃: 세로 스택 */
+    .generator-content {
+        flex-direction: column;
+    }
+
+    .input-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .generator-container {
+        margin: 1rem auto;
+        padding: 0 12px;
+    }
+
+    .generator-container h1 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* 미리보기 영역 */
+    .preview-wrapper {
+        padding: 0.75rem;
+        min-height: 200px;
+        overflow-x: auto;
+    }
+
+    .puzzle-preview {
+        transform: scale(0.18);
+        transform-origin: top left;
+    }
+
+    /* 버튼 전체 너비 */
+    .generate-btn,
+    .download-btn,
+    .print-btn,
+    .action-btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.85rem 1rem;
+    }
+
+    /* 폼 요소 */
+    .input-group {
+        flex-direction: column;
+    }
+
+    .option-group {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    /* 헤더 여백 (fixed header 보정) */
+    .generator-container {
+        padding-top: 0.5rem;
+    }
+}
+
 /* Logo Input */
 .logo-input {
     background: white;

@@ -43,6 +43,8 @@
                     <h1>AriClass Worksheet Generator</h1>
                     <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
                 </div>
+
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
             </div>
         </div>
         <nav class="top-menu">
@@ -65,6 +67,20 @@
                 </ul>
             </div>
         </nav>
+    
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="word-search.html">Word Search</a>
+        <a href="unscramble.html">Unscramble</a>
+        <a href="crossword.html">Crossword Puzzle</a>
+        <a href="matching-lists.html">Matching Lists</a>
+        <a href="bingo.html">Bingo Game</a>
+        <a href="sudoku.html">Sudoku</a>
+        <a href="maze.html">Maze Puzzle</a>
+        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+        <a href="how-to-use.html">How to Use</a>
+    </nav>
     </header>
 
     <div class="generator-container">
@@ -212,5 +228,17 @@
             <p>© 2025 Ariclass. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
 </body>
 </html>
