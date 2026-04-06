@@ -1,4 +1,77 @@
 /* Generator Page Styles */
+
+/* ── Tooltip ── */
+.tooltip-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #FFD700;
+    color: #7a5c00;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    cursor: default;
+    line-height: 1;
+    flex-shrink: 0;
+    border: 1px solid #e6c200;
+}
+
+.tooltip-box {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFF9E6;
+    color: #555;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100;
+    border: 1px solid #FFE082;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+}
+
+.tooltip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #FFE082;
+}
+
+.tooltip-box::before {
+    content: '';
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #FFF9E6;
+    z-index: 1;
+}
+
+.tooltip-wrap:hover .tooltip-box {
+    display: block;
+}
+/* ── / Tooltip ── */
 :root {
     --border-color: #e0e0e0;
     --background-light: #fff9e6;

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const printBtn         = document.getElementById('print-btn');
     const answerBtn        = document.getElementById('answer-btn');
     const puzzlePreview    = document.getElementById('puzzle-preview');
-    const difficultySelect = document.getElementById('difficulty-select');
+    const getDifficulty = () => (document.querySelector('input[name="difficulty"]:checked') || { value: 'medium' }).value;
 
     // ── State ─────────────────────────────────────────────────────────────────
     let currentMaze     = null;
@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     printBtn.addEventListener('click',          () => window.print());
     showTitle.addEventListener('change',        updatePreview);
     worksheetTitle.addEventListener('input',    updatePreview);
-    difficultySelect.addEventListener('change', () => { if (currentMaze) generateMaze(); });
+    document.querySelectorAll('input[name="difficulty"]').forEach(r =>
+        r.addEventListener('change', () => { if (currentMaze) generateMaze(); }));
 
     answerBtn.addEventListener('click', function () {
         if (!currentMaze) return;
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ═════════════════════════════════════════════════════════════════════════
 
     function generateMaze() {
-        const difficulty    = difficultySelect.value;
+        const difficulty    = getDifficulty();
         const size          = MAZE_SIZE[difficulty];
         // Accept mazes where the solution path length falls in a sweet spot:
         //   min  → path is long & winding (not a short straight shot)
@@ -239,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updatePreview() {
         if (!currentMaze) { displayEmptyPreview(); return; }
 
-        const difficulty = difficultySelect.value;
+        const difficulty = getDifficulty();
         const size       = MAZE_SIZE[difficulty];
         const title      = showTitle.checked ? (worksheetTitle.value || 'Maze Puzzle') : '';
 

@@ -112,6 +112,23 @@
                             <div class="case-option">
                                 <input type="radio" id="mode-draw" name="clock-mode" value="draw">
                                 <label for="mode-draw">Draw the hands</label>
+                                <label style="display:flex;align-items:center;gap:0.2rem;margin-left:0.6rem;font-size:0.8rem;color:#888;cursor:pointer;">
+                                    <input type="checkbox" id="hide-time-label"><s>12:00</s>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group" id="color-option-group">
+                        <h2 style="text-align:center">Hand Color</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="color-bw" name="clock-color" value="bw">
+                                <label for="color-bw">Black &amp; White</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="color-color" name="clock-color" value="color" checked>
+                                <label for="color-color">Color</label>
                             </div>
                         </div>
                     </div>
@@ -142,6 +159,10 @@
                         <h2 style="text-align:center">Number of Clocks</h2>
                         <div class="case-options">
                             <div class="case-option">
+                                <input type="radio" id="count-1" name="clock-count" value="1">
+                                <label for="count-1">1</label>
+                            </div>
+                            <div class="case-option">
                                 <input type="radio" id="count-6" name="clock-count" value="6">
                                 <label for="count-6">6</label>
                             </div>
@@ -154,6 +175,14 @@
                                 <label for="count-12">12</label>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="option-group" style="display: flex; justify-content: center; border-top: 1px solid #e0e0e0; padding-top: 1rem;">
+                        <label>
+                            Pages:
+                            <input type="number" id="num-pages" min="1" max="10" value="1" style="width: 80px; padding: 0.4rem; margin-left: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px;">
+                            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Each page gets a unique set of random problems.</span></span>
+                        </label>
                     </div>
                 </div>
 

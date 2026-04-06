@@ -104,11 +104,20 @@
                 <div class="options">
                     <div class="option-group">
                         <h2>Difficulty Level</h2>
-                        <select id="difficulty-select" class="difficulty-select">
-                            <option value="easy">Easy (10x10)</option>
-                            <option value="medium" selected>Medium (15x15)</option>
-                            <option value="hard">Hard (20x20)</option>
-                        </select>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="diff-easy" name="difficulty" value="easy">
+                                <label for="diff-easy">Easy</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-medium" name="difficulty" value="medium" checked>
+                                <label for="diff-medium">Medium</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-hard" name="difficulty" value="hard">
+                                <label for="diff-hard">Hard</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="option-group">
                         <h2>Maze Type</h2>
