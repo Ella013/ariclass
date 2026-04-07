@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -59,10 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title if show-title is checked
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // Add puzzle grid with or without answers
         html += currentPuzzle.generateHTML(true, true, showingAnswers);
@@ -247,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -263,10 +261,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title if show-title is checked
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // Add the generated sample puzzle grid (without letters)
         html += samplePuzzle.generateHTML(true, true, false);
@@ -395,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -411,10 +407,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title if show-title is checked
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // Add puzzle grid
         html += currentPuzzle.generateHTML(true, true, false);
@@ -462,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -478,10 +472,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title if show-title is checked
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // Add puzzle grid
         html += puzzle.generateHTML(true, true, false);

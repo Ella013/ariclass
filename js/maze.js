@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const difficulty = getDifficulty();
         const size       = MAZE_SIZE[difficulty];
-        const title      = showTitle.checked ? (worksheetTitle.value || 'Maze Puzzle') : '';
+        const title      = worksheetTitle.value || 'Maze Puzzle';
 
         // Stroke widths scale with maze size so walls look consistent
         const sw  = (2.5 * size) / 500;     // internal wall stroke
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="student-header">
             <div class="header-left">
                 <div class="puzzle-header">
-                    <img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
+                    <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
                 </div>
             </div>
             <div class="info-group">
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         </div>`;
 
-        if (title) h += `<div class="puzzle-title">${title}</div>`;
+        h += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // ── SVG maze ──────────────────────────────────────────────────────────
         h += '<div class="maze-container"><div class="maze-wrapper">';
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="student-header">
             <div class="header-left">
                 <div class="puzzle-header">
-                    <img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
+                    <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
                 </div>
             </div>
             <div class="info-group">
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="info-line"><label>Date:</label><div class="input-field"></div></div>
             </div>
         </div>`;
-        if (title) h += `<div class="puzzle-title">${title}</div>`;
+        h += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
         h += `<div class="maze-container"><div class="maze-wrapper">
             <svg class="maze-svg" viewBox="-0.1 -0.1 10.2 10.2" width="600" height="600"
                  style="max-width:100%;height:auto;aspect-ratio:1;">

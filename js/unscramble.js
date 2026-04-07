@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const worksheetTitle = document.getElementById('worksheet-title');
     const capitalizeFirst = document.getElementById('capitalize-first');
     const showTitle = document.getElementById('show-title');
-    const oneColumn = document.getElementById('one-column');
-    const twoColumns = document.getElementById('two-columns');
     const clearButton = document.getElementById('clearButton');
     let originalSentences = [];
     let scrambledSentences = [];
@@ -40,29 +38,22 @@ document.addEventListener('DOMContentLoaded', function() {
         "She walks her dog in the park."
     ];
 
-    // Function to get random sentences based on layout and spacing
-    function getRandomSentences() {
-        const layout = twoColumns.checked ? '2column' : '1column';
+    // Function to get max sentences based on spacing and title
+    function getMaxSentences() {
         const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
         const hasTitle = showTitle.checked;
+        if (spacing === 'compact') return hasTitle ? 8 : 9;
+        if (spacing === 'normal') return hasTitle ? 7 : 8;
+        return hasTitle ? 6 : 7; // wide
+    }
 
-        // Calculate max sentences based on current layout
-        let maxSentences;
-        if (layout === '1column') {
-            if (spacing === 'compact') maxSentences = hasTitle ? 8 : 9;
-            else if (spacing === 'normal') maxSentences = hasTitle ? 7 : 8;
-            else maxSentences = hasTitle ? 6 : 7; // wide
-        } else {
-            if (spacing === 'compact') maxSentences = hasTitle ? 10 : 11;
-            else maxSentences = hasTitle ? 8 : 9; // normal & wide
-        }
-
-        // Shuffle and select random sentences
+    // Function to get random sentences based on spacing
+    function getRandomSentences() {
+        const maxSentences = getMaxSentences();
         const shuffledSentences = [...randomSentences]
             .sort(() => Math.random() - 0.5)
             .slice(0, maxSentences)
             .map(text => ({ text: text.slice(0, -1), punctuation: text.slice(-1) }));
-
         return shuffledSentences;
     }
 
@@ -81,10 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     spacingOptions.forEach(option => {
         option.addEventListener('change', function() {
-            // Remove all spacing classes first
             puzzlePreview.classList.remove('spacing-compact', 'spacing-normal', 'spacing-wide');
-            // Add the selected spacing class
             puzzlePreview.classList.add(`spacing-${this.value}`);
+            if (scrambledSentences.length > 0) displayWorksheet();
         });
     });
 
@@ -101,15 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
     printBtn.addEventListener('click', printWorksheet);
     clearButton.addEventListener('click', clearAll);
     capitalizeFirst.addEventListener('change', updateCapitalization);
-    [showTitle, oneColumn, twoColumns].forEach(el => 
-        el.addEventListener('change', () => {
-            if (scrambledSentences.length > 0) {
-                displayWorksheet();
-            }
-        })
-    );
-
-    // Add real-time title visibility toggle
     showTitle.addEventListener('change', () => {
         displayWorksheet();
     });
@@ -146,50 +127,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function checkSentenceLimit(sentences) {
-        const layout = twoColumns.checked ? '2column' : '1column';
-        const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
-        const hasTitle = showTitle.checked;
-        let maxSentences;
-        
-        // Calculate lines based on sentence length
-        const getLinesCount = (sentence) => {
-            const words = sentence.text.split(' ');
-            if (layout === '2column') {
-                return words.length > 12 ? 3 : 2; // 3 lines if more than 12 words in 2-column
-            } else {
-                return words.length > 8 ? 2 : 1; // 2 lines if more than 8 words in 1-column
-            }
-        };
-
-        // Calculate average lines for all sentences
-        const avgLines = sentences.reduce((sum, sentence) => sum + getLinesCount(sentence), 0) / sentences.length;
-
-        // Set max sentences based on layout, spacing, and title visibility
-        if (layout === '1column') {
-            if (avgLines <= 1) { // Single line sentences
-                if (spacing === 'compact') maxSentences = hasTitle ? 9 : 10;
-                else if (spacing === 'normal') maxSentences = hasTitle ? 8 : 9;
-                else maxSentences = hasTitle ? 7 : 8; // wide
-            } else { // Two line sentences
-                if (spacing === 'compact') maxSentences = hasTitle ? 7 : 8;
-                else maxSentences = hasTitle ? 6 : 7; // normal & wide
-            }
-        } else { // 2column
-            if (avgLines > 2) { // Long sentences (3 lines)
-                maxSentences = hasTitle ? 8 : 9; // all spacings
-            } else { // Short sentences (2 lines)
-                if (spacing === 'compact') maxSentences = hasTitle ? 10 : 11;
-                else maxSentences = hasTitle ? 8 : 9; // normal & wide
-            }
-        }
-
-        // Display warning message
+        const maxSentences = getMaxSentences();
         const warningDiv = document.querySelector('.sentence-limit-warning') || document.createElement('div');
         warningDiv.className = 'sentence-limit-warning';
-        
         if (sentences.length > maxSentences) {
             const removeCount = sentences.length - maxSentences;
-            warningDiv.textContent = `Please remove ${removeCount} sentence(s). Maximum ${maxSentences} sentences allowed for current layout.`;
+            warningDiv.textContent = `Please remove ${removeCount} sentence(s). Maximum ${maxSentences} sentences allowed.`;
             if (!warningDiv.parentElement) {
                 const wordInput = document.querySelector('.word-input');
                 wordInput.insertBefore(warningDiv, wordInput.querySelector('button'));
@@ -197,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             warningDiv.remove();
         }
-        
         return sentences.slice(0, maxSentences);
     }
 
@@ -298,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -321,39 +263,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add scrambled sentences
         if (scrambledSentences.length > 0) {
-            const maxQuestionsPerPage = showTitle.checked ? 10 : 12;
-            const useColumns = twoColumns.checked;
-            
-            if (useColumns) {
-                // Create flex container for two columns
-                html += '<div class="sentence-container">';
-                
-                // Calculate split point for even distribution
-                const midPoint = Math.ceil(scrambledSentences.length / 2);
-                
-                // Left column
-                html += '<div class="sentence-list column-left">';
-                scrambledSentences.slice(0, midPoint).forEach((words, index) => {
-                    html += createSentenceItem(words, index, originalSentences[index]);
-                });
-                html += '</div>';
-                
-                // Right column
-                html += '<div class="sentence-list column-right">';
-                scrambledSentences.slice(midPoint).forEach((words, index) => {
-                    html += createSentenceItem(words, index + midPoint, originalSentences[index + midPoint]);
-                });
-                html += '</div>';
-                
-                html += '</div>'; // Close sentence-container
-            } else {
-                // Single column layout
-                html += '<div class="sentence-list">';
-                scrambledSentences.forEach((words, index) => {
-                    html += createSentenceItem(words, index, originalSentences[index]);
-                });
-                html += '</div>';
-            }
+            const maxPerPage = getMaxSentences();
+            const displayed = scrambledSentences.slice(0, maxPerPage);
+            html += '<div class="sentence-list">';
+            displayed.forEach((words, index) => {
+                html += createSentenceItem(words, index, originalSentences[index]);
+            });
+            html += '</div>';
         } else {
             // Empty state
             html += '<div class="empty-state">';
@@ -385,30 +301,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Helper function to create sentence item HTML
-    function createSentenceItem(words, index, originalSentence) {
+    function createSentenceItem(words, index, originalSentence, displayNumber) {
+        const num = displayNumber !== undefined ? displayNumber : index + 1;
         let html = '<div class="sentence-item">';
         html += '<div class="sentence-line">';
-        html += `<span class="sentence-number">${index + 1}.</span>`;
+        html += `<span class="sentence-number">${num}.</span>`;
         html += `<span class="scrambled-words">${words.join(' / ')}</span>`;
         html += '</div>';
-        
-        // Calculate number of lines needed only for two-column layout
-        let numLines = 1;
-        if (twoColumns.checked) {
-            // Count actual words (not just characters)
-            const wordCount = words.length;
-            // If more than 6 words would be on the second line, add another answer line
-            numLines = (wordCount > 8) ? 2 : 1;
-        }
         if (answerMode) {
             html += `<div class="answer-line answer-shown">${originalSentence.text}${originalSentence.punctuation}</div>`;
         } else {
-            // Add multiple answer lines based on the calculated number of lines
-            for (let i = 0; i < numLines; i++) {
             html += `<div class="answer-line">&nbsp;</div>`;
-            }
         }
         html += '</div>';
+        return html;
+    }
+
+    // Build a single print page HTML (header + sentences + footer)
+    function buildPrintPageHTML(sentences, originals, startNumber) {
+        const currentYear = new Date().getFullYear();
+        let html = '';
+        html += '<div class="student-header">';
+        html += '<div class="header-left"><div class="puzzle-header">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '</div></div>';
+        html += '<div class="info-group">';
+        html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
+        html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
+        html += '</div></div>';
+        html += '<div class="sentence-list">';
+        sentences.forEach((words, i) => {
+            html += createSentenceItem(words, i, originals[i], startNumber + i);
+        });
+        html += '</div>';
+        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
         return html;
     }
 
@@ -419,16 +345,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function printWorksheet() {
-        // Get current spacing class
-        const currentSpacing = document.querySelector('input[name="question-spacing"]:checked').value;
-        const spacingClass = `spacing-${currentSpacing}`;
+        const maxPerPage = getMaxSentences();
+        const total = scrambledSentences.length;
 
-        // Apply spacing class to each sentence item
-        puzzlePreview.querySelectorAll('.sentence-item').forEach(item => {
-            item.classList.add(spacingClass);
-        });
+        // If everything fits on one page, just print
+        if (total <= maxPerPage) {
+            window.print();
+            return;
+        }
 
-        // Print
+        // Build extra pages for sentences beyond page 1
+        const extraContainer = document.createElement('div');
+        extraContainer.id = 'unscramble-extra-pages';
+
+        const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
+        let startIndex = maxPerPage;
+
+        while (startIndex < total) {
+            const endIndex = Math.min(startIndex + maxPerPage, total);
+            const pageSentences = scrambledSentences.slice(startIndex, endIndex);
+            const pageOriginals = originalSentences.slice(startIndex, endIndex);
+
+            const pageDiv = document.createElement('div');
+            pageDiv.className = `extra-print-page spacing-${spacing}`;
+            pageDiv.innerHTML = buildPrintPageHTML(pageSentences, pageOriginals, startIndex + 1);
+            extraContainer.appendChild(pageDiv);
+
+            startIndex = endIndex;
+        }
+
+        document.body.appendChild(extraContainer);
+
+        const cleanup = () => {
+            extraContainer.remove();
+            window.removeEventListener('afterprint', cleanup);
+        };
+        window.addEventListener('afterprint', cleanup);
+
         window.print();
     }
 }); 

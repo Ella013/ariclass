@@ -4,6 +4,8 @@ let currentAnswers = [];
 let currentWords = []; // Store current words
 let currentGrid = null; // Store current grid state
 
+const ANSWER_COLORS = ['#e74c3c', '#2980b9', '#27ae60', '#e67e22', '#8e44ad', '#f39c12', '#16a085', '#c0392b'];
+
 // Add fixed letters for each grid size
 const fixedLetters = {
     '8': [
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const printBtn = document.getElementById('print-btn');
     const puzzlePreview = document.getElementById('puzzle-preview');
     const worksheetTitle = document.getElementById('worksheet-title');
+    const showTitle = document.getElementById('show-title');
     const headerText = document.getElementById('header-text');
     const footerText = document.getElementById('footer-text');
     const headerImage = document.getElementById('header-image');
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('change', (e) => {
             selectedLevel = e.target.value;
             updatePlaceholder();
+            updateWordCountDisplay();
             generateEmptyPuzzle();
         });
     });
@@ -127,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     lowercaseWords.addEventListener('change', updateCase);
 
     // Add case toggle button listener
-    caseToggleBtn.addEventListener('click', function() {
+    if (caseToggleBtn) caseToggleBtn.addEventListener('click', function() {
         if (uppercaseWords.checked) {
             lowercaseWords.checked = true;
         } else {
@@ -137,17 +141,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Logo image upload handlers
-    headerImage.addEventListener('change', function(e) {
+    if (headerImage) headerImage.addEventListener('change', function(e) {
         handleImageUpload(e, 'header');
     });
 
-    footerImage.addEventListener('change', function(e) {
+    if (footerImage) footerImage.addEventListener('change', function(e) {
         handleImageUpload(e, 'footer');
     });
 
+    // Show title toggle
+    if (showTitle) showTitle.addEventListener('change', () => {
+        if (currentGrid) displayPuzzle(currentGrid, currentWords, currentAnswers);
+    });
+
     // Text input handlers
-    headerText.addEventListener('input', updatePreview);
-    footerText.addEventListener('input', updatePreview);
+    if (headerText) headerText.addEventListener('input', updatePreview);
+    if (footerText) footerText.addEventListener('input', updatePreview);
+
+    // Word count display (highlights excess words in red)
+    const wordCountDisplay = document.createElement('div');
+    wordCountDisplay.id = 'word-count-display';
+    vocabList.parentElement.insertBefore(wordCountDisplay, vocabList.nextSibling);
+
+    function updateWordCountDisplay() {
+        const text = vocabList.value.trim();
+        const allWords = text.split('\n').map(w => w.trim()).filter(w => w.length > 0);
+        const max = getMaxWords();
+        if (allWords.length === 0) {
+            wordCountDisplay.innerHTML = '';
+            return;
+        }
+        const countText = `${allWords.length} / ${max} words`;
+        const items = allWords.map((w, i) => {
+            if (i >= max) {
+                return `<span class="word-over-limit">${w}</span>`;
+            }
+            return `<span class="word-ok">${w}</span>`;
+        }).join('');
+        wordCountDisplay.innerHTML = `<div class="word-count-label">${countText}${allWords.length > max ? ' — <span class="word-over-limit-msg">excess words (red) will be ignored</span>' : ''}</div><div class="word-count-list">${items}</div>`;
+    }
+
+    vocabList.addEventListener('input', updateWordCountDisplay);
 
     // Add keyboard event listener to vocab list
     vocabList.addEventListener('keydown', function(e) {
@@ -194,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -210,7 +244,9 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title
-        html += '<div class="puzzle-title">Word Search</div>';
+        const titleText0 = worksheetTitle ? worksheetTitle.value.trim() || 'Word Search' : 'Word Search';
+        const titleVisible0 = !showTitle || showTitle.checked;
+        html += `<div class="puzzle-title" style="visibility:${titleVisible0 ? 'visible' : 'hidden'}">${titleText0}</div>`;
 
         // Add puzzle grid with level class and data attributes
         html += `<div class="puzzle-grid level-${selectedLevel}">`;
@@ -219,15 +255,6 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let x = 0; x < grid[y].length; x++) {
                 let cellClasses = ['puzzle-cell'];
                 let cellAttributes = `data-row="${y}" data-col="${x}"`;
-                
-                if (answerMode && currentAnswers && currentAnswers.length > 0) {
-                    for (let answer of currentAnswers) {
-                        const isPartOfWord = answer.positions.some(pos => pos.row === y && pos.col === x);
-                        if (isPartOfWord) {
-                            cellClasses.push('answer-highlight');
-                        }
-                    }
-                }
                 
                 html += `<div class="${cellClasses.join(' ')}" ${cellAttributes}>${grid[y][x]}</div>`;
             }
@@ -460,8 +487,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const startX = Math.floor(Math.random() * gridSize);
                 const startY = Math.floor(Math.random() * gridSize);
                 
-                // Try all possible directions
-                for (const [dx, dy] of directions) {
+                // Try directions in random order so all directions are used equally
+                const shuffledDirs = [...directions].sort(() => Math.random() - 0.5);
+                for (const [dx, dy] of shuffledDirs) {
                     if (canPlaceWord(grid, word, startX, startY, [dx, dy])) {
                         wordPositions = placeWord(grid, word, startX, startY, [dx, dy]);
                         placed = true;
@@ -546,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -562,8 +590,9 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title (default or custom)
-        const title = worksheetTitle.value.trim() || 'Word Search';
-        html += `<div class="puzzle-title">${title}</div>`;
+        const titleText1 = worksheetTitle.value.trim() || 'Word Search';
+        const titleVisible1 = !showTitle || showTitle.checked;
+        html += `<div class="puzzle-title" style="visibility:${titleVisible1 ? 'visible' : 'hidden'}">${titleText1}</div>`;
 
         // Add puzzle grid with data attributes for row and column
         html += `<div class="puzzle-grid level-${selectedLevel}">`;
@@ -574,16 +603,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 let cellClasses = ['puzzle-cell'];
                 let cellAttributes = `data-row="${y}" data-col="${x}"`;
                 
+                let cellColor = null;
                 if (answerMode && currentAnswers && currentAnswers.length > 0) {
-                    for (let answer of currentAnswers) {
-                        const isPartOfWord = answer.positions.some(pos => pos.row === y && pos.col === x);
+                    for (let ai = 0; ai < currentAnswers.length; ai++) {
+                        const isPartOfWord = currentAnswers[ai].positions.some(pos => pos.row === y && pos.col === x);
                         if (isPartOfWord) {
                             cellClasses.push('answer-highlight');
+                            cellColor = ANSWER_COLORS[ai % ANSWER_COLORS.length];
+                            break;
                         }
                     }
                 }
-                
-                html += `<div class="${cellClasses.join(' ')}" ${cellAttributes}>${grid[y][x]}</div>`;
+
+                const colorStyle = cellColor ? ` style="background:${cellColor};color:#fff;"` : '';
+                html += `<div class="${cellClasses.join(' ')}" ${cellAttributes}${colorStyle}>${grid[y][x]}</div>`;
             }
             html += '</div>';
         }
@@ -593,8 +626,10 @@ document.addEventListener('DOMContentLoaded', function() {
         html += `<div class="word-list" style="display: ${showWordList.checked ? 'block' : 'none'}">`;
         html += '<h3>Find these words:</h3>';
         html += '<ul>';
-        for (const word of words) {
-            html += `<li>${word}</li>`;
+        for (let wi = 0; wi < words.length; wi++) {
+            const color = answerMode ? ANSWER_COLORS[wi % ANSWER_COLORS.length] : '';
+            const style = answerMode ? ` style="color:${color};font-weight:bold;"` : '';
+            html += `<li${style}>${words[wi]}</li>`;
         }
         html += '</ul>';
         html += '</div>';
@@ -635,18 +670,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add these helper functions
     function showAnswers() {
-        console.log('Showing answers:', currentAnswers); // Debug log
         if (currentAnswers && currentAnswers.length > 0) {
             const puzzleGrid = document.querySelector('.puzzle-grid');
             if (!puzzleGrid) return;
 
-            currentAnswers.forEach(answer => {
+            currentAnswers.forEach((answer, ai) => {
+                const color = ANSWER_COLORS[ai % ANSWER_COLORS.length];
                 answer.positions.forEach(pos => {
                     const cell = puzzleGrid.querySelector(`.puzzle-cell[data-row="${pos.row}"][data-col="${pos.col}"]`);
                     if (cell) {
                         cell.classList.add('answer-highlight');
+                        cell.style.background = color;
+                        cell.style.color = '#fff';
                     }
                 });
+            });
+
+            // Color the word list items
+            document.querySelectorAll('.word-list li').forEach((li, wi) => {
+                li.style.color = ANSWER_COLORS[wi % ANSWER_COLORS.length];
+                li.style.fontWeight = 'bold';
             });
         }
     }
@@ -654,6 +697,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideAnswers() {
         document.querySelectorAll('.puzzle-cell.answer-highlight').forEach(cell => {
             cell.classList.remove('answer-highlight');
+            cell.style.background = '';
+            cell.style.color = '';
+        });
+        document.querySelectorAll('.word-list li').forEach(li => {
+            li.style.color = '';
+            li.style.fontWeight = '';
         });
     }
 

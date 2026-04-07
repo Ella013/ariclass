@@ -135,17 +135,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let html = '';
         html += '<div class="student-header">';
         html += '<div class="header-left"><div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div></div>';
         html += '<div class="info-group">';
         html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
         html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
         html += '</div></div>';
 
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Telling Time';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Telling Time';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         const gridCols = count === 1 ? '1fr' : count === 6 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
         html += `<div class="clock-grid cols-${cols} count-${count}" style="grid-template-columns:${gridCols}">`;
@@ -178,17 +176,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let html = '';
         html += '<div class="student-header">';
         html += '<div class="header-left"><div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div></div>';
         html += '<div class="info-group">';
         html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
         html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
         html += '</div></div>';
 
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Telling Time';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Telling Time';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         const gridCols = count === 1 ? '1fr' : count === 6 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
         html += `<div class="clock-grid cols-${cols} count-${count}" style="grid-template-columns:${gridCols}">`;

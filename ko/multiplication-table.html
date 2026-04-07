@@ -12,7 +12,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/generator.css">
-        <link rel="stylesheet" href="../css/multiplication-table.css">
+    <link rel="stylesheet" href="../css/addition-subtraction.css">
+    <link rel="stylesheet" href="../css/multiplication-table.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
@@ -68,41 +69,56 @@
             </div>
         </nav>
         <nav class="mobile-nav" id="mobileNav">
-        <a href="index.html">홈</a>
-        <a href="word-search.html">단어 찾기</a>
-        <a href="unscramble.html">문장 배열</a>
-        <a href="crossword.html">십자말풀이</a>
-        <a href="matching-lists.html">단어 연결</a>
-        <a href="bingo.html">빙고 게임</a>
-        <a href="sudoku.html">스도쿠</a>
-        <a href="maze.html">미로 퍼즐</a>
-        <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
-        <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
-        <a href="clock.html">시계 읽기</a>
-        <a href="how-to-use.html">사용 방법</a>
-    </nav>
+            <a href="index.html">홈</a>
+            <a href="word-search.html">단어 찾기</a>
+            <a href="unscramble.html">문장 배열</a>
+            <a href="crossword.html">십자말풀이</a>
+            <a href="matching-lists.html">단어 연결</a>
+            <a href="bingo.html">빙고 게임</a>
+            <a href="sudoku.html">스도쿠</a>
+            <a href="maze.html">미로 퍼즐</a>
+            <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+            <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+            <a href="clock.html">시계 읽기</a>
+            <a href="how-to-use.html">사용 방법</a>
+        </nav>
     </header>
-
 
     <div class="generator-container">
         <h1>곱셈 &amp; 나눗셈</h1>
+
         <div class="generator-content">
             <div class="input-section">
+
                 <div class="title-input">
                     <h2>학습지 제목</h2>
                     <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요">
                     <div class="option-group">
-                        <label><input type="checkbox" id="show-title" checked> 학습지 제목 보이기</label>
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            학습지 제목 보이기
+                        </label>
                     </div>
                 </div>
+
                 <div class="options">
                     <div class="option-group">
                         <div style="display: flex; gap: 2rem;">
-                            <label><input type="radio" name="operation" id="multiplication-only" value="multiplication" checked> 곱셈만</label>
-                            <label><input type="radio" name="operation" id="division-only" value="division"> 나눗셈만</label>
-                            <label><input type="radio" name="operation" id="mixed" value="mixed"> 혼합</label>
+                            <label>
+                                <input type="radio" name="operation" id="multiplication-only" value="multiplication" checked>
+                                곱셈만
+                            </label>
+                            <label>
+                                <input type="radio" name="operation" id="division-only" value="division">
+                                나눗셈만
+                            </label>
+                            <label>
+                                <input type="radio" name="operation" id="mixed" value="mixed">
+                                혼합
+                            </label>
                         </div>
                     </div>
+
                     <div class="option-group" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
                         <h2 style="text-align:center; font-weight:bold; margin-top:0; margin-bottom:0.6rem;">난이도</h2>
                         <div class="case-options">
@@ -120,6 +136,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="option-group" style="display: flex; justify-content: center;">
                         <label>
                             페이지 수:
@@ -128,21 +145,30 @@
                         </label>
                     </div>
                 </div>
+
                 <div class="button-container">
-                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> 학습지 만들기</button>
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> 학습지 만들기
+                    </button>
                 </div>
             </div>
+
             <div class="preview-section">
                 <div class="preview-label">미리보기</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> 출력하기</button>
-                        <button id="answer-btn" class="answer-btn"><i class="fas fa-eye"></i> 정답 보기</button>
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> 출력하기
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> 정답 보기
+                        </button>
                     </div>
                     <div id="puzzle-preview"></div>
                 </div>
             </div>
         </div>
+
         <div class="description-section">
             <h2>곱셈 &amp; 나눗셈 학습지 만들기</h2>
             <div class="description-content">
@@ -176,9 +202,10 @@
             </div>
         </div>
     </div>
+
     <script src="../js/multiplication-table.js"></script>
 
-<footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-about">
                 <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
@@ -218,7 +245,7 @@
         </div>
     </footer>
 
-<script>
+    <script>
         (function() {
             var btn = document.getElementById('hamburgerBtn');
             var nav = document.getElementById('mobileNav');

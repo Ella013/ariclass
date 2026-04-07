@@ -1329,16 +1329,16 @@ body {
 
 .answer-line.answer-shown {
     border-bottom: none;
-    height: auto;
+    height: 2em;
     min-height: 30px;
     margin: 2mm 0;
-    padding: 4px 0;
+    padding: 0;
     font-size: 14px;
-    line-height: 1.5;
     color: #ff4444;
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .page-break {
@@ -1402,13 +1402,13 @@ body {
 
     .answer-line.answer-shown {
         border-bottom: none;
-        height: auto;
+        height: 2em;
         min-height: 30px;
         margin: 2mm 0;
-        padding: 4px 0;
+        padding: 0;
         font-size: 14px;
-        line-height: 1.5;
         color: #ff4444;
+        overflow: hidden;
     }
 }
 
@@ -1474,28 +1474,28 @@ body {
 
 .answer-line.answer-shown {
     border-bottom: none;
-    height: auto;
+    height: 2em;
     min-height: 30px;
     margin: 2mm 0;
-    padding: 4px 0;
+    padding: 0;
     font-size: 14px;
-    line-height: 1.5;
     color: #ff4444;
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 @media print {
     .answer-line.answer-shown {
         border-bottom: none;
-        height: auto;
+        height: 2em;
         min-height: 30px;
         margin: 2mm 0;
-        padding: 4px 0;
+        padding: 0;
         font-size: 14px;
-        line-height: 1.5;
         color: #ff4444;
+        overflow: hidden;
     }
 }
 
@@ -1580,13 +1580,13 @@ body {
 
     .answer-line.answer-shown {
         border-bottom: none !important;
-        height: auto !important;
+        height: 2em !important;
         min-height: 30px !important;
         margin: 2mm 0 !important;
-        padding: 4px 0 !important;
+        padding: 0 !important;
         font-size: 14px !important;
-        line-height: 1.5 !important;
         color: #ff4444 !important;
+        overflow: hidden !important;
     }
 
     .sentence-container {
@@ -1611,6 +1611,40 @@ body {
     }
 }
 
+/* Extra print pages for unscramble auto page-split */
+#unscramble-extra-pages {
+    display: none;
+}
+
+@media print {
+    #unscramble-extra-pages {
+        display: block;
+    }
+
+    .extra-print-page {
+        break-before: page;
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm;
+        box-sizing: border-box;
+        background: white;
+    }
+
+    .extra-print-page .student-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        margin-bottom: 10mm !important;
+        width: 100% !important;
+    }
+
+    .extra-print-page .preview-logo {
+        height: 12mm !important;
+        width: auto !important;
+        object-fit: contain !important;
+    }
+}
+
 .sentence-limit-warning {
     color: #ff4444;
     font-size: 14px;
@@ -1631,4 +1665,44 @@ body {
     transition: opacity 0.3s ease;
     text-align: center;
     width: 100%;
+}
+
+/* Word count display */
+#word-count-display {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.word-count-label {
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.word-over-limit-msg {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+.word-count-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.word-ok {
+    background: #eaf6ea;
+    color: #2e7d32;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.word-over-limit {
+    background: #fdecea;
+    color: #e74c3c;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: line-through;
 } 

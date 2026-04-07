@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -221,10 +221,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title if show-title is checked
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Sudoku Puzzle';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Sudoku Puzzle';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // Add sudoku grid
         html += '<div class="sudoku-grid">';
@@ -266,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -282,10 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
 
         // Add title if show-title is checked
-        if (showTitle.checked) {
-            const title = worksheetTitle.value.trim() || 'Sudoku Puzzle';
-            html += `<div class="puzzle-title">${title}</div>`;
-        }
+        const title = worksheetTitle.value.trim() || 'Sudoku Puzzle';
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
 
         // Add empty sudoku grid
         html += '<div class="sudoku-grid">';

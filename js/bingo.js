@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             header.innerHTML = `
                 <div class="header-left">
                     <div class="puzzle-header">
-                        <img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
+                        <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
                     </div>
                 </div>
                 <div class="info-group">
@@ -168,13 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             board.appendChild(header);
 
-            // Add title if show-title is checked
-            if (showTitleCheckbox.checked && worksheetTitle.value.trim()) {
-                const title = document.createElement('div');
-                title.className = 'puzzle-title';
-                title.textContent = worksheetTitle.value.trim();
-                board.appendChild(title);
-            }
+            const titleEl = document.createElement('div');
+            titleEl.className = 'puzzle-title';
+            titleEl.textContent = worksheetTitle.value.trim() || 'Bingo Game';
+            titleEl.style.visibility = showTitleCheckbox.checked ? 'visible' : 'hidden';
+            board.appendChild(titleEl);
 
             // Add empty grid
             const grid = document.createElement('div');
@@ -231,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         header.innerHTML = `
             <div class="header-left">
                 <div class="puzzle-header">
-                    <img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
+                    <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
                 </div>
             </div>
             <div class="info-group">
