@@ -603,20 +603,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let cellClasses = ['puzzle-cell'];
                 let cellAttributes = `data-row="${y}" data-col="${x}"`;
                 
-                let cellColor = null;
-                if (answerMode && currentAnswers && currentAnswers.length > 0) {
-                    for (let ai = 0; ai < currentAnswers.length; ai++) {
-                        const isPartOfWord = currentAnswers[ai].positions.some(pos => pos.row === y && pos.col === x);
-                        if (isPartOfWord) {
-                            cellClasses.push('answer-highlight');
-                            cellColor = ANSWER_COLORS[ai % ANSWER_COLORS.length];
-                            break;
-                        }
-                    }
-                }
-
-                const colorStyle = cellColor ? ` style="background:${cellColor};color:#fff;"` : '';
-                html += `<div class="${cellClasses.join(' ')}" ${cellAttributes}${colorStyle}>${grid[y][x]}</div>`;
+                html += `<div class="${cellClasses.join(' ')}" ${cellAttributes}>${grid[y][x]}</div>`;
             }
             html += '</div>';
         }
@@ -626,10 +613,8 @@ document.addEventListener('DOMContentLoaded', function() {
         html += `<div class="word-list" style="display: ${showWordList.checked ? 'block' : 'none'}">`;
         html += '<h3>Find these words:</h3>';
         html += '<ul>';
-        for (let wi = 0; wi < words.length; wi++) {
-            const color = answerMode ? ANSWER_COLORS[wi % ANSWER_COLORS.length] : '';
-            const style = answerMode ? ` style="color:${color};font-weight:bold;"` : '';
-            html += `<li${style}>${words[wi]}</li>`;
+        for (const word of words) {
+            html += `<li>${word}</li>`;
         }
         html += '</ul>';
         html += '</div>';
@@ -639,6 +624,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
 
         puzzlePreview.innerHTML = html;
+        if (answerMode) showAnswers();
     }
 
     function printPuzzle() {
@@ -670,35 +656,80 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add these helper functions
     function showAnswers() {
-        if (currentAnswers && currentAnswers.length > 0) {
-            const puzzleGrid = document.querySelector('.puzzle-grid');
-            if (!puzzleGrid) return;
+        if (!currentAnswers || currentAnswers.length === 0) return;
+        const puzzleGrid = document.querySelector('.puzzle-grid');
+        if (!puzzleGrid) return;
 
-            currentAnswers.forEach((answer, ai) => {
-                const color = ANSWER_COLORS[ai % ANSWER_COLORS.length];
-                answer.positions.forEach(pos => {
-                    const cell = puzzleGrid.querySelector(`.puzzle-cell[data-row="${pos.row}"][data-col="${pos.col}"]`);
-                    if (cell) {
-                        cell.classList.add('answer-highlight');
-                        cell.style.background = color;
-                        cell.style.color = '#fff';
-                    }
-                });
-            });
+        // Remove any existing overlay
+        const existing = puzzleGrid.querySelector('.answer-overlay');
+        if (existing) existing.remove();
 
-            // Color the word list items
-            document.querySelectorAll('.word-list li').forEach((li, wi) => {
-                li.style.color = ANSWER_COLORS[wi % ANSWER_COLORS.length];
-                li.style.fontWeight = 'bold';
-            });
-        }
+        puzzleGrid.style.position = 'relative';
+
+        const gridRect = puzzleGrid.getBoundingClientRect();
+
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.classList.add('answer-overlay');
+        svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;';
+
+        currentAnswers.forEach((answer, ai) => {
+            const color = ANSWER_COLORS[ai % ANSWER_COLORS.length];
+            const positions = answer.positions;
+            if (!positions || positions.length === 0) return;
+
+            const firstCell = puzzleGrid.querySelector(`.puzzle-cell[data-row="${positions[0].row}"][data-col="${positions[0].col}"]`);
+            const lastCell  = puzzleGrid.querySelector(`.puzzle-cell[data-row="${positions[positions.length-1].row}"][data-col="${positions[positions.length-1].col}"]`);
+            if (!firstCell || !lastCell) return;
+
+            const fr = firstCell.getBoundingClientRect();
+            const lr = lastCell.getBoundingClientRect();
+
+            // Cell center points relative to grid container
+            const x1 = fr.left - gridRect.left + fr.width  / 2;
+            const y1 = fr.top  - gridRect.top  + fr.height / 2;
+            const x2 = lr.left - gridRect.left + lr.width  / 2;
+            const y2 = lr.top  - gridRect.top  + lr.height / 2;
+
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            const cx = (x1 + x2) / 2;
+            const cy = (y1 + y2) / 2;
+
+            // rx spans from center to last cell center + half a cell
+            const cellHalf = fr.width / 2;
+            const rx = Math.sqrt(dx*dx + dy*dy) / 2 + cellHalf * 0.85;
+            const ry = fr.height * 0.62;
+
+            const ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+            ellipse.setAttribute('cx', cx);
+            ellipse.setAttribute('cy', cy);
+            ellipse.setAttribute('rx', rx);
+            ellipse.setAttribute('ry', ry);
+            ellipse.setAttribute('fill', 'none');
+            ellipse.setAttribute('stroke', color);
+            ellipse.setAttribute('stroke-width', '2.5');
+            ellipse.setAttribute('transform', `rotate(${angle},${cx},${cy})`);
+            svg.appendChild(ellipse);
+        });
+
+        puzzleGrid.appendChild(svg);
+
+        // Color the word list items
+        document.querySelectorAll('.word-list li').forEach((li, wi) => {
+            li.style.color = ANSWER_COLORS[wi % ANSWER_COLORS.length];
+            li.style.fontWeight = 'bold';
+        });
     }
 
     function hideAnswers() {
+        const puzzleGrid = document.querySelector('.puzzle-grid');
+        if (puzzleGrid) {
+            const overlay = puzzleGrid.querySelector('.answer-overlay');
+            if (overlay) overlay.remove();
+        }
         document.querySelectorAll('.puzzle-cell.answer-highlight').forEach(cell => {
             cell.classList.remove('answer-highlight');
-            cell.style.background = '';
-            cell.style.color = '';
         });
         document.querySelectorAll('.word-list li').forEach(li => {
             li.style.color = '';
