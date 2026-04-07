@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const start = pageIndex * perPage;
         const end   = Math.min(start + perPage, currentProblems.length);
         for (let i = start; i < end; i++) {
-            html += renderProblemHTML(currentProblems[i], i % perPage);
+            html += renderProblemHTML(currentProblems[i], i);
         }
         html += '</div>';
 
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
             html += '</div></div>';
             html += `<div class="puzzle-title title-slot">${title}</div>`;
             html += '<div class="problems-grid">';
-            pageProblems.forEach((prob, i) => { html += renderProblemHTML(prob, i); });
+            pageProblems.forEach((prob, i) => { html += renderProblemHTML(prob, p * perPage + i); });
             html += '</div>';
             const currentYear = new Date().getFullYear();
             html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
