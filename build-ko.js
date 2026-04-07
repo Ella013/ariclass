@@ -451,8 +451,8 @@ function buildWordSearch() {
                     </div>
                     <div class="option-group">
                         <div style="display: flex; gap: 2rem;">
-                            <label><input type="radio" name="case" id="uppercase-words" checked> UPPERCASE</label>
-                            <label><input type="radio" name="case" id="lowercase-words"> lowercase</label>
+                            <label><input type="radio" name="case" id="uppercase-words" checked> 대문자</label>
+                            <label><input type="radio" name="case" id="lowercase-words"> 소문자</label>
                         </div>
                     </div>
                     <div class="option-group">
@@ -731,11 +731,11 @@ function buildMatchingLists() {
                         <div class="case-options">
                             <div class="case-option">
                                 <input type="radio" id="uppercase" name="letter-case" value="uppercase">
-                                <label for="uppercase">UPPERCASE</label>
+                                <label for="uppercase">대문자</label>
                             </div>
                             <div class="case-option">
                                 <input type="radio" id="lowercase" name="letter-case" value="lowercase" checked>
-                                <label for="lowercase">lowercase</label>
+                                <label for="lowercase">소문자</label>
                             </div>
                         </div>
                     </div>
