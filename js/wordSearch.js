@@ -665,8 +665,7 @@ document.addEventListener('DOMContentLoaded', function() {
             answer.positions.forEach(pos => {
                 const cell = puzzleGrid.querySelector(`.puzzle-cell[data-row="${pos.row}"][data-col="${pos.col}"]`);
                 if (cell) {
-                    cell.style.background = color;
-                    cell.style.color = '#fff';
+                    cell.style.color = color;
                     cell.style.fontWeight = 'bold';
                 }
             });
@@ -675,7 +674,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function hideAnswers() {
         document.querySelectorAll('.puzzle-cell').forEach(cell => {
-            cell.style.background = '';
             cell.style.color = '';
             cell.style.fontWeight = '';
             cell.classList.remove('answer-highlight');
