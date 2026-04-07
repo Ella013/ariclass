@@ -274,13 +274,15 @@ document.addEventListener('DOMContentLoaded', function() {
         printPages.id = 'print-pages';
 
         for (let p = 0; p < numPages; p++) {
-            // Generate fresh random problems for each print page
-            const pageProblems = [];
-            if (operation === 'mixed') {
-                for (let i = 0; i < 7; i++) pageProblems.push(generateProblem(level, 'multiplication'));
-                for (let i = 0; i < 8; i++) pageProblems.push(generateProblem(level, 'division'));
-            } else {
-                for (let i = 0; i < perPage; i++) pageProblems.push(generateProblem(level, operation));
+            // Page 1: use the same problems shown in preview; pages 2+: generate fresh
+            const pageProblems = p === 0 ? currentProblems.slice(0, perPage) : [];
+            if (p > 0) {
+                if (operation === 'mixed') {
+                    for (let i = 0; i < 7; i++) pageProblems.push(generateProblem(level, 'multiplication'));
+                    for (let i = 0; i < 8; i++) pageProblems.push(generateProblem(level, 'division'));
+                } else {
+                    for (let i = 0; i < perPage; i++) pageProblems.push(generateProblem(level, operation));
+                }
             }
 
             // Build page HTML directly from pageProblems
