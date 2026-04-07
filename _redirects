@@ -1,0 +1,5 @@
+# Language-based redirects
+# Korean browsers auto-redirect to /ko/
+/   /ko/   302   Language=ko
+
+# Fallback: everything else stays on English (default)
