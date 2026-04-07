@@ -4,7 +4,7 @@ let currentAnswers = [];
 let currentWords = []; // Store current words
 let currentGrid = null; // Store current grid state
 
-const ANSWER_COLORS = ['#e74c3c', '#2980b9', '#27ae60', '#e67e22', '#8e44ad', '#f39c12', '#16a085', '#c0392b'];
+const ANSWER_COLORS = ['#e74c3c', '#2980b9', '#27ae60'];
 
 // Add fixed letters for each grid size
 const fixedLetters = {
@@ -660,80 +660,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const puzzleGrid = document.querySelector('.puzzle-grid');
         if (!puzzleGrid) return;
 
-        // Remove any existing overlay
-        const existing = puzzleGrid.querySelector('.answer-overlay');
-        if (existing) existing.remove();
-
-        puzzleGrid.style.position = 'relative';
-
-        const gridRect = puzzleGrid.getBoundingClientRect();
-
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.classList.add('answer-overlay');
-        svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;';
-
         currentAnswers.forEach((answer, ai) => {
             const color = ANSWER_COLORS[ai % ANSWER_COLORS.length];
-            const positions = answer.positions;
-            if (!positions || positions.length === 0) return;
-
-            const firstCell = puzzleGrid.querySelector(`.puzzle-cell[data-row="${positions[0].row}"][data-col="${positions[0].col}"]`);
-            const lastCell  = puzzleGrid.querySelector(`.puzzle-cell[data-row="${positions[positions.length-1].row}"][data-col="${positions[positions.length-1].col}"]`);
-            if (!firstCell || !lastCell) return;
-
-            const fr = firstCell.getBoundingClientRect();
-            const lr = lastCell.getBoundingClientRect();
-
-            // Cell center points relative to grid container
-            const x1 = fr.left - gridRect.left + fr.width  / 2;
-            const y1 = fr.top  - gridRect.top  + fr.height / 2;
-            const x2 = lr.left - gridRect.left + lr.width  / 2;
-            const y2 = lr.top  - gridRect.top  + lr.height / 2;
-
-            const dx = x2 - x1;
-            const dy = y2 - y1;
-            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-            const cx = (x1 + x2) / 2;
-            const cy = (y1 + y2) / 2;
-
-            // rx spans from center to last cell center + half a cell
-            const cellHalf = fr.width / 2;
-            const rx = Math.sqrt(dx*dx + dy*dy) / 2 + cellHalf * 0.85;
-            const ry = fr.height * 0.62;
-
-            const ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
-            ellipse.setAttribute('cx', cx);
-            ellipse.setAttribute('cy', cy);
-            ellipse.setAttribute('rx', rx);
-            ellipse.setAttribute('ry', ry);
-            ellipse.setAttribute('fill', 'none');
-            ellipse.setAttribute('stroke', color);
-            ellipse.setAttribute('stroke-width', '2.5');
-            ellipse.setAttribute('transform', `rotate(${angle},${cx},${cy})`);
-            svg.appendChild(ellipse);
-        });
-
-        puzzleGrid.appendChild(svg);
-
-        // Color the word list items
-        document.querySelectorAll('.word-list li').forEach((li, wi) => {
-            li.style.color = ANSWER_COLORS[wi % ANSWER_COLORS.length];
-            li.style.fontWeight = 'bold';
+            answer.positions.forEach(pos => {
+                const cell = puzzleGrid.querySelector(`.puzzle-cell[data-row="${pos.row}"][data-col="${pos.col}"]`);
+                if (cell) {
+                    cell.style.background = color;
+                    cell.style.color = '#fff';
+                    cell.style.fontWeight = 'bold';
+                }
+            });
         });
     }
 
     function hideAnswers() {
-        const puzzleGrid = document.querySelector('.puzzle-grid');
-        if (puzzleGrid) {
-            const overlay = puzzleGrid.querySelector('.answer-overlay');
-            if (overlay) overlay.remove();
-        }
-        document.querySelectorAll('.puzzle-cell.answer-highlight').forEach(cell => {
+        document.querySelectorAll('.puzzle-cell').forEach(cell => {
+            cell.style.background = '';
+            cell.style.color = '';
+            cell.style.fontWeight = '';
             cell.classList.remove('answer-highlight');
-        });
-        document.querySelectorAll('.word-list li').forEach(li => {
-            li.style.color = '';
-            li.style.fontWeight = '';
         });
     }
 
