@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
         expert: 60   // Remove 60 cells
     };
 
+    // Pages input
+    const numPagesInput = document.getElementById('num-pages');
+
     // Event Listeners
     generateBtn.addEventListener('click', () => {
         if (savedSolution) {
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     randomGenerateBtn.addEventListener('click', generateSudoku); // Always generate new puzzle
-    printBtn.addEventListener('click', () => window.print());
+    printBtn.addEventListener('click', printWorksheet);
     showTitle.addEventListener('change', updatePreview);
     worksheetTitle.addEventListener('input', updatePreview);
     
@@ -254,6 +257,89 @@ document.addEventListener('DOMContentLoaded', function() {
 
         puzzlePreview.innerHTML = html;
         printBtn.disabled = false;
+    }
+
+    // Build HTML for one sudoku page (puzzle or solution)
+    function buildSudokuPageHTML(puzzle, solution, showAnswers) {
+        const title = worksheetTitle.value.trim() || 'Sudoku Puzzle';
+        let html = '';
+
+        html += '<div class="student-header">';
+        html += '<div class="header-left"><div class="puzzle-header">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '</div></div>';
+        html += '<div class="info-group">';
+        html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
+        html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
+        html += '</div></div>';
+
+        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
+
+        html += '<div class="sudoku-grid">';
+        const grid = showAnswers ? solution : puzzle;
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                const value = grid[row][col];
+                const isGiven = puzzle[row][col] !== 0;
+                const isAnswer = showAnswers && !isGiven && value !== 0;
+                let cellClass = 'sudoku-cell';
+                if (isGiven) cellClass += ' given';
+                else if (isAnswer) cellClass += ' answer';
+                else cellClass += ' empty';
+                html += `<div class="${cellClass}">${value !== 0 ? value : ''}</div>`;
+            }
+        }
+        html += '</div>';
+
+        const currentYear = new Date().getFullYear();
+        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
+
+        return html;
+    }
+
+    // Generate a fresh puzzle object (solution + puzzle with holes)
+    function generateFreshPuzzle() {
+        const solution = generateCompleteSudoku();
+        const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+        const cellsToRemove = difficultyLevels[difficulty];
+
+        const puzzle = solution.map(row => [...row]);
+        const positions = Array.from({ length: 81 }, (_, i) => i);
+        shuffleArray(positions);
+        for (let i = 0; i < cellsToRemove; i++) {
+            const pos = positions[i];
+            puzzle[Math.floor(pos / 9)][pos % 9] = 0;
+        }
+        return { puzzle, solution };
+    }
+
+    // Print: page 1 = current preview, pages 2..N = new random puzzles
+    function printWorksheet() {
+        if (!currentPuzzle) { window.print(); return; }
+
+        const numPages = Math.max(1, parseInt(numPagesInput.value) || 1);
+        if (numPages === 1) { window.print(); return; }
+
+        // Build extra pages (page 1 already comes from #puzzle-preview)
+        const printPages = document.createElement('div');
+        printPages.id = 'sudoku-print-pages';
+
+        for (let p = 1; p < numPages; p++) {
+            const { puzzle, solution } = generateFreshPuzzle();
+            const page = document.createElement('div');
+            page.className = 'sudoku-print-page';
+            page.innerHTML = buildSudokuPageHTML(puzzle, solution, showingAnswers);
+            printPages.appendChild(page);
+        }
+
+        document.body.appendChild(printPages);
+
+        const cleanup = () => {
+            printPages.remove();
+            window.removeEventListener('afterprint', cleanup);
+        };
+        window.addEventListener('afterprint', cleanup);
+        window.print();
     }
 
     // Display empty preview

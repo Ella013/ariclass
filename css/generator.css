@@ -1667,6 +1667,26 @@ body {
     width: 100%;
 }
 
+/* Sudoku multi-page print */
+#sudoku-print-pages {
+    display: none;
+}
+
+@media print {
+    #sudoku-print-pages {
+        display: block;
+    }
+
+    .sudoku-print-page {
+        break-before: page;
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm;
+        box-sizing: border-box;
+        background: white;
+    }
+}
+
 /* Word count display */
 #word-count-display {
     margin-top: 6px;

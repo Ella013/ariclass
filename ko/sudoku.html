@@ -118,6 +118,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="option-group" style="margin-top:12px;">
+                    <label style="display:inline-flex;align-items:center;gap:6px;">
+                        페이지 수:
+                        <input type="number" id="num-pages" min="1" max="10" value="1" style="width:80px;padding:0.4rem;margin-left:0.5rem;border:1px solid var(--border-color);border-radius:4px;">
+                        <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">페이지마다 새로운 랜덤 스도쿠가 생성됩니다.</span></span>
+                    </label>
+                </div>
+
                 <div class="button-container">
                     <button class="generate-btn" id="random-generate-btn"><i class="fas fa-random"></i> 랜덤 생성</button>
                     <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> 퍼즐 만들기</button>
