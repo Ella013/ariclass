@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let html = '';
         html += '<div class="student-header">';
         html += '<div class="header-left"><div class="puzzle-header">';
-        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div></div>';
         html += '<div class="info-group">';
         html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let html = '';
         html += '<div class="student-header">';
         html += '<div class="header-left"><div class="puzzle-header">';
-        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div></div>';
         html += '<div class="info-group">';
         html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';

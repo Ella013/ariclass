@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="student-header">';
         html += '<div class="header-left">';
         html += '<div class="puzzle-header">';
-        html += '<img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '<img src="/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
         html += '</div>';
         html += '</div>';
         html += '<div class="info-group">';
