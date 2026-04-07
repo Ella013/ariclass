@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="다양한 크기와 난이도의 미로 퍼즐을 무료로 생성하세요. 아이들과 수업에 딱 맞는 문제 해결 활동입니다.">
+    <title>무료 미로 퍼즐 생성기 - 아리클래스</title>
+    <link rel="canonical" href="https://ariclass.com/ko/maze.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/maze.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/maze.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+        <link rel="stylesheet" href="../css/maze.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select">
+                <select id="language-selector">
+                    <option value="en">English</option>
+                    <option value="ko" selected>한국어</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">아리클래스 : 학습지 생성기</p>
+                    <p>교사와 학생에게 맞춤 학습지를 제공합니다</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">홈</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">학습지</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">단어 찾기</a></li>
+                            <li><a href="unscramble.html">문장 배열</a></li>
+                            <li><a href="crossword.html">십자말풀이</a></li>
+                            <li><a href="matching-lists.html">단어 연결</a></li>
+                            <li><a href="bingo.html">빙고 게임</a></li>
+                            <li><a href="sudoku.html">스도쿠</a></li>
+                            <li><a href="maze.html">미로 퍼즐</a></li>
+                            <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                            <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                            <li><a href="clock.html">시계 읽기</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">사용 방법</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">홈</a>
+        <a href="word-search.html">단어 찾기</a>
+        <a href="unscramble.html">문장 배열</a>
+        <a href="crossword.html">십자말풀이</a>
+        <a href="matching-lists.html">단어 연결</a>
+        <a href="bingo.html">빙고 게임</a>
+        <a href="sudoku.html">스도쿠</a>
+        <a href="maze.html">미로 퍼즐</a>
+        <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+        <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+        <a href="clock.html">시계 읽기</a>
+        <a href="how-to-use.html">사용 방법</a>
+    </nav>
+    </header>
+
+
+    <div class="generator-container">
+        <h1>미로 퍼즐</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>학습지 제목</h2>
+                    <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요" value="Maze Puzzle">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> 학습지 제목 보이기</label>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <h2>난이도</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="diff-easy" name="difficulty" value="easy">
+                                <label for="diff-easy">쉬움</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-medium" name="difficulty" value="medium" checked>
+                                <label for="diff-medium">보통</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-hard" name="difficulty" value="hard">
+                                <label for="diff-hard">어려움</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>미로 유형</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="type-grid" name="maze-type" value="grid" checked>
+                                <label for="type-grid">격자형</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn"><i class="fas fa-random"></i> 랜덤 생성</button>
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> 퍼즐 만들기</button>
+                </div>
+            </div>
+            <div class="preview-section">
+                <div class="preview-label">미리보기</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> 출력하기</button>
+                        <button id="answer-btn" class="answer-btn"><i class="fas fa-check-circle"></i> 정답 보기</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+        <div class="description-section">
+            <h2>미로 퍼즐 만들기</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>만드는 방법</h3>
+                    <ol>
+                        <li>학습지 제목을 입력하세요</li>
+                        <li>난이도를 선택하세요 (쉬움 10x10, 보통 15x15, 어려움 20x20)</li>
+                        <li>"퍼즐 만들기" 버튼을 클릭하세요</li>
+                        <li>"정답 보기"로 빨간색 경로를 확인하세요</li>
+                        <li>출력 버튼으로 학습지를 인쇄하세요</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>교육적 효과</h3>
+                    <ul>
+                        <li>문제 해결 및 비판적 사고력 향상</li>
+                        <li>공간 감각 및 시각적 인식 향상</li>
+                        <li>인내심 및 집중력 개발</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>선생님 팁</h3>
+                    <ul>
+                        <li>어린 학생은 쉬움(10x10)부터 시작하세요</li>
+                        <li>대부분의 학생에게는 보통(15x15)을 사용하세요</li>
+                        <li>워밍업 또는 문제 해결 활동으로 활용하세요</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/maze.js"></script>
+
+<footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>아리클래스는 교사와 학생을 위한 무료 학습지 생성 사이트입니다.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>바로가기</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="word-search.html">단어 찾기</a></li>
+                    <li><a href="unscramble.html">문장 배열</a></li>
+                    <li><a href="crossword.html">십자말풀이</a></li>
+                    <li><a href="matching-lists.html">단어 연결</a></li>
+                    <li><a href="bingo.html">빙고 게임</a></li>
+                    <li><a href="sudoku.html">스도쿠</a></li>
+                    <li><a href="maze.html">미로 퍼즐</a></li>
+                    <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                    <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                    <li><a href="clock.html">시계 읽기</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>정보</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
+                    <li><a href="../terms-of-use.html">이용약관</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>문의</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+        document.getElementById('language-selector').addEventListener('change', function() {
+            if (this.value === 'en') {
+                window.location.href = '../maze.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -91,7 +91,56 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-
+    <url>
+        <loc>https://ariclass.com/ko/word-search.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/unscramble.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/crossword.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/matching-lists.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/bingo.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/sudoku.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/maze.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/addition-subtraction.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/multiplication-table.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://ariclass.com/ko/clock.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
     <url>
         <loc>https://ariclass.com/ko/how-to-use.html</loc>
         <changefreq>monthly</changefreq>

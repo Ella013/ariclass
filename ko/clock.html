@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="아날로그 시계 읽기 및 시침 그리기 학습지를 무료로 만들어보세요. 초등학생 시간 개념 학습에 딱입니다.">
+    <title>무료 시계 읽기 학습지 생성기 - 아리클래스</title>
+    <link rel="canonical" href="https://ariclass.com/ko/clock.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/clock.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/clock.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+        <link rel="stylesheet" href="../css/clock.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select">
+                <select id="language-selector">
+                    <option value="en">English</option>
+                    <option value="ko" selected>한국어</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">아리클래스 : 학습지 생성기</p>
+                    <p>교사와 학생에게 맞춤 학습지를 제공합니다</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">홈</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">학습지</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">단어 찾기</a></li>
+                            <li><a href="unscramble.html">문장 배열</a></li>
+                            <li><a href="crossword.html">십자말풀이</a></li>
+                            <li><a href="matching-lists.html">단어 연결</a></li>
+                            <li><a href="bingo.html">빙고 게임</a></li>
+                            <li><a href="sudoku.html">스도쿠</a></li>
+                            <li><a href="maze.html">미로 퍼즐</a></li>
+                            <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                            <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                            <li><a href="clock.html">시계 읽기</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">사용 방법</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">홈</a>
+        <a href="word-search.html">단어 찾기</a>
+        <a href="unscramble.html">문장 배열</a>
+        <a href="crossword.html">십자말풀이</a>
+        <a href="matching-lists.html">단어 연결</a>
+        <a href="bingo.html">빙고 게임</a>
+        <a href="sudoku.html">스도쿠</a>
+        <a href="maze.html">미로 퍼즐</a>
+        <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+        <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+        <a href="clock.html">시계 읽기</a>
+        <a href="how-to-use.html">사용 방법</a>
+    </nav>
+    </header>
+
+
+    <div class="generator-container">
+        <h1>시계 읽기</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>학습지 제목</h2>
+                    <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요" value="Telling Time">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> 제목 보이기</label>
+                    </div>
+                </div>
+                <div class="options clock-options">
+                    <div class="option-group">
+                        <h2 style="text-align:center">모드</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="mode-read" name="clock-mode" value="read" checked>
+                                <label for="mode-read">몇 시일까요?</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="mode-draw" name="clock-mode" value="draw">
+                                <label for="mode-draw">시침 그리기</label>
+                                <label style="display:flex;align-items:center;gap:0.2rem;margin-left:0.6rem;font-size:0.8rem;color:#888;cursor:pointer;">
+                                    <input type="checkbox" id="hide-time-label"><s>12:00</s>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group" id="color-option-group">
+                        <h2 style="text-align:center">시침 색상</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="color-bw" name="clock-color" value="bw">
+                                <label for="color-bw">흑백</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="color-color" name="clock-color" value="color" checked>
+                                <label for="color-color">컬러</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2 style="text-align:center">시간 단위</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="interval-hour" name="clock-interval" value="hour">
+                                <label for="interval-hour">1시간</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="interval-half" name="clock-interval" value="half">
+                                <label for="interval-half">30분</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="interval-quarter" name="clock-interval" value="quarter" checked>
+                                <label for="interval-quarter">15분</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="interval-five" name="clock-interval" value="five">
+                                <label for="interval-five">5분</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2 style="text-align:center">시계 개수</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="count-1" name="clock-count" value="1">
+                                <label for="count-1">1</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="count-6" name="clock-count" value="6">
+                                <label for="count-6">6</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="count-9" name="clock-count" value="9">
+                                <label for="count-9">9</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="count-12" name="clock-count" value="12" checked>
+                                <label for="count-12">12</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group" style="display: flex; justify-content: center; border-top: 1px solid #e0e0e0; padding-top: 1rem;">
+                        <label>
+                            페이지 수:
+                            <input type="number" id="num-pages" min="1" max="10" value="1" style="width: 80px; padding: 0.4rem; margin-left: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px;">
+                            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">각 페이지마다 새로운 랜덤 문제가 생성됩니다.</span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> 생성하기</button>
+                </div>
+            </div>
+            <div class="preview-section">
+                <div class="preview-label">미리보기</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> 출력하기</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+        <div class="description-section">
+            <h2>시계 읽기 학습지 만들기</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>만드는 방법</h3>
+                    <ol>
+                        <li>모드를 선택하세요: 시간 읽기 또는 시침 그리기</li>
+                        <li>시간 단위를 선택하세요 (1시간, 30분, 15분, 5분)</li>
+                        <li>페이지당 시계 개수를 설정하세요</li>
+                        <li>"생성하기" 버튼을 클릭하세요</li>
+                        <li>출력 버튼으로 학습지를 인쇄하세요</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>교육적 효과</h3>
+                    <ul>
+                        <li>아날로그 시계 읽기 능력 향상</li>
+                        <li>수 감각 및 시간 개념 강화</li>
+                        <li>읽기와 쓰기 두 가지 모드 제공</li>
+                        <li>시간 단위별 난이도 조절 가능</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>선생님 팁</h3>
+                    <ul>
+                        <li>초보자는 "1시간" 단위부터 시작하세요</li>
+                        <li>5분 단위로 고급 학생에게 도전을 제공하세요</li>
+                        <li>시침 그리기 모드로 실기 연습을 해보세요</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/clock.js"></script>
+
+<footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>아리클래스는 교사와 학생을 위한 무료 학습지 생성 사이트입니다.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>바로가기</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="word-search.html">단어 찾기</a></li>
+                    <li><a href="unscramble.html">문장 배열</a></li>
+                    <li><a href="crossword.html">십자말풀이</a></li>
+                    <li><a href="matching-lists.html">단어 연결</a></li>
+                    <li><a href="bingo.html">빙고 게임</a></li>
+                    <li><a href="sudoku.html">스도쿠</a></li>
+                    <li><a href="maze.html">미로 퍼즐</a></li>
+                    <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                    <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                    <li><a href="clock.html">시계 읽기</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>정보</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
+                    <li><a href="../terms-of-use.html">이용약관</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>문의</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+        document.getElementById('language-selector').addEventListener('change', function() {
+            if (this.value === 'en') {
+                window.location.href = '../clock.html';
+            }
+        });
+    </script>
+</body>
+</html>
