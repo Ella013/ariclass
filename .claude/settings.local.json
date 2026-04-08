@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ':*)",
+      "Bash(python -c ':*)",
+      "Bash(sed -n '143,150p' \"c:/web Ella2025/ariclass/js/clock.js\")",
+      "Bash(sed -n '186,192p' \"c:/web Ella2025/ariclass/js/clock.js\")",
+      "Bash(sed -n '222,228p' \"c:/web Ella2025/ariclass/js/sudoku.js\")",
+      "Bash(sed -n '283,289p' \"c:/web Ella2025/ariclass/js/sudoku.js\")",
+      "Bash(sed -n '60,66p' \"c:/web Ella2025/ariclass/js/crossword.js\")",
+      "Bash(sed -n '264,270p' \"c:/web Ella2025/ariclass/js/crossword.js\")",
+      "Bash(sed -n '412,418p' \"c:/web Ella2025/ariclass/js/crossword.js\")",
+      "Bash(sed -n '479,485p' \"c:/web Ella2025/ariclass/js/crossword.js\")",
+      "Bash(sed -n '243,270p' \"c:/web Ella2025/ariclass/js/maze.js\")",
+      "Bash(sed -n '327,346p' \"c:/web Ella2025/ariclass/js/maze.js\")",
+      "Bash(grep -l \"problem-number\\\\|sentence-number\\\\|question-number\\\\|index + 1\\\\|\\(i + 1\\)\\\\|num + 1\" \"c:/web Ella2025/ariclass/js/\"*.js)",
+      "Bash(grep -n \"num-pages\\\\|numPages\\\\|numPagesInput\" \"c:/web Ella2025/ariclass/js/\"*.js)",
+      "Bash(grep -l \"top-menu\\\\|nav-links\" \"c:/web Ella2025/ariclass/\"*.html \"c:/web Ella2025/ariclass/ko/\"*.html)",
+      "Bash(python3 -)",
+      "Bash(python -)",
+      "Bash(grep -l \"Worksheets\" \"c:/web Ella2025/ariclass/\"*.html)"
+    ]
+  }
+}
