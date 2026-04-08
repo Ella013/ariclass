@@ -152,6 +152,7 @@
         box-sizing: border-box;
         page-break-after: always;
         background: white;
+        position: relative;
     }
 
     #print-pages .print-page:last-child {
