@@ -334,6 +334,11 @@ body {
     border-color: #e07b2a;
 }
 
+.puzzle-section-header {
+    color: #7b5ea7;
+    border-color: #7b5ea7;
+}
+
 .worksheet-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
