@@ -289,32 +289,64 @@ document.addEventListener('DOMContentLoaded', function() {
         const numPages = Math.max(1, parseInt(numPagesInput.value) || 1);
         const showTitle = showTitleCheckbox.checked;
         const title = worksheetTitle.value || 'Addition & Subtraction';
+        const level = parseInt(document.querySelector('input[name="level"]:checked').value);
+        const operation = document.querySelector('input[name="operation"]:checked').value;
 
-        // Build print-only pages (A4) without changing preview
         const printPages = document.createElement('div');
         printPages.id = 'print-pages';
 
         for (let p = 0; p < numPages; p++) {
+            let pageHtml;
+            if (p === 0) {
+                // Page 1: same problems as preview
+                pageHtml = buildPageHTML(showTitle, title, 0);
+            } else {
+                // Pages 2+: generate fresh random problems
+                const freshProblems = [];
+                for (let i = 0; i < PROBLEMS_PER_PAGE; i++) {
+                    freshProblems.push(generateProblem(level, operation));
+                }
+                pageHtml = buildPageHTMLFromProblems(showTitle, title, freshProblems, p * PROBLEMS_PER_PAGE);
+            }
+
             const page = document.createElement('div');
             page.className = 'print-page';
             page.classList.toggle('answers-on', answerMode);
             page.classList.toggle('title-off', !showTitle);
-
-            // reuse same markup as preview page
-            const pageHtml = buildPageHTML(showTitle, title, p);
             page.innerHTML = pageHtml;
             printPages.appendChild(page);
         }
 
         document.body.appendChild(printPages);
 
-        // Print, then cleanup and restore preview-only view
         const cleanup = () => {
             printPages.remove();
             window.removeEventListener('afterprint', cleanup);
         };
         window.addEventListener('afterprint', cleanup);
         window.print();
+    }
+
+    // Build page HTML from an explicit problems array (for print pages 2+)
+    function buildPageHTMLFromProblems(showTitle, title, problems, startIndex) {
+        let html = '';
+        html += '<div class="student-header">';
+        html += '<div class="header-left"><div class="puzzle-header">';
+        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
+        html += '</div></div>';
+        html += '<div class="info-group">';
+        html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
+        html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
+        html += '</div></div>';
+        html += `<div class="puzzle-title title-slot">${title}</div>`;
+        html += '<div class="problems-grid">';
+        problems.forEach((prob, i) => {
+            html += renderProblemHTML(prob, startIndex + i, answerMode);
+        });
+        html += '</div>';
+        const currentYear = new Date().getFullYear();
+        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
+        return html;
     }
 
     function buildPageHTML(showTitle, title, pageIndex) {
