@@ -781,18 +781,20 @@ body {
         display: none !important;
     }
 
-    /* Copyright footer: flows after content, never overlaps word list */
-    #puzzle-preview {
-        position: relative !important;
-    }
-    #puzzle-preview .copyright-footer {
-        position: static !important;
+    /* Copyright footer: pinned to bottom of every print page */
+    #puzzle-preview .copyright-footer,
+    .extra-print-page .copyright-footer,
+    .sudoku-print-page .copyright-footer {
         display: block !important;
-        margin-top: 4mm !important;
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
         text-align: center !important;
         font-size: 8pt !important;
         color: #666 !important;
         padding: 0 !important;
+        margin: 0 !important;
     }
 
     .bingo-page {
@@ -1624,10 +1626,11 @@ body {
     .extra-print-page {
         break-before: page;
         width: 210mm;
-        min-height: 297mm;
+        height: 297mm;
         padding: 20mm;
         box-sizing: border-box;
         background: white;
+        position: relative;
     }
 
     .extra-print-page .student-header {
@@ -1680,10 +1683,11 @@ body {
     .sudoku-print-page {
         break-before: page;
         width: 210mm;
-        min-height: 297mm;
+        height: 297mm;
         padding: 20mm;
         box-sizing: border-box;
         background: white;
+        position: relative;
     }
 }
 

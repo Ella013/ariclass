@@ -156,8 +156,8 @@
     .copyright-footer {
         position: absolute !important;
         bottom: 5mm !important;
-        left: 0 !important;
-        right: 0 !important;
+        left: 20mm !important;
+        right: 20mm !important;
         text-align: center !important;
         font-size: 8pt !important;
         color: #666 !important;
