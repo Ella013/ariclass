@@ -302,13 +302,42 @@ body {
     font-size: 1.1rem;
 }
 
+.worksheet-section {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+}
+
+.worksheet-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.worksheet-section-header i {
+    font-size: 1.1rem;
+}
+
+.english-section-header {
+    color: #3a7bd5;
+    border-color: #3a7bd5;
+}
+
+.math-section-header {
+    color: #e07b2a;
+    border-color: #e07b2a;
+}
+
 .worksheet-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1.4rem;
-    padding: 0 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .worksheet-card {
@@ -516,6 +545,9 @@ footer {
     .worksheet-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+    .worksheet-section {
+        padding: 0 1.5rem;
+    }
 }
 
 /* Hamburger Button */
@@ -609,7 +641,10 @@ footer {
     .worksheet-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+    }
+    .worksheet-section {
         padding: 0 1rem;
+        margin-bottom: 2rem;
     }
 
     .worksheet-types {
@@ -637,6 +672,9 @@ footer {
 @media (max-width: 480px) {
     .worksheet-grid {
         grid-template-columns: 1fr;
+    }
+    .worksheet-section {
+        padding: 0 0.75rem;
     }
 
     .main-header {
