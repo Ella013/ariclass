@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize variables
     const vocabList = document.getElementById('vocab-list');
     const addWordBtn = document.getElementById('add-word-btn');
+    const resetWordsBtn = document.getElementById('reset-words-btn');
+    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => { vocabList.value = ''; vocabList.dispatchEvent(new Event('input')); });
     const generateBtn = document.getElementById('generate-btn');
     const randomGenerateBtn = document.getElementById('random-generate-btn');
     const printBtn = document.getElementById('print-btn');

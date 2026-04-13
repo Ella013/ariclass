@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const wordInput = document.getElementById('wordInput');
+    const resetWordsBtn = document.getElementById('reset-words-btn');
+    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => { wordInput.value = ''; wordInput.dispatchEvent(new Event('input')); });
     const randomGenerateBtn = document.getElementById('random-generate-btn');
     const boardSizeRadios = document.querySelectorAll('input[name="board-size"]');
     const generateBtn = document.getElementById('generate-btn');

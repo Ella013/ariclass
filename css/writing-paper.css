@@ -1,0 +1,134 @@
+/* ── English Writing Lines (4-line system) ── */
+
+/* Override puzzle-preview padding to 15mm */
+#puzzle-preview {
+    padding: 15mm !important;
+}
+
+#puzzle-preview.ns-fullpage {
+    padding: 0 !important;
+}
+
+/* Screen only: copyright footer is hidden so give that 5mm back to content */
+.ns-one-wrap { height: 267mm; }
+
+/*
+  4 lines per group:
+  line 1 (top border)    — solid gray   — ascender
+  line 2 (::before)      — dashed gray  — x-height
+  line 3 (::after)       — solid red    — baseline
+  line 4 (bottom border) — solid gray   — descender
+*/
+.wp-line-group {
+    position: relative;
+    flex-shrink: 0;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    height: 12mm;
+}
+
+/* Line 2: dashed at 33% */
+.wp-line-group::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 33.33%;
+    border-top: 1px dashed #bbb;
+}
+
+/* Line 3: accent baseline at 67% — color set by theme class */
+.wp-line-group::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 66.66%;
+    border-top: 1px solid #e05a5a; /* default: red */
+}
+
+/* ── Color themes ── */
+/* Black & White: accent line same as others */
+.wp-color-bw .wp-line-group::after  { border-top-color: #999; }
+
+/* Red (default) */
+.wp-color-red .wp-line-group::after { border-top-color: #e05a5a; }
+
+/* Blue */
+.wp-color-blue .wp-line-group::after { border-top-color: #3a7bd5; }
+
+
+/* ── Gap between line groups ── */
+#puzzle-preview.wp-narrow .ns-lines { row-gap: 6mm; }
+#puzzle-preview.wp-normal .ns-lines { row-gap: 9mm; }
+#puzzle-preview.wp-wide   .ns-lines { row-gap: 12mm; }
+
+/* ── Header → lines gap (1-per-page only) ── */
+.ns-one-wrap .ns-lines { margin-top: 4mm; }
+
+/* ── 2-per-page wide: tighten gap so 4 groups fit ── */
+#puzzle-preview.wp-wide .ns-half .ns-lines { row-gap: 8mm; }
+
+/* ── Spacing variants ── */
+.wp-narrow .wp-line-group { height: 9mm; }
+.wp-normal .wp-line-group { height: 13mm; }
+.wp-wide   .wp-line-group { height: 18mm; }
+
+/* 4-per-page cells: smaller */
+.ns-cell4 .wp-line-group { height: 9mm; }
+.wp-narrow .ns-cell4 .wp-line-group { height: 7mm; }
+.wp-wide   .ns-cell4 .wp-line-group { height: 13mm; }
+
+/* ── Print ── */
+@media print {
+    #puzzle-preview {
+        padding: 15mm !important;
+    }
+
+    #puzzle-preview.ns-fullpage {
+        padding: 0 !important;
+    }
+
+    #puzzle-preview.ns-fullpage .copyright-footer {
+        display: none !important;
+    }
+
+    .wp-line-group {
+        position: relative !important;
+        flex-shrink: 0 !important;
+        border-top: 1px solid #999 !important;
+        border-bottom: 1px solid #999 !important;
+    }
+
+    .wp-line-group::before {
+        content: '' !important;
+        position: absolute !important;
+        left: 0 !important; right: 0 !important;
+        top: 33.33% !important;
+        border-top: 1px dashed #bbb !important;
+    }
+
+    .wp-line-group::after {
+        content: '' !important;
+        position: absolute !important;
+        left: 0 !important; right: 0 !important;
+        top: 66.66% !important;
+        border-top: 1px solid #e05a5a !important;
+    }
+
+    .wp-color-bw   .wp-line-group::after { border-top-color: #999 !important; }
+    .wp-color-red  .wp-line-group::after { border-top-color: #e05a5a !important; }
+    .wp-color-blue .wp-line-group::after { border-top-color: #3a7bd5 !important; }
+
+    #puzzle-preview.wp-narrow .ns-lines { row-gap: 6mm !important; }
+    #puzzle-preview.wp-normal .ns-lines { row-gap: 9mm !important; }
+    #puzzle-preview.wp-wide   .ns-lines { row-gap: 12mm !important; }
+
+    .wp-narrow .wp-line-group { height: 9mm !important; }
+    .wp-normal .wp-line-group { height: 13mm !important; }
+    .wp-wide   .wp-line-group { height: 18mm !important; }
+
+    .ns-cell4 .wp-line-group { height: 9mm !important; }
+    .wp-narrow .ns-cell4 .wp-line-group { height: 7mm !important; }
+    .wp-wide   .ns-cell4 .wp-line-group { height: 13mm !important; }
+}

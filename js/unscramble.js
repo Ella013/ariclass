@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize variables
     const sentenceList = document.getElementById('sentence-list');
+    const resetWordsBtn = document.getElementById('reset-words-btn');
+    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => { sentenceList.value = ''; sentenceList.dispatchEvent(new Event('input')); });
     const generateBtn = document.getElementById('generate-btn');
     const randomGenerateBtn = document.getElementById('random-generate-btn');
     const printBtn = document.getElementById('print-btn');

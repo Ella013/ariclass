@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create free printable bingo cards with custom words for classroom games. Choose board size and generate multiple unique cards instantly.">
-    <title>Free Bingo Card Generator for Teachers - AriClass</title>
-    <!-- Favicon -->
+    <meta name="description" content="Free printable note sheets for teachers and students. Choose 1, 2, or 4 per page layout — ready to print in seconds.">
+    <title>Free Note Sheet Generator - AriClass</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
-    <link rel="stylesheet" href="css/bingo.css">
+    <link rel="stylesheet" href="css/vocab-test.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
@@ -45,6 +43,7 @@
                     <h1>AriClass Worksheet Generator</h1>
                     <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
                 </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
             </div>
         </div>
         <nav class="top-menu">
@@ -80,116 +79,100 @@
                 </ul>
             </div>
         </nav>
-    
-    <!-- Mobile Nav Drawer -->
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="index.html">Home</a>
-        <a href="word-search.html">Word Search</a>
-        <a href="unscramble.html">Unscramble</a>
-        <a href="crossword.html">Crossword Puzzle</a>
-        <a href="matching-lists.html">Matching Lists</a>
-        <a href="bingo.html">Bingo Game</a>
-        <a href="sudoku.html">Sudoku</a>
-        <a href="maze.html">Maze Puzzle</a>
-        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
-        <a href="how-to-use.html">How to Use</a>
-    </nav>
+
+        <!-- Mobile Nav Drawer -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="word-search.html">Word Search</a>
+            <a href="unscramble.html">Unscramble</a>
+            <a href="crossword.html">Crossword Puzzle</a>
+            <a href="matching-lists.html">Matching Lists</a>
+            <a href="bingo.html">Bingo Game</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Maze Puzzle</a>
+            <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+            <a href="multiplication-table.html">Multiplication Table</a>
+            <a href="clock.html">Telling Time</a>
+            <a href="vocab-test.html">Vocabulary Test</a>
+            <a href="how-to-use.html">How to Use</a>
+        </nav>
     </header>
 
     <div class="generator-container">
-        <h1>Bingo Game Generator</h1>
-        
+        <h1>Note Sheet</h1>
         <div class="generator-content">
+            <!-- Input Section -->
             <div class="input-section">
-                <div class="title-input">
-                    <h2>Worksheet Title</h2>
-                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Bingo Game">
-                    <div class="option-group">
-                        <label>
-                            <input type="checkbox" id="show-title" checked>
-                            Show Title
-                        </label>
-                    </div>
-                </div>
-
-                <div class="word-input">
-                    <div class="section-header">
-                        <h2>Enter Words</h2>
-                        <button id="reset-words-btn" class="reset-btn" title="Reset all words">
-                            <i class="fas fa-undo-alt"></i>
-                        </button>
-                    </div>
-                    <textarea id="wordInput" class="vocab-textarea" placeholder="Enter words (one per line)"></textarea>
-                    <button id="clearButton" class="clear-btn">
-                        <i class="fas fa-trash"></i>
-                        Clear
-                    </button>
-                </div>
-
+                <!-- Layout Option -->
                 <div class="options">
                     <div class="option-group">
-                        <h2>Board Size</h2>
+                        <h2>Layout <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">2 per page: Cut along the dashed line to separate into 2 sheets. 4 per page: Cut along the cross lines to separate into 4 sheets.</span></span></h2>
                         <div class="case-options">
                             <div class="case-option">
-                                <input type="radio" id="board-3" name="board-size" value="3">
-                                <label for="board-3">3 x 3</label>
+                                <input type="radio" id="layout-1" name="layout" value="1" checked>
+                                <label for="layout-1">1 per page</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="board-4" name="board-size" value="4" checked>
-                                <label for="board-4">4 x 4</label>
+                                <input type="radio" id="layout-2" name="layout" value="2">
+                                <label for="layout-2">2 per page</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="board-5" name="board-size" value="5">
-                                <label for="board-5">5 x 5</label>
+                                <input type="radio" id="layout-4" name="layout" value="4">
+                                <label for="layout-4">4 per page</label>
                             </div>
                         </div>
                     </div>
+
                     <div class="option-group">
-                        <h2>Font Size</h2>
+                        <h2>Line Style</h2>
                         <div class="case-options">
                             <div class="case-option">
-                                <input type="radio" id="font-small" name="font-size" value="small">
-                                <label for="font-small">Small</label>
+                                <input type="radio" id="style-solid" name="linestyle" value="solid" checked>
+                                <label for="style-solid">Solid</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="font-medium" name="font-size" value="medium" checked>
-                                <label for="font-medium">Medium</label>
+                                <input type="radio" id="style-dashed" name="linestyle" value="dashed">
+                                <label for="style-dashed">Dashed</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="font-large" name="font-size" value="large">
-                                <label for="font-large">Large</label>
+                                <input type="radio" id="style-bold" name="linestyle" value="bold">
+                                <label for="style-bold">Bold</label>
                             </div>
                         </div>
                     </div>
+
                     <div class="option-group">
-                        <h2>Number of Players <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Each player gets a unique bingo card. When you print, one page is generated per player.</span></span></h2>
-                        <div class="player-counter">
-                            <button id="decreasePlayer" type="button">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <span id="playerCount">2</span>
-                            <button id="increasePlayer" type="button">
-                                <i class="fas fa-plus"></i>
-                            </button>
+                        <h2>Line Spacing</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="spacing-narrow" name="spacing" value="narrow">
+                                <label for="spacing-narrow">Narrow</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="spacing-normal" name="spacing" value="normal" checked>
+                                <label for="spacing-normal">Normal</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="spacing-wide" name="spacing" value="wide">
+                                <label for="spacing-wide">Wide</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="random-generate-btn">
-                        <i class="fas fa-random"></i> Randomly generated
-                    </button>
-                    <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-magic"></i> Generate Bingo
+                    <button class="print-btn" id="print-btn">
+                        <i class="fas fa-print"></i> Print Worksheet
                     </button>
                 </div>
             </div>
 
+            <!-- Preview Section -->
             <div class="preview-section">
                 <div class="preview-label">Preview</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <button id="print-btn" class="print-btn">
+                        <button class="print-btn" id="print-btn-top">
                             <i class="fas fa-print"></i> Print Worksheet
                         </button>
                     </div>
@@ -199,85 +182,37 @@
         </div>
 
         <div class="description-section">
-            <h2>How to Create Your Bingo Game</h2>
+            <h2>How to Use Note Sheets</h2>
             <div class="description-content">
                 <div class="instruction-block">
-                    <h3>Simple Steps to Create</h3>
-                    <ol>
-                        <li>Enter a title for your worksheet</li>
-                        <li>Add vocabulary words or use random generation</li>
-                        <li>Choose the bingo board size (3x3, 4x4, or 5x5)</li>
-                        <li>Select the number of players (2-6)</li>
-                        <li>Click "Generate Bingo" to create your game</li>
-                        <li>Print your worksheet using the print button</li>
-                    </ol>
-                </div>
-                <div class="instruction-block">
-                    <h3>Educational Benefits</h3>
+                    <h3>1 Per Page</h3>
                     <ul>
-                        <li>Enhances vocabulary recognition</li>
-                        <li>Promotes active participation</li>
-                        <li>Perfect for group activities</li>
-                        <li>Improves reading skills</li>
-                        <li>Makes learning fun and engaging</li>
+                        <li>Full A4 portrait page with writing lines</li>
+                        <li>Includes Date and Name fields at the top</li>
+                        <li>Great for longer vocabulary lists or note-taking</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
-                    <h3>Tips for Teachers</h3>
+                    <h3>2 Per Page</h3>
                     <ul>
-                        <li>Use themed vocabulary sets</li>
-                        <li>Start with smaller boards for younger students</li>
-                        <li>Prepare enough words for larger boards</li>
-                        <li>Use as review activities</li>
-                        <li>Make multiple sets for different groups</li>
+                        <li>Two sheets on one A4 page (landscape halves)</li>
+                        <li>Cut along the dashed line to separate</li>
+                        <li>Great for shorter vocabulary lists (saves paper!)</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>4 Per Page</h3>
+                    <ul>
+                        <li>Four mini sheets in a 2×2 grid on one A4 page</li>
+                        <li>Cut out each cell separately</li>
+                        <li>Perfect for quick quizzes or small word lists</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/bingo.js"></script>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
-                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
-            </div>
-            
-            <nav class="footer-nav">
-                <h3>Quick Links</h3>
-                <ul class="footer-nav-list">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="word-search.html">Word Search</a></li>
-                    <li><a href="unscramble.html">Unscramble</a></li>
-                    <li><a href="crossword.html">Crossword Puzzle</a></li>
-                    <li><a href="bingo.html">Bingo Game</a></li>
-                    <li><a href="sudoku.html">Sudoku</a></li>
-                    <li><a href="maze.html">Maze Puzzle</a></li>
-                </ul>
-            </nav>
-
-            <nav class="footer-nav">
-                <h3>Information</h3>
-                <ul class="footer-nav-list">
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms-of-use.html">Terms of Use</a></li>
-                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="footer-contact">
-                <h3>Contact Us</h3>
-                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>© 2025 Ariclass. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <script src="js/vocab-test.js"></script>
     <script>
         (function() {
             var btn = document.getElementById('hamburgerBtn');
@@ -288,6 +223,42 @@
                 nav.classList.toggle('open');
             });
         })();
+
     </script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="word-search.html">Word Search</a></li>
+                    <li><a href="unscramble.html">Unscramble</a></li>
+                    <li><a href="vocab-test.html">Vocabulary Test</a></li>
+                    <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
-</html> 
+</html>

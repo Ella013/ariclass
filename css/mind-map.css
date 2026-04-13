@@ -1,0 +1,38 @@
+/* ── Mind Map ── */
+#puzzle-preview {
+    padding: 20mm !important;
+}
+
+/* SVG fills remaining space after header + title */
+.mm-svg {
+    display: block;
+    width: 100%;
+    flex: 1;
+}
+
+/* Lightbulb icon via Font Awesome */
+.mm-bulb {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 22px;
+    fill: #f0a500;
+}
+
+/* ── Print ── */
+@media print {
+    #puzzle-preview {
+        padding: 20mm !important;
+    }
+
+    .mm-svg {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .mm-bulb {
+        font-family: 'Font Awesome 6 Free' !important;
+        font-weight: 900 !important;
+        font-size: 22px !important;
+        fill: #f0a500 !important;
+    }
+}

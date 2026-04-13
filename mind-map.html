@@ -3,21 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create free printable bingo cards with custom words for classroom games. Choose board size and generate multiple unique cards instantly.">
-    <title>Free Bingo Card Generator for Teachers - AriClass</title>
-    <!-- Favicon -->
+    <meta name="description" content="Free printable mind map template with a lightbulb center. Great for brainstorming and visual thinking — ready to print in seconds.">
+    <title>Free Mind Map Template Generator - AriClass</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
-    <link rel="stylesheet" href="css/bingo.css">
+    <link rel="stylesheet" href="css/vocab-test.css">
+    <link rel="stylesheet" href="css/mind-map.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="utility-nav">
@@ -45,6 +39,7 @@
                     <h1>AriClass Worksheet Generator</h1>
                     <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
                 </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
             </div>
         </div>
         <nav class="top-menu">
@@ -80,107 +75,109 @@
                 </ul>
             </div>
         </nav>
-    
-    <!-- Mobile Nav Drawer -->
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="index.html">Home</a>
-        <a href="word-search.html">Word Search</a>
-        <a href="unscramble.html">Unscramble</a>
-        <a href="crossword.html">Crossword Puzzle</a>
-        <a href="matching-lists.html">Matching Lists</a>
-        <a href="bingo.html">Bingo Game</a>
-        <a href="sudoku.html">Sudoku</a>
-        <a href="maze.html">Maze Puzzle</a>
-        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
-        <a href="how-to-use.html">How to Use</a>
-    </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="word-search.html">Word Search</a>
+            <a href="unscramble.html">Unscramble</a>
+            <a href="crossword.html">Crossword Puzzle</a>
+            <a href="matching-lists.html">Matching Lists</a>
+            <a href="bingo.html">Bingo Game</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Maze Puzzle</a>
+            <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+            <a href="multiplication-table.html">Multiplication Table</a>
+            <a href="clock.html">Telling Time</a>
+            <a href="vocab-test.html">Note Sheet</a>
+            <a href="writing-paper.html">Writing Paper</a>
+            <a href="mind-map.html">Mind Map</a>
+            <a href="how-to-use.html">How to Use</a>
+        </nav>
     </header>
 
     <div class="generator-container">
-        <h1>Bingo Game Generator</h1>
-        
+        <h1>Mind Map</h1>
         <div class="generator-content">
             <div class="input-section">
                 <div class="title-input">
                     <h2>Worksheet Title</h2>
-                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Bingo Game">
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Mind Map">
                     <div class="option-group">
                         <label>
                             <input type="checkbox" id="show-title" checked>
-                            Show Title
+                            Show worksheet title
                         </label>
                     </div>
                 </div>
 
-                <div class="word-input">
-                    <div class="section-header">
-                        <h2>Enter Words</h2>
-                        <button id="reset-words-btn" class="reset-btn" title="Reset all words">
-                            <i class="fas fa-undo-alt"></i>
-                        </button>
-                    </div>
-                    <textarea id="wordInput" class="vocab-textarea" placeholder="Enter words (one per line)"></textarea>
-                    <button id="clearButton" class="clear-btn">
-                        <i class="fas fa-trash"></i>
-                        Clear
-                    </button>
-                </div>
-
                 <div class="options">
                     <div class="option-group">
-                        <h2>Board Size</h2>
+                        <h2>Center Shape</h2>
                         <div class="case-options">
                             <div class="case-option">
-                                <input type="radio" id="board-3" name="board-size" value="3">
-                                <label for="board-3">3 x 3</label>
+                                <input type="radio" id="shape-bulb" name="centershape" value="bulb" checked>
+                                <label for="shape-bulb">Lightbulb</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="board-4" name="board-size" value="4" checked>
-                                <label for="board-4">4 x 4</label>
+                                <input type="radio" id="shape-rect" name="centershape" value="rect">
+                                <label for="shape-rect">Rounded Box</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="board-5" name="board-size" value="5">
-                                <label for="board-5">5 x 5</label>
+                                <input type="radio" id="shape-circle" name="centershape" value="circle">
+                                <label for="shape-circle">Circle</label>
                             </div>
                         </div>
                     </div>
                     <div class="option-group">
-                        <h2>Font Size</h2>
+                        <h2>Center Size</h2>
                         <div class="case-options">
                             <div class="case-option">
-                                <input type="radio" id="font-small" name="font-size" value="small">
-                                <label for="font-small">Small</label>
+                                <input type="radio" id="sz-small" name="centersize" value="small">
+                                <label for="sz-small">Small</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="font-medium" name="font-size" value="medium" checked>
-                                <label for="font-medium">Medium</label>
+                                <input type="radio" id="sz-medium" name="centersize" value="medium" checked>
+                                <label for="sz-medium">Medium</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="font-large" name="font-size" value="large">
-                                <label for="font-large">Large</label>
+                                <input type="radio" id="sz-large" name="centersize" value="large">
+                                <label for="sz-large">Large</label>
                             </div>
                         </div>
                     </div>
                     <div class="option-group">
-                        <h2>Number of Players <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Each player gets a unique bingo card. When you print, one page is generated per player.</span></span></h2>
-                        <div class="player-counter">
-                            <button id="decreasePlayer" type="button">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <span id="playerCount">2</span>
-                            <button id="increasePlayer" type="button">
-                                <i class="fas fa-plus"></i>
-                            </button>
+                        <h2>Line Color</h2>
+                        <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+                            <div style="display:flex; gap:8px">
+                                <div class="case-option">
+                                    <input type="radio" id="col-gray" name="centercolor" value="gray" checked>
+                                    <label for="col-gray"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#bbb;vertical-align:middle;margin-right:4px"></span>Gray</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="col-black" name="centercolor" value="black">
+                                    <label for="col-black"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#333;vertical-align:middle;margin-right:4px"></span>Black</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="col-blue" name="centercolor" value="blue">
+                                    <label for="col-blue"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#6aaee0;vertical-align:middle;margin-right:4px"></span>Blue</label>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:8px">
+                                <div class="case-option">
+                                    <input type="radio" id="col-green" name="centercolor" value="green">
+                                    <label for="col-green"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#72c49a;vertical-align:middle;margin-right:4px"></span>Green</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="col-red" name="centercolor" value="red">
+                                    <label for="col-red"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#e05a5a;vertical-align:middle;margin-right:4px"></span>Red</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="random-generate-btn">
-                        <i class="fas fa-random"></i> Randomly generated
-                    </button>
-                    <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-magic"></i> Generate Bingo
+                    <button class="print-btn" id="print-btn">
+                        <i class="fas fa-print"></i> Print Worksheet
                     </button>
                 </div>
             </div>
@@ -189,7 +186,7 @@
                 <div class="preview-label">Preview</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <button id="print-btn" class="print-btn">
+                        <button class="print-btn" id="print-btn-top">
                             <i class="fas fa-print"></i> Print Worksheet
                         </button>
                     </div>
@@ -199,85 +196,37 @@
         </div>
 
         <div class="description-section">
-            <h2>How to Create Your Bingo Game</h2>
+            <h2>How to Use Mind Map</h2>
             <div class="description-content">
                 <div class="instruction-block">
-                    <h3>Simple Steps to Create</h3>
-                    <ol>
-                        <li>Enter a title for your worksheet</li>
-                        <li>Add vocabulary words or use random generation</li>
-                        <li>Choose the bingo board size (3x3, 4x4, or 5x5)</li>
-                        <li>Select the number of players (2-6)</li>
-                        <li>Click "Generate Bingo" to create your game</li>
-                        <li>Print your worksheet using the print button</li>
-                    </ol>
-                </div>
-                <div class="instruction-block">
-                    <h3>Educational Benefits</h3>
+                    <h3>4 Branches</h3>
                     <ul>
-                        <li>Enhances vocabulary recognition</li>
-                        <li>Promotes active participation</li>
-                        <li>Perfect for group activities</li>
-                        <li>Improves reading skills</li>
-                        <li>Makes learning fun and engaging</li>
+                        <li>4 main topic areas</li>
+                        <li>Great for simple categorization</li>
+                        <li>More space per branch for writing</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
-                    <h3>Tips for Teachers</h3>
+                    <h3>6 Branches</h3>
                     <ul>
-                        <li>Use themed vocabulary sets</li>
-                        <li>Start with smaller boards for younger students</li>
-                        <li>Prepare enough words for larger boards</li>
-                        <li>Use as review activities</li>
-                        <li>Make multiple sets for different groups</li>
+                        <li>6 main topic areas</li>
+                        <li>Perfect for most brainstorming tasks</li>
+                        <li>Balanced layout around the center</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>8 Branches</h3>
+                    <ul>
+                        <li>8 main topic areas</li>
+                        <li>Best for detailed mind mapping</li>
+                        <li>Great for complex topics</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/bingo.js"></script>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
-                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
-            </div>
-            
-            <nav class="footer-nav">
-                <h3>Quick Links</h3>
-                <ul class="footer-nav-list">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="word-search.html">Word Search</a></li>
-                    <li><a href="unscramble.html">Unscramble</a></li>
-                    <li><a href="crossword.html">Crossword Puzzle</a></li>
-                    <li><a href="bingo.html">Bingo Game</a></li>
-                    <li><a href="sudoku.html">Sudoku</a></li>
-                    <li><a href="maze.html">Maze Puzzle</a></li>
-                </ul>
-            </nav>
-
-            <nav class="footer-nav">
-                <h3>Information</h3>
-                <ul class="footer-nav-list">
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms-of-use.html">Terms of Use</a></li>
-                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="footer-contact">
-                <h3>Contact Us</h3>
-                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>© 2025 Ariclass. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <script src="js/mind-map.js"></script>
     <script>
         (function() {
             var btn = document.getElementById('hamburgerBtn');
@@ -289,5 +238,40 @@
             });
         })();
     </script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="word-search.html">Word Search</a></li>
+                    <li><a href="vocab-test.html">Note Sheet</a></li>
+                    <li><a href="writing-paper.html">Writing Paper</a></li>
+                    <li><a href="mind-map.html">Mind Map</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
-</html> 
+</html>
