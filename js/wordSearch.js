@@ -175,12 +175,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const countText = `${allWords.length} / ${max} words`;
         const items = allWords.map((w, i) => {
-            if (i >= max) {
-                return `<span class="word-over-limit">${w}</span>`;
-            }
-            return `<span class="word-ok">${w}</span>`;
+            const cls = i >= max ? 'word-over-limit' : 'word-ok';
+            return `<span class="${cls}" data-word="${w}">${w}<i class="word-delete">✕</i></span>`;
         }).join('');
         wordCountDisplay.innerHTML = `<div class="word-count-label">${countText}${allWords.length > max ? ' — <span class="word-over-limit-msg">excess words (red) will be ignored</span>' : ''}</div><div class="word-count-list">${items}</div>`;
+
+        wordCountDisplay.querySelectorAll('.word-ok, .word-over-limit').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const target = chip.dataset.word;
+                const lines = vocabList.value.split('\n').filter(l => l.trim() !== target);
+                vocabList.value = lines.join('\n');
+                updateWordCountDisplay();
+            });
+        });
     }
 
     vocabList.addEventListener('input', updateWordCountDisplay);
@@ -198,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     clearButton.addEventListener('click', function() {
         vocabTextarea.value = '';
+        updateWordCountDisplay();
         generateEmptyPuzzle();
     });
 
@@ -755,6 +763,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update vocab list with random words
         vocabList.value = words.join('\n');
+        updateWordCountDisplay();
         printBtn.disabled = false;
     }
 

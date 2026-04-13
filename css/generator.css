@@ -1099,6 +1099,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    margin-top: 12px;
 }
 
 .clear-btn:hover {
@@ -1750,6 +1751,9 @@ body {
     padding: 2px 7px;
     border-radius: 4px;
     font-size: 13px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
 }
 
 .word-over-limit {
@@ -1759,4 +1763,29 @@ body {
     border-radius: 4px;
     font-size: 13px;
     text-decoration: line-through;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.word-ok:hover,
+.word-over-limit:hover {
+    padding-right: 20px;
+}
+
+.word-ok .word-delete,
+.word-over-limit .word-delete {
+    display: none;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    line-height: 1;
+    font-style: normal;
+}
+
+.word-ok:hover .word-delete,
+.word-over-limit:hover .word-delete {
+    display: inline;
 } 
