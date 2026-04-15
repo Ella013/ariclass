@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     randomGenerateBtn.addEventListener('click', () => {
         const sentences = getRandomSentences();
         sentenceList.value = sentences.map(s => s.text + s.punctuation).join('\n');
+        updateSentenceCountDisplay();
         generateWorksheet(true);
     });
 
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         option.addEventListener('change', function() {
             puzzlePreview.classList.remove('spacing-compact', 'spacing-normal', 'spacing-wide');
             puzzlePreview.classList.add(`spacing-${this.value}`);
+            updateSentenceCountDisplay();
             if (scrambledSentences.length > 0) displayWorksheet();
         });
     });
@@ -88,12 +90,31 @@ document.addEventListener('DOMContentLoaded', function() {
     answerBtn.addEventListener('click', toggleAnswers);
     previewActions.appendChild(answerBtn);
 
+    // Sentence count display
+    const sentenceCountDisplay = document.createElement('div');
+    sentenceCountDisplay.id = 'sentence-count-display';
+    sentenceList.parentElement.insertBefore(sentenceCountDisplay, sentenceList.nextSibling);
+
+    function updateSentenceCountDisplay() {
+        const text = sentenceList.value.trim();
+        const allSentences = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        if (allSentences.length === 0) { sentenceCountDisplay.innerHTML = ''; return; }
+        const max = getMaxSentences();
+        const pages = Math.ceil(allSentences.length / max);
+        const pageText = pages > 1 ? ` &nbsp;|&nbsp; ${pages} pages` : '';
+        sentenceCountDisplay.innerHTML =
+            `<span style="color:#888;font-size:13px">${allSentences.length} sentences${pageText}</span>`;
+    }
+
+    sentenceList.addEventListener('input', updateSentenceCountDisplay);
+
     // Event Listeners
     generateBtn.addEventListener('click', () => generateWorksheet(false));
     printBtn.addEventListener('click', printWorksheet);
     clearButton.addEventListener('click', clearAll);
     capitalizeFirst.addEventListener('change', updateCapitalization);
     showTitle.addEventListener('change', () => {
+        updateSentenceCountDisplay();
         displayWorksheet();
     });
 
@@ -102,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function clearAll() {
         sentenceList.value = '';
+        updateSentenceCountDisplay();
         generateEmptyWorksheet();
     }
 
@@ -148,18 +170,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function getSentences() {
         const text = sentenceList.value.trim();
         if (!text) return [];
-        
-        // Split by ., !, or ? and keep the punctuation
-        const sentences = text.match(/[^.!?]+[.!?]/g) || [];
-        
-        // Process each sentence and store punctuation
-        let processedSentences = sentences.map(sentence => {
-            const trimmed = sentence.trim();
-            return {
-                text: trimmed.slice(0, -1).trim(),
-                punctuation: trimmed.slice(-1)
-            };
-        }).filter(sentence => sentence.text.length > 0);
+
+        // Split by newline; each non-empty line is a sentence
+        let processedSentences = text.split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .map(line => {
+                const last = line.slice(-1);
+                const hasPunct = ['.', '!', '?'].includes(last);
+                return {
+                    text: hasPunct ? line.slice(0, -1).trim() : line,
+                    punctuation: hasPunct ? last : '.'
+                };
+            });
 
         // Apply smart limit
         const limitedSentences = checkSentenceLimit(processedSentences);
@@ -350,40 +373,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const maxPerPage = getMaxSentences();
         const total = scrambledSentences.length;
 
-        // If everything fits on one page, just print
         if (total <= maxPerPage) {
             window.print();
             return;
         }
 
-        // Build extra pages for sentences beyond page 1
-        const extraContainer = document.createElement('div');
-        extraContainer.id = 'unscramble-extra-pages';
+        // Save original preview content
+        const originalHTML = puzzlePreview.innerHTML;
 
+        // Build all pages inside puzzle-preview
         const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
-        let startIndex = maxPerPage;
+        let allHTML = originalHTML; // page 1 already rendered
 
+        let startIndex = maxPerPage;
         while (startIndex < total) {
             const endIndex = Math.min(startIndex + maxPerPage, total);
             const pageSentences = scrambledSentences.slice(startIndex, endIndex);
             const pageOriginals = originalSentences.slice(startIndex, endIndex);
 
-            const pageDiv = document.createElement('div');
-            pageDiv.className = `extra-print-page spacing-${spacing}`;
-            pageDiv.innerHTML = buildPrintPageHTML(pageSentences, pageOriginals, startIndex + 1);
-            extraContainer.appendChild(pageDiv);
+            allHTML += `<div class="us-page-break spacing-${spacing}">`;
+            allHTML += buildPrintPageHTML(pageSentences, pageOriginals, startIndex + 1);
+            allHTML += '</div>';
 
             startIndex = endIndex;
         }
 
-        document.body.appendChild(extraContainer);
-
-        const cleanup = () => {
-            extraContainer.remove();
-            window.removeEventListener('afterprint', cleanup);
-        };
-        window.addEventListener('afterprint', cleanup);
-
+        puzzlePreview.innerHTML = allHTML;
         window.print();
+        puzzlePreview.innerHTML = originalHTML;
     }
 }); 

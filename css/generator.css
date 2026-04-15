@@ -660,7 +660,8 @@ body {
     #puzzle-preview {
         transform: none !important;
         width: 210mm !important;
-        height: 297mm !important;
+        height: auto !important;
+        min-height: 297mm !important;
         padding: 20mm !important;
         margin: 0 !important;
         box-shadow: none !important;
@@ -669,6 +670,12 @@ body {
         position: relative !important;
         background: white !important;
         display: block !important;
+    }
+
+    .us-page-break {
+        page-break-before: always !important;
+        break-before: page !important;
+        padding-top: 20mm;
     }
 
     #puzzle-preview .student-header {
@@ -1645,38 +1652,9 @@ body {
 }
 
 /* Extra print pages for unscramble auto page-split */
-#unscramble-extra-pages {
-    display: none;
-}
-
-@media print {
-    #unscramble-extra-pages {
-        display: block;
-    }
-
-    .extra-print-page {
-        break-before: page;
-        width: 210mm;
-        height: 297mm;
-        padding: 20mm;
-        box-sizing: border-box;
-        background: white;
-        position: relative;
-    }
-
-    .extra-print-page .student-header {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: flex-start !important;
-        margin-bottom: 10mm !important;
-        width: 100% !important;
-    }
-
-    .extra-print-page .preview-logo {
-        height: 12mm !important;
-        width: auto !important;
-        object-fit: contain !important;
-    }
+.us-page-break {
+    page-break-before: always;
+    break-before: page;
 }
 
 .sentence-limit-warning {
@@ -1768,21 +1746,30 @@ body {
     user-select: none;
 }
 
-.word-ok:hover,
+.word-ok:hover {
+    color: rgba(46,125,50,0.15);
+    background: #d6f0d6;
+}
+
 .word-over-limit:hover {
-    padding-right: 20px;
+    color: rgba(231,76,60,0.15);
+    background: #fad7d4;
 }
 
 .word-ok .word-delete,
 .word-over-limit .word-delete {
     display: none;
     position: absolute;
-    right: 4px;
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
-    font-size: 11px;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
     line-height: 1;
     font-style: normal;
+    color: #e74c3c;
+    font-weight: 900;
+    font-size: 18px;
+    -webkit-text-stroke: 1px #e74c3c;
 }
 
 .word-ok:hover .word-delete,
