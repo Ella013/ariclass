@@ -150,28 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return shuffled;
     }
 
-    function checkSentenceLimit(sentences) {
-        const maxSentences = getMaxSentences();
-        const warningDiv = document.querySelector('.sentence-limit-warning') || document.createElement('div');
-        warningDiv.className = 'sentence-limit-warning';
-        if (sentences.length > maxSentences) {
-            const removeCount = sentences.length - maxSentences;
-            warningDiv.textContent = `Please remove ${removeCount} sentence(s). Maximum ${maxSentences} sentences allowed.`;
-            if (!warningDiv.parentElement) {
-                clearButton.parentElement.insertBefore(warningDiv, clearButton);
-            }
-        } else {
-            warningDiv.remove();
-        }
-        return sentences.slice(0, maxSentences);
-    }
-
     function getSentences() {
         const text = sentenceList.value.trim();
         if (!text) return [];
 
-        // Split by newline; each non-empty line is a sentence
-        let processedSentences = text.split('\n')
+        return text.split('\n')
             .map(line => line.trim())
             .filter(line => line.length > 0)
             .map(line => {
@@ -182,8 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     punctuation: hasPunct ? last : '.'
                 };
             });
-
-        return checkSentenceLimit(processedSentences);
     }
 
     function shuffleWords(sentence, useRandomSeed) {
@@ -214,16 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateWorksheet(randomize) {
         const sentences = getSentences();
         
-        if (sentences.length === 0) {
-            const warningDiv = document.querySelector('.sentence-limit-warning') || document.createElement('div');
-            warningDiv.className = 'sentence-limit-warning';
-            warningDiv.textContent = 'Please enter sentences ending with ., !, or ?';
-            const wordInput = document.querySelector('.word-input');
-            if (!warningDiv.parentElement) {
-                wordInput.insertBefore(warningDiv, wordInput.querySelector('button'));
-            }
-            return;
-        }
+        if (sentences.length === 0) return;
 
         // Reset seed for consistent shuffling
         if (!randomize) {
