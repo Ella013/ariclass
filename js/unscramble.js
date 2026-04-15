@@ -158,8 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const removeCount = sentences.length - maxSentences;
             warningDiv.textContent = `Please remove ${removeCount} sentence(s). Maximum ${maxSentences} sentences allowed.`;
             if (!warningDiv.parentElement) {
-                const wordInput = document.querySelector('.word-input');
-                wordInput.insertBefore(warningDiv, wordInput.querySelector('button'));
+                clearButton.parentElement.insertBefore(warningDiv, clearButton);
             }
         } else {
             warningDiv.remove();
@@ -184,21 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             });
 
-        // Apply smart limit
-        const limitedSentences = checkSentenceLimit(processedSentences);
-        
-        // Show warning if sentences were limited
-        if (limitedSentences.length < processedSentences.length) {
-            const warningDiv = document.querySelector('.sentence-limit-warning') || document.createElement('div');
-            warningDiv.className = 'sentence-limit-warning';
-            warningDiv.textContent = `Please remove ${processedSentences.length - limitedSentences.length} sentence(s). Maximum ${limitedSentences.length} sentences allowed for current layout.`;
-            const wordInput = document.querySelector('.word-input');
-            if (!warningDiv.parentElement) {
-                wordInput.insertBefore(warningDiv, wordInput.querySelector('button'));
-            }
-        }
-        
-        return limitedSentences;
+        return checkSentenceLimit(processedSentences);
     }
 
     function shuffleWords(sentence, useRandomSeed) {
