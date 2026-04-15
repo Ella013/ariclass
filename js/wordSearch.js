@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedLevel = '3'; // Default to level 3
 
     function getMaxWords() {
-        if (selectedLevel === '1') return 10;
-        if (selectedLevel === '2') return 15;
-        return 20; // level 3
+        if (selectedLevel === '1') return 7;
+        if (selectedLevel === '2') return 12;
+        return 17; // level 3
     }
 
     function updatePlaceholder() {
@@ -192,12 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     vocabList.addEventListener('input', updateWordCountDisplay);
 
-    // Add keyboard event listener to vocab list
-    vocabList.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    });
 
     // Clear button functionality
     const clearButton = document.getElementById('clearButton');
