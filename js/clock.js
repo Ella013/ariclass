@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const puzzlePreview = document.getElementById('puzzle-preview');
 
     const colorOptionGroup = document.getElementById('color-option-group');
+    const intervalOptionGroup = document.getElementById('interval-option-group');
     let currentTimes = [];
 
     function updateColorDisabled() {
@@ -15,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
         hideLabel.disabled = mode !== 'draw';
         hideLabel.parentElement.style.opacity = mode === 'draw' ? '1' : '0.35';
         hideLabel.parentElement.style.pointerEvents = mode === 'draw' ? '' : 'none';
+        const hideChecked = mode === 'draw' && hideLabel.checked;
+        intervalOptionGroup.classList.toggle('disabled-group', hideChecked);
     }
 
     generateClocks();
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         i.addEventListener('change', generateClocks));
     document.querySelectorAll('input[name="clock-color"]').forEach(i =>
         i.addEventListener('change', () => renderClocks()));
-    document.getElementById('hide-time-label').addEventListener('change', () => renderClocks());
+    document.getElementById('hide-time-label').addEventListener('change', () => { updateColorDisabled(); renderClocks(); });
 
     function getOption(name, fallback) {
         const el = document.querySelector(`input[name="${name}"]:checked`);
