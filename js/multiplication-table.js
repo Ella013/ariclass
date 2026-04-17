@@ -14,7 +14,21 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProblems = [];
     let answerMode = false;
     let titleIsAuto = true;
-    const PROBLEMS_PER_PAGE = 15;
+
+    function getBaseProblemsPerPage() {
+        const checked = document.querySelector('input[name="problems-per-page"]:checked');
+        return checked ? parseInt(checked.value) : 15;
+    }
+
+    function getColsPerRow() {
+        return getBaseProblemsPerPage() === 20 ? 4 : 3;
+    }
+
+    function getProblemsPerPage() {
+        const base = getBaseProblemsPerPage();
+        const cols = getColsPerRow();
+        return showTitleCheckbox.checked ? base : base + cols;
+    }
 
     function getOperationTitle(operation) {
         switch (operation) {
@@ -54,15 +68,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (operation === 'multiplication') {
             let num1, num2;
             switch (level) {
-                case 1: // 1-digit × 1-digit
+                case 1:
                     num1 = Math.floor(Math.random() * 9) + 1;
                     num2 = Math.floor(Math.random() * 9) + 1;
                     break;
-                case 2: // 2-digit × 1-digit
+                case 2:
                     num1 = Math.floor(Math.random() * 90) + 10;
                     num2 = Math.floor(Math.random() * 9) + 2;
                     break;
-                case 3: // 2-digit × 2-digit
+                case 3:
                     num1 = Math.floor(Math.random() * 90) + 10;
                     num2 = Math.floor(Math.random() * 90) + 10;
                     break;
@@ -73,22 +87,21 @@ document.addEventListener('DOMContentLoaded', function() {
             return { num1, num2, result: num1 * num2, operator: '×' };
         }
 
-        // Division: always whole-number answer, no remainder
-        // Strategy: pick quotient and divisor, compute dividend
+        // Division: always whole-number answer
         let quotient, divisor, dividend;
         switch (level) {
-            case 1: // dividend up to 81, divisor 2-9
+            case 1:
                 divisor  = Math.floor(Math.random() * 8) + 2;
                 quotient = Math.floor(Math.random() * 9) + 1;
                 dividend = divisor * quotient;
                 break;
-            case 2: // 2-digit quotient, 1-digit divisor
+            case 2:
                 divisor  = Math.floor(Math.random() * 8) + 2;
                 quotient = Math.floor(Math.random() * 90) + 10;
                 dividend = divisor * quotient;
                 break;
-            case 3: // 2-digit quotient, 2-digit divisor
-                divisor  = Math.floor(Math.random() * 11) + 2; // 2-12
+            case 3:
+                divisor  = Math.floor(Math.random() * 11) + 2;
                 quotient = Math.floor(Math.random() * 90) + 10;
                 dividend = divisor * quotient;
                 break;
@@ -97,8 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 quotient = Math.floor(Math.random() * 9) + 1;
                 dividend = divisor * quotient;
         }
-        // num1 = dividend (top), num2 = divisor (bottom), result = quotient
         return { num1: dividend, num2: divisor, result: quotient, operator: '÷' };
+    }
+
+    function generateProblemsForPage(level, operation, count) {
+        const problems = [];
+        if (operation === 'mixed') {
+            const half = Math.floor(count / 2);
+            for (let i = 0; i < half; i++) problems.push(generateProblem(level, 'multiplication'));
+            for (let i = 0; i < count - half; i++) problems.push(generateProblem(level, 'division'));
+        } else {
+            for (let i = 0; i < count; i++) problems.push(generateProblem(level, operation));
+        }
+        return problems;
     }
 
     // ── Rendering ───────────────────────────────────────────────
@@ -108,22 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getMaxLength(level) {
-        // Level 1: max result 81 → 2 digits. But for division num1 can be 81 too.
-        // Level 2: multiply max 99×9=891 → 3 digits
-        // Level 3: multiply max 99×99=9801 → 4 digits. Division num1 max 12×99=1188 → 4 digits
         return [0, 2, 3, 4][level] || 3;
     }
 
     function renderProblemHTML(problem, index) {
-        const { num1, num2, result, operator } = problem;
-
-        if (operator === '÷') {
-            return renderDivisionHTML(problem, index);
-        }
+        if (problem.operator === '÷') return renderDivisionHTML(problem, index);
         return renderMultiplicationHTML(problem, index);
     }
 
-    // Multiplication: vertical format (same as addition/subtraction)
     function renderMultiplicationHTML(problem, index) {
         const { num1, num2, result } = problem;
         const digits1      = numberToDigits(num1);
@@ -164,13 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return html;
     }
 
-    // Division: long-division bracket format
-    // num1 = dividend (inside), num2 = divisor (left), result = quotient (top)
     function renderDivisionHTML(problem, index) {
         const { num1, num2, result } = problem;
 
-        // SVG bracket: top horizontal bar + vertical line that curves slightly right in the middle
-        // viewBox: width=80 (horizontal bar), height=44 (vertical part)
         const w = 80, h = 44, curve = 5;
         const bracketSVG = `<svg class="div-svg-bracket" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
   <path d="M 0,0 L ${w},0" stroke="#333" stroke-width="2" fill="none"/>
@@ -190,7 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return html;
     }
 
-    function buildPageHTML(showTitle, title, pageIndex) {
+    function buildPageHTML(showTitle, title, problems, startIndex) {
+        const cols = getColsPerRow();
         let html = '';
 
         html += '<div class="student-header">';
@@ -202,16 +215,12 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
         html += '</div></div>';
 
-        html += `<div class="puzzle-title title-slot">${title}</div>`;
+        html += `<div class="puzzle-title title-slot"${showTitle ? '' : ' style="display:none"'}>${title}</div>`;
 
-        const operation = document.querySelector('input[name="operation"]:checked').value;
-        const perPage   = operation === 'mixed' ? 15 : PROBLEMS_PER_PAGE;
-        html += '<div class="problems-grid">';
-        const start = pageIndex * perPage;
-        const end   = Math.min(start + perPage, currentProblems.length);
-        for (let i = start; i < end; i++) {
-            html += renderProblemHTML(currentProblems[i], i);
-        }
+        html += `<div class="problems-grid cols-${cols}">`;
+        problems.forEach((prob, i) => {
+            html += renderProblemHTML(prob, startIndex + i);
+        });
         html += '</div>';
 
         const currentYear = new Date().getFullYear();
@@ -229,18 +238,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const operation = document.querySelector('input[name="operation"]:checked').value;
         const numPages  = Math.max(1, parseInt(numPagesInput.value) || 1);
         const showTitle = showTitleCheckbox.checked;
+        const perPage   = getProblemsPerPage();
 
         currentProblems = [];
-        if (operation === 'mixed') {
-            // Per page: 7 multiplication + 8 division = 15 total
-            for (let p = 0; p < numPages; p++) {
-                for (let i = 0; i < 7; i++) currentProblems.push(generateProblem(level, 'multiplication'));
-                for (let i = 0; i < 8; i++) currentProblems.push(generateProblem(level, 'division'));
-            }
-        } else {
-            for (let i = 0; i < numPages * PROBLEMS_PER_PAGE; i++) {
-                currentProblems.push(generateProblem(level, operation));
-            }
+        for (let p = 0; p < numPages; p++) {
+            const pageProblems = generateProblemsForPage(level, operation, perPage);
+            currentProblems.push(...pageProblems);
         }
 
         answerMode = false;
@@ -248,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
         answerBtn.innerHTML = '<i class="fas fa-eye"></i> Show Answers';
         worksheetPreview.classList.remove('answers-on');
 
-        worksheetPreview.innerHTML = buildPageHTML(showTitle, title, 0);
+        worksheetPreview.innerHTML = buildPageHTML(showTitle, title, currentProblems.slice(0, perPage), 0);
         worksheetPreview.classList.toggle('title-off', !showTitle);
         printBtn.disabled = false;
     }
@@ -268,45 +271,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const title     = worksheetTitle.value || 'Multiplication & Division';
         const level     = parseInt(document.querySelector('input[name="level"]:checked').value);
         const operation = document.querySelector('input[name="operation"]:checked').value;
-        const perPage   = operation === 'mixed' ? 15 : PROBLEMS_PER_PAGE;
+        const perPage   = getProblemsPerPage();
 
         const printPages = document.createElement('div');
         printPages.id = 'print-pages';
 
         for (let p = 0; p < numPages; p++) {
-            // Page 1: use the same problems shown in preview; pages 2+: generate fresh
-            const pageProblems = p === 0 ? currentProblems.slice(0, perPage) : [];
-            if (p > 0) {
-                if (operation === 'mixed') {
-                    for (let i = 0; i < 7; i++) pageProblems.push(generateProblem(level, 'multiplication'));
-                    for (let i = 0; i < 8; i++) pageProblems.push(generateProblem(level, 'division'));
-                } else {
-                    for (let i = 0; i < perPage; i++) pageProblems.push(generateProblem(level, operation));
-                }
-            }
-
-            // Build page HTML directly from pageProblems
-            let html = '';
-            html += '<div class="student-header">';
-            html += '<div class="header-left"><div class="puzzle-header">';
-            html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
-            html += '</div></div>';
-            html += '<div class="info-group">';
-            html += '<div class="info-line"><label>Name:</label><div class="input-field"></div></div>';
-            html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
-            html += '</div></div>';
-            html += `<div class="puzzle-title title-slot">${title}</div>`;
-            html += '<div class="problems-grid">';
-            pageProblems.forEach((prob, i) => { html += renderProblemHTML(prob, p * perPage + i); });
-            html += '</div>';
-            const currentYear = new Date().getFullYear();
-            html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
+            const pageProblems = p === 0
+                ? currentProblems.slice(0, perPage)
+                : generateProblemsForPage(level, operation, perPage);
 
             const page = document.createElement('div');
             page.className = 'print-page';
             page.classList.toggle('answers-on', answerMode);
             page.classList.toggle('title-off', !showTitle);
-            page.innerHTML = html;
+            page.innerHTML = buildPageHTML(showTitle, title, pageProblems, p * perPage);
             printPages.appendChild(page);
         }
 
@@ -316,18 +295,13 @@ document.addEventListener('DOMContentLoaded', function() {
         window.print();
     }
 
-    function updateTitleVisibility() {
-        const showTitle  = showTitleCheckbox.checked;
-        const title      = worksheetTitle.value || 'Multiplication & Division';
-        const titleEl    = document.querySelector('#puzzle-preview .puzzle-title');
-        if (titleEl) titleEl.textContent = title;
-        worksheetPreview.classList.toggle('title-off', !showTitle);
-    }
-
     generateBtn.addEventListener('click', generateWorksheet);
     printBtn.addEventListener('click', printWorksheet);
     answerBtn.addEventListener('click', toggleAnswers);
-    showTitleCheckbox.addEventListener('change', updateTitleVisibility);
+    showTitleCheckbox.addEventListener('change', generateWorksheet);
+    document.querySelectorAll('input[name="problems-per-page"]').forEach(input => {
+        input.addEventListener('change', generateWorksheet);
+    });
 
     syncTitleWithOperation();
     generateWorksheet();

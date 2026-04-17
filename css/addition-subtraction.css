@@ -137,18 +137,12 @@
 /* Print (multi-page):
    We print via #print-pages so we can generate N pages while keeping preview as 1 page. */
 @media print {
-    body * {
-        visibility: hidden !important;
-    }
-
-    #print-pages, #print-pages * {
-        visibility: visible !important;
+    body > *:not(#print-pages) {
+        display: none !important;
     }
 
     #print-pages {
-        position: absolute;
-        left: 0;
-        top: 0;
+        position: static;
         width: 100%;
     }
 
@@ -157,14 +151,13 @@
         height: 297mm;
         padding: 20mm;
         box-sizing: border-box;
-        page-break-after: always;
         background: white;
         position: relative;
         overflow: hidden;
     }
 
-    #print-pages .print-page:last-child {
-        page-break-after: auto;
+    #print-pages .print-page:not(:last-child) {
+        page-break-after: always;
     }
 
     #print-pages .copyright-footer {

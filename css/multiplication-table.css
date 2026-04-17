@@ -1,6 +1,15 @@
 /* Multiplication & Division — division bracket styles */
 
 @media print {
+    body > *:not(#print-pages) {
+        display: none !important;
+    }
+
+    #print-pages {
+        position: static;
+        width: 100%;
+    }
+
     #print-pages .copyright-footer {
         display: block !important;
         position: absolute !important;
