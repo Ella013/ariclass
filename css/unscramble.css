@@ -38,7 +38,12 @@
     gap: 1.5rem;
 }
 
-/* Center align Spacing Between Questions (third option group) */
+/* Font size variations */
+#puzzle-preview.font-small .scrambled-words { font-size: 12pt; }
+#puzzle-preview.font-medium .scrambled-words { font-size: 14pt; }
+#puzzle-preview.font-large .scrambled-words { font-size: 16pt; }
+
+/* Center align Font Size (third option group — Spacing moved to 4th) */
 .options .option-group:nth-child(3) {
     display: flex !important;
     flex-direction: column !important;

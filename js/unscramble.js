@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize variables
     const sentenceList = document.getElementById('sentence-list');
     const resetWordsBtn = document.getElementById('reset-words-btn');
-    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => { sentenceList.value = ''; sentenceList.dispatchEvent(new Event('input')); });
+    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => {
+        if (sentenceList.value.trim()) generateWorksheet(true);
+    });
     const generateBtn = document.getElementById('generate-btn');
     const randomGenerateBtn = document.getElementById('random-generate-btn');
     const printBtn = document.getElementById('print-btn');
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearButton = document.getElementById('clearButton');
     let originalSentences = [];
     let scrambledSentences = [];
+    let firstWordIndices = [];
     let answerMode = false;
     let lastSeed = 1;
 
@@ -40,10 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
         "She walks her dog in the park."
     ];
 
-    // Function to get max sentences based on spacing and title
+    // Function to get max sentences based on spacing, title, and font size
     function getMaxSentences() {
         const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
         const hasTitle = showTitle.checked;
+        const fontSize = document.querySelector('input[name="font-size"]:checked').value;
+        if (fontSize === 'large') {
+            if (spacing === 'compact') return hasTitle ? 7 : 8;
+            if (spacing === 'normal') return hasTitle ? 6 : 7;
+            return hasTitle ? 5 : 6; // wide
+        }
         if (spacing === 'compact') return hasTitle ? 8 : 9;
         if (spacing === 'normal') return hasTitle ? 7 : 8;
         return hasTitle ? 6 : 7; // wide
@@ -82,6 +91,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Font size controls
+    const fontSizeOptions = document.querySelectorAll('input[name="font-size"]');
+    puzzlePreview.classList.add('font-medium');
+
+    fontSizeOptions.forEach(option => {
+        option.addEventListener('change', function() {
+            puzzlePreview.classList.remove('font-small', 'font-medium', 'font-large');
+            puzzlePreview.classList.add(`font-${this.value}`);
+            if (scrambledSentences.length > 0) displayWorksheet();
+        });
+    });
+
     // Create and add answer button
     const previewActions = document.querySelector('.preview-actions');
     const answerBtn = document.createElement('button');
@@ -103,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const pages = Math.ceil(allSentences.length / max);
         const pageText = pages > 1 ? ` &nbsp;|&nbsp; ${pages} pages` : '';
         sentenceCountDisplay.innerHTML =
-            `<span style="color:#888;font-size:13px">${allSentences.length} sentences${pageText}</span>`;
+            `<span style="color:#555;font-size:13px;font-weight:500">${allSentences.length} sentences${pageText}</span>`;
     }
 
     sentenceList.addEventListener('input', updateSentenceCountDisplay);
@@ -168,28 +189,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function shuffleWords(sentence, useRandomSeed) {
-        // Split the sentence into words
         const words = sentence.split(' ').filter(word => word.length > 0);
-        if (words.length <= 1) return words;
+        if (words.length <= 1) return { words, firstIdx: 0 };
 
-        // Store the first word to handle capitalization
         const firstWord = words[0];
 
-        // Shuffle the words using either consistent or random seed
-        const shuffled = useRandomSeed ? 
-            shuffleWithSeed(words, Math.random() * 10000) : 
-            shuffleWithSeed(words, lastSeed++);
+        // Tag each word with its original index to track the first word
+        const indexed = words.map((w, i) => ({ w, i }));
 
-        // Apply capitalization based on the checkbox
+        const shuffledIndexed = useRandomSeed ?
+            shuffleWithSeed(indexed, Math.random() * 10000) :
+            shuffleWithSeed(indexed, lastSeed++);
+
+        const firstIdx = shuffledIndexed.findIndex(({ i }) => i === 0);
+
         if (capitalizeFirst.checked) {
-            return shuffled.map(word => 
-                word.toLowerCase() === firstWord.toLowerCase() 
-                    ? firstWord 
-                    : word.toLowerCase()
-            );
+            return {
+                words: shuffledIndexed.map(({ w, i }) => i === 0 ? firstWord : w.toLowerCase()),
+                firstIdx
+            };
         }
 
-        return shuffled.map(word => word.toLowerCase());
+        return { words: shuffledIndexed.map(({ w }) => w.toLowerCase()), firstIdx };
     }
 
     function generateWorksheet(randomize) {
@@ -203,8 +224,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         originalSentences = sentences;
+        firstWordIndices = [];
         scrambledSentences = sentences.map(sentence => {
-            return shuffleWords(sentence.text, randomize);
+            const { words, firstIdx } = shuffleWords(sentence.text, randomize);
+            firstWordIndices.push(firstIdx);
+            return words;
         });
         
         // Reset answer mode
@@ -217,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayWorksheet() {
         let html = '';
-        
+
         // Add header section with logo and student info
         html += '<div class="student-header">';
         html += '<div class="header-left">';
@@ -259,7 +283,6 @@ document.addEventListener('DOMContentLoaded', function() {
             html += '</div>';
         }
 
-        // Add copyright footer
         const currentYear = new Date().getFullYear();
         html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
 
@@ -268,14 +291,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateCapitalization() {
         if (scrambledSentences.length > 0) {
-            // Reapply capitalization to existing scrambled sentences
             scrambledSentences = scrambledSentences.map((words, index) => {
                 const firstWord = originalSentences[index].text.split(' ')[0];
-                return words.map((word, wordIndex) => {
-                    if (capitalizeFirst.checked && word.toLowerCase() === firstWord.toLowerCase()) {
+                const firstIdx = firstWordIndices[index];
+                return words.map((word, i) => {
+                    if (capitalizeFirst.checked && i === firstIdx) {
                         return firstWord;
                     }
-                    return capitalizeFirst.checked ? word.toLowerCase() : word.toLowerCase();
+                    return word.toLowerCase();
                 });
             });
             displayWorksheet();
@@ -340,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Build all pages inside puzzle-preview
         const spacing = document.querySelector('input[name="question-spacing"]:checked').value;
-        let allHTML = originalHTML; // page 1 already rendered
+        let allHTML = originalHTML;
 
         let startIndex = maxPerPage;
         while (startIndex < total) {
@@ -359,4 +382,5 @@ document.addEventListener('DOMContentLoaded', function() {
         window.print();
         puzzlePreview.innerHTML = originalHTML;
     }
+
 }); 

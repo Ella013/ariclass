@@ -18,11 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
         addWordCluePair();
     }
 
+    function resetAnswerBtn() {
+        showingAnswers = false;
+        answerBtn.innerHTML = '<i class="fas fa-eye"></i> Show Answers';
+    }
+
     // Event Listeners
     addWordBtn.addEventListener('click', addWordCluePair);
-    clearAllBtn.addEventListener('click', clearAll);
-    generateBtn.addEventListener('click', generatePuzzle);
-    generateRandomBtn.addEventListener('click', generateRandomPuzzle);
+    clearAllBtn.addEventListener('click', () => { resetAnswerBtn(); clearAll(); });
+    generateBtn.addEventListener('click', () => { resetAnswerBtn(); generatePuzzle(); });
+    generateRandomBtn.addEventListener('click', () => { resetAnswerBtn(); generateRandomPuzzle(); });
     printBtn.addEventListener('click', printWorksheet);
     showTitle.addEventListener('change', updatePreview);
 
@@ -102,11 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Reset button event listener
     const resetWordsBtn = document.getElementById('reset-words-btn');
     resetWordsBtn.addEventListener('click', function() {
-        wordClueContainer.innerHTML = '';
-        for (let i = 0; i < 5; i++) {
-            addWordCluePair();
+        const wordsAndClues = getWordsAndClues();
+        if (wordsAndClues.length >= 2) {
+            resetAnswerBtn();
+            generatePuzzle(true);
         }
-        displayEmptyPreview();
     });
 
     // Random word lists for different categories
@@ -136,16 +141,16 @@ document.addEventListener('DOMContentLoaded', function() {
         addWordCluePair();
         let pairs = document.querySelectorAll('.word-clue-pair');
         let firstPair = pairs[0];
-        firstPair.querySelector('.word-input-field').value = selectedWords[0];
-        firstPair.querySelector('.clue-input-field').value = `Clue for ${selectedWords[0]}`;
+        firstPair.querySelector('.word-input-field').value = selectedWords[0].toLowerCase();
+        firstPair.querySelector('.clue-input-field').value = `Clue for ${selectedWords[0].toLowerCase()}`;
 
         // Add remaining words
         for (let i = 1; i < selectedWords.length; i++) {
             addWordCluePair();
             pairs = document.querySelectorAll('.word-clue-pair');
             const currentPair = pairs[pairs.length - 1];
-            currentPair.querySelector('.word-input-field').value = selectedWords[i];
-            currentPair.querySelector('.clue-input-field').value = `Clue for ${selectedWords[i]}`;
+            currentPair.querySelector('.word-input-field').value = selectedWords[i].toLowerCase();
+            currentPair.querySelector('.clue-input-field').value = `Clue for ${selectedWords[i].toLowerCase()}`;
         }
 
         // Generate the puzzle
@@ -232,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedWords = shuffledWords.slice(0, 5);
         const sampleWordsAndClues = selectedWords.map(word => ({
             word: word,
-            clue: `Sample clue for ${word}`
+            clue: `Sample clue for ${word.toLowerCase()}`
         }));
 
         const samplePuzzle = new CrosswordPuzzle(15, sampleWordsAndClues);
@@ -330,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (word && clue) {
                 // Remove any spaces from the word
-                const cleanWord = word.replace(/\s+/g, '');
+                const cleanWord = word.replace(/\s+/g, '').toUpperCase();
                 if (cleanWord.length > 0) {
                     wordsAndClues.push({ word: cleanWord, clue });
                     console.log(`Added pair ${index}: Word="${cleanWord}", Clue="${clue}"`); // 디버깅용 로그
@@ -343,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Generate crossword puzzle
-    function generatePuzzle() {
+    function generatePuzzle(randomize = false) {
         console.log('Generate puzzle button clicked'); // 디버깅용 로그
 
         const wordsAndClues = getWordsAndClues();
@@ -367,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            currentPuzzle = new CrosswordPuzzle(size, wordsAndClues);
+            currentPuzzle = new CrosswordPuzzle(size, wordsAndClues, randomize);
             const success = currentPuzzle.generate();
             console.log('Puzzle generation success:', success); // 디버깅용 로그
             console.log('Placed words:', currentPuzzle.placedWords); // 디버깅용 로그
@@ -379,70 +384,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Update the preview with the generated puzzle
             updatePreview();
+            printBtn.disabled = false;
         } catch (error) {
             console.error('Error generating puzzle:', error);
             alert('Error generating puzzle. Please try different words or a different puzzle size.');
             return;
         }
-
-        let html = '';
-        
-        // Add header section with logo and student info
-        html += '<div class="student-header">';
-        html += '<div class="header-left">';
-        html += '<div class="puzzle-header">';
-        html += '<img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="info-group">';
-        html += '<div class="info-line">';
-        html += '<label>Name:</label>';
-        html += '<div class="input-field"></div>';
-        html += '</div>';
-        html += '<div class="info-line">';
-        html += '<label>Date:</label>';
-        html += '<div class="input-field"></div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-
-        // Add title if show-title is checked
-        const title = worksheetTitle.value.trim() || 'Crossword Puzzle';
-        html += `<div class="puzzle-title" style="visibility:${showTitle.checked ? 'visible' : 'hidden'}">${title}</div>`;
-
-        // Add puzzle grid
-        html += currentPuzzle.generateHTML(true, true, false);
-
-        // Add clue lists
-        html += '<div class="clue-lists">';
-        
-        // Across clues
-        html += '<div class="across-clues">';
-        html += '<div class="clue-list-title">Across:</div>';
-        html += '<ul class="clue-list">';
-        currentPuzzle.acrossClues.forEach(clue => {
-            html += `<li class="clue-item"><span class="clue-number">${clue.number}.</span>${clue.clue}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-
-        // Down clues
-        html += '<div class="down-clues">';
-        html += '<div class="clue-list-title">Down:</div>';
-        html += '<ul class="clue-list">';
-        currentPuzzle.downClues.forEach(clue => {
-            html += `<li class="clue-item"><span class="clue-number">${clue.number}.</span>${clue.clue}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-        html += '</div>';
-
-        // Add copyright footer
-        const currentYear = new Date().getFullYear();
-        html += `<div class="copyright-footer">© ${currentYear} AriClass. All rights reserved.</div>`;
-
-        puzzlePreview.innerHTML = html;
-        printBtn.disabled = false;
     }
 
     // Update preview
@@ -532,9 +479,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Crossword Puzzle Class
 class CrosswordPuzzle {
-    constructor(size, wordsAndClues) {
+    constructor(size, wordsAndClues, randomize = false) {
         this.size = size;
         this.wordsAndClues = wordsAndClues;
+        this.randomize = randomize;
         this.grid = Array(size).fill().map(() => Array(size).fill(null));
         this.acrossClues = [];
         this.downClues = [];
@@ -596,47 +544,44 @@ class CrosswordPuzzle {
 
     tryPlaceWord(word, clue) {
         let bestScore = -1;
-        let bestPlacement = null;
+        let bestPlacements = [];
 
         // Try all possible positions and directions
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
-                // Try horizontal placement
-                if (this.canPlaceWord(word, x, y, true)) {
-                    const score = this.calculatePlacementScore(word, x, y, true);
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestPlacement = { x, y, across: true };
-                    }
-                }
-                // Try vertical placement
-                if (this.canPlaceWord(word, x, y, false)) {
-                    const score = this.calculatePlacementScore(word, x, y, false);
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestPlacement = { x, y, across: false };
+                for (const across of [true, false]) {
+                    if (this.canPlaceWord(word, x, y, across)) {
+                        const score = this.calculatePlacementScore(word, x, y, across);
+                        if (score > bestScore) {
+                            bestScore = score;
+                            bestPlacements = [{ x, y, across }];
+                        } else if (score === bestScore && score >= 0) {
+                            bestPlacements.push({ x, y, across });
+                        }
                     }
                 }
             }
         }
 
-        // Place word at best position if found
-        if (bestPlacement && bestScore >= 0) {
-            return this.placeWord(word, clue, bestPlacement.x, bestPlacement.y, bestPlacement.across);
+        if (bestPlacements.length > 0 && bestScore >= 0) {
+            const chosen = this.randomize
+                ? bestPlacements[Math.floor(Math.random() * bestPlacements.length)]
+                : bestPlacements[0];
+            return this.placeWord(word, clue, chosen.x, chosen.y, chosen.across);
         }
         return false;
     }
 
     tryPlaceIndependentWord(word, clue) {
-        // 빈 공간 찾아서 배치
+        // 교차점 없이도 배치 가능한 빈 공간 찾기
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
-                if (this.canPlaceWord(word, x, y, true)) {
-                    this.placeWord(word, clue, x, y, true);
+                if (this.canPlaceWord(word, x, y, true, false)) {
+                    this.placeWord(word, clue, x, y, true, false);
                     return true;
                 }
-                if (this.canPlaceWord(word, x, y, false)) {
-                    this.placeWord(word, clue, x, y, false);
+                if (this.canPlaceWord(word, x, y, false, false)) {
+                    this.placeWord(word, clue, x, y, false, false);
                     return true;
                 }
             }
@@ -669,7 +614,7 @@ class CrosswordPuzzle {
         return intersections > 0 ? score : -1;
     }
 
-    canPlaceWord(word, startX, startY, across) {
+    canPlaceWord(word, startX, startY, across, requireIntersection = true) {
         // Check boundaries
         if (startX < 0 || startY < 0) return false;
         if (across && startX + word.length > this.size) return false;
@@ -718,12 +663,12 @@ class CrosswordPuzzle {
         // First word doesn't need intersection
         if (this.placedWords.length === 0) return true;
 
-        return hasIntersection;
+        return requireIntersection ? hasIntersection : true;
     }
 
-    placeWord(word, clue, startX, startY, across) {
+    placeWord(word, clue, startX, startY, across, requireIntersection = true) {
         // Verify placement is valid
-        if (!this.canPlaceWord(word, startX, startY, across)) {
+        if (!this.canPlaceWord(word, startX, startY, across, requireIntersection)) {
             return false;
         }
 
@@ -791,7 +736,7 @@ class CrosswordPuzzle {
                 } else {
                     const number = this.getCellNumber(x, y);
                     const numberHtml = number ? `<span class="cell-number">${number}</span>` : '';
-                    const letterHtml = showAnswers ? `<span class="cell-letter">${cell}</span>` : '';
+                    const letterHtml = showAnswers ? `<span class="cell-letter" style="color:red">${cell.toLowerCase()}</span>` : '';
                     html += `<td class="crossword-cell">${numberHtml}${letterHtml}</td>`;
                 }
             }

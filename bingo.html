@@ -115,11 +115,13 @@
                 <div class="word-input">
                     <div class="section-header">
                         <h2>Enter Words</h2>
-                        <button id="reset-words-btn" class="reset-btn" title="Reset all words">
-                            <i class="fas fa-undo-alt"></i>
+                        <button id="reset-words-btn" class="reset-btn" title="Shuffle preview">
+                            <i class="fas fa-random"></i>
                         </button>
                     </div>
-                    <textarea id="wordInput" class="vocab-textarea" placeholder="Enter words (one per line)"></textarea>
+                    <div class="word-input-wrapper">
+                        <textarea id="wordInput" class="vocab-textarea" placeholder="Enter words (one per line)"></textarea>
+                    </div>
                     <button id="clearButton" class="clear-btn">
                         <i class="fas fa-trash"></i>
                         Clear
@@ -160,6 +162,16 @@
                                 <label for="font-large">Large</label>
                             </div>
                         </div>
+                    </div>
+                    <div class="option-group option-checkboxes">
+                        <label class="check-option-label">
+                            <input type="checkbox" id="top-align">
+                            Align Words to Top
+                        </label>
+                        <label class="check-option-label">
+                            <input type="checkbox" id="free-space">
+                            Free Space
+                        </label>
                     </div>
                     <div class="option-group">
                         <h2>Number of Players <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Each player gets a unique bingo card. When you print, one page is generated per player.</span></span></h2>

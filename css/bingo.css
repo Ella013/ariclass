@@ -72,6 +72,8 @@
 
 /* ── / Tooltip ── */
 
+
+
 .settings {
     background: #fff;
     padding: 20px;
@@ -152,7 +154,7 @@
     gap: 1.5rem;
 }
 
-/* Number of Players 중앙정렬 */
+/* Font Size 중앙정렬 */
 .options .option-group:nth-child(2) {
     display: flex;
     flex-direction: column;
@@ -172,18 +174,39 @@
     gap: 1.5rem;
 }
 
-.options .option-group:last-child {
+/* Inline checkboxes (Align to Top + Free Space) */
+.options .option-group.option-checkboxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.5rem 0;
+}
+
+.check-option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    color: #555;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Number of Players 중앙정렬 */
+.options .option-group:nth-child(4) {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.options .option-group:last-child h2 {
+.options .option-group:nth-child(4) h2 {
     margin-bottom: 1rem;
     margin-top: 0;
 }
 
-.options .option-group:last-child .player-counter {
+.options .option-group:nth-child(4) .player-counter {
     justify-content: center;
 }
 
@@ -299,8 +322,9 @@
     text-align: center;
     font-size: 24pt;
     font-weight: bold;
-    margin: 8mm 0;
+    margin: 5mm 0;
     padding: 0;
+    min-height: 12mm; /* keeps space even when visibility:hidden */
 }
 
 .bingo-grid {
@@ -311,7 +335,7 @@
     width: 100%;
     max-width: 600px;
     aspect-ratio: 1;
-    margin-top: 20mm;
+    margin-top: 5mm;
     grid-auto-rows: 1fr;
 }
 
@@ -329,23 +353,43 @@
     overflow: hidden;
 }
 
-/* Font size variations - only change font-size, keep layout fixed */
+/* Free Space cell */
+.bingo-cell.free-space {
+    font-size: 4em !important;
+}
+
+/* Font size variations */
 .bingo-board.font-small .bingo-cell {
-    font-size: 14px;
+    font-size: 15pt;
     padding: 10px;
     height: 100%;
 }
 
 .bingo-board.font-medium .bingo-cell {
-    font-size: 18px;
+    font-size: 18pt;
     padding: 10px;
     height: 100%;
 }
 
 .bingo-board.font-large .bingo-cell {
-    font-size: 24px;
+    font-size: 21pt;
     padding: 10px;
     height: 100%;
+}
+
+/* Word position variations - text alignment within each cell */
+.bingo-board.pos-top .bingo-cell {
+    align-items: flex-start;
+    padding-top: 8px;
+}
+
+.bingo-board.pos-top .bingo-cell.free-space {
+    align-items: center !important;
+    padding-top: 0 !important;
+}
+
+.bingo-board.pos-middle .bingo-cell {
+    align-items: center;
 }
 
 /* Print styles */

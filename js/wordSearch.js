@@ -55,7 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const vocabList = document.getElementById('vocab-list');
     const addWordBtn = document.getElementById('add-word-btn');
     const resetWordsBtn = document.getElementById('reset-words-btn');
-    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => { vocabList.value = ''; vocabList.dispatchEvent(new Event('input')); });
+    if (resetWordsBtn) resetWordsBtn.addEventListener('click', () => {
+        if (getWords().length > 0) generatePuzzle();
+    });
     const generateBtn = document.getElementById('generate-btn');
     const randomGenerateBtn = document.getElementById('random-generate-btn');
     const printBtn = document.getElementById('print-btn');
@@ -174,8 +176,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         const countText = `${allWords.length} / ${max} words`;
+        const maxLength = getMaxWordLength();
         const items = allWords.map((w, i) => {
-            const cls = i >= max ? 'word-over-limit' : 'word-ok';
+            const cls = (i >= max || w.length > maxLength) ? 'word-over-limit' : 'word-ok';
             return `<span class="${cls}" data-word="${w}">${w}<i class="word-delete">✕</i></span>`;
         }).join('');
         wordCountDisplay.innerHTML = `<div class="word-count-label">${countText}${allWords.length > max ? ' — <span class="word-over-limit-msg">excess words (red) will be ignored</span>' : ''}</div><div class="word-count-list">${items}</div>`;

@@ -3,6 +3,18 @@
     background: rgba(255, 215, 0, 0.3);
 }
 
+#pair-count-display {
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+#add-pair-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 #add-pair-btn {
     background: rgba(255, 215, 0, 0.3);
     color: #000;
@@ -58,6 +70,12 @@
     position: relative;
     padding-left: 1.5rem;
     counter-increment: pair-number;
+}
+
+.word-pair.over-limit .word-input-field {
+    text-decoration: line-through;
+    color: #aaa;
+    border-color: rgba(255, 0, 0, 0.4);
 }
 
 .word-pair::before {
@@ -139,8 +157,8 @@
 }
 
 .reset-btn:hover {
-    color: #ff4444;
-    transform: rotate(-45deg);
+    color: #4a90d9;
+    transform: scale(1.2);
 }
 
 /* Matching Lists Preview Styles */
@@ -234,7 +252,7 @@
     margin-left: 0.5rem;
     font-weight: bold;
     color: #ff4444;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 /* Make sure list items have proper positioning */
@@ -381,9 +399,10 @@
         position: relative !important;
         background: white !important;
         display: block !important;
+        overflow: visible !important;
     }
 
-    .matching-list {
+.matching-list {
         page-break-inside: avoid;
     }
 
@@ -503,15 +522,15 @@
 
 /* Font size variations */
 .matching-list.font-small .list-item {
-    font-size: 0.9rem;
+    font-size: 12pt;
 }
 
 .matching-list.font-medium .list-item {
-    font-size: 1.1rem;
+    font-size: 14pt;
 }
 
 .matching-list.font-large .list-item {
-    font-size: 1.3rem;
+    font-size: 16pt;
 }
 
 /* Options box styles */

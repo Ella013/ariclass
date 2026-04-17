@@ -14,7 +14,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProblems = [];
     let answerMode = false;
     let titleIsAuto = true;
-    const PROBLEMS_PER_PAGE = 15;
+
+    function getBaseProblemsPerPage() {
+        const checked = document.querySelector('input[name="problems-per-page"]:checked');
+        return checked ? parseInt(checked.value) : 15;
+    }
+
+    function getColsPerRow() {
+        return getBaseProblemsPerPage() === 20 ? 4 : 3;
+    }
+
+    function getProblemsPerPage() {
+        const base = getBaseProblemsPerPage();
+        const cols = getColsPerRow();
+        // When title is hidden, use the freed space for one extra row
+        return showTitleCheckbox.checked ? base : base + cols;
+    }
 
     function getOperationTitle(operation) {
         switch (operation) {
@@ -147,8 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const showTitle = showTitleCheckbox.checked;
         
         // Generate problems
+        const problemsPerPage = getProblemsPerPage();
         currentProblems = [];
-        for (let i = 0; i < numPages * PROBLEMS_PER_PAGE; i++) {
+        for (let i = 0; i < numPages * problemsPerPage; i++) {
             currentProblems.push(generateProblem(level, operation));
         }
         
@@ -187,13 +203,14 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</div>';
         html += '</div>';
         
-        // Title slot is always rendered to keep layout fixed; visibility toggled via class
-        html += `<div class="puzzle-title title-slot">${title}</div>`;
+        html += `<div class="puzzle-title title-slot" style="${showTitle ? '' : 'display:none'}">${title}</div>`;
         
         // Problems grid
-        html += '<div class="problems-grid">';
-        const start = pageIndex * PROBLEMS_PER_PAGE;
-        const end = Math.min(start + PROBLEMS_PER_PAGE, currentProblems.length);
+        const problemsPerPage = getProblemsPerPage();
+        const cols = getColsPerRow();
+        html += `<div class="problems-grid cols-${cols}">`;
+        const start = pageIndex * problemsPerPage;
+        const end = Math.min(start + problemsPerPage, currentProblems.length);
         for (let i = start; i < end; i++) {
             html += renderProblemHTML(currentProblems[i], i, answerMode);
         }
@@ -295,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const printPages = document.createElement('div');
         printPages.id = 'print-pages';
 
+        const problemsPerPage = getProblemsPerPage();
         for (let p = 0; p < numPages; p++) {
             let pageHtml;
             if (p === 0) {
@@ -303,10 +321,10 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Pages 2+: generate fresh random problems
                 const freshProblems = [];
-                for (let i = 0; i < PROBLEMS_PER_PAGE; i++) {
+                for (let i = 0; i < problemsPerPage; i++) {
                     freshProblems.push(generateProblem(level, operation));
                 }
-                pageHtml = buildPageHTMLFromProblems(showTitle, title, freshProblems, p * PROBLEMS_PER_PAGE);
+                pageHtml = buildPageHTMLFromProblems(showTitle, title, freshProblems, p * problemsPerPage);
             }
 
             const page = document.createElement('div');
@@ -339,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<div class="info-line"><label>Date:</label><div class="input-field"></div></div>';
         html += '</div></div>';
         html += `<div class="puzzle-title title-slot">${title}</div>`;
-        html += '<div class="problems-grid">';
+        html += `<div class="problems-grid cols-${getColsPerRow()}">`;
         problems.forEach((prob, i) => {
             html += renderProblemHTML(prob, startIndex + i, answerMode);
         });
@@ -372,9 +390,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         html += `<div class="puzzle-title title-slot">${title}</div>`;
 
-        html += '<div class="problems-grid">';
-        const start = pageIndex * PROBLEMS_PER_PAGE;
-        const end = Math.min(start + PROBLEMS_PER_PAGE, currentProblems.length);
+        const problemsPerPage = getProblemsPerPage();
+        html += `<div class="problems-grid cols-${getColsPerRow()}">`;
+        const start = pageIndex * problemsPerPage;
+        const end = Math.min(start + problemsPerPage, currentProblems.length);
         for (let i = start; i < end; i++) {
             html += renderProblemHTML(currentProblems[i], i, answerMode);
         }
@@ -399,7 +418,10 @@ document.addEventListener('DOMContentLoaded', function() {
     generateBtn.addEventListener('click', generateWorksheet);
     printBtn.addEventListener('click', printWorksheet);
     answerBtn.addEventListener('click', toggleAnswers);
-    showTitleCheckbox.addEventListener('change', updateTitleVisibility);
+    showTitleCheckbox.addEventListener('change', generateWorksheet);
+    document.querySelectorAll('input[name="problems-per-page"]').forEach(input => {
+        input.addEventListener('change', generateWorksheet);
+    });
     
     // Generate on page load
     syncTitleWithOperation();

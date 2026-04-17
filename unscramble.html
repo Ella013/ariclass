@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="css/unscramble.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
@@ -116,8 +117,8 @@
                 <div class="word-input">
                     <div class="section-header">
                         <h2>Enter Your Sentences</h2>
-                        <button id="reset-words-btn" class="reset-btn" title="Reset all sentences">
-                            <i class="fas fa-undo-alt"></i>
+                        <button id="reset-words-btn" class="reset-btn" title="Shuffle preview">
+                            <i class="fas fa-random"></i>
                         </button>
                     </div>
                     <textarea id="sentence-list" class="vocab-textarea" 
@@ -134,6 +135,23 @@
                             <input type="checkbox" id="capitalize-first" checked>
                             Capitalize first word in scrambled sentence
                         </label>
+                    </div>
+                    <div class="option-group">
+                        <h2>Font Size</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="font-small" name="font-size" value="small">
+                                <label for="font-small">Small</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="font-medium" name="font-size" value="medium" checked>
+                                <label for="font-medium">Medium</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="font-large" name="font-size" value="large">
+                                <label for="font-large">Large</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="option-group">
                         <h2>Spacing Between Questions</h2>

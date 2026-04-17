@@ -13,11 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let showingAnswers = false;
     let keyPressed = false;
     let isRandomGenerated = false; // tracks whether current list came from random generation
+    let savedShuffledRight = null; // preserve right column order across font/layout changes
 
-    // Max pairs that fit on one A4 page per font size
-    // Row height is fixed at 2rem regardless of font size, so all sizes fit 15 items
+    // Max pairs that fit on one A4 page
     function getMaxPairsForFont() {
-        return 15;
+        const fontSize = document.querySelector('input[name="font-size"]:checked')?.value || 'medium';
+        if (showTitle.checked) return fontSize === 'large' ? 14 : 15;
+        return fontSize === 'large' ? 16 : 17;
     }
 
     // Add keyboard event listeners
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'cat', right: 'kitten' },
             { left: 'sheep', right: 'lamb' },
             { left: 'horse', right: 'foal' },
-            { left: 'cow', right: 'calf' },
+            { left: 'cow', right: 'heifer' },
             { left: 'chicken', right: 'chick' },
             { left: 'pig', right: 'piglet' },
             { left: 'goat', right: 'kid' },
@@ -85,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'goose', right: 'gosling' },
             { left: 'deer', right: 'fawn' },
             { left: 'lion', right: 'cub' },
-            { left: 'bear', right: 'cub' },
+            { left: 'bear', right: 'bear cub' },
             { left: 'wolf', right: 'pup' },
             { left: 'rabbit', right: 'kit' },
-            { left: 'fox', right: 'kit' },
+            { left: 'fox', right: 'fox kit' },
             { left: 'kangaroo', right: 'joey' },
             { left: 'swan', right: 'cygnet' },
             { left: 'elephant', right: 'calf' },
@@ -130,8 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'dusk', right: 'end' },
             { left: 'noon', right: 'midday' },
             { left: 'second', right: 'moment' },
-            { left: 'minute', right: 'sixty' },
-            { left: 'hour', right: 'sixty' },
+            { left: 'minute', right: 'sixty seconds' },
+            { left: 'hour', right: 'sixty minutes' },
             { left: 'week', right: 'seven' },
             { left: 'month', right: 'thirty' },
             { left: 'year', right: 'twelve' },
@@ -146,14 +148,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     displayEmptyPreview();
 
+    // Pair count display
+    const pairCountDisplay = document.createElement('div');
+    pairCountDisplay.id = 'pair-count-display';
+    wordPairContainer.parentElement.insertAdjacentElement('afterend', pairCountDisplay);
+
+    function updatePairCountDisplay() {
+        const max = getMaxPairsForFont();
+        const allPairEls = document.querySelectorAll('.word-pair');
+        const allPairs = allPairEls.length;
+        if (allPairs === 0) { pairCountDisplay.innerHTML = ''; addPairBtn.disabled = false; return; }
+
+        // Apply over-limit styling to excess pairs
+        allPairEls.forEach((el, i) => {
+            if (i >= max) {
+                el.classList.add('over-limit');
+            } else {
+                el.classList.remove('over-limit');
+            }
+        });
+
+        addPairBtn.disabled = allPairs >= max;
+        const color = allPairs > max ? 'red' : '#555';
+        pairCountDisplay.innerHTML = `<span style="color:${color};font-size:13px;font-weight:500">${allPairs}/${max}</span>`;
+    }
+
     // Add font size change event listener
     const fontSizeInputs = document.querySelectorAll('input[name="font-size"]');
     fontSizeInputs.forEach(input => {
         input.addEventListener('change', function() {
+            updatePairCountDisplay();
             if (isRandomGenerated) {
-                generateRandomList();
+                generateRandomList(true);
             } else {
-                generateList();
+                generateList(true);
             }
         });
     });
@@ -165,15 +193,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Event Listeners
-    addPairBtn.addEventListener('click', addWordPair);
+    addPairBtn.addEventListener('click', () => { addWordPair(); updatePairCountDisplay(); });
     clearAllBtn.addEventListener('click', clearAll);
     generateBtn.addEventListener('click', function() {
         isRandomGenerated = false;
-        generateList();
+        generateList(true);
     });
-    generateRandomBtn.addEventListener('click', generateRandomList);
+    generateRandomBtn.addEventListener('click', () => generateRandomList());
     printBtn.addEventListener('click', printWorksheet);
-    showTitle.addEventListener('change', updatePreview);
+    showTitle.addEventListener('change', () => { updatePairCountDisplay(); updatePreview(); });
 
     // Add Show Answers button event listener
     answerBtn.addEventListener('click', function() {
@@ -189,13 +217,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Reset button event listener
-    const resetWordsBtn = document.getElementById('reset-words-btn');
+    const resetWordsBtn = document.getElementById('reset-pairs-btn');
     resetWordsBtn.addEventListener('click', function() {
-        wordPairContainer.innerHTML = '';
-        for (let i = 0; i < 5; i++) {
-            addWordPair();
-        }
-        displayEmptyPreview();
+        const pairs = getWordPairs();
+        if (pairs.length > 0) generateList(false);
     });
 
     // Add word pair
@@ -220,12 +245,13 @@ document.addEventListener('DOMContentLoaded', function() {
         removeButton.addEventListener('click', function() {
             if (document.querySelectorAll('.word-pair').length > 1) {
                 pair.remove();
-                updatePreview();
+                updatePairCountDisplay();
             }
         });
 
         // Add event listeners for word inputs
         const inputs = pair.querySelectorAll('.word-input-field');
+        inputs.forEach(input => input.addEventListener('input', updatePairCountDisplay));
         inputs[0].addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -283,8 +309,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Generate random list
-    function generateRandomList() {
+    function generateRandomList(preserveOrder = false) {
+        if (preserveOrder) {
+            generateList(true);
+            return;
+        }
+
         isRandomGenerated = true;
+        savedShuffledRight = null;
 
         // Clear existing pairs
         wordPairContainer.innerHTML = '';
@@ -313,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (document.querySelectorAll('.word-pair').length > 1) {
                     pairElement.remove();
                     isRandomGenerated = false;
-                    updatePreview();
+                    updatePairCountDisplay();
                 }
             });
             wordPairContainer.appendChild(pairElement);
@@ -321,12 +353,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Generate the list
         generateList();
+        updatePairCountDisplay();
     }
 
     // Generate list
-    function generateList() {
+    function generateList(preserveOrder = false) {
         const wordPairs = getWordPairs();
-        
+
         if (wordPairs.length === 0) {
             displayEmptyPreview();
             return;
@@ -340,12 +373,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const letterCaseInput = document.querySelector('input[name="letter-case"]:checked');
         const letterCase = letterCaseInput ? letterCaseInput.value : 'uppercase';
 
-        // Create shuffled right column
-        const rightWords = wordPairs.map(pair => pair.right);
-        const shuffledRight = shuffleArray([...rightWords]);
+        // Show only first page in preview
+        const maxPairs = getMaxPairsForFont();
+        const displayedPairs = wordPairs.slice(0, maxPairs);
+
+        // Create shuffled right column using indices (avoids duplicate-value bugs)
+        const allIndices = displayedPairs.map((_, i) => i);
+        let shuffledIndices;
+        if (preserveOrder && savedShuffledRight && savedShuffledRight.length > 0) {
+            if (displayedPairs.length <= savedShuffledRight.length) {
+                // Same count or fewer — keep only valid indices in saved order
+                shuffledIndices = savedShuffledRight.filter(i => i < displayedPairs.length);
+                if (shuffledIndices.length !== displayedPairs.length) {
+                    shuffledIndices = shuffleArray([...allIndices]);
+                }
+            } else {
+                // More pairs than before — reshuffle all
+                shuffledIndices = shuffleArray([...allIndices]);
+            }
+        } else {
+            shuffledIndices = shuffleArray([...allIndices]);
+        }
+        savedShuffledRight = [...shuffledIndices];
 
         let html = '';
-        
+
         // Add header section with logo and student info
         html += '<div class="student-header">';
         html += '<div class="header-left">';
@@ -375,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += `
             <div class="matching-list font-${fontSize}">
                 <div class="list-column left">
-                    ${wordPairs.map((pair, index) => `
+                    ${displayedPairs.map((pair, index) => `
                         <div class="list-item" data-index="${index + 1}">
                             <span class="number">${index + 1}.</span>
                             ${letterCase === 'uppercase' ? pair.left.toUpperCase() : pair.left.toLowerCase()}
@@ -384,13 +436,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     `).join('')}
                 </div>
                 <div class="list-column right">
-                    ${shuffledRight.map((word, index) => {
-                        // Find the original pair that contains this word
-                        const originalPair = wordPairs.find(pair => pair.right === word);
-                        // Get the index of the original pair (1-based to match left items)
-                        const pairIndex = wordPairs.indexOf(originalPair) + 1;
+                    ${shuffledIndices.map((pairIdx) => {
+                        const pair = displayedPairs[pairIdx];
+                        const word = pair.right;
                         return `
-                        <div class="list-item" data-pair-index="${pairIndex}">
+                        <div class="list-item" data-pair-index="${pairIdx + 1}">
                             <span class="connection-point"></span>
                             ${letterCase === 'uppercase' ? word.toUpperCase() : word.toLowerCase()}
                         </div>
@@ -406,6 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update preview
         puzzlePreview.innerHTML = html;
         printBtn.disabled = false;
+        updatePairCountDisplay();
     }
 
     // Display empty preview
@@ -449,6 +500,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearAll() {
         wordPairContainer.innerHTML = '';
         addWordPair();
+        updatePairCountDisplay();
         displayEmptyPreview();
     }
 
@@ -459,19 +511,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Print worksheet
     function printWorksheet() {
-        // Get the worksheet title or use default
         const title = worksheetTitle.value.trim() || 'Matching Lists';
-        
-        // Store the original title
         const originalTitle = document.title;
-        
-        // Set the document title to worksheet title (this will be used as the default filename)
         document.title = title;
-        
-        // Print
         window.print();
-        
-        // Restore the original title
         document.title = originalTitle;
     }
 

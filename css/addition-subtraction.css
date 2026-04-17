@@ -2,10 +2,17 @@
 
 #puzzle-preview .problems-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 1.2rem 1.2rem;
     margin: 0.8rem 0 1.2rem 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#puzzle-preview .problems-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#puzzle-preview .problems-grid.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
 }
 
 #puzzle-preview .problem-item {
@@ -153,6 +160,7 @@
         page-break-after: always;
         background: white;
         position: relative;
+        overflow: hidden;
     }
 
     #print-pages .print-page:last-child {
@@ -173,10 +181,17 @@
     /* Make print pages match preview layout */
     #print-pages .problems-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
         gap: 1.2rem 1.2rem;
         margin: 0.8rem 0 1.2rem 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #print-pages .problems-grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #print-pages .problems-grid.cols-4 {
+        grid-template-columns: repeat(4, 1fr);
     }
 
     #print-pages .problem-item {
@@ -246,7 +261,7 @@
     }
 
     #print-pages .print-page.title-off .title-slot {
-        visibility: hidden;
+        display: none !important;
     }
 
     #print-pages .problem-row.answer {

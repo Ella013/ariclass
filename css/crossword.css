@@ -594,9 +594,9 @@ input[value="large"]:checked ~ .generator-content .cell-letter {
 }
 
 .reset-btn:hover {
-    color: #ff4444;
-    transform: rotate(-45deg);
-} 
+    color: #4a90d9;
+    transform: scale(1.2);
+}
 
 #puzzle-preview {
     position: relative;
