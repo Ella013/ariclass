@@ -1,0 +1,302 @@
+/* ── Checklist Styles ── */
+
+/* 4-per-page: no outer padding */
+#puzzle-preview.ns-fullpage {
+    padding: 0 !important;
+}
+
+/* ── Override puzzle-preview padding ── */
+#puzzle-preview {
+    padding: 15mm !important;
+}
+
+/* ── Override generator layout for option-group ── */
+.options .option-group:first-child {
+    display: block;
+    border-bottom: none;
+    padding-bottom: 0;
+    text-align: center;
+}
+.options .option-group h2  { text-align: center; margin-bottom: 1rem; }
+.options .case-options     { justify-content: center; }
+
+/* ── Header (shared with Note Sheet) ── */
+.ns-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3mm;
+    gap: 8px;
+}
+.ns-logo-wrap img {
+    height: 10mm;
+    width: auto;
+}
+.ns-fields {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.ns-field {
+    font-size: 9pt;
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+.ns-line-short {
+    display: inline-block;
+    width: 28mm;
+    border-bottom: 1px solid #333;
+    height: 14px;
+}
+
+/* ── 4-per-page: smaller header ── */
+.ns-cell4 .ns-logo-wrap img { height: 7mm; }
+.ns-cell4 .ns-field         { font-size: 7.5pt; }
+.ns-cell4 .ns-line-short    { width: 18mm; }
+
+/* ── Title for 2/4-per-page (compact) ── */
+.cl-title {
+    text-align: center;
+    font-size: 17pt;
+    font-weight: bold;
+    margin: 0.5mm 0 1mm;
+    flex-shrink: 0;
+}
+.ns-one-wrap .puzzle-title {
+    margin: 1mm 0;
+}
+.ns-cell4 .cl-title {
+    font-size: 13pt;
+    margin: 1mm 0 2mm;
+}
+
+/* ── Line-only title ── */
+.cl-title-line-only {
+    border-bottom: 1px solid #333;
+    width: 52%;
+    margin: 0.5mm auto 1mm;
+    height: 9mm;
+    flex-shrink: 0;
+}
+.puzzle-title-line {
+    width: 60%;
+    margin: 3mm auto 4mm;
+    height: 10mm;
+}
+.ns-cell4 .cl-title-line-only {
+    height: 5mm;
+    margin: 0.5mm auto 1mm;
+}
+
+/* ── Item text (typed content) ── */
+.cl-item-text {
+    flex: 1;
+    font-size: 13pt;
+    align-self: flex-end;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #999;
+}
+
+/* ── 2-column layout ── */
+.cl-2col {
+    display: flex;
+    gap: 8mm;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+.ns-cell4 .cl-2col {
+    gap: 1.5mm;
+}
+.cl-2col .cl-rows {
+    flex: 1;
+    padding-right: 0;
+}
+
+/* ── Checklist rows ── */
+.cl-rows {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    padding-right: 8mm;
+}
+.cl-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 3mm;
+    flex-shrink: 0;
+}
+.cl-num {
+    font-size: 9pt;
+    color: #555;
+    flex-shrink: 0;
+    padding-bottom: 1px;
+    min-width: 6mm;
+    text-align: right;
+}
+.cl-box {
+    display: inline-block;
+    width: 5mm;
+    height: 5mm;
+    border: 1.5px solid #333;
+    flex-shrink: 0;
+    margin-bottom: 1px;
+}
+.cl-line {
+    flex: 1;
+    border-bottom: 1px solid #999;
+}
+
+/* ── Row height variants ── */
+.ns-lh-narrow .cl-row         { height: 10mm; }
+.ns-lh-normal  .cl-row         { height: 13mm; }
+.ns-lh-wide    .cl-row         { height: 17mm; }
+
+.ns-lh-narrow .ns-cell4 .cl-row { height: 7mm; }
+.ns-lh-normal  .ns-cell4 .cl-row { height: 9mm; }
+.ns-lh-wide    .ns-cell4 .cl-row { height: 12mm; }
+
+/* ── 1-per-page ── */
+.ns-one-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 262mm;
+    overflow: hidden;
+}
+.ns-one-wrap .cl-rows {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ── 2-per-page ── */
+.ns-two-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 267mm;
+}
+.ns-half {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 3mm 0 0;
+    overflow: hidden;
+    min-height: 0;
+}
+.ns-half .cl-rows {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+.ns-cut {
+    flex-shrink: 0;
+    height: 0;
+    border-top: 1.5px dashed #bbb;
+    margin: 0;
+}
+.ns-half:first-child { padding-bottom: 13mm; }
+.ns-half:last-child  { padding-top: 13mm; }
+
+/* ── 4-per-page ── */
+.ns-grid4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 297mm;
+    position: relative;
+}
+.ns-grid4::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    border-top: 1.5px dashed #bbb;
+    pointer-events: none;
+}
+.ns-grid4::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    border-left: 1.5px dashed #bbb;
+    pointer-events: none;
+}
+.ns-cell4 {
+    padding: 6mm;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+.ns-cell4 .cl-rows {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+.ns-cell4 .cl-box { width: 4mm; height: 4mm; }
+.ns-cell4 .cl-num { font-size: 8pt; }
+
+/* ── Print ── */
+@media print {
+    #puzzle-preview              { padding: 15mm !important; }
+    #puzzle-preview.ns-fullpage  { padding: 0 !important; }
+    #puzzle-preview.ns-fullpage .copyright-footer { display: none !important; }
+
+    .ns-header       { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 3mm !important; }
+    .ns-logo-wrap img { height: 10mm !important; width: auto !important; }
+    .ns-fields        { display: flex !important; gap: 10px !important; align-items: center !important; }
+    .ns-field         { font-size: 9pt !important; }
+    .ns-line-short    { display: inline-block !important; width: 28mm !important; border-bottom: 1px solid #333 !important; }
+
+    .cl-title              { text-align: center !important; font-size: 17pt !important; font-weight: bold !important; margin: 0.5mm 0 1mm !important; flex-shrink: 0 !important; }
+    .ns-one-wrap .puzzle-title { margin: 1mm 0 !important; }
+    .ns-cell4 .cl-title   { font-size: 13pt !important; margin: 1mm 0 2mm !important; }
+    .cl-title-line-only    { border-bottom: 1px solid #333 !important; width: 52% !important; margin: 0.5mm auto 1mm !important; height: 9mm !important; flex-shrink: 0 !important; }
+    .puzzle-title-line     { width: 60% !important; margin: 3mm auto 4mm !important; height: 10mm !important; }
+    .ns-cell4 .cl-title-line-only { height: 5mm !important; margin: 0.5mm auto 1mm !important; }
+
+    .cl-rows { display: flex !important; flex-direction: column !important; overflow: hidden !important; min-height: 0 !important; padding-right: 8mm !important; }
+    .cl-row  { display: flex !important; align-items: flex-end !important; gap: 3mm !important; flex-shrink: 0 !important; }
+    .cl-num  { font-size: 9pt !important; color: #555 !important; flex-shrink: 0 !important; padding-bottom: 1px !important; min-width: 6mm !important; text-align: right !important; }
+    .cl-box  { display: inline-block !important; width: 5mm !important; height: 5mm !important; border: 1.5px solid #333 !important; flex-shrink: 0 !important; margin-bottom: 1px !important; }
+    .cl-line { flex: 1 !important; border-bottom: 1px solid #999 !important; }
+    .cl-item-text { flex: 1 !important; font-size: 13pt !important; align-self: flex-end !important; padding-bottom: 1px !important; border-bottom: 1px solid #999 !important; }
+
+    .cl-2col { display: flex !important; gap: 8mm !important; flex: 1 !important; overflow: hidden !important; min-height: 0 !important; }
+    .cl-2col .cl-rows { flex: 1 !important; padding-right: 0 !important; }
+    .ns-cell4 .cl-2col { gap: 1.5mm !important; }
+
+    .ns-one-wrap            { display: flex !important; flex-direction: column !important; height: 262mm !important; overflow: hidden !important; }
+    .ns-one-wrap .cl-rows   { flex: 1 !important; overflow: hidden !important; min-height: 0 !important; }
+    .ns-one-wrap .preview-logo { margin-bottom: 0 !important; }
+
+    .ns-two-wrap            { display: flex !important; flex-direction: column !important; height: 267mm !important; }
+    .ns-half                { flex: 1 !important; display: flex !important; flex-direction: column !important; padding: 3mm 0 0 !important; overflow: hidden !important; min-height: 0 !important; }
+    .ns-half .cl-rows       { flex: 1 !important; overflow: hidden !important; min-height: 0 !important; }
+    .ns-cut                 { flex-shrink: 0 !important; height: 0 !important; border-top: 1.5px dashed #bbb !important; margin: 0 !important; }
+    .ns-half:first-child    { padding-bottom: 13mm !important; }
+    .ns-half:last-child     { padding-top: 13mm !important; }
+
+    .ns-grid4         { display: grid !important; grid-template-columns: 1fr 1fr !important; grid-template-rows: 1fr 1fr !important; height: 297mm !important; position: relative !important; }
+    .ns-grid4::before { content: '' !important; position: absolute !important; top: 50% !important; left: 0 !important; right: 0 !important; border-top: 1.5px dashed #bbb !important; }
+    .ns-grid4::after  { content: '' !important; position: absolute !important; left: 50% !important; top: 0 !important; bottom: 0 !important; border-left: 1.5px dashed #bbb !important; }
+    .ns-cell4         { padding: 6mm !important; box-sizing: border-box !important; overflow: hidden !important; display: flex !important; flex-direction: column !important; min-height: 0 !important; }
+    .ns-cell4 .cl-rows { flex: 1 !important; overflow: hidden !important; min-height: 0 !important; }
+
+    .ns-cell4 .ns-logo-wrap img  { height: 7mm !important; width: auto !important; }
+    .ns-cell4 .ns-field          { font-size: 7.5pt !important; }
+    .ns-cell4 .ns-line-short     { width: 18mm !important; }
+    .ns-cell4 .cl-box            { width: 4mm !important; height: 4mm !important; }
+    .ns-cell4 .cl-num            { font-size: 8pt !important; }
+
+    /* Row height variants */
+    .ns-lh-narrow .cl-row           { height: 10mm !important; }
+    .ns-lh-normal  .cl-row           { height: 13mm !important; }
+    .ns-lh-wide    .cl-row           { height: 17mm !important; }
+    .ns-lh-narrow .ns-cell4 .cl-row  { height: 7mm !important; }
+    .ns-lh-normal  .ns-cell4 .cl-row  { height: 9mm !important; }
+    .ns-lh-wide    .ns-cell4 .cl-row  { height: 12mm !important; }
+}
