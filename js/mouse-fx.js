@@ -1,6 +1,8 @@
 (function() {
+    var isHome = /\/(index\.html)?$/.test(window.location.pathname);
+
     var style = document.createElement('style');
-    style.textContent = '.fx-star{pointer-events:none;position:fixed;font-size:26px;font-weight:bold;color:#FFD700;z-index:9999;animation:fx-star-anim 0.6s ease-out forwards;}@keyframes fx-star-anim{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.3);}}#mouse-circle{pointer-events:none;position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(255,215,0,0.35);z-index:9998;transform:translate(-50%,-50%);display:none;}';
+    style.textContent = '.fx-star{pointer-events:none;position:fixed;font-size:26px;font-weight:bold;color:#FFD700;z-index:9999;animation:fx-star-anim 0.6s ease-out forwards;}@keyframes fx-star-anim{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.3);}}.fx-ripple{pointer-events:none;position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(255,215,0,0.5);z-index:9999;transform:translate(-50%,-50%) scale(1);animation:fx-ripple-anim 0.5s ease-out forwards;}@keyframes fx-ripple-anim{0%{opacity:0.6;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) scale(3.5);}}#mouse-circle{pointer-events:none;position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(255,215,0,0.35);z-index:9998;transform:translate(-50%,-50%);display:none;}';
     document.head.appendChild(style);
 
     var mc = document.createElement('div');
@@ -29,5 +31,17 @@
         }
     }
 
-    document.addEventListener('click', function(e) { burst(e.clientX, e.clientY); }, true);
+    function ripple(x, y) {
+        var el = document.createElement('div');
+        el.className = 'fx-ripple';
+        el.style.left = x + 'px';
+        el.style.top  = y + 'px';
+        document.body.appendChild(el);
+        el.addEventListener('animationend', function(){ this.remove(); });
+    }
+
+    document.addEventListener('click', function(e) {
+        if (isHome) burst(e.clientX, e.clientY);
+        else ripple(e.clientX, e.clientY);
+    }, true);
 })();
