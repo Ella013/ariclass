@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="난이도 조절 가능한 곱셈, 나눗셈 수학 학습지를 무료로 만들어보세요. 연습 문제를 바로 출력하세요.">
-    <title>무료 곱셈 나눗셈 학습지 생성기 - 아리클래스</title>
-    <link rel="canonical" href="https://ariclass.com/ko/multiplication-table.html">
-    <link rel="alternate" hreflang="en" href="https://ariclass.com/multiplication-table.html">
-    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/multiplication-table.html">
+    <meta name="description" content="영어 필기 및 문장 연습을 위한 무료 인쇄용 줄 노트 생성기.">
+    <title>무료 쓰기 노트 생성기 - 아리클래스</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon.ico">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/generator.css">
-    <link rel="stylesheet" href="../css/addition-subtraction.css">
-    <link rel="stylesheet" href="../css/multiplication-table.css">
+    <link rel="stylesheet" href="../css/vocab-test.css">
+    <link rel="stylesheet" href="../css/writing-paper.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
      crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="utility-nav">
+        <div class="utility-nav">
         <div class="container">
             <div class="language-select">
                 <select id="language-selector">
@@ -39,8 +38,8 @@
                     </a>
                 </div>
                 <div class="site-description">
-                    <p class="site-title">아리클래스 : 학습지 생성기</p>
-                    <p>교사와 학생에게 맞춤 학습지를 제공합니다</p>
+                    <h1>아리클래스 : 학습지 생성기</h1>
+                    <p>영어, 수학 등 맞춤 학습지를 몇 초 만에 만들어보세요. 교사와 학생 모두에게 완벽!</p>
                 </div>
                 <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
             </div>
@@ -74,6 +73,15 @@
                             <li><a href="maze.html">미로 퍼즐</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">인쇄용 시트</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">체크리스트</a></li>
+                            <li><a href="vocab-test.html">노트 시트</a></li>
+                            <li><a href="writing-paper.html">쓰기 노트</a></li>
+                            <li><a href="mind-map.html">마인드맵</a></li>
+                        </ul>
+                    </li>
                     <li><a href="how-to-use.html">사용 방법</a></li>
                 </ul>
             </div>
@@ -85,93 +93,94 @@
             <a href="crossword.html">십자말풀이</a>
             <a href="matching-lists.html">단어 연결</a>
             <a href="bingo.html">빙고 게임</a>
-            <a href="sudoku.html">스도쿠</a>
-            <a href="maze.html">미로 퍼즐</a>
             <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
             <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
             <a href="clock.html">시계 읽기</a>
+            <a href="sudoku.html">스도쿠</a>
+            <a href="maze.html">미로 퍼즐</a>
+            <a href="checklist.html">체크리스트</a>
+            <a href="vocab-test.html">노트 시트</a>
+            <a href="writing-paper.html">쓰기 노트</a>
+            <a href="mind-map.html">마인드맵</a>
             <a href="how-to-use.html">사용 방법</a>
         </nav>
     </header>
 
     <div class="generator-container">
-        <h1>곱셈 &amp; 나눗셈</h1>
-
+        <h1>쓰기 노트</h1>
         <div class="generator-content">
+            <!-- Input Section -->
             <div class="input-section">
-
-                <div class="title-input">
-                    <h2>학습지 제목</h2>
-                    <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요">
-                    <div class="option-group">
-                        <label>
-                            <input type="checkbox" id="show-title" checked>
-                            학습지 제목 보이기
-                        </label>
-                    </div>
-                </div>
-
                 <div class="options">
                     <div class="option-group">
-                        <div style="display: flex; gap: 2rem;">
-                            <label>
-                                <input type="radio" name="operation" id="multiplication-only" value="multiplication" checked>
-                                곱셈만
-                            </label>
-                            <label>
-                                <input type="radio" name="operation" id="division-only" value="division">
-                                나눗셈만
-                            </label>
-                            <label>
-                                <input type="radio" name="operation" id="mixed" value="mixed">
-                                혼합
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="option-group" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
-                        <h2 style="text-align:center; font-weight:bold; margin-top:0; margin-bottom:0.6rem;">난이도</h2>
+                        <h2>레이아웃 <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">2장: 점선을 따라 잘라 2장으로 분리하세요. 4장: 십자 선을 따라 잘라 4장으로 분리하세요.</span></span></h2>
                         <div class="case-options">
                             <div class="case-option">
-                                <input type="radio" id="level1" name="level" value="1" checked>
-                                <label for="level1">Level 1 (쉬움)</label>
+                                <input type="radio" id="layout-1" name="layout" value="1" checked>
+                                <label for="layout-1">1장</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="level2" name="level" value="2">
-                                <label for="level2">Level 2 (보통)</label>
+                                <input type="radio" id="layout-2" name="layout" value="2">
+                                <label for="layout-2">2장</label>
                             </div>
                             <div class="case-option">
-                                <input type="radio" id="level3" name="level" value="3">
-                                <label for="level3">Level 3 (어려움)</label>
+                                <input type="radio" id="layout-4" name="layout" value="4">
+                                <label for="layout-4">4장</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="option-group" style="display: flex; justify-content: center;">
-                        <label>
-                            페이지 수:
-                            <input type="number" id="num-pages" min="1" max="10" value="1" style="width: 80px; padding: 0.4rem; margin-left: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px;">
-                            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">각 페이지마다 새로운 랜덤 문제가 생성됩니다.</span></span>
-                        </label>
+                    <div class="option-group">
+                        <h2>줄 간격</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="spacing-narrow" name="spacing" value="narrow">
+                                <label for="spacing-narrow">좁게</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="spacing-normal" name="spacing" value="normal" checked>
+                                <label for="spacing-normal">보통</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="spacing-wide" name="spacing" value="wide">
+                                <label for="spacing-wide">넓게</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h2>줄 색상</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="color-bw" name="linecolor" value="bw">
+                                <label for="color-bw">흑백</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="color-red" name="linecolor" value="red" checked>
+                                <label for="color-red">빨간색</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="color-blue" name="linecolor" value="blue">
+                                <label for="color-blue">파란색</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="button-container">
-                    <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-magic"></i> 학습지 만들기
+                    <button class="print-btn" id="print-btn">
+                        <i class="fas fa-print"></i> 학습지 인쇄
                     </button>
                 </div>
             </div>
 
+            <!-- Preview Section -->
             <div class="preview-section">
                 <div class="preview-label">미리보기</div>
                 <div class="preview-wrapper">
                     <div class="preview-actions">
-                        <button id="print-btn" class="print-btn">
-                            <i class="fas fa-print"></i> 출력하기
-                        </button>
-                        <button id="answer-btn" class="answer-btn">
-                            <i class="fas fa-eye"></i> 정답 보기
+                        <button class="print-btn" id="print-btn-top">
+                            <i class="fas fa-print"></i> 학습지 인쇄
                         </button>
                     </div>
                     <div id="puzzle-preview"></div>
@@ -180,81 +189,37 @@
         </div>
 
         <div class="description-section">
-            <h2>곱셈 &amp; 나눗셈 학습지 만들기</h2>
+            <h2>쓰기 노트 사용 방법</h2>
             <div class="description-content">
                 <div class="instruction-block">
-                    <h3>만드는 방법</h3>
-                    <ol>
-                        <li>학습지 제목을 입력하세요</li>
-                        <li>연산 유형을 선택하세요 (곱셈, 나눗셈, 혼합)</li>
-                        <li>난이도를 선택하세요</li>
-                        <li>페이지 수를 설정하세요</li>
-                        <li>"학습지 만들기" 버튼을 클릭하세요</li>
-                        <li>출력 버튼으로 학습지를 인쇄하세요</li>
-                    </ol>
-                </div>
-                <div class="instruction-block">
-                    <h3>교육적 효과</h3>
+                    <h3>1장</h3>
                     <ul>
-                        <li>곱셈 및 나눗셈 능력 향상</li>
-                        <li>수학적 유창성 강화</li>
-                        <li>초등학생에게 적합</li>
+                        <li>영어 줄이 있는 A4 전체 페이지</li>
+                        <li>3선 시스템: 대문자 높이, x-높이(점선), 기준선</li>
+                        <li>상단에 날짜 및 이름 칸 포함</li>
                     </ul>
                 </div>
                 <div class="instruction-block">
-                    <h3>선생님 팁</h3>
+                    <h3>2장</h3>
                     <ul>
-                        <li>구구단 연습에 활용하세요</li>
-                        <li>혼합 연산으로 학생에게 도전을 제공하세요</li>
-                        <li>매일 워밍업 활동으로 활용하세요</li>
+                        <li>A4 한 페이지에 쓰기 노트 2개</li>
+                        <li>점선을 따라 잘라 분리하세요</li>
+                        <li>짧은 쓰기 연습에 적합</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>4장</h3>
+                    <ul>
+                        <li>2×2 격자의 미니 쓰기 노트 4개</li>
+                        <li>십자 선을 따라 잘라 분리하세요</li>
+                        <li>간단한 쓰기 연습에 적합</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../js/multiplication-table.js"></script>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
-                <p>아리클래스는 교사와 학생을 위한 무료 학습지 생성 사이트입니다.</p>
-            </div>
-            <nav class="footer-nav">
-                <h3>바로가기</h3>
-                <ul class="footer-nav-list">
-                    <li><a href="index.html">홈</a></li>
-                    <li><a href="word-search.html">단어 찾기</a></li>
-                    <li><a href="unscramble.html">문장 배열</a></li>
-                    <li><a href="crossword.html">십자말풀이</a></li>
-                    <li><a href="matching-lists.html">단어 연결</a></li>
-                    <li><a href="bingo.html">빙고 게임</a></li>
-                    <li><a href="sudoku.html">스도쿠</a></li>
-                    <li><a href="maze.html">미로 퍼즐</a></li>
-                    <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
-                    <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
-                    <li><a href="clock.html">시계 읽기</a></li>
-                </ul>
-            </nav>
-            <nav class="footer-nav">
-                <h3>정보</h3>
-                <ul class="footer-nav-list">
-                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
-                    <li><a href="../terms-of-use.html">이용약관</a></li>
-                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
-                </ul>
-            </nav>
-            <div class="footer-contact">
-                <h3>문의</h3>
-                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 Ariclass. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <script src="../js/writing-paper.js"></script>
     <script>
         (function() {
             var btn = document.getElementById('hamburgerBtn');
@@ -266,11 +231,44 @@
             });
         })();
         document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../multiplication-table.html';
-            }
+            if (this.value === 'en') window.location.href = '../writing-paper.html';
         });
     </script>
+
+        <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>아리클래스는 영어, 수학 등 다양한 과목의 무료 학습지를 제공합니다.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>바로가기</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="word-search.html">단어 찾기</a></li>
+                    <li><a href="unscramble.html">문장 배열</a></li>
+                    <li><a href="checklist.html">체크리스트</a></li>
+                    <li><a href="vocab-test.html">노트 시트</a></li>
+                    <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>정보</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
+                    <li><a href="../terms-of-use.html">이용약관</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>문의하기</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
     <script src="../js/mouse-fx.js"></script>
 </body>
 </html>

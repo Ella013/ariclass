@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사용 방법 - 아리클래스</title>
-    <meta name="description" content="아리클래스 학습지 생성기 사용법 안내. 영어, 수학 등 맞춤 학습지를 만드는 방법을 단계별로 알아보세요.">
+    <meta name="description" content="아리클래스 학습지 생성기 사용 방법을 안내합니다. 영어, 수학 등 맞춤 학습지를 만드는 단계별 가이드입니다.">
     <link rel="canonical" href="https://ariclass.com/ko/how-to-use.html">
     <link rel="alternate" hreflang="en" href="https://ariclass.com/how-to-use.html">
     <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/how-to-use.html">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon.ico">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
@@ -36,8 +38,8 @@
                     </a>
                 </div>
                 <div class="site-description">
-                    <p class="site-title">아리클래스 : 학습지 생성기</p>
-                    <p>교사와 학생에게 맞춤 학습지를 제공합니다</p>
+                    <h1>아리클래스 : 학습지 생성기</h1>
+                    <p>영어, 수학 등 맞춤 학습지를 몇 초 만에 만들어보세요. 교사와 학생 모두에게 완벽!</p>
                 </div>
                 <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
             </div>
@@ -47,18 +49,37 @@
                 <ul class="nav-links">
                     <li><a href="index.html">홈</a></li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)">학습지</a>
+                        <a href="index.html#section-english">영어</a>
                         <ul class="dropdown-menu">
-                            <li><a href="../word-search.html">단어 찾기</a></li>
-                            <li><a href="../unscramble.html">문장 배열</a></li>
-                            <li><a href="../crossword.html">십자말풀이</a></li>
-                            <li><a href="../matching-lists.html">연결하기</a></li>
-                            <li><a href="../bingo.html">빙고 게임</a></li>
-                            <li><a href="../sudoku.html">스도쿠</a></li>
-                            <li><a href="../maze.html">미로 퍼즐</a></li>
-                            <li><a href="../addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
-                            <li><a href="../multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
-                            <li><a href="../clock.html">시계 읽기</a></li>
+                            <li><a href="word-search.html">단어 찾기</a></li>
+                            <li><a href="unscramble.html">문장 배열</a></li>
+                            <li><a href="crossword.html">십자말풀이</a></li>
+                            <li><a href="matching-lists.html">단어 연결</a></li>
+                            <li><a href="bingo.html">빙고 게임</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">수학</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                            <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                            <li><a href="clock.html">시계 읽기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">퍼즐</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">스도쿠</a></li>
+                            <li><a href="maze.html">미로 퍼즐</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">인쇄용 시트</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">체크리스트</a></li>
+                            <li><a href="vocab-test.html">노트 시트</a></li>
+                            <li><a href="writing-paper.html">쓰기 노트</a></li>
+                            <li><a href="mind-map.html">마인드맵</a></li>
                         </ul>
                     </li>
                     <li><a href="how-to-use.html">사용 방법</a></li>
@@ -66,18 +87,23 @@
             </div>
         </nav>
 
+        <!-- Mobile Nav Drawer -->
         <nav class="mobile-nav" id="mobileNav">
             <a href="index.html">홈</a>
-            <a href="../word-search.html">단어 찾기</a>
-            <a href="../unscramble.html">문장 배열</a>
-            <a href="../crossword.html">십자말풀이</a>
-            <a href="../matching-lists.html">연결하기</a>
-            <a href="../bingo.html">빙고 게임</a>
-            <a href="../sudoku.html">스도쿠</a>
-            <a href="../maze.html">미로 퍼즐</a>
-            <a href="../addition-subtraction.html">덧셈 &amp; 뺄셈</a>
-            <a href="../multiplication-table.html">곱셈 &amp; 나눗셈</a>
-            <a href="../clock.html">시계 읽기</a>
+            <a href="word-search.html">단어 찾기</a>
+            <a href="unscramble.html">문장 배열</a>
+            <a href="crossword.html">십자말풀이</a>
+            <a href="matching-lists.html">단어 연결</a>
+            <a href="bingo.html">빙고 게임</a>
+            <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+            <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+            <a href="clock.html">시계 읽기</a>
+            <a href="sudoku.html">스도쿠</a>
+            <a href="maze.html">미로 퍼즐</a>
+            <a href="checklist.html">체크리스트</a>
+            <a href="vocab-test.html">노트 시트</a>
+            <a href="writing-paper.html">쓰기 노트</a>
+            <a href="mind-map.html">마인드맵</a>
             <a href="how-to-use.html">사용 방법</a>
         </nav>
     </header>
@@ -86,76 +112,87 @@
         <div style="background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
             <h1 style="font-size: 2.5rem; margin-bottom: 1rem; color: #333;">아리클래스 사용 방법</h1>
             <p style="color: #666; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">
-                아리클래스는 몇 초 만에 맞춤형 교육 학습지를 만들 수 있는 서비스입니다. 아래 가이드를 따라 시작해보세요.
+                아리클래스는 몇 초 만에 맞춤 교육용 학습지를 만들 수 있는 서비스입니다. 이 가이드를 따라 학습지 생성기를 시작해보세요.
             </p>
 
             <section style="margin-bottom: 3rem;">
                 <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #FFD700; padding-bottom: 0.5rem;">시작하기</h2>
                 <p style="line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
-                    아리클래스로 학습지 만들기는 간단하며 회원가입이 필요 없습니다. 다음 단계를 따라해 보세요:
+                    아리클래스로 학습지를 만드는 것은 간단하고 회원가입이 필요 없습니다. 다음 기본 단계를 따라해보세요:
                 </p>
                 <ol style="line-height: 1.8; color: #555; margin-left: 2rem; margin-bottom: 1rem;">
-                    <li style="margin-bottom: 1rem;"><strong>학습지 유형 선택:</strong> 홈페이지에서 단어 찾기, 문장 배열, 십자말풀이, 연결하기, 빙고 게임 등을 선택하세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>내용 입력:</strong> 단어, 문장, 어휘를 입력 칸에 직접 입력하거나 붙여넣으세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>설정 조정:</strong> 레이아웃, 간격, 글자 크기 등 원하는 옵션을 설정하세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>생성 및 미리보기:</strong> '학습지 생성' 버튼을 클릭하면 오른쪽에서 미리볼 수 있습니다.</li>
-                    <li style="margin-bottom: 1rem;"><strong>출력:</strong> 출력 버튼을 눌러 브라우저에서 바로 인쇄하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>학습지 유형 선택:</strong> 홈 페이지에서 단어 찾기, 문장 배열, 십자말풀이, 단어 연결, 빙고 게임 중 원하는 것을 선택하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>내용 입력:</strong> 단어, 문장, 어휘 등을 입력 칸에 입력하거나 붙여넣기 하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>옵션 설정:</strong> 레이아웃 형식, 간격, 글씨 크기 등 다양한 옵션을 조절하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>생성 &amp; 미리보기:</strong> "학습지 생성" 버튼을 클릭해 학습지를 만들고 오른쪽에서 미리보기를 확인하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>인쇄:</strong> 인쇄 버튼을 눌러 브라우저에서 바로 출력하세요.</li>
                 </ol>
             </section>
 
             <section style="margin-bottom: 3rem;">
-                <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #FFD700; padding-bottom: 0.5rem;">학습지 종류</h2>
+                <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #FFD700; padding-bottom: 0.5rem;">학습지 유형</h2>
 
                 <div style="margin-bottom: 2rem; padding: 1.5rem; background: #FFF9E6; border-radius: 8px;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; color: #333;">단어 찾기</h3>
-                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">맞춤 어휘로 단어 찾기 퍼즐을 만들어보세요. 어휘 연습과 철자 학습에 좋습니다.</p>
+                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">
+                        맞춤 어휘로 단어 찾기 퍼즐을 만들어보세요. 어휘 연습과 철자 익히기에 최적입니다.
+                    </p>
                     <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                        <li>단어 최대 10개까지 입력</li>
-                        <li>대문자 또는 소문자 선택</li>
-                        <li>그리드 크기 선택 (8×8, 11×11, 15×15)</li>
-                        <li>대각선, 거꾸로 쓰기 등 옵션 설정</li>
+                        <li>입력 칸에 단어를 입력하세요</li>
+                        <li>대문자 또는 소문자 선택 가능</li>
+                        <li>격자 크기 선택 (8x8, 11x11, 15x15)</li>
+                        <li>대각선 단어, 뒤집힌 단어 등 옵션 설정 가능</li>
                     </ul>
                 </div>
 
                 <div style="margin-bottom: 2rem; padding: 1.5rem; background: #FFF9E6; border-radius: 8px;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; color: #333;">문장 배열</h3>
-                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">문장을 섞어서 어순과 문장 구조를 연습할 수 있는 문제를 만드세요.</p>
+                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">
+                        학생들이 단어 순서와 문장 구조를 익힐 수 있도록 문장 배열 학습지를 만들어보세요.
+                    </p>
                     <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                        <li>마침표, 물음표, 느낌표로 끝나는 문장 입력</li>
-                        <li>1열 또는 2열 레이아웃 선택</li>
-                        <li>간격 조절 (좁게, 보통, 넓게)</li>
-                        <li>섞인 문장의 첫 글자 대문자 옵션</li>
+                        <li>마침표, 물음표, 느낌표로 끝나는 문장을 한 줄씩 입력하세요</li>
+                        <li>1단 또는 2단 레이아웃 선택 가능</li>
+                        <li>문항 간격 조절 (좁게, 보통, 넓게)</li>
+                        <li>섞인 문장의 첫 단어 대문자 표시 옵션</li>
                     </ul>
                 </div>
 
                 <div style="margin-bottom: 2rem; padding: 1.5rem; background: #FFF9E6; border-radius: 8px;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; color: #333;">십자말풀이</h3>
-                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">어휘 연습과 복습을 위한 십자말풀이를 만들어보세요.</p>
+                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">
+                        어휘 연습과 개념 복습을 위한 십자말풀이 퍼즐을 만들어보세요.
+                    </p>
                     <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                        <li>단어와 힌트 입력</li>
-                        <li>자동으로 십자말 그리드 생성</li>
-                        <li>채점용 정답지 포함</li>
+                        <li>단어와 힌트를 입력하세요</li>
+                        <li>십자말풀이 격자가 자동으로 생성됩니다</li>
+                        <li>채점에 편리한 정답지가 포함됩니다</li>
                     </ul>
                 </div>
 
                 <div style="margin-bottom: 2rem; padding: 1.5rem; background: #FFF9E6; border-radius: 8px;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; color: #333;">연결하기</h3>
-                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">관련 단어, 개념, 뜻을 연결하는 문제를 만드세요.</p>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; color: #333;">단어 연결</h3>
+                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">
+                        관련 단어, 개념, 정의를 연결하는 학습지를 만들어보세요.
+                    </p>
                     <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                        <li>관련 항목 쌍 입력 (단어, 뜻, 번역 등)</li>
-                        <li>자동으로 섞어서 번호 표시</li>
-                        <li>번호가 있는 정답 확인 기능</li>
+                        <li>관련 항목 쌍을 입력하세요 (단어, 정의, 번역 등)</li>
+                        <li>자동으로 섞어서 번호를 매겨줍니다</li>
+                        <li>번호가 매겨진 정답으로 "정답 보기" 기능 포함</li>
                     </ul>
                 </div>
 
                 <div style="margin-bottom: 2rem; padding: 1.5rem; background: #FFF9E6; border-radius: 8px;">
                     <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; color: #333;">빙고 게임</h3>
-                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">다양한 크기의 맞춤형 빙고 카드를 만들어보세요.</p>
+                    <p style="line-height: 1.8; color: #555; margin-bottom: 0.8rem;">
+                        어휘 연습과 복습 활동을 위한 맞춤 빙고 게임을 만들어보세요.
+                    </p>
                     <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                        <li>어휘 단어 입력</li>
-                        <li>보드 크기 선택 (3×3, 4×4, 5×5)</li>
-                        <li>플레이어 수 선택 (각자 고유한 카드)</li>
-                        <li>글자 크기 조절 및 학습지 제목 설정</li>
+                        <li>어휘 단어를 입력하세요</li>
+                        <li>보드 크기 선택 (3x3, 4x4, 5x5)</li>
+                        <li>플레이어 수 선택 (각각 다른 보드 생성)</li>
+                        <li>글씨 크기 조절 (작게, 보통, 크게)</li>
+                        <li>학습지 제목 설정 가능</li>
                     </ul>
                 </div>
             </section>
@@ -163,23 +200,25 @@
             <section style="margin-bottom: 3rem;">
                 <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #FFD700; padding-bottom: 0.5rem;">선생님을 위한 팁</h2>
                 <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                    <li style="margin-bottom: 1rem;"><strong>내용 미리 준비:</strong> 시작 전에 어휘, 문장, 개념을 미리 정리해두세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>현재 수업 활용:</strong> 현재 커리큘럼에 맞는 학습지를 만들어 학습을 강화하세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>난이도 조절:</strong> 그리드 크기, 간격, 글자 크기를 조절해 학생 수준에 맞추세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>나중을 위해 저장:</strong> 같은 학습지를 여러 학급에 출력하거나 내용을 저장해두세요.</li>
-                    <li style="margin-bottom: 1rem;"><strong>다양한 활동 조합:</strong> 같은 어휘로 다양한 유형의 학습지를 만들어 다채로운 연습 기회를 제공하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>내용 미리 준비:</strong> 시작 전 어휘, 문장, 개념을 미리 준비하세요. 시간을 절약하고 정확도를 높일 수 있어요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>현재 수업 활용:</strong> 현재 교육과정에 맞는 학습지를 만들어 학습을 강화하고 관련 연습을 제공하세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>난이도 조절:</strong> 격자 크기, 간격, 글씨 크기 등 다양한 설정을 사용해 학생 수준에 맞추세요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>나중을 위해 저장:</strong> 같은 학습지를 여러 반을 위해 여러 장 출력하거나, 내용을 저장해 나중에 다시 만들 수 있어요.</li>
+                    <li style="margin-bottom: 1rem;"><strong>활동 조합:</strong> 같은 어휘로 다양한 유형의 학습지를 만들어 다채로운 연습 기회를 제공하세요.</li>
                 </ul>
             </section>
 
             <section style="margin-bottom: 3rem;">
-                <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #FFD700; padding-bottom: 0.5rem;">학습지 출력하기</h2>
-                <p style="line-height: 1.8; color: #555; margin-bottom: 1rem;">모든 학습지는 A4 용지에 최적화되어 있습니다. 출력 시:</p>
+                <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #FFD700; padding-bottom: 0.5rem;">학습지 인쇄하기</h2>
+                <p style="line-height: 1.8; color: #555; margin-bottom: 1rem;">
+                    모든 학습지는 A4 용지 크기에 최적화되어 있습니다. 인쇄 시:
+                </p>
                 <ul style="line-height: 1.8; color: #555; margin-left: 2rem;">
-                    <li style="margin-bottom: 0.8rem;">미리보기 영역에서 '학습지 출력' 버튼 클릭</li>
-                    <li style="margin-bottom: 0.8rem;">인쇄 설정에서 용지 크기를 'A4'로 선택</li>
-                    <li style="margin-bottom: 0.8rem;">여백은 기본값(20mm)으로 설정</li>
-                    <li style="margin-bottom: 0.8rem;">빙고처럼 여러 플레이어 카드가 있는 경우 모두 자동으로 출력</li>
-                    <li style="margin-bottom: 0.8rem;">출력 시 입력 영역과 메뉴는 자동으로 숨겨짐</li>
+                    <li style="margin-bottom: 0.8rem;">미리보기 영역의 "학습지 인쇄" 버튼을 클릭하세요</li>
+                    <li style="margin-bottom: 0.8rem;">인쇄 대화상자에서 용지 크기가 "A4"로 설정되어 있는지 확인하세요</li>
+                    <li style="margin-bottom: 0.8rem;">여백은 기본값(보통 20mm)으로 설정하세요</li>
+                    <li style="margin-bottom: 0.8rem;">빙고처럼 여러 페이지가 있는 경우, 모든 페이지가 자동으로 인쇄됩니다</li>
+                    <li style="margin-bottom: 0.8rem;">메뉴와 입력 영역은 인쇄 시 자동으로 숨겨집니다</li>
                 </ul>
             </section>
 
@@ -188,30 +227,40 @@
 
                 <div style="margin-bottom: 1.5rem;">
                     <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #333;">회원가입이 필요한가요?</h3>
-                    <p style="line-height: 1.8; color: #555;">아니요. 아리클래스는 완전 무료이며 회원가입 없이 바로 사용할 수 있습니다.</p>
+                    <p style="line-height: 1.8; color: #555;">
+                        아니요, 아리클래스는 완전히 무료이며 회원가입이 필요 없습니다. 웹사이트에 접속해 바로 학습지를 만들 수 있어요.
+                    </p>
                 </div>
 
                 <div style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #333;">이 학습지를 상업적으로 사용할 수 있나요?</h3>
-                    <p style="line-height: 1.8; color: #555;">학습지는 개인 및 교육 목적으로 사용하도록 설계되었습니다. 상업적 사용은 이용약관을 확인해 주세요.</p>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #333;">상업적으로 사용할 수 있나요?</h3>
+                    <p style="line-height: 1.8; color: #555;">
+                        아리클래스로 만든 학습지는 개인 및 교육 목적으로 사용하기 위한 것입니다. 상업적 이용은 이용약관을 확인해주세요.
+                    </p>
                 </div>
 
                 <div style="margin-bottom: 1.5rem;">
                     <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #333;">입력한 내용이 서버에 저장되나요?</h3>
-                    <p style="line-height: 1.8; color: #555;">아니요. 입력하신 내용은 브라우저에서 로컬로 처리되며, 서버에 저장하거나 전송하지 않습니다.</p>
+                    <p style="line-height: 1.8; color: #555;">
+                        아니요, 입력한 모든 내용은 브라우저에서 로컬로 처리됩니다. 학습지 내용을 서버에 저장하거나 전송하지 않습니다.
+                    </p>
                 </div>
 
                 <div style="margin-bottom: 1.5rem;">
                     <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #333;">어떤 과목의 학습지를 만들 수 있나요?</h3>
-                    <p style="line-height: 1.8; color: #555;">주로 영어와 수학을 위해 설계되었지만, 어휘, 매칭, 퍼즐 활동을 활용하는 모든 과목에 적용할 수 있습니다.</p>
+                    <p style="line-height: 1.8; color: #555;">
+                        주로 영어와 수학을 위해 설계되었지만, 어휘, 연결, 퍼즐 기반 활동을 사용하는 어떤 과목에도 활용할 수 있습니다.
+                    </p>
                 </div>
             </section>
 
             <section style="margin-bottom: 2rem; padding: 2rem; background: #FFF9E6; border-radius: 8px; text-align: center;">
-                <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #333;">지금 시작해볼까요?</h2>
-                <p style="line-height: 1.8; color: #555; margin-bottom: 1.5rem;">홈페이지로 이동해서 모든 학습지 유형을 살펴보고 첫 번째 학습지를 만들어보세요!</p>
+                <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #333;">지금 시작할 준비가 됐나요?</h2>
+                <p style="line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                    홈 페이지를 방문해 모든 학습지 유형을 둘러보고 오늘 첫 번째 학습지를 만들어보세요!
+                </p>
                 <a href="index.html" class="create-btn" style="display: inline-block; padding: 1rem 2rem; background-color: #FFD700; color: #333; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 1.1rem; transition: background-color 0.2s ease;">
-                    학습지 살펴보기
+                    학습지 둘러보기
                 </a>
             </section>
         </div>
@@ -223,21 +272,19 @@
                 <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
                 <p>아리클래스는 영어, 수학 등 다양한 과목의 무료 학습지를 제공합니다.</p>
             </div>
-
             <nav class="footer-nav">
                 <h3>바로가기</h3>
                 <ul class="footer-nav-list">
                     <li><a href="index.html">홈</a></li>
-                    <li><a href="../word-search.html">단어 찾기</a></li>
-                    <li><a href="../unscramble.html">문장 배열</a></li>
-                    <li><a href="../crossword.html">십자말풀이</a></li>
-                    <li><a href="../matching-lists.html">연결하기</a></li>
-                    <li><a href="../bingo.html">빙고 게임</a></li>
-                    <li><a href="../sudoku.html">스도쿠</a></li>
-                    <li><a href="../maze.html">미로 퍼즐</a></li>
+                    <li><a href="word-search.html">단어 찾기</a></li>
+                    <li><a href="unscramble.html">문장 배열</a></li>
+                    <li><a href="crossword.html">십자말풀이</a></li>
+                    <li><a href="matching-lists.html">단어 연결</a></li>
+                    <li><a href="bingo.html">빙고 게임</a></li>
+                    <li><a href="sudoku.html">스도쿠</a></li>
+                    <li><a href="maze.html">미로 퍼즐</a></li>
                 </ul>
             </nav>
-
             <nav class="footer-nav">
                 <h3>정보</h3>
                 <ul class="footer-nav-list">
@@ -246,13 +293,11 @@
                     <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
                 </ul>
             </nav>
-
             <div class="footer-contact">
-                <h3>문의</h3>
+                <h3>문의하기</h3>
                 <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>© 2025 Ariclass. All rights reserved.</p>
         </div>
@@ -270,10 +315,9 @@
         })();
 
         document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../how-to-use.html';
-            }
+            if (this.value === 'en') window.location.href = '../how-to-use.html';
         });
     </script>
+    <script src="../js/mouse-fx.js"></script>
 </body>
 </html>
