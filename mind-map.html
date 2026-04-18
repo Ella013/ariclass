@@ -112,18 +112,34 @@
                 <div class="options">
                     <div class="option-group">
                         <h2>Center Shape</h2>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <input type="radio" id="shape-bulb" name="centershape" value="bulb" checked>
-                                <label for="shape-bulb">Lightbulb</label>
+                        <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+                            <div style="display:flex; gap:8px">
+                                <div class="case-option">
+                                    <input type="radio" id="shape-bulb" name="centershape" value="bulb" checked>
+                                    <label for="shape-bulb">Lightbulb</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="shape-rect" name="centershape" value="rect">
+                                    <label for="shape-rect">Rounded Box</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="shape-circle" name="centershape" value="circle">
+                                    <label for="shape-circle">Circle</label>
+                                </div>
                             </div>
-                            <div class="case-option">
-                                <input type="radio" id="shape-rect" name="centershape" value="rect">
-                                <label for="shape-rect">Rounded Box</label>
-                            </div>
-                            <div class="case-option">
-                                <input type="radio" id="shape-circle" name="centershape" value="circle">
-                                <label for="shape-circle">Circle</label>
+                            <div style="display:flex; gap:8px">
+                                <div class="case-option">
+                                    <input type="radio" id="shape-oval" name="centershape" value="oval">
+                                    <label for="shape-oval">Oval</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="shape-line" name="centershape" value="line">
+                                    <label for="shape-line">Underline</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="shape-none" name="centershape" value="none">
+                                    <label for="shape-none">None</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -273,5 +289,6 @@
             <p>© 2025 Ariclass. All rights reserved.</p>
         </div>
     </footer>
+    <script src="js/mouse-fx.js"></script>
 </body>
 </html>
