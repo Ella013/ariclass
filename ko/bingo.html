@@ -22,10 +22,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -106,8 +103,15 @@
                     </div>
                 </div>
                 <div class="word-input">
-                    <h2>단어 입력</h2>
-                    <textarea id="wordInput" class="vocab-textarea" placeholder="단어를 입력하세요 (한 줄에 하나씩)"></textarea>
+                    <div class="section-header">
+                        <h2>단어 입력</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="미리보기 셔플">
+                            <i class="fas fa-random"></i>
+                        </button>
+                    </div>
+                    <div class="word-input-wrapper">
+                        <textarea id="wordInput" class="vocab-textarea" placeholder="단어를 입력하세요 (한 줄에 하나씩)"></textarea>
+                    </div>
                     <button id="clearButton" class="clear-btn"><i class="fas fa-trash"></i> 초기화</button>
                 </div>
                 <div class="options">
@@ -144,6 +148,16 @@
                                 <label for="font-large">크게</label>
                             </div>
                         </div>
+                    </div>
+                    <div class="option-group option-checkboxes">
+                        <label class="check-option-label">
+                            <input type="checkbox" id="top-align">
+                            단어 위쪽 정렬
+                        </label>
+                        <label class="check-option-label">
+                            <input type="checkbox" id="free-space">
+                            FREE 칸
+                        </label>
                     </div>
                     <div class="option-group">
                         <h2>플레이어 수 <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">플레이어마다 고유한 빙고 카드가 생성됩니다. 출력 시 플레이어 수만큼 페이지가 생성됩니다.</span></span></h2>
@@ -255,12 +269,8 @@
                 nav.classList.toggle('open');
             });
         })();
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../bingo.html';
-            }
-        });
     </script>
     <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
 </body>
 </html>

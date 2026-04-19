@@ -2,7 +2,7 @@
     var isHome = /\/(index\.html)?$/.test(window.location.pathname);
 
     var style = document.createElement('style');
-    style.textContent = '.fx-star{pointer-events:none;position:fixed;font-size:26px;font-weight:bold;color:#FFD700;z-index:9999;animation:fx-star-anim 0.6s ease-out forwards;}@keyframes fx-star-anim{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.3);}}@keyframes fx-pulse{0%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(2);}100%{transform:translate(-50%,-50%) scale(1);}}#mouse-circle{pointer-events:none;position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(255,215,0,0.35);z-index:9998;transform:translate(-50%,-50%);display:none;}';
+    style.textContent = '.fx-star{pointer-events:none;position:fixed;font-size:26px;font-weight:bold;color:#FFD700;z-index:9999;animation:fx-star-anim 0.6s ease-out forwards;}@keyframes fx-star-anim{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.3);}}@keyframes fx-pulse{0%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.5);}100%{transform:translate(-50%,-50%) scale(1);}}#mouse-circle{pointer-events:none;position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(255,215,0,0.35);z-index:9998;transform:translate(-50%,-50%);display:none;}';
     document.head.appendChild(style);
 
     var mc = document.createElement('div');

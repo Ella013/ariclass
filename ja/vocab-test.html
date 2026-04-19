@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="日付・名前欄付きのノートシートを無料で作成。1・2・4枚レイアウトから選べます。">
+    <title>無料ノートシート作成ツール - アリクラス</title>
+    <link rel="canonical" href="https://ariclass.com/ja/vocab-test.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/vocab-test.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/vocab-test.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/vocab-test.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/vocab-test.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select">
+                
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">アリクラス：プリント作成ツール</p>
+                    <p>教師と生徒のための無料プリント作成サービス</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">英語</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">単語探し</a></li>
+                            <li><a href="unscramble.html">文章並び替え</a></li>
+                            <li><a href="crossword.html">クロスワード</a></li>
+                            <li><a href="matching-lists.html">単語マッチング</a></li>
+                            <li><a href="bingo.html">ビンゴゲーム</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">算数</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">足し算・引き算</a></li>
+                            <li><a href="multiplication-table.html">掛け算・割り算</a></li>
+                            <li><a href="clock.html">時計の読み方</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">パズル</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">数独</a></li>
+                            <li><a href="maze.html">迷路パズル</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">印刷用シート</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">チェックリスト</a></li>
+                            <li><a href="vocab-test.html">ノートシート</a></li>
+                            <li><a href="writing-paper.html">作文用紙</a></li>
+                            <li><a href="mind-map.html">マインドマップ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">使い方</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">ホーム</a>
+            <a href="word-search.html">単語探し</a>
+            <a href="unscramble.html">文章並び替え</a>
+            <a href="crossword.html">クロスワード</a>
+            <a href="matching-lists.html">単語マッチング</a>
+            <a href="bingo.html">ビンゴゲーム</a>
+            <a href="addition-subtraction.html">足し算・引き算</a>
+            <a href="multiplication-table.html">掛け算・割り算</a>
+            <a href="clock.html">時計の読み方</a>
+            <a href="sudoku.html">数独</a>
+            <a href="maze.html">迷路パズル</a>
+            <a href="checklist.html">チェックリスト</a>
+            <a href="vocab-test.html">ノートシート</a>
+            <a href="writing-paper.html">作文用紙</a>
+            <a href="mind-map.html">マインドマップ</a>
+            <a href="how-to-use.html">使い方</a>
+        </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>ノートシート作成ツール</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="options">
+                    <div class="option-group">
+                        <h2>レイアウト <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">2枚：点線に沿って切り取り2枚に分けてください。4枚：十字線に沿って切り取り4枚に分けてください。</span></span></h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="layout-1" name="layout" value="1" checked>
+                                <label for="layout-1">1枚</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="layout-2" name="layout" value="2">
+                                <label for="layout-2">2枚</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="layout-4" name="layout" value="4">
+                                <label for="layout-4">4枚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>線のスタイル</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="style-solid" name="linestyle" value="solid" checked>
+                                <label for="style-solid">実線</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="style-dashed" name="linestyle" value="dashed">
+                                <label for="style-dashed">破線</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="style-bold" name="linestyle" value="bold">
+                                <label for="style-bold">太線</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>行の間隔</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="spacing-narrow" name="spacing" value="narrow">
+                                <label for="spacing-narrow">狭い</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="spacing-normal" name="spacing" value="normal" checked>
+                                <label for="spacing-normal">普通</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="spacing-wide" name="spacing" value="wide">
+                                <label for="spacing-wide">広い</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="print-btn" id="print-btn">
+                        <i class="fas fa-print"></i> 印刷する
+                    </button>
+                </div>
+            </div>
+            <div class="preview-section">
+                <div class="preview-label">プレビュー</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button class="print-btn" id="print-btn-top">
+                            <i class="fas fa-print"></i> 印刷する
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+        <div class="description-section">
+            <h2>ノートシートの使い方</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>1枚</h3>
+                    <ul>
+                        <li>罫線付きA4全ページ</li>
+                        <li>日付・名前欄付き</li>
+                        <li>長い語彙リストやノート取りに最適</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>2枚</h3>
+                    <ul>
+                        <li>A4一枚にノートシート2枚</li>
+                        <li>点線に沿って切り取って使用</li>
+                        <li>短い語彙リストに最適（用紙節約！）</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>4枚</h3>
+                    <ul>
+                        <li>2×2グリッドのミニノートシート4枚</li>
+                        <li>クイズや少量の単語リストに最適</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/vocab-test.js"></script>
+<footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>アリクラスは英語・算数など様々な科目の無料プリントを提供します。</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>クイックリンク</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="word-search.html">単語探し</a></li>
+                    <li><a href="unscramble.html">文章並び替え</a></li>
+                    <li><a href="crossword.html">クロスワード</a></li>
+                    <li><a href="matching-lists.html">単語マッチング</a></li>
+                    <li><a href="bingo.html">ビンゴゲーム</a></li>
+                    <li><a href="sudoku.html">数独</a></li>
+                    <li><a href="maze.html">迷路パズル</a></li>
+                    <li><a href="addition-subtraction.html">足し算・引き算</a></li>
+                    <li><a href="multiplication-table.html">掛け算・割り算</a></li>
+                    <li><a href="clock.html">時計の読み方</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>情報</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">プライバシーポリシー</a></li>
+                    <li><a href="../terms-of-use.html">利用規約</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>お問い合わせ</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+<script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

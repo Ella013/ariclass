@@ -22,10 +22,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -107,7 +104,7 @@
                 </div>
                 <div class="word-input">
                     <div class="section-header">
-                        <h2>단어 쌍 입력</h2>
+                        <h2>단어 짝 입력</h2>
                         <button id="reset-pairs-btn" class="reset-btn" title="초기화">
                             <i class="fas fa-undo-alt"></i>
                         </button>
@@ -115,7 +112,7 @@
                     <div class="word-pairs-container">
                         <div class="word-pair-container"></div>
                     </div>
-                    <button id="add-pair-btn" class="add-word-btn"><i class="fas fa-plus"></i> 단어 쌍 추가</button>
+                    <button id="add-pair-btn" class="add-word-btn"><i class="fas fa-plus"></i> 단어 짝 추가</button>
                     <button id="clear-all-btn" class="clear-btn"><i class="fas fa-trash"></i> 전체 삭제</button>
                 </div>
                 <div class="options">
@@ -172,7 +169,7 @@
                     <h3>만드는 방법</h3>
                     <ol>
                         <li>학습지 제목을 입력하세요</li>
-                        <li>연결할 단어 쌍을 추가하세요</li>
+                        <li>연결할 단어 짝을 추가하세요</li>
                         <li>"목록 만들기" 버튼을 클릭하세요</li>
                         <li>출력 버튼으로 학습지를 인쇄하세요</li>
                     </ol>
@@ -189,7 +186,7 @@
                 <div class="instruction-block">
                     <h3>선생님 팁</h3>
                     <ul>
-                        <li>명확하고 관련성 있는 단어 쌍을 사용하세요</li>
+                        <li>명확하고 관련성 있는 단어 짝을 사용하세요</li>
                         <li>복습 활동으로 활용하세요</li>
                         <li>다른 학습 활동과 함께 활용하세요</li>
                     </ul>
@@ -249,12 +246,8 @@
                 nav.classList.toggle('open');
             });
         })();
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../matching-lists.html';
-            }
-        });
     </script>
     <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
 </body>
 </html>

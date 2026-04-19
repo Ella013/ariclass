@@ -21,10 +21,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -105,9 +102,13 @@
                     </div>
                 </div>
                 <div class="word-input">
-                    <h2>단어 입력</h2>
-                    <textarea id="vocab-list" class="vocab-textarea" placeholder="단어를 입력하세요 (각 단어는 줄바꿈으로 구분)
-최대 20개"></textarea>
+                    <div class="section-header">
+                        <h2>단어 입력</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="미리보기 셔플">
+                            <i class="fas fa-random"></i>
+                        </button>
+                    </div>
+                    <textarea id="vocab-list" class="vocab-textarea" placeholder="단어를 입력하세요 (줄바꿈으로 구분)&#10;최대 20개"></textarea>
                     <button id="add-word-btn" class="clear-btn">
                         <i class="fas fa-trash"></i> 초기화
                     </button>
@@ -247,12 +248,8 @@
                 nav.classList.toggle('open');
             });
         })();
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../word-search.html';
-            }
-        });
     </script>
     <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
 </body>
 </html>

@@ -1,3 +1,11 @@
+var _lang = (function() {
+    var p = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
+    var codes = ['es','fr','pt','ko','ja','zh'];
+    return p.find(function(s){ return codes.indexOf(s) !== -1; }) || 'en';
+})();
+var _showTxt = { en:'Show Answers', ko:'답 보기', ja:'答えを見る', es:'Ver respuestas', fr:'Voir les réponses', pt:'Ver respostas', zh:'查看答案' }[_lang] || 'Show Answers';
+var _hideTxt = { en:'Hide Answers', ko:'답 가리기', ja:'答えを隠す', es:'Ocultar respuestas', fr:'Masquer les réponses', pt:'Ocultar respostas', zh:'隐藏答案' }[_lang] || 'Hide Answers';
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize variables
     const worksheetTitle = document.getElementById('worksheet-title');
@@ -209,8 +217,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update button text
         this.innerHTML = showingAnswers ? 
-            '<i class="fas fa-eye-slash"></i> Hide Answers' : 
-            '<i class="fas fa-eye"></i> Show Answers';
+            '<i class="fas fa-eye-slash"></i> ' + _hideTxt :
+            '<i class="fas fa-eye"></i> ' + _showTxt;
 
         // Show or hide answer lines
         showAnswerLines(showingAnswers);

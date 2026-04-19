@@ -176,21 +176,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         const countText = `${allWords.length} / ${max} words`;
-        const maxLength = getMaxWordLength();
-        const items = allWords.map((w, i) => {
-            const cls = (i >= max || w.length > maxLength) ? 'word-over-limit' : 'word-ok';
-            return `<span class="${cls}" data-word="${w}">${w}<i class="word-delete">✕</i></span>`;
-        }).join('');
-        wordCountDisplay.innerHTML = `<div class="word-count-label">${countText}${allWords.length > max ? ' — <span class="word-over-limit-msg">excess words (red) will be ignored</span>' : ''}</div><div class="word-count-list">${items}</div>`;
-
-        wordCountDisplay.querySelectorAll('.word-ok, .word-over-limit').forEach(chip => {
-            chip.addEventListener('click', () => {
-                const target = chip.dataset.word;
-                const lines = vocabList.value.split('\n').filter(l => l.trim() !== target);
-                vocabList.value = lines.join('\n');
-                updateWordCountDisplay();
-            });
-        });
+        if (allWords.length > max) {
+            wordCountDisplay.innerHTML = `<div class="word-count-label">${countText} — <span class="word-over-limit-msg" style="color:#e53935;font-weight:600;">words beyond the limit will be ignored</span></div>`;
+        } else {
+            wordCountDisplay.innerHTML = `<div class="word-count-label">${countText}</div>`;
+        }
     }
 
     vocabList.addEventListener('input', updateWordCountDisplay);

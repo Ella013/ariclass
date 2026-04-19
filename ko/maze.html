@@ -22,10 +22,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -233,12 +230,8 @@
                 nav.classList.toggle('open');
             });
         })();
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../maze.html';
-            }
-        });
     </script>
     <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
 </body>
 </html>

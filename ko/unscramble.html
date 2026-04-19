@@ -12,6 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/unscramble.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
@@ -21,10 +22,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -105,13 +103,35 @@
                     </div>
                 </div>
                 <div class="word-input">
-                    <h2>문장 입력</h2>
+                    <div class="section-header">
+                        <h2>문장 입력</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="미리보기 셔플">
+                            <i class="fas fa-random"></i>
+                        </button>
+                    </div>
                     <textarea id="sentence-list" class="vocab-textarea" placeholder="문장을 입력하세요. 각 문장은 마침표(.), 물음표(?), 느낌표(!)로 끝나야 합니다."></textarea>
                     <button id="clearButton" class="clear-btn"><i class="fas fa-trash-alt"></i> 전체 삭제</button>
                 </div>
                 <div class="options">
                     <div class="option-group">
                         <label><input type="checkbox" id="capitalize-first" checked> 섞인 문장의 첫 글자를 대문자로</label>
+                    </div>
+                    <div class="option-group">
+                        <h2>글씨 크기</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="font-small" name="font-size" value="small">
+                                <label for="font-small">작게</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="font-medium" name="font-size" value="medium" checked>
+                                <label for="font-medium">보통</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="font-large" name="font-size" value="large">
+                                <label for="font-large">크게</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="option-group">
                         <h2>문제 간격</h2>
@@ -231,12 +251,8 @@
                 nav.classList.toggle('open');
             });
         })();
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../unscramble.html';
-            }
-        });
     </script>
     <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
 </body>
 </html>

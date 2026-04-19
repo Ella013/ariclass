@@ -23,10 +23,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -143,6 +140,19 @@
                             <div class="case-option">
                                 <input type="radio" id="level3" name="level" value="3">
                                 <label for="level3">Level 3 (어려움)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-group" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; display:flex; flex-direction:column; align-items:center;">
+                        <h2 style="text-align:center; font-weight:bold; margin-top:0; margin-bottom:0.6rem;">페이지당 문제 수</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option">
+                                <input type="radio" id="probs-15" name="problems-per-page" value="15" checked>
+                                <label for="probs-15">기본</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="probs-20" name="problems-per-page" value="20">
+                                <label for="probs-20">더 많이</label>
                             </div>
                         </div>
                     </div>
@@ -265,12 +275,8 @@
                 nav.classList.toggle('open');
             });
         })();
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') {
-                window.location.href = '../multiplication-table.html';
-            }
-        });
     </script>
     <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
 </body>
 </html>

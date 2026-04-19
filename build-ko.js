@@ -138,8 +138,8 @@ const pageKO = {
     metaDesc: '단어, 뜻, 개념을 연결하는 학습지를 무료로 만들어보세요. 어휘 복습과 ESL 수업에 최적입니다.',
     canonical: 'https://ariclass.com/ko/matching-lists.html',
     h1: '단어 연결',
-    enterWordPairs: '단어 쌍 입력',
-    addPair: '<i class="fas fa-plus"></i> 단어 쌍 추가',
+    enterWordPairs: '단어 짝 입력',
+    addPair: '<i class="fas fa-plus"></i> 단어 짝 추가',
     clearAll: '<i class="fas fa-trash"></i> 전체 삭제',
     fontSize: '글자 크기',
     generateBtn: '<i class="fas fa-magic"></i> 목록 만들기',
@@ -780,7 +780,7 @@ function buildMatchingLists() {
                     <h3>만드는 방법</h3>
                     <ol>
                         <li>학습지 제목을 입력하세요</li>
-                        <li>연결할 단어 쌍을 추가하세요</li>
+                        <li>연결할 단어 짝을 추가하세요</li>
                         <li>"목록 만들기" 버튼을 클릭하세요</li>
                         <li>출력 버튼으로 학습지를 인쇄하세요</li>
                     </ol>
@@ -797,7 +797,7 @@ function buildMatchingLists() {
                 <div class="instruction-block">
                     <h3>선생님 팁</h3>
                     <ul>
-                        <li>명확하고 관련성 있는 단어 쌍을 사용하세요</li>
+                        <li>명확하고 관련성 있는 단어 짝을 사용하세요</li>
                         <li>복습 활동으로 활용하세요</li>
                         <li>다른 학습 활동과 함께 활용하세요</li>
                     </ul>
