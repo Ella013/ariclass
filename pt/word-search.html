@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caça-palavras gratuito - AriClass</title>
+    <meta name="description" content="Crie caça-palavras imprimíveis com o seu próprio vocabulário. Ideal para professores de inglês e alunos de todos os níveis.">
+    <link rel="canonical" href="https://ariclass.com/pt/word-search.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/word-search.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/word-search.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/word-search.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/word-search.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/word-search.html">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/word-search.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass: Gerador de fichas</p>
+                    <p>Crie fichas de inglês, matemática e muito mais em segundos.</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">Inglês</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Caça-palavras</a></li>
+                            <li><a href="unscramble.html">Ordenar palavras</a></li>
+                            <li><a href="crossword.html">Palavras cruzadas</a></li>
+                            <li><a href="matching-lists.html">Associação de palavras</a></li>
+                            <li><a href="bingo.html">Bingo</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">Matemática</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                            <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                            <li><a href="clock.html">Ler as horas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Labirinto</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">Fichas</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">Lista de verificação</a></li>
+                            <li><a href="vocab-test.html">Folha de notas</a></li>
+                            <li><a href="writing-paper.html">Papel de escrita</a></li>
+                            <li><a href="mind-map.html">Mapa mental</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">Como usar</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Início</a>
+            <a href="word-search.html">Caça-palavras</a>
+            <a href="unscramble.html">Ordenar palavras</a>
+            <a href="crossword.html">Palavras cruzadas</a>
+            <a href="matching-lists.html">Associação de palavras</a>
+            <a href="bingo.html">Bingo</a>
+            <a href="addition-subtraction.html">Adição e subtração</a>
+            <a href="multiplication-table.html">Multiplicação e divisão</a>
+            <a href="clock.html">Ler as horas</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Labirinto</a>
+            <a href="checklist.html">Lista de verificação</a>
+            <a href="vocab-test.html">Folha de notas</a>
+            <a href="writing-paper.html">Papel de escrita</a>
+            <a href="mind-map.html">Mapa mental</a>
+            <a href="how-to-use.html">Como usar</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>Caça-palavras</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Título da ficha</h2>
+                    <input type="text" id="worksheet-title" placeholder="Digite o título">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> Mostrar título</label>
+                    </div>
+                </div>
+                <div class="word-input">
+                    <div class="section-header">
+                        <h2>Inserir palavras</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="Misturar pré-visualização"><i class="fas fa-random"></i></button>
+                    </div>
+                    <textarea id="vocab-list" class="vocab-textarea" placeholder="Digite as palavras (uma por linha)&#10;Máximo 20 palavras"></textarea>
+                    <button id="add-word-btn" class="clear-btn"><i class="fas fa-trash"></i> Apagar</button>
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <div class="level-options">
+                            <div class="level-option"><input type="radio" id="level1" name="level" value="1"><label for="level1">Nível 1 (Fácil)</label></div>
+                            <div class="level-option"><input type="radio" id="level2" name="level" value="2"><label for="level2">Nível 2 (Médio)</label></div>
+                            <div class="level-option"><input type="radio" id="level3" name="level" value="3" checked><label for="level3">Nível 3 (Difícil)</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <div style="display: flex; gap: 2rem;">
+                            <label><input type="radio" name="case" id="uppercase-words"> MAIÚSCULAS</label>
+                            <label><input type="radio" name="case" id="lowercase-words" checked> minúsculas</label>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <label class="check-option-label"><input type="checkbox" id="show-word-list" checked> Mostrar lista de palavras</label>
+                    </div>
+                    <div class="option-group">
+                        <label><input type="checkbox" id="diagonal-words" checked> Incluir palavras na diagonal</label>
+                    </div>
+                    <div class="option-group">
+                        <label><input type="checkbox" id="reverse-words" checked> Incluir palavras ao contrário</label>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn"><i class="fas fa-random"></i> Gerar aleatoriamente</button>
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> Criar puzzle</button>
+                </div>
+            </div>
+                        <div class="preview-section">
+                <div class="preview-label">Pré-visualização</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>Como criar o seu caça-palavras</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Passos simples para criar</h3>
+                    <ol>
+                        <li>Insira um título para a sua ficha</li>
+                        <li>Escreva ou cole as suas palavras (máx. 10/15/20 segundo o nível)</li>
+                        <li>Escolha letras maiúsculas ou minúsculas</li>
+                        <li>Selecione opções como palavras na diagonal ou ao contrário</li>
+                        <li>Clique em "Criar puzzle" para gerar o caça-palavras</li>
+                        <li>Imprima com o botão de impressão</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Benefícios educativos</h3>
+                    <ul>
+                        <li>Melhora o reconhecimento de vocabulário e a ortografia</li>
+                        <li>Desenvolve o reconhecimento de padrões e a leitura visual</li>
+                        <li>Ideal para alunos de ESL/EFL e iniciantes</li>
+                        <li>Cria atividades dinâmicas para a aula ou trabalhos de casa</li>
+                        <li>Níveis de dificuldade personalizáveis</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Dicas para professores</h3>
+                    <ul>
+                        <li>Use listas de palavras temáticas para reforçar vocabulário específico</li>
+                        <li>Comece com palavras curtas para iniciantes</li>
+                        <li>Ative palavras na diagonal e ao contrário para alunos avançados</li>
+                        <li>Imprima várias cópias para atividades em sala de aula</li>
+                        <li>Use como atividade de aquecimento ou complemento da lição</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/wordSearch.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass oferece fichas de exercícios gratuitas de inglês, matemática e muito mais.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Links rápidos</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="word-search.html">Caça-palavras</a></li>
+                    <li><a href="unscramble.html">Ordenar palavras</a></li>
+                    <li><a href="crossword.html">Palavras cruzadas</a></li>
+                    <li><a href="matching-lists.html">Associação de palavras</a></li>
+                    <li><a href="bingo.html">Bingo</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Labirinto</a></li>
+                    <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                    <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                    <li><a href="clock.html">Ler as horas</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Informações</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">Política de privacidade</a></li>
+                    <li><a href="../terms-of-use.html">Termos de uso</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

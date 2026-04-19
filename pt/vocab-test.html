@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folha de notas - AriClass</title>
+    <meta name="description" content="Crie folhas de notas imprimíveis com linhas. Layout de 1, 2 ou 4 por página.">
+    <link rel="canonical" href="https://ariclass.com/pt/vocab-test.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/vocab-test.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/vocab-test.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/vocab-test.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/vocab-test.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/vocab-test.html">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/vocab-test.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/vocab-test.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass: Gerador de fichas</p>
+                    <p>Crie fichas de inglês, matemática e muito mais em segundos.</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">Inglês</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Caça-palavras</a></li>
+                            <li><a href="unscramble.html">Ordenar palavras</a></li>
+                            <li><a href="crossword.html">Palavras cruzadas</a></li>
+                            <li><a href="matching-lists.html">Associação de palavras</a></li>
+                            <li><a href="bingo.html">Bingo</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">Matemática</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                            <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                            <li><a href="clock.html">Ler as horas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Labirinto</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">Fichas</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">Lista de verificação</a></li>
+                            <li><a href="vocab-test.html">Folha de notas</a></li>
+                            <li><a href="writing-paper.html">Papel de escrita</a></li>
+                            <li><a href="mind-map.html">Mapa mental</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">Como usar</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Início</a>
+            <a href="word-search.html">Caça-palavras</a>
+            <a href="unscramble.html">Ordenar palavras</a>
+            <a href="crossword.html">Palavras cruzadas</a>
+            <a href="matching-lists.html">Associação de palavras</a>
+            <a href="bingo.html">Bingo</a>
+            <a href="addition-subtraction.html">Adição e subtração</a>
+            <a href="multiplication-table.html">Multiplicação e divisão</a>
+            <a href="clock.html">Ler as horas</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Labirinto</a>
+            <a href="checklist.html">Lista de verificação</a>
+            <a href="vocab-test.html">Folha de notas</a>
+            <a href="writing-paper.html">Papel de escrita</a>
+            <a href="mind-map.html">Mapa mental</a>
+            <a href="how-to-use.html">Como usar</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>Folha de notas</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="options">
+                    <div class="option-group">
+                        <h2>Layout <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">2 por página: Corte pela linha pontilhada para obter 2 fichas. 4 por página: Corte em cruz para obter 4 fichas.</span></span></h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="layout-1" name="layout" value="1" checked><label for="layout-1">1 página</label></div>
+                            <div class="case-option"><input type="radio" id="layout-2" name="layout" value="2"><label for="layout-2">2 páginas</label></div>
+                            <div class="case-option"><input type="radio" id="layout-4" name="layout" value="4"><label for="layout-4">4 páginas</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>Estilo da linha</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="style-solid" name="linestyle" value="solid" checked><label for="style-solid">Sólido</label></div>
+                            <div class="case-option"><input type="radio" id="style-dashed" name="linestyle" value="dashed"><label for="style-dashed">Tracejado</label></div>
+                            <div class="case-option"><input type="radio" id="style-bold" name="linestyle" value="bold"><label for="style-bold">Negrito</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>Espaçamento entre linhas</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="spacing-narrow" name="spacing" value="narrow"><label for="spacing-narrow">Estreito</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-normal" name="spacing" value="normal" checked><label for="spacing-normal">Normal</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-wide" name="spacing" value="wide"><label for="spacing-wide">Amplo</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="print-btn" id="print-btn"><i class="fas fa-print"></i> Imprimir</button>
+                </div>
+            </div>
+            <div class="preview-section">
+                <div class="preview-label">Pré-visualização</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button class="print-btn" id="print-btn-top"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>Como usar as folhas de notas</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>1 por página</h3>
+                    <ul>
+                        <li>Página A4 completa com linhas de escrita</li>
+                        <li>Inclui campos de Data e Nome no topo</li>
+                        <li>Ideal para listas de vocabulário longas ou apontamentos</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>2 por página</h3>
+                    <ul>
+                        <li>Duas folhas numa página A4</li>
+                        <li>Corte pela linha tracejada para separar</li>
+                        <li>Ideal para listas de vocabulário curtas (poupa papel!)</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>4 por página</h3>
+                    <ul>
+                        <li>Quatro mini-folhas numa grelha 2×2 numa página A4</li>
+                        <li>Corte cada célula separadamente</li>
+                        <li>Ideal para testes rápidos ou pequenas listas de palavras</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/vocab-test.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass oferece fichas de exercícios gratuitas de inglês, matemática e muito mais.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Links rápidos</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="word-search.html">Caça-palavras</a></li>
+                    <li><a href="unscramble.html">Ordenar palavras</a></li>
+                    <li><a href="crossword.html">Palavras cruzadas</a></li>
+                    <li><a href="matching-lists.html">Associação de palavras</a></li>
+                    <li><a href="bingo.html">Bingo</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Labirinto</a></li>
+                    <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                    <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                    <li><a href="clock.html">Ler as horas</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Informações</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">Política de privacidade</a></li>
+                    <li><a href="../terms-of-use.html">Termos de uso</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

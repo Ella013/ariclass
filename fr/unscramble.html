@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remettre en ordre - AriClass</title>
+    <meta name="description" content="Créez des fiches pour remettre les mots dans l'ordre. Parfait pour pratiquer la grammaire et le vocabulaire.">
+    <link rel="canonical" href="https://ariclass.com/fr/unscramble.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/unscramble.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/unscramble.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/unscramble.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/unscramble.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/unscramble.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/unscramble.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass : Générateur de fiches</p>
+                    <p>Créez des fiches d'exercices d'anglais, de maths et plus encore en quelques secondes.</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">Anglais</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Mots mêlés</a></li>
+                            <li><a href="unscramble.html">Remettre en ordre</a></li>
+                            <li><a href="crossword.html">Mots croisés</a></li>
+                            <li><a href="matching-lists.html">Associations</a></li>
+                            <li><a href="bingo.html">Bingo</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">Mathématiques</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">Addition et soustraction</a></li>
+                            <li><a href="multiplication-table.html">Multiplication et division</a></li>
+                            <li><a href="clock.html">Lire l'heure</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Labyrinthe</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">Fiches</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">Liste de contrôle</a></li>
+                            <li><a href="vocab-test.html">Fiche de notes</a></li>
+                            <li><a href="writing-paper.html">Papier d'écriture</a></li>
+                            <li><a href="mind-map.html">Carte mentale</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">Comment utiliser</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Accueil</a>
+            <a href="word-search.html">Mots mêlés</a>
+            <a href="unscramble.html">Remettre en ordre</a>
+            <a href="crossword.html">Mots croisés</a>
+            <a href="matching-lists.html">Associations</a>
+            <a href="bingo.html">Bingo</a>
+            <a href="addition-subtraction.html">Addition et soustraction</a>
+            <a href="multiplication-table.html">Multiplication et division</a>
+            <a href="clock.html">Lire l'heure</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Labyrinthe</a>
+            <a href="checklist.html">Liste de contrôle</a>
+            <a href="vocab-test.html">Fiche de notes</a>
+            <a href="writing-paper.html">Papier d'écriture</a>
+            <a href="mind-map.html">Carte mentale</a>
+            <a href="how-to-use.html">Comment utiliser</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>Remettre en ordre</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Titre de la fiche</h2>
+                    <input type="text" id="worksheet-title" placeholder="Entrez le titre">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> Afficher le titre</label>
+                    </div>
+                </div>
+                <div class="word-input">
+                    <div class="section-header">
+                        <h2>Saisir les phrases</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="Mélanger l'aperçu"><i class="fas fa-random"></i></button>
+                    </div>
+                    <textarea id="sentence-list" class="vocab-textarea" placeholder="Entrez les phrases. Chaque phrase doit se terminer par un point (.), un point d'interrogation (?) ou un point d'exclamation (!)."></textarea>
+                    <button id="clearButton" class="clear-btn"><i class="fas fa-trash-alt"></i> Tout effacer</button>
+                    <div class="option-group">
+                        <label class="check-option-label"><input type="checkbox" id="capitalize-first" checked> Majuscule au début</label>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <h2>Taille de police</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="font-small" name="font-size" value="small"><label for="font-small">Petite</label></div>
+                            <div class="case-option"><input type="radio" id="font-medium" name="font-size" value="medium" checked><label for="font-medium">Moyenne</label></div>
+                            <div class="case-option"><input type="radio" id="font-large" name="font-size" value="large"><label for="font-large">Grande</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>Espacement entre les questions</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="spacing-compact" name="question-spacing" value="compact"><label for="spacing-compact">Compact</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-normal" name="question-spacing" value="normal" checked><label for="spacing-normal">Normal</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-wide" name="question-spacing" value="wide"><label for="spacing-wide">Large</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn"><i class="fas fa-random"></i> Générer aléatoirement</button>
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> Créer la fiche</button>
+                </div>
+            </div>
+                        <div class="preview-section">
+                <div class="preview-label">Aperçu</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> Imprimer</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>Comment créer votre fiche de remise en ordre</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Étapes simples pour créer</h3>
+                    <ol>
+                        <li>Saisissez un titre pour votre fiche</li>
+                        <li>Tapez ou collez vos phrases dans la zone de texte</li>
+                        <li>Assurez-vous que chaque phrase se termine par un point (.)</li>
+                        <li>Cliquez sur "Créer l'exercice" pour générer l'activité</li>
+                        <li>Imprimez avec le bouton d'impression</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Bénéfices pédagogiques</h3>
+                    <ul>
+                        <li>Améliore la compréhension de la structure des phrases</li>
+                        <li>Renforce l'ordre correct des mots</li>
+                        <li>Parfait pour les apprenants ESL/FLE</li>
+                        <li>Développe la pensée logique</li>
+                        <li>Renforce la formation correcte des phrases</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Conseils pour les enseignants</h3>
+                    <ul>
+                        <li>Commencez par des phrases simples et courtes pour les débutants</li>
+                        <li>Utilisez le vocabulaire de la leçon en cours</li>
+                        <li>Incluez une variété de types de phrases</li>
+                        <li>Imprimez avec le corrigé pour faciliter la correction</li>
+                        <li>Utilisez comme activité d'échauffement ou de révision</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/unscramble.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass propose des fiches d'exercices gratuites d'anglais, de maths et bien plus.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Liens rapides</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="word-search.html">Mots mêlés</a></li>
+                    <li><a href="unscramble.html">Remettre en ordre</a></li>
+                    <li><a href="crossword.html">Mots croisés</a></li>
+                    <li><a href="matching-lists.html">Associations</a></li>
+                    <li><a href="bingo.html">Bingo</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Labyrinthe</a></li>
+                    <li><a href="addition-subtraction.html">Addition et soustraction</a></li>
+                    <li><a href="multiplication-table.html">Multiplication et division</a></li>
+                    <li><a href="clock.html">Lire l'heure</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Informations</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">Politique de confidentialité</a></li>
+                    <li><a href="../terms-of-use.html">Conditions d'utilisation</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

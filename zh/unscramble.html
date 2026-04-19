@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单词排序 - AriClass</title>
+    <meta name="description" content="创建句子单词排序练习题。非常适合练习语法和词汇。">
+    <link rel="canonical" href="https://ariclass.com/zh/unscramble.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/unscramble.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/unscramble.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/unscramble.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/unscramble.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/unscramble.html">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/unscramble.html">
+    <link rel="alternate" hreflang="zh" href="https://ariclass.com/zh/unscramble.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/unscramble.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass：练习题生成器</p>
+                    <p>几秒内生成英语、数学等各类可打印练习题。</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">英语</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">单词搜索</a></li>
+                            <li><a href="unscramble.html">单词排序</a></li>
+                            <li><a href="crossword.html">填字游戏</a></li>
+                            <li><a href="matching-lists.html">单词匹配</a></li>
+                            <li><a href="bingo.html">宾果游戏</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">数学</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">加法与减法</a></li>
+                            <li><a href="multiplication-table.html">乘法与除法</a></li>
+                            <li><a href="clock.html">认识时钟</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">益智游戏</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">数独</a></li>
+                            <li><a href="maze.html">迷宫</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">打印模板</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">清单</a></li>
+                            <li><a href="vocab-test.html">笔记纸</a></li>
+                            <li><a href="writing-paper.html">书写纸</a></li>
+                            <li><a href="mind-map.html">思维导图</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">使用方法</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">首页</a>
+            <a href="word-search.html">单词搜索</a>
+            <a href="unscramble.html">单词排序</a>
+            <a href="crossword.html">填字游戏</a>
+            <a href="matching-lists.html">单词匹配</a>
+            <a href="bingo.html">宾果游戏</a>
+            <a href="addition-subtraction.html">加法与减法</a>
+            <a href="multiplication-table.html">乘法与除法</a>
+            <a href="clock.html">认识时钟</a>
+            <a href="sudoku.html">数独</a>
+            <a href="maze.html">迷宫</a>
+            <a href="checklist.html">清单</a>
+            <a href="vocab-test.html">笔记纸</a>
+            <a href="writing-paper.html">书写纸</a>
+            <a href="mind-map.html">思维导图</a>
+            <a href="how-to-use.html">使用方法</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>单词排序</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>练习题标题</h2>
+                    <input type="text" id="worksheet-title" placeholder="请输入标题">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> 显示标题</label>
+                    </div>
+                </div>
+                <div class="word-input">
+                    <div class="section-header">
+                        <h2>输入句子</h2>
+                        <button id="reset-words-btn" class="reset-btn" title="打乱预览"><i class="fas fa-random"></i></button>
+                    </div>
+                    <textarea id="sentence-list" class="vocab-textarea" placeholder="输入句子，每个句子以句号（.）、问号（?）或感叹号（!）结尾。"></textarea>
+                    <button id="clearButton" class="clear-btn"><i class="fas fa-trash-alt"></i> 全部清除</button>
+                    <div class="option-group">
+                        <label class="check-option-label"><input type="checkbox" id="capitalize-first" checked> 首字母大写</label>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <h2>字体大小</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="font-small" name="font-size" value="small"><label for="font-small">小</label></div>
+                            <div class="case-option"><input type="radio" id="font-medium" name="font-size" value="medium" checked><label for="font-medium">中</label></div>
+                            <div class="case-option"><input type="radio" id="font-large" name="font-size" value="large"><label for="font-large">大</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>题目间距</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="spacing-compact" name="question-spacing" value="compact"><label for="spacing-compact">紧凑</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-normal" name="question-spacing" value="normal" checked><label for="spacing-normal">正常</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-wide" name="question-spacing" value="wide"><label for="spacing-wide">宽松</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn"><i class="fas fa-random"></i> 随机生成</button>
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> 生成题目</button>
+                </div>
+            </div>
+                        <div class="preview-section">
+                <div class="preview-label">预览</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> 打印</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>如何创建单词排序练习</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>创建步骤</h3>
+                    <ol>
+                        <li>输入练习标题</li>
+                        <li>在文本框中输入或粘贴句子</li>
+                        <li>确保每个句子以句号（.）结尾</li>
+                        <li>点击"创建练习"生成活动</li>
+                        <li>使用打印按钮打印练习纸</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>教育益处</h3>
+                    <ul>
+                        <li>提高对句子结构的理解</li>
+                        <li>强化正确的语序</li>
+                        <li>非常适合ESL/EFL学生</li>
+                        <li>培养逻辑思维能力</li>
+                        <li>强化正确的句子构成</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>教师提示</h3>
+                    <ul>
+                        <li>从简单短句开始，适合初学者</li>
+                        <li>使用当前课程主题的词汇</li>
+                        <li>包含多种句子类型</li>
+                        <li>附带答案键打印，便于批改</li>
+                        <li>用作热身或复习活动</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/unscramble.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass 提供英语、数学等各类免费练习题。</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>快速链接</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="word-search.html">单词搜索</a></li>
+                    <li><a href="unscramble.html">单词排序</a></li>
+                    <li><a href="crossword.html">填字游戏</a></li>
+                    <li><a href="matching-lists.html">单词匹配</a></li>
+                    <li><a href="bingo.html">宾果游戏</a></li>
+                    <li><a href="sudoku.html">数独</a></li>
+                    <li><a href="maze.html">迷宫</a></li>
+                    <li><a href="addition-subtraction.html">加法与减法</a></li>
+                    <li><a href="multiplication-table.html">乘法与除法</a></li>
+                    <li><a href="clock.html">认识时钟</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>信息</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">隐私政策</a></li>
+                    <li><a href="../terms-of-use.html">使用条款</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">联系我们</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>联系我们</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

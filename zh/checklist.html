@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清单 - AriClass</title>
+    <meta name="description" content="创建带复选框的可打印清单。每页1、2或4张布局。">
+    <link rel="canonical" href="https://ariclass.com/zh/checklist.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/checklist.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/checklist.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/checklist.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/checklist.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/checklist.html">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/checklist.html">
+    <link rel="alternate" hreflang="zh" href="https://ariclass.com/zh/checklist.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/checklist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass：练习题生成器</p>
+                    <p>几秒内生成英语、数学等各类可打印练习题。</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">英语</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">单词搜索</a></li>
+                            <li><a href="unscramble.html">单词排序</a></li>
+                            <li><a href="crossword.html">填字游戏</a></li>
+                            <li><a href="matching-lists.html">单词匹配</a></li>
+                            <li><a href="bingo.html">宾果游戏</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">数学</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">加法与减法</a></li>
+                            <li><a href="multiplication-table.html">乘法与除法</a></li>
+                            <li><a href="clock.html">认识时钟</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">益智游戏</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">数独</a></li>
+                            <li><a href="maze.html">迷宫</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">打印模板</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">清单</a></li>
+                            <li><a href="vocab-test.html">笔记纸</a></li>
+                            <li><a href="writing-paper.html">书写纸</a></li>
+                            <li><a href="mind-map.html">思维导图</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">使用方法</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">首页</a>
+            <a href="word-search.html">单词搜索</a>
+            <a href="unscramble.html">单词排序</a>
+            <a href="crossword.html">填字游戏</a>
+            <a href="matching-lists.html">单词匹配</a>
+            <a href="bingo.html">宾果游戏</a>
+            <a href="addition-subtraction.html">加法与减法</a>
+            <a href="multiplication-table.html">乘法与除法</a>
+            <a href="clock.html">认识时钟</a>
+            <a href="sudoku.html">数独</a>
+            <a href="maze.html">迷宫</a>
+            <a href="checklist.html">清单</a>
+            <a href="vocab-test.html">笔记纸</a>
+            <a href="writing-paper.html">书写纸</a>
+            <a href="mind-map.html">思维导图</a>
+            <a href="how-to-use.html">使用方法</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>清单</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>标题</h2>
+                    <div class="case-options" style="justify-content:center;margin:12px 0 14px;">
+                        <div class="case-option"><input type="radio" id="title-text" name="title-type" value="text" checked><label for="title-text">文字</label></div>
+                        <div class="case-option"><input type="radio" id="title-line" name="title-type" value="line"><label for="title-line">下划线</label></div>
+                        <div class="case-option"><input type="radio" id="title-none" name="title-type" value="none"><label for="title-none">无</label></div>
+                    </div>
+                    <input type="text" id="worksheet-title" placeholder="请输入标题">
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <h2>布局 <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">每页2张：沿虚线裁剪得到2张。每页4张：沿十字线裁剪得到4张。</span></span></h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="layout-1" name="layout" value="1" checked><label for="layout-1">1张</label></div>
+                            <div class="case-option"><input type="radio" id="layout-2" name="layout" value="2"><label for="layout-2">2张</label></div>
+                            <div class="case-option"><input type="radio" id="layout-4" name="layout" value="4"><label for="layout-4">4张</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>列数</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="col-1" name="columns" value="1" checked><label for="col-1">1列</label></div>
+                            <div class="case-option"><input type="radio" id="col-2" name="columns" value="2"><label for="col-2">2列</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>行间距</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="spacing-narrow" name="spacing" value="narrow"><label for="spacing-narrow">窄</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-normal" name="spacing" value="normal"><label for="spacing-normal">正常</label></div>
+                            <div class="case-option"><input type="radio" id="spacing-wide" name="spacing" value="wide" checked><label for="spacing-wide">宽</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2>编号</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="num-yes" name="numbering" value="yes" checked><label for="num-yes">有</label></div>
+                            <div class="case-option"><input type="radio" id="num-no" name="numbering" value="no"><label for="num-no">无</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="print-btn" id="print-btn"><i class="fas fa-print"></i> 打印</button>
+                </div>
+            </div>
+            <div class="preview-section">
+                <div class="preview-label">预览</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button class="print-btn" id="print-btn-top"><i class="fas fa-print"></i> 打印</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>如何使用清单模板</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>每页1个</h3>
+                    <ul>
+                        <li>带有复选框行的完整A4页</li>
+                        <li>顶部包含日期和姓名字段</li>
+                        <li>非常适合较长的任务列表</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>每页2个</h3>
+                    <ul>
+                        <li>一张A4页上有两个清单</li>
+                        <li>沿虚线裁剪分开</li>
+                        <li>非常适合较短的列表——节省纸张！</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>每页4个</h3>
+                    <ul>
+                        <li>2×2网格中有四个迷你清单</li>
+                        <li>分别裁剪每个格子</li>
+                        <li>非常适合快速日常任务</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/checklist.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass 提供英语、数学等各类免费练习题。</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>快速链接</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="word-search.html">单词搜索</a></li>
+                    <li><a href="unscramble.html">单词排序</a></li>
+                    <li><a href="crossword.html">填字游戏</a></li>
+                    <li><a href="matching-lists.html">单词匹配</a></li>
+                    <li><a href="bingo.html">宾果游戏</a></li>
+                    <li><a href="sudoku.html">数独</a></li>
+                    <li><a href="maze.html">迷宫</a></li>
+                    <li><a href="addition-subtraction.html">加法与减法</a></li>
+                    <li><a href="multiplication-table.html">乘法与除法</a></li>
+                    <li><a href="clock.html">认识时钟</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>信息</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">隐私政策</a></li>
+                    <li><a href="../terms-of-use.html">使用条款</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">联系我们</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>联系我们</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

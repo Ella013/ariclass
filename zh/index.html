@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AriClass - 免费练习题生成器</title>
+    <meta name="description" content="免费生成数学、英语等各类练习题。单词搜索、填字游戏、宾果、加法、乘法、时钟等——随时可打印。">
+    <link rel="canonical" href="https://ariclass.com/zh/">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/">
+    <link rel="alternate" hreflang="zh" href="https://ariclass.com/zh/">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass：练习题生成器</p>
+                    <p>几秒内生成英语、数学等各类可打印练习题。</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">英语</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">单词搜索</a></li>
+                            <li><a href="unscramble.html">单词排序</a></li>
+                            <li><a href="crossword.html">填字游戏</a></li>
+                            <li><a href="matching-lists.html">单词匹配</a></li>
+                            <li><a href="bingo.html">宾果游戏</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">数学</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">加法与减法</a></li>
+                            <li><a href="multiplication-table.html">乘法与除法</a></li>
+                            <li><a href="clock.html">认识时钟</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">益智游戏</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">数独</a></li>
+                            <li><a href="maze.html">迷宫</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">打印模板</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">清单</a></li>
+                            <li><a href="vocab-test.html">笔记纸</a></li>
+                            <li><a href="writing-paper.html">书写纸</a></li>
+                            <li><a href="mind-map.html">思维导图</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">使用方法</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">首页</a>
+            <a href="word-search.html">单词搜索</a>
+            <a href="unscramble.html">单词排序</a>
+            <a href="crossword.html">填字游戏</a>
+            <a href="matching-lists.html">单词匹配</a>
+            <a href="bingo.html">宾果游戏</a>
+            <a href="addition-subtraction.html">加法与减法</a>
+            <a href="multiplication-table.html">乘法与除法</a>
+            <a href="clock.html">认识时钟</a>
+            <a href="sudoku.html">数独</a>
+            <a href="maze.html">迷宫</a>
+            <a href="checklist.html">清单</a>
+            <a href="vocab-test.html">笔记纸</a>
+            <a href="writing-paper.html">书写纸</a>
+            <a href="mind-map.html">思维导图</a>
+            <a href="how-to-use.html">使用方法</a>
+        </nav>
+    </header>
+    <main class="main-content">
+        <div class="section-title">
+            <h1>免费练习题生成器</h1>
+            <p>选择练习类型，几秒内即可打印</p>
+        </div>
+        <div class="worksheet-section" id="section-english">
+            <div class="worksheet-section-header english-section-header">
+                <i class="fas fa-book-open"></i><span>英语练习</span>
+            </div>
+            <div class="worksheet-grid">
+                <div class="worksheet-card">
+                    <img src="../images/word-search-preview.png" alt="单词搜索" loading="eager">
+                    <h3>单词搜索</h3>
+                    <p>用自己的单词创建单词搜索游戏</p>
+                    <a href="word-search.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/unscramble-preview.png" alt="单词排序" loading="lazy">
+                    <h3>单词排序</h3>
+                    <p>练习句子中单词顺序的练习题</p>
+                    <a href="unscramble.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/crossword-preview.png" alt="填字游戏" loading="lazy">
+                    <h3>填字游戏</h3>
+                    <p>创建填字游戏练习词汇</p>
+                    <a href="crossword.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/matching-lists-preview.png" alt="单词匹配" loading="lazy">
+                    <h3>单词匹配</h3>
+                    <p>连接相关的单词或概念</p>
+                    <a href="matching-lists.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/bingo-preview.png" alt="宾果游戏" loading="lazy">
+                    <h3>宾果游戏</h3>
+                    <p>自定义宾果卡片练习词汇</p>
+                    <a href="bingo.html" class="create-btn">创建</a>
+                </div>
+            </div>
+        </div>
+        <div class="worksheet-section" id="section-math">
+            <div class="worksheet-section-header math-section-header">
+                <i class="fas fa-calculator"></i><span>数学练习</span>
+            </div>
+            <div class="worksheet-grid">
+                <div class="worksheet-card">
+                    <img src="../images/addition-subtraction-preview.png" alt="加法与减法" loading="lazy">
+                    <h3>加法与减法</h3>
+                    <p>加减法练习题</p>
+                    <a href="addition-subtraction.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/multiplication-table-preview.png" alt="乘法与除法" loading="lazy">
+                    <h3>乘法与除法</h3>
+                    <p>乘除法练习题</p>
+                    <a href="multiplication-table.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/clock-preview.png" alt="认识时钟" loading="lazy">
+                    <h3>认识时钟</h3>
+                    <p>练习读取模拟时钟的练习题</p>
+                    <a href="clock.html" class="create-btn">创建</a>
+                </div>
+            </div>
+        </div>
+        <div class="worksheet-section" id="section-puzzles">
+            <div class="worksheet-section-header puzzle-section-header">
+                <i class="fas fa-puzzle-piece"></i><span>益智游戏</span>
+            </div>
+            <div class="worksheet-grid">
+                <div class="worksheet-card">
+                    <img src="../images/sudoku-preview.png" alt="数独" loading="lazy">
+                    <h3>数独</h3>
+                    <p>不同难度的数独训练逻辑思维</p>
+                    <a href="sudoku.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/maze-preview.png" alt="迷宫" loading="lazy">
+                    <h3>迷宫</h3>
+                    <p>不同大小的迷宫解题练习</p>
+                    <a href="maze.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/Secret Code.png" alt="密码" loading="lazy">
+                    <h3>密码</h3>
+                    <p>用符号表解密单词</p>
+                    <a href="secret-code.html" class="create-btn">创建</a>
+                </div>
+            </div>
+        </div>
+        <div class="worksheet-section" id="section-sheets">
+            <div class="worksheet-section-header template-section-header">
+                <i class="fas fa-clipboard-list"></i><span>打印模板</span>
+            </div>
+            <div class="worksheet-grid worksheet-grid-coming-soon">
+                <div class="worksheet-card">
+                    <img src="../images/Checklist.png" alt="清单" loading="lazy">
+                    <h3>清单</h3>
+                    <p>带复选框的清单——每页1、2或4张</p>
+                    <a href="checklist.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/Note Sheet.png" alt="笔记纸" loading="lazy">
+                    <h3>笔记纸</h3>
+                    <p>带日期和姓名的打印纸——每页1、2或4张</p>
+                    <a href="vocab-test.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/Writing Paper.png" alt="书写纸" loading="lazy">
+                    <h3>书写纸</h3>
+                    <p>带横线的书写练习纸</p>
+                    <a href="writing-paper.html" class="create-btn">创建</a>
+                </div>
+                <div class="worksheet-card">
+                    <img src="../images/Mind Map.png" alt="思维导图" loading="lazy">
+                    <h3>思维导图</h3>
+                    <p>用于头脑风暴和概念整理的思维导图</p>
+                    <a href="mind-map.html" class="create-btn">创建</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>为什么选择 AriClass？</h2>
+                <p>让练习题创建更简单的功能</p><br>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card"><i class="fas fa-bolt"></i><h3>快速</h3><p>通过直观界面几秒内创建练习题</p></div>
+                <div class="feature-card"><i class="fas fa-print"></i><h3>即时可打印</h3><p>所有练习题均针对A4纸张优化</p></div>
+                <div class="feature-card"><i class="fas fa-cog"></i><h3>可定制</h3><p>根据课堂目标调整选项</p></div>
+                <div class="feature-card"><i class="fas fa-download"></i><h3>无需注册</h3><p>无需创建账户即可开始使用</p></div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass 提供英语、数学等各类免费练习题。</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>快速链接</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="word-search.html">单词搜索</a></li>
+                    <li><a href="unscramble.html">单词排序</a></li>
+                    <li><a href="crossword.html">填字游戏</a></li>
+                    <li><a href="matching-lists.html">单词匹配</a></li>
+                    <li><a href="bingo.html">宾果游戏</a></li>
+                    <li><a href="sudoku.html">数独</a></li>
+                    <li><a href="maze.html">迷宫</a></li>
+                    <li><a href="addition-subtraction.html">加法与减法</a></li>
+                    <li><a href="multiplication-table.html">乘法与除法</a></li>
+                    <li><a href="clock.html">认识时钟</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>信息</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">隐私政策</a></li>
+                    <li><a href="../terms-of-use.html">使用条款</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">联系我们</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>联系我们</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

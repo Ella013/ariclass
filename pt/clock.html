@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ler as horas - AriClass</title>
+    <meta name="description" content="Crie fichas de exercícios para ler as horas num relógio analógico. Ideal para crianças e alunos do ensino básico.">
+    <link rel="canonical" href="https://ariclass.com/pt/clock.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/clock.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/clock.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/clock.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/clock.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/clock.html">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/clock.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/clock.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass: Gerador de fichas</p>
+                    <p>Crie fichas de inglês, matemática e muito mais em segundos.</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">Inglês</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Caça-palavras</a></li>
+                            <li><a href="unscramble.html">Ordenar palavras</a></li>
+                            <li><a href="crossword.html">Palavras cruzadas</a></li>
+                            <li><a href="matching-lists.html">Associação de palavras</a></li>
+                            <li><a href="bingo.html">Bingo</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">Matemática</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                            <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                            <li><a href="clock.html">Ler as horas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Labirinto</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">Fichas</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">Lista de verificação</a></li>
+                            <li><a href="vocab-test.html">Folha de notas</a></li>
+                            <li><a href="writing-paper.html">Papel de escrita</a></li>
+                            <li><a href="mind-map.html">Mapa mental</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">Como usar</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Início</a>
+            <a href="word-search.html">Caça-palavras</a>
+            <a href="unscramble.html">Ordenar palavras</a>
+            <a href="crossword.html">Palavras cruzadas</a>
+            <a href="matching-lists.html">Associação de palavras</a>
+            <a href="bingo.html">Bingo</a>
+            <a href="addition-subtraction.html">Adição e subtração</a>
+            <a href="multiplication-table.html">Multiplicação e divisão</a>
+            <a href="clock.html">Ler as horas</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Labirinto</a>
+            <a href="checklist.html">Lista de verificação</a>
+            <a href="vocab-test.html">Folha de notas</a>
+            <a href="writing-paper.html">Papel de escrita</a>
+            <a href="mind-map.html">Mapa mental</a>
+            <a href="how-to-use.html">Como usar</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>Ler as horas</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Título da ficha</h2>
+                    <input type="text" id="worksheet-title" placeholder="Digite o título" value="Telling Time">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> Mostrar título</label>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <h2 style="text-align:center">Modo</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><input type="radio" id="mode-read" name="clock-mode" value="read" checked><label for="mode-read">Ler as horas</label></div>
+                            <div class="case-option"><input type="radio" id="mode-draw" name="clock-mode" value="draw"><label for="mode-draw">Desenhar os ponteiros</label></div>
+                        </div>
+                        <div style="text-align:center;margin-top:0.5rem;">
+                            <label><input type="checkbox" id="hide-time-label"> <s>12:00</s></label>
+                        </div>
+                    </div>
+                    <div class="option-group" id="color-option-group">
+                        <h2 style="text-align:center">Cor dos ponteiros</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><input type="radio" id="color-bw" name="clock-color" value="bw"><label for="color-bw">P&amp;B</label></div>
+                            <div class="case-option"><input type="radio" id="color-color" name="clock-color" value="color" checked><label for="color-color">Cor</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group" id="interval-option-group">
+                        <h2 style="text-align:center">Intervalo de tempo</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><input type="radio" id="interval-hour" name="clock-interval" value="hour"><label for="interval-hour">1 hora</label></div>
+                            <div class="case-option"><input type="radio" id="interval-half" name="clock-interval" value="half"><label for="interval-half">30 min</label></div>
+                            <div class="case-option"><input type="radio" id="interval-quarter" name="clock-interval" value="quarter" checked><label for="interval-quarter">15 min</label></div>
+                            <div class="case-option"><input type="radio" id="interval-five" name="clock-interval" value="five"><label for="interval-five">5 min</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h2 style="text-align:center">Número de relógios</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><input type="radio" id="count-1" name="clock-count" value="1"><label for="count-1">1</label></div>
+                            <div class="case-option"><input type="radio" id="count-6" name="clock-count" value="6"><label for="count-6">6</label></div>
+                            <div class="case-option"><input type="radio" id="count-9" name="clock-count" value="9"><label for="count-9">9</label></div>
+                            <div class="case-option"><input type="radio" id="count-12" name="clock-count" value="12" checked><label for="count-12">12</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group" style="display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="text-align:center;font-weight:bold;margin-top:0;margin-bottom:0.6rem;">Número de páginas</h2>
+                        <label>Páginas: <input type="number" id="num-pages" min="1" max="10" value="1" style="width:80px;padding:0.4rem;margin-left:0.5rem;border:1px solid var(--border-color);border-radius:4px;"></label>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> Criar ficha</button>
+                </div>
+            </div>
+                        <div class="preview-section">
+                <div class="preview-label">Pré-visualização</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>Como criar a sua ficha de leitura de horas</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Passos simples para criar</h3>
+                    <ol>
+                        <li>Escolha um modo: ler as horas ou desenhar os ponteiros</li>
+                        <li>Selecione o intervalo de tempo (cada hora, 30, 15 ou 5 min)</li>
+                        <li>Defina o número de relógios por página</li>
+                        <li>Clique em Criar para obter um novo conjunto de horas</li>
+                        <li>Imprima a ficha</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Benefícios educativos</h3>
+                    <ul>
+                        <li>Ensina a leitura do relógio analógico</li>
+                        <li>Desenvolve o sentido numérico e os conceitos de tempo</li>
+                        <li>Dois modos para praticar leitura e escrita</li>
+                        <li>Dificuldade ajustável com os intervalos de tempo</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Dicas para professores</h3>
+                    <ul>
+                        <li>Comece com "cada hora" para iniciantes</li>
+                        <li>Use "desenhar os ponteiros" para prática avançada</li>
+                        <li>Misture layouts de 6 e 9 relógios para variedade</li>
+                        <li>Ótimo para lições de vocabulário de tempo em ESL/EFL</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/clock.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass oferece fichas de exercícios gratuitas de inglês, matemática e muito mais.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Links rápidos</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="word-search.html">Caça-palavras</a></li>
+                    <li><a href="unscramble.html">Ordenar palavras</a></li>
+                    <li><a href="crossword.html">Palavras cruzadas</a></li>
+                    <li><a href="matching-lists.html">Associação de palavras</a></li>
+                    <li><a href="bingo.html">Bingo</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Labirinto</a></li>
+                    <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                    <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                    <li><a href="clock.html">Ler as horas</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Informações</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">Política de privacidade</a></li>
+                    <li><a href="../terms-of-use.html">Termos de uso</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

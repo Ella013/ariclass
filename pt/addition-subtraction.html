@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adição e subtração - AriClass</title>
+    <meta name="description" content="Crie fichas de exercícios de adição e subtração imprimíveis com diferentes níveis de dificuldade.">
+    <link rel="canonical" href="https://ariclass.com/pt/addition-subtraction.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/addition-subtraction.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/addition-subtraction.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/addition-subtraction.html">
+    <link rel="alternate" hreflang="es" href="https://ariclass.com/es/addition-subtraction.html">
+    <link rel="alternate" hreflang="fr" href="https://ariclass.com/fr/addition-subtraction.html">
+    <link rel="alternate" hreflang="pt" href="https://ariclass.com/pt/addition-subtraction.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/addition-subtraction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img"></a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">AriClass: Gerador de fichas</p>
+                    <p>Crie fichas de inglês, matemática e muito mais em segundos.</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">Inglês</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Caça-palavras</a></li>
+                            <li><a href="unscramble.html">Ordenar palavras</a></li>
+                            <li><a href="crossword.html">Palavras cruzadas</a></li>
+                            <li><a href="matching-lists.html">Associação de palavras</a></li>
+                            <li><a href="bingo.html">Bingo</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">Matemática</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                            <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                            <li><a href="clock.html">Ler as horas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Labirinto</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">Fichas</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">Lista de verificação</a></li>
+                            <li><a href="vocab-test.html">Folha de notas</a></li>
+                            <li><a href="writing-paper.html">Papel de escrita</a></li>
+                            <li><a href="mind-map.html">Mapa mental</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">Como usar</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Início</a>
+            <a href="word-search.html">Caça-palavras</a>
+            <a href="unscramble.html">Ordenar palavras</a>
+            <a href="crossword.html">Palavras cruzadas</a>
+            <a href="matching-lists.html">Associação de palavras</a>
+            <a href="bingo.html">Bingo</a>
+            <a href="addition-subtraction.html">Adição e subtração</a>
+            <a href="multiplication-table.html">Multiplicação e divisão</a>
+            <a href="clock.html">Ler as horas</a>
+            <a href="sudoku.html">Sudoku</a>
+            <a href="maze.html">Labirinto</a>
+            <a href="checklist.html">Lista de verificação</a>
+            <a href="vocab-test.html">Folha de notas</a>
+            <a href="writing-paper.html">Papel de escrita</a>
+            <a href="mind-map.html">Mapa mental</a>
+            <a href="how-to-use.html">Como usar</a>
+        </nav>
+    </header>
+    <div class="generator-container">
+        <h1>Adição e subtração</h1>
+        <div class="generator-content">
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Título da ficha</h2>
+                    <input type="text" id="worksheet-title" placeholder="Digite o título">
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-title" checked> Mostrar título</label>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><label><input type="radio" name="operation" id="addition-only" value="addition" checked> Só adição</label></div>
+                            <div class="case-option"><label><input type="radio" name="operation" id="subtraction-only" value="subtraction"> Só subtração</label></div>
+                            <div class="case-option"><label><input type="radio" name="operation" id="mixed" value="mixed"> Misto</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="text-align:center;font-weight:bold;margin-top:0;margin-bottom:0.6rem;">Nível de dificuldade</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><input type="radio" id="level1" name="level" value="1" checked><label for="level1">Nível 1</label></div>
+                            <div class="case-option"><input type="radio" id="level2" name="level" value="2"><label for="level2">Nível 2</label></div>
+                            <div class="case-option"><input type="radio" id="level3" name="level" value="3"><label for="level3">Nível 3</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="text-align:center;font-weight:bold;margin-top:0;margin-bottom:0.6rem;">Problemas por página</h2>
+                        <div class="case-options" style="justify-content:center;">
+                            <div class="case-option"><input type="radio" id="probs-15" name="problems-per-page" value="15" checked><label for="probs-15">Padrão</label></div>
+                            <div class="case-option"><input type="radio" id="probs-20" name="problems-per-page" value="20"><label for="probs-20">Mais</label></div>
+                        </div>
+                    </div>
+                    <div class="option-group" style="display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="text-align:center;font-weight:bold;margin-top:0;margin-bottom:0.6rem;">Número de páginas</h2>
+                        <label>Páginas: <input type="number" id="num-pages" min="1" max="10" value="1" style="width:80px;padding:0.4rem;margin-left:0.5rem;border:1px solid var(--border-color);border-radius:4px;"></label>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn"><i class="fas fa-magic"></i> Criar ficha</button>
+                </div>
+            </div>
+            <div class="preview-section">
+                <div class="preview-label">Pré-visualização</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn"><i class="fas fa-print"></i> Imprimir</button>
+                        <button id="answer-btn" class="answer-btn"><i class="fas fa-eye"></i> Ver respostas</button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+                <div class="description-section">
+            <h2>Como criar a sua ficha de adição e subtração</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Passos simples para criar</h3>
+                    <ol>
+                        <li>Insira um título para a sua ficha</li>
+                        <li>Escolha o tipo de operação (Adição, Subtração ou Misto)</li>
+                        <li>Selecione o nível de dificuldade</li>
+                        <li>Defina o número de problemas</li>
+                        <li>Clique em "Criar exercício" para gerar os problemas</li>
+                        <li>Imprima com o botão de impressão</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Benefícios educativos</h3>
+                    <ul>
+                        <li>Melhora o cálculo mental e as competências aritméticas</li>
+                        <li>Reforça o sentido numérico e o valor posicional</li>
+                        <li>Ideal para alunos do ensino básico e secundário</li>
+                        <li>Cria prática dinâmica para a aula ou trabalhos de casa</li>
+                        <li>Níveis de dificuldade personalizáveis</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Dicas para professores</h3>
+                    <ul>
+                        <li>Comece com níveis mais fáceis para iniciantes</li>
+                        <li>Use operações mistas para desafiar os alunos</li>
+                        <li>Imprima várias cópias para atividades em sala de aula</li>
+                        <li>Use como exercício de aquecimento diário</li>
+                        <li>Ajuste o número de problemas conforme o tempo disponível</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/addition-subtraction.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>AriClass oferece fichas de exercícios gratuitas de inglês, matemática e muito mais.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Links rápidos</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="word-search.html">Caça-palavras</a></li>
+                    <li><a href="unscramble.html">Ordenar palavras</a></li>
+                    <li><a href="crossword.html">Palavras cruzadas</a></li>
+                    <li><a href="matching-lists.html">Associação de palavras</a></li>
+                    <li><a href="bingo.html">Bingo</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Labirinto</a></li>
+                    <li><a href="addition-subtraction.html">Adição e subtração</a></li>
+                    <li><a href="multiplication-table.html">Multiplicação e divisão</a></li>
+                    <li><a href="clock.html">Ler as horas</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Informações</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">Política de privacidade</a></li>
+                    <li><a href="../terms-of-use.html">Termos de uso</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/mouse-fx.js"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>
