@@ -834,6 +834,41 @@ ${nav('index')}
             </div>
         </div>
     </section>
+    <script>
+        function scrollToCenter(id) {
+            var target = document.getElementById(id);
+            if (!target) return;
+            var scroller = document.scrollingElement || document.documentElement;
+            var dest = Math.max(0, target.getBoundingClientRect().top + scroller.scrollTop
+                       - (window.innerHeight / 2) + (target.offsetHeight / 2));
+            var start = scroller.scrollTop;
+            var duration = 600;
+            var startTime = null;
+            function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+            function step(ts) {
+                if (!startTime) startTime = ts;
+                var p = Math.min((ts - startTime) / duration, 1);
+                scroller.scrollTop = start + (dest - start) * ease(p);
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+        if (history.scrollRestoration) history.scrollRestoration = 'manual';
+        document.querySelectorAll('a[href*="#section-"]').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var parts = this.getAttribute('href').split('#');
+                if (parts[0] && parts[0] !== 'index.html' && parts[0] !== '') return;
+                e.preventDefault();
+                scrollToCenter(parts[1]);
+            });
+        });
+        window.addEventListener('load', function() {
+            var hash = window.location.hash;
+            if (hash && hash.indexOf('section-') !== -1) {
+                setTimeout(function() { scrollToCenter(hash.slice(1)); }, 50);
+            }
+        });
+    </script>
 ${footer()}`;
 
 // WORD SEARCH

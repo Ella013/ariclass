@@ -43,10 +43,7 @@
     <div class="utility-nav">
         <div class="container">
             <div class="language-select">
-                <select id="language-selector">
-                    <option value="en">English</option>
-                    <option value="ko" selected>한국어</option>
-                </select>
+                
             </div>
         </div>
     </div>
@@ -349,11 +346,9 @@
                 nav.classList.toggle('open');
             });
         })();
-
-        document.getElementById('language-selector').addEventListener('change', function() {
-            if (this.value === 'en') window.location.href = '../index.html';
-        });
-
+    </script>
+    <script src="../js/lang-selector.js"></script>
+    <script>
         function scrollToCenter(id) {
             var target = document.getElementById(id);
             if (!target) return;
@@ -372,9 +367,7 @@
             }
             requestAnimationFrame(step);
         }
-
         if (history.scrollRestoration) history.scrollRestoration = 'manual';
-
         document.querySelectorAll('a[href*="#section-"]').forEach(function(link) {
             link.addEventListener('click', function(e) {
                 var parts = this.getAttribute('href').split('#');
@@ -383,7 +376,6 @@
                 scrollToCenter(parts[1]);
             });
         });
-
         window.addEventListener('load', function() {
             var hash = window.location.hash;
             if (hash && hash.indexOf('section-') !== -1) {
