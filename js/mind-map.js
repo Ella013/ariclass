@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="student-header">
             <div class="header-left">
                 <div class="puzzle-header">
-                    <img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
+                    <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
                 </div>
             </div>
             <div class="info-group">
@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function buildMindMapSVG() {
         const shape   = getShape();
         const sizeKey = getSize();
-        const s       = { small: 0.65, medium: 1.0, large: 1.4 }[sizeKey];
-        const sw  = { small: 1.5 / s, medium: 2.0 / s, large: 2.0 / s }[sizeKey];
-        const sw2 = { small: 1.2 / s, medium: 1.6 / s, large: 1.6 / s }[sizeKey];
+        const s       = { small: 0.55, medium: 0.78, large: 1.0 }[sizeKey];
+        const sw  = { small: 1.2 / s, medium: 1.6 / s, large: 1.6 / s }[sizeKey];
+        const sw2 = { small: 1.0 / s, medium: 1.3 / s, large: 1.3 / s }[sizeKey];
         const col = getColor();
         // Center placed at (90, 88) — slightly above the SVG midpoint to sit higher on the page
         const cx = 90, cy = 88;
@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
             shapeHTML = `<circle cx="0" cy="0" r="42" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
         } else if (shape === 'rect') {
             shapeHTML = `<rect x="-54" y="-30" width="108" height="60" rx="16" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+        } else if (shape === 'oval') {
+            shapeHTML = `<ellipse cx="0" cy="0" rx="60" ry="28" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+        } else if (shape === 'line') {
+            shapeHTML = `<line x1="-55" y1="0" x2="55" y2="0" stroke="${col}" stroke-width="${sw}" stroke-linecap="round"/>`;
+        } else if (shape === 'none') {
+            shapeHTML = '';
         } else {
             // Lightbulb: original paths centered around (90,115) → shifted to (0,0)
             shapeHTML = `

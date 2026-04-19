@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return `<div class="student-header">
                 <div class="header-left">
                     <div class="puzzle-header">
-                        <img src="images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
+                        <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass Logo" class="preview-logo">
                     </div>
                 </div>
                 <div class="info-group">

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="ns-header">
             <div class="ns-logo-wrap">
-                <img src="images/worksheet-logo.png" alt="AriClass">
+                <img src="https://ariclass.com/images/worksheet-logo.png" alt="AriClass">
             </div>
             <div class="ns-fields">
                 <span class="ns-field">Date&nbsp;<span class="ns-line-short"></span></span>
