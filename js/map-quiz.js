@@ -142,17 +142,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function generate() {
         const region = document.querySelector('input[name="region"]:checked').value;
         const count  = getCountByFont();
-        let pool = region === 'all'
+        const pool = region === 'all'
             ? Object.values(GEO_DATA).flat()
             : (GEO_DATA[region] || []);
-        // if region has fewer countries than needed, supplement from other regions
-        if (pool.length < count) {
-            const others = Object.entries(GEO_DATA)
-                .filter(([k]) => k !== region)
-                .flatMap(([, v]) => v);
-            pool = pool.concat(shuffle(others).slice(0, count - pool.length));
-        }
-        const picked = shuffle(pool).slice(0, count);
+        const picked = shuffle(pool).slice(0, Math.min(count, pool.length));
         // right column: shuffled country names with original index
         const rightShuffled = shuffle(picked.map((p, i) => ({ country: p.country, idx: i })));
         savedData = { picked, rightShuffled, region };
