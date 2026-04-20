@@ -1,0 +1,59 @@
+/* ── Map Quiz — options panel ── */
+.options .option-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-bottom: 0.6rem !important;
+}
+
+.options .option-group h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0.6rem;
+    margin-top: 0;
+}
+
+.options .option-group .case-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+/* Right column wide enough for long country names */
+#puzzle-preview .list-column.right .list-item {
+    width: auto;
+    min-width: 160px;
+    white-space: nowrap;
+}
+
+/* ── Flag images in the worksheet ── */
+.mq-flag-img {
+    width: 48px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* Both columns match flag row height */
+.list-column.left .list-item,
+.list-column.right .list-item {
+    min-height: 2.6em;
+}
+
+.matching-list.font-large .list-column.left .list-item,
+.matching-list.font-large .list-column.right .list-item {
+    min-height: 3em;
+}
+
+.matching-list.font-small .list-column.left .list-item,
+.matching-list.font-small .list-column.right .list-item {
+    min-height: 2.2em;
+}
+
+/* Flag size by font setting */
+.matching-list.font-large .mq-flag-img { width: 56px; }
+.matching-list.font-small .mq-flag-img  { width: 36px; }
