@@ -142,7 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function generate() {
         const region = document.querySelector('input[name="region"]:checked').value;
         const count  = getCountByFont();
-        const pool   = GEO_DATA[region] || [];
+        const pool   = region === 'all'
+            ? Object.values(GEO_DATA).flat()
+            : (GEO_DATA[region] || []);
         const picked = shuffle(pool).slice(0, Math.min(count, pool.length));
         // right column: shuffled country names with original index
         const rightShuffled = shuffle(picked.map((p, i) => ({ country: p.country, idx: i })));
