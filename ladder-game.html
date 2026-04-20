@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate free printable ladder game worksheets. A fun random selection activity for classrooms. Print and play instantly.">
+    <title>Free Ladder Game Worksheet Generator - AriClass</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="css/ladder-game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <h1>AriClass Worksheet Generator</h1>
+                    <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">English</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Word Search</a></li>
+                            <li><a href="unscramble.html">Unscramble</a></li>
+                            <li><a href="crossword.html">Crossword Puzzle</a></li>
+                            <li><a href="matching-lists.html">Matching Lists</a></li>
+                            <li><a href="bingo.html">Bingo Game</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Math</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                            <li><a href="multiplication-table.html">Multiplication &amp; Division</a></li>
+                            <li><a href="clock.html">Telling Time</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Maze Puzzle</a></li>
+                            <li><a href="map-quiz.html">Map Quiz</a></li>
+                            <li><a href="ladder-game.html">Ladder Game</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">How to Use</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="word-search.html">Word Search</a>
+        <a href="unscramble.html">Unscramble</a>
+        <a href="crossword.html">Crossword Puzzle</a>
+        <a href="matching-lists.html">Matching Lists</a>
+        <a href="bingo.html">Bingo Game</a>
+        <a href="sudoku.html">Sudoku</a>
+        <a href="maze.html">Maze Puzzle</a>
+        <a href="map-quiz.html">Map Quiz</a>
+        <a href="ladder-game.html">Ladder Game</a>
+        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+        <a href="how-to-use.html">How to Use</a>
+    </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>Ladder Game</h1>
+        <div class="generator-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <!-- Title Input -->
+                <div class="title-input">
+                    <h2>Worksheet Title</h2>
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Ladder Game">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            Show worksheet title
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="options">
+                    <div class="option-group" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                        <h2>Number of Players</h2>
+                        <div class="case-options">
+                            <div class="case-option"><input type="radio" id="n2" name="num-players" value="2"><label for="n2">2</label></div>
+                            <div class="case-option"><input type="radio" id="n3" name="num-players" value="3"><label for="n3">3</label></div>
+                            <div class="case-option"><input type="radio" id="n4" name="num-players" value="4" checked><label for="n4">4</label></div>
+                            <div class="case-option"><input type="radio" id="n5" name="num-players" value="5"><label for="n5">5</label></div>
+                            <div class="case-option"><input type="radio" id="n6" name="num-players" value="6"><label for="n6">6</label></div>
+                            <div class="case-option"><input type="radio" id="n7" name="num-players" value="7"><label for="n7">7</label></div>
+                            <div class="case-option"><input type="radio" id="n8" name="num-players" value="8"><label for="n8">8</label></div>
+                        </div>
+                    </div>
+
+                    <div class="option-group label-inputs-section">
+                        <div class="label-inputs-group">
+                            <h3>Top (Players)</h3>
+                            <div id="top-labels"></div>
+                        </div>
+                        <div class="label-inputs-group">
+                            <h3>Bottom (Results)</h3>
+                            <div id="bot-labels"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-random"></i> Generate Ladder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-label">Preview</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> Show Answers
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>How to Create Your Ladder Game</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Simple Steps to Create</h3>
+                    <ol>
+                        <li>Enter a title for your worksheet</li>
+                        <li>Select the number of players (2–8)</li>
+                        <li>Type player names at the top and results at the bottom</li>
+                        <li>Click "Generate Ladder" for a new random ladder</li>
+                        <li>Print your worksheet using the print button</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>How to Play</h3>
+                    <ul>
+                        <li>Each player picks a column at the top</li>
+                        <li>Follow your line straight down</li>
+                        <li>When you hit a horizontal rung, move sideways</li>
+                        <li>Continue down until you reach the bottom</li>
+                        <li>Your result is where your line ends up!</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Tips for Teachers</h3>
+                    <ul>
+                        <li>Use for random seat or group assignments</li>
+                        <li>Assign homework or classroom duties randomly</li>
+                        <li>Click "Show Answers" to reveal all paths</li>
+                        <li>Generate a new ladder each time for variety</li>
+                        <li>Works great as a fun classroom icebreaker</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/ladder-game.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
+            </div>
+
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="word-search.html">Word Search</a></li>
+                    <li><a href="unscramble.html">Unscramble</a></li>
+                    <li><a href="crossword.html">Crossword Puzzle</a></li>
+                    <li><a href="matching-lists.html">Matching Lists</a></li>
+                    <li><a href="bingo.html">Bingo Game</a></li>
+                    <li><a href="sudoku.html">Sudoku</a></li>
+                    <li><a href="maze.html">Maze Puzzle</a></li>
+                    <li><a href="map-quiz.html">Map Quiz</a></li>
+                    <li><a href="ladder-game.html">Ladder Game</a></li>
+                </ul>
+            </nav>
+
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="js/mouse-fx.js"></script>
+    <script src="js/lang-selector.js"></script>
+</body>
+</html>
