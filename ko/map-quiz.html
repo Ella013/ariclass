@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="무료 국기 맞추기 학습지를 만들어보세요. 지역별 국가 국기와 나라 이름을 연결하는 활동지입니다. 교실 수업에 완벽.">
+    <title>무료 국기 맞추기 학습지 생성기 - 아리클래스</title>
+    <link rel="canonical" href="https://ariclass.com/ko/map-quiz.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/map-quiz.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/map-quiz.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/map-quiz.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/matching-lists.css">
+    <link rel="stylesheet" href="../css/map-quiz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">아리클래스 : 학습지 생성기</p>
+                    <p>교사와 학생을 위한 맞춤 학습지를 몇 초 만에 만들어보세요</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">홈</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">영어</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">단어 찾기</a></li>
+                            <li><a href="unscramble.html">문장 배열</a></li>
+                            <li><a href="crossword.html">십자말풀이</a></li>
+                            <li><a href="matching-lists.html">단어 연결</a></li>
+                            <li><a href="bingo.html">빙고 게임</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">수학</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">숫자 이어적기</a></li>
+                            <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                            <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                            <li><a href="mixed-operations.html">혼합 계산</a></li>
+                            <li><a href="clock.html">시계 읽기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">퍼즐</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">스도쿠</a></li>
+                            <li><a href="maze.html">미로 퍼즐</a></li>
+                            <li><a href="ladder-game.html">사다리타기</a></li>
+                            <li><a href="map-quiz.html">국기 맞추기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">인쇄용 시트</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">체크리스트</a></li>
+                            <li><a href="mind-map.html">마인드맵</a></li>
+                            <li><a href="circle-planner.html">원형 플래너</a></li>
+                            <li><a href="vocab-test.html">노트 시트</a></li>
+                            <li><a href="writing-paper.html">쓰기 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">사용 방법</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">홈</a>
+        <a href="word-search.html">단어 찾기</a>
+        <a href="unscramble.html">문장 배열</a>
+        <a href="crossword.html">십자말풀이</a>
+        <a href="matching-lists.html">단어 연결</a>
+        <a href="bingo.html">빙고 게임</a>
+        <a href="number-sequence.html">숫자 이어적기</a>
+        <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+        <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+        <a href="mixed-operations.html">혼합 계산</a>
+        <a href="clock.html">시계 읽기</a>
+        <a href="sudoku.html">스도쿠</a>
+        <a href="maze.html">미로 퍼즐</a>
+        <a href="ladder-game.html">사다리타기</a>
+        <a href="map-quiz.html">국기 맞추기</a>
+        <a href="checklist.html">체크리스트</a>
+        <a href="mind-map.html">마인드맵</a>
+        <a href="circle-planner.html">원형 플래너</a>
+        <a href="vocab-test.html">노트 시트</a>
+        <a href="writing-paper.html">쓰기 노트</a>
+        <a href="how-to-use.html">사용 방법</a>
+    </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>국기 맞추기</h1>
+        <div class="generator-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>학습지 제목</h2>
+                    <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요" value="국기 맞추기">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            학습지 제목 보이기
+                        </label>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option-group" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                        <h2>지역</h2>
+                        <div class="case-options" style="flex-wrap: wrap;">
+                            <div class="case-option">
+                                <input type="radio" id="region-all" name="region" value="all" checked>
+                                <label for="region-all">🌐 전체</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="region-asia" name="region" value="asia">
+                                <label for="region-asia">🌏 아시아</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="region-europe" name="region" value="europe">
+                                <label for="region-europe">🌍 유럽</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="region-americas" name="region" value="americas">
+                                <label for="region-americas">🌎 아메리카</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="region-africa" name="region" value="africa">
+                                <label for="region-africa">🌍 아프리카</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="region-oceania" name="region" value="oceania">
+                                <label for="region-oceania">🌊 오세아니아</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h2>글자 크기</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="font-small" name="font-size" value="small">
+                                <label for="font-small">작게</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="font-medium" name="font-size" value="medium" checked>
+                                <label for="font-medium">보통</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="font-large" name="font-size" value="large">
+                                <label for="font-large">크게</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-random"></i> 학습지 만들기
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-label">미리보기</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> 출력하기
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> 답 보기
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>국기 맞추기 학습지 만드는 방법</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>만드는 방법</h3>
+                    <ol>
+                        <li>학습지 제목을 입력하세요</li>
+                        <li>지역을 선택하세요 (아시아, 유럽, 아메리카, 아프리카, 오세아니아)</li>
+                        <li>글자 크기를 선택하세요</li>
+                        <li>"학습지 만들기" 버튼을 클릭하세요</li>
+                        <li>출력 버튼으로 학습지를 인쇄하세요</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>교육적 효과</h3>
+                    <ul>
+                        <li>세계 지리 지식을 쌓을 수 있어요</li>
+                        <li>나라별 국기를 익힐 수 있어요</li>
+                        <li>사회, 영어 수업에 활용하기 좋아요</li>
+                        <li>시각적 연상 능력을 키워요</li>
+                        <li>모든 연령대에 재미있는 활동이에요</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>선생님 팁</h3>
+                    <ul>
+                        <li>매 수업마다 새로운 문제를 생성해 다양하게 활용하세요</li>
+                        <li>처음에는 나라 수를 줄여서 시작하세요</li>
+                        <li>"답 보기"로 정답지를 바로 만들 수 있어요</li>
+                        <li>여러 지역을 섞어서 세계 지리 도전 과제를 만들어보세요</li>
+                        <li>수업 시작이나 마무리 활동으로 활용하세요</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/map-quiz.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>아리클래스는 영어, 수학 등 다양한 과목의 무료 학습지를 제공합니다.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>바로가기</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="word-search.html">단어 찾기</a></li>
+                    <li><a href="matching-lists.html">단어 연결</a></li>
+                    <li><a href="map-quiz.html">국기 맞추기</a></li>
+                    <li><a href="sudoku.html">스도쿠</a></li>
+                    <li><a href="maze.html">미로 퍼즐</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>정보</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
+                    <li><a href="../terms-of-use.html">이용약관</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>문의하기</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>
