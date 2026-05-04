@@ -1,0 +1,245 @@
+/* Mixed Operations Worksheet */
+
+/* Operation checkboxes */
+.mo-ops-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem 1.2rem;
+    margin: 0.2rem 0;
+}
+
+.mo-ops-grid label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.96rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Operand count hint below radio label */
+.mo-operand-hint {
+    font-size: 0.72rem;
+    color: #999;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+}
+
+
+/* Override generator.css: make preview a flex column so grid can fill remaining height */
+#puzzle-preview {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Body area below header: flex-grows to fill the page */
+#puzzle-preview .mo-page-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Problems grid: fills all remaining space, rows distributed evenly via JS */
+#puzzle-preview .mo-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+    row-gap: 0;
+    align-items: center;
+    min-height: 0;
+}
+
+#puzzle-preview .mo-grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1.5rem;
+}
+
+#puzzle-preview .mo-problem {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-size: 17pt;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    white-space: nowrap;
+}
+
+#puzzle-preview .mo-num {
+    font-size: 10pt;
+    color: #888;
+    font-weight: 500;
+    min-width: 1.8rem;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+#puzzle-preview .mo-expr {
+    flex-shrink: 0;
+}
+
+/* Answer blank: no underline, just space */
+#puzzle-preview .mo-blank {
+    display: inline-block;
+    min-width: 2.8rem;
+    text-align: center;
+}
+
+#puzzle-preview .mo-blank .answer-slot {
+    display: inline-block;
+    opacity: 0;
+    color: #cc0000;
+    font-weight: 600;
+}
+
+#puzzle-preview.answers-on .mo-blank .answer-slot {
+    opacity: 1;
+}
+
+#puzzle-preview .student-header {
+    margin-bottom: 6mm;
+}
+
+#puzzle-preview .puzzle-title {
+    margin: 5mm 0;
+}
+
+#puzzle-preview .title-slot {
+    min-height: 10mm;
+    flex-shrink: 0;
+}
+
+#puzzle-preview.title-off .title-slot {
+    display: none;
+}
+
+/* Print */
+@media print {
+    body > *:not(#print-pages) {
+        display: none !important;
+    }
+
+    #print-pages {
+        position: static;
+        width: 100%;
+    }
+
+    #print-pages .print-page {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 210mm;
+        height: 297mm;
+        padding: 20mm;
+        box-sizing: border-box;
+        background: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #print-pages .print-page:not(:last-child) {
+        page-break-after: always;
+    }
+
+    #print-pages .copyright-footer {
+        display: block !important;
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        text-align: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+    }
+
+    #print-pages .mo-page-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #print-pages .mo-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.5rem;
+        row-gap: 0;
+        align-items: center;
+        min-height: 0;
+    }
+
+    #print-pages .mo-grid.cols-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 1.5rem;
+    }
+
+    #print-pages .mo-problem {
+        display: flex;
+        align-items: baseline;
+        gap: 0.35rem;
+        font-size: 17pt;
+        font-weight: 500;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        white-space: nowrap;
+    }
+
+    #print-pages .mo-num {
+        font-size: 10pt;
+        color: #888;
+        font-weight: 500;
+        min-width: 1.8rem;
+        text-align: right;
+        flex-shrink: 0;
+    }
+
+    #print-pages .mo-blank {
+        display: inline-block;
+        min-width: 2.8rem;
+        text-align: center;
+    }
+
+    #print-pages .mo-blank .answer-slot {
+        display: inline-block;
+        opacity: 0;
+        color: #cc0000;
+        font-weight: 600;
+    }
+
+    #print-pages .print-page.answers-on .mo-blank .answer-slot {
+        opacity: 1;
+    }
+
+    #print-pages .student-header {
+        margin-bottom: 6mm;
+        flex-shrink: 0;
+    }
+
+    #print-pages .puzzle-title {
+        margin: 5mm 0;
+        flex-shrink: 0;
+    }
+
+    #print-pages .title-slot {
+        min-height: 10mm;
+        flex-shrink: 0;
+    }
+
+    #print-pages .print-page.title-off .title-slot {
+        display: none !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .generator-container {
+        margin: 1rem auto !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    .generator-content {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        min-width: 1100px;
+    }
+}

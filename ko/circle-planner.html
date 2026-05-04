@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="무료 원형 플래너 학습지를 만들어보세요. 시계 모양의 원형 플래너로 하루 일과와 활동 계획을 세울 수 있습니다. 교실 활동에 완벽.">
+    <title>무료 원형 플래너 학습지 - 아리클래스</title>
+    <link rel="canonical" href="https://ariclass.com/ko/circle-planner.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/circle-planner.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/circle-planner.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/circle-planner.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/circle-planner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">아리클래스 : 학습지 생성기</p>
+                    <p>교사와 학생을 위한 맞춤 학습지를 몇 초 만에 만들어보세요</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">홈</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">영어</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">단어 찾기</a></li>
+                            <li><a href="unscramble.html">문장 배열</a></li>
+                            <li><a href="crossword.html">십자말풀이</a></li>
+                            <li><a href="matching-lists.html">단어 연결</a></li>
+                            <li><a href="bingo.html">빙고 게임</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">수학</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">숫자 이어적기</a></li>
+                            <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                            <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                            <li><a href="mixed-operations.html">혼합 계산</a></li>
+                            <li><a href="clock.html">시계 읽기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">퍼즐</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">스도쿠</a></li>
+                            <li><a href="maze.html">미로 퍼즐</a></li>
+                            <li><a href="ladder-game.html">사다리타기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">인쇄용 시트</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">체크리스트</a></li>
+                            <li><a href="mind-map.html">마인드맵</a></li>
+                            <li><a href="circle-planner.html">원형 플래너</a></li>
+                            <li><a href="vocab-test.html">노트 시트</a></li>
+                            <li><a href="writing-paper.html">쓰기 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">사용 방법</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">홈</a>
+        <a href="word-search.html">단어 찾기</a>
+        <a href="unscramble.html">문장 배열</a>
+        <a href="crossword.html">십자말풀이</a>
+        <a href="matching-lists.html">단어 연결</a>
+        <a href="bingo.html">빙고 게임</a>
+        <a href="number-sequence.html">숫자 이어적기</a>
+        <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+        <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+        <a href="mixed-operations.html">혼합 계산</a>
+        <a href="clock.html">시계 읽기</a>
+        <a href="sudoku.html">스도쿠</a>
+        <a href="maze.html">미로 퍼즐</a>
+        <a href="ladder-game.html">사다리타기</a>
+        <a href="checklist.html">체크리스트</a>
+        <a href="mind-map.html">마인드맵</a>
+        <a href="circle-planner.html">원형 플래너</a>
+        <a href="vocab-test.html">노트 시트</a>
+        <a href="writing-paper.html">쓰기 노트</a>
+        <a href="how-to-use.html">사용 방법</a>
+    </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>원형 플래너</h1>
+        <div class="generator-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>학습지 제목</h2>
+                    <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요" value="원형 플래너">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            학습지 제목 보이기
+                        </label>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option-group cp-style-group">
+                        <h2>스타일</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="style-clean" name="cp-style" value="clean">
+                                <label for="style-clean">심플</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="style-deco" name="cp-style" value="decorative" checked>
+                                <label for="style-deco">꾸밈</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group cp-sleep-group">
+                        <h2>수면 시간</h2>
+                        <label class="cp-sleep-toggle">
+                            <input type="checkbox" id="sleep-enable" checked>
+                            <span>플래너에 수면 시간 표시</span>
+                        </label>
+                        <div id="sleep-options" class="cp-sleep-picker enabled">
+                            <div class="cp-time-box">
+                                <span class="cp-time-label">부터</span>
+                                <div class="cp-timepicker" id="sleep-from-picker"></div>
+                            </div>
+                            <span class="cp-time-sep">→</span>
+                            <div class="cp-time-box">
+                                <span class="cp-time-label">까지</span>
+                                <div class="cp-timepicker" id="sleep-to-picker"></div>
+                            </div>
+                        </div>
+                        <div id="sleep-extras" class="cp-sleep-extras enabled">
+                            <div class="cp-extra-row">
+                                <span class="cp-time-label">색상</span>
+                                <input type="color" id="sleep-color" value="#3c50b4">
+                            </div>
+                            <div class="cp-extra-row">
+                                <span class="cp-time-label">달 아이콘</span>
+                                <div class="cp-moon-opts">
+                                    <button class="cp-moon-btn active" data-moon="crescent">☾</button>
+<button class="cp-moon-btn" data-moon="half">◑</button>
+                                    <button class="cp-moon-btn" data-moon="full">●</button>
+                                    <button class="cp-moon-btn" data-moon="star">★</button>
+                                    <button class="cp-moon-btn" data-moon="none">✕</button>
+                                </div>
+                            </div>
+                            <div class="cp-extra-row">
+                                <span class="cp-time-label">위치</span>
+                                <div class="cp-moon-opts">
+                                    <button class="cp-moon-btn cp-pos-btn" data-pos="p1">·</button>
+                                    <button class="cp-moon-btn cp-pos-btn active" data-pos="p2">∘</button>
+                                    <button class="cp-moon-btn cp-pos-btn" data-pos="p3">○</button>
+                                    <button class="cp-moon-btn cp-pos-btn" data-pos="p4">◯</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cp-print-notice">
+                    <i class="fas fa-info-circle"></i>
+                    브라우저에 따라 인쇄 미리보기 화면이 다르게 보일 수 있습니다. 실제 인쇄 결과는 이 페이지의 미리보기와 동일하게 출력됩니다.
+                </div>
+
+                <div class="button-container">
+                    <button class="print-btn" id="print-btn" style="display:none"></button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-label">미리보기</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button class="print-btn" id="print-btn-top">
+                            <i class="fas fa-print"></i> 인쇄하기
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>원형 플래너 사용 방법</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>간단한 단계</h3>
+                    <ol>
+                        <li>플래너 제목을 입력하세요</li>
+                        <li>수면 시간을 설정하세요</li>
+                        <li>인쇄하고 각 구역에 하루 계획을 적어보세요</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>학습 효과</h3>
+                    <ul>
+                        <li>하루 일과를 시각적으로 파악할 수 있어요</li>
+                        <li>시간 관리 활동에 최적이에요</li>
+                        <li>방학이나 여행 계획 세우기에 완벽해요</li>
+                        <li>창의적 사고와 목표 설정을 장려해요</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>선생님을 위한 팁</h3>
+                    <ul>
+                        <li>일일 또는 주간 일정표 템플릿으로 활용하세요</li>
+                        <li>방학이나 여행 계획 수업 활동에 최적이에요</li>
+                        <li>학생들이 각 구역에 그림이나 글을 쓰도록 하세요</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/circle-planner.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>아리클래스는 영어, 수학 등 다양한 과목의 무료 학습지를 제공합니다.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>바로가기</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="checklist.html">체크리스트</a></li>
+                    <li><a href="writing-paper.html">쓰기 노트</a></li>
+                    <li><a href="mind-map.html">마인드맵</a></li>
+                    <li><a href="circle-planner.html">원형 플래너</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>정보</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
+                    <li><a href="../terms-of-use.html">이용약관</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>문의하기</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

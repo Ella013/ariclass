@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free printable circle planner worksheet. A clock-style circle planner for daily schedules and activity planning. Perfect for classrooms.">
+    <title>Free Circle Planner Worksheet - AriClass</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="css/circle-planner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <h1>AriClass Worksheet Generator</h1>
+                    <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">English</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Word Search</a></li>
+                            <li><a href="unscramble.html">Unscramble</a></li>
+                            <li><a href="crossword.html">Crossword Puzzle</a></li>
+                            <li><a href="matching-lists.html">Matching Lists</a></li>
+                            <li><a href="bingo.html">Bingo Game</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Math</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">Number Sequence</a></li>
+                            <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                            <li><a href="multiplication-table.html">Multiplication &amp; Division</a></li>
+                            <li><a href="mixed-operations.html">Mixed Operations</a></li>
+                            <li><a href="clock.html">Telling Time</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Maze Puzzle</a></li>
+                            <li><a href="map-quiz.html">Map Quiz</a></li>
+                            <li><a href="ladder-game.html">Ladder Game</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Sheets</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">Checklist</a></li>
+                            <li><a href="vocab-test.html">Note Sheet</a></li>
+                            <li><a href="writing-paper.html">Writing Paper</a></li>
+                            <li><a href="mind-map.html">Mind Map</a></li>
+                            <li><a href="circle-planner.html">Circle Planner</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">How to Use</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="word-search.html">Word Search</a>
+        <a href="unscramble.html">Unscramble</a>
+        <a href="crossword.html">Crossword Puzzle</a>
+        <a href="matching-lists.html">Matching Lists</a>
+        <a href="bingo.html">Bingo Game</a>
+        <a href="number-sequence.html">Number Sequence</a>
+        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+        <a href="multiplication-table.html">Multiplication &amp; Division</a>
+        <a href="mixed-operations.html">Mixed Operations</a>
+        <a href="clock.html">Telling Time</a>
+        <a href="sudoku.html">Sudoku</a>
+        <a href="maze.html">Maze Puzzle</a>
+        <a href="map-quiz.html">Map Quiz</a>
+        <a href="ladder-game.html">Ladder Game</a>
+        <a href="checklist.html">Checklist</a>
+        <a href="vocab-test.html">Note Sheet</a>
+        <a href="writing-paper.html">Writing Paper</a>
+        <a href="mind-map.html">Mind Map</a>
+        <a href="circle-planner.html">Circle Planner</a>
+        <a href="how-to-use.html">How to Use</a>
+    </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>Circle Planner</h1>
+        <div class="generator-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>Worksheet Title</h2>
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Circle Planner">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            Show worksheet title
+                        </label>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option-group cp-style-group">
+                        <h2>Style</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="style-clean" name="cp-style" value="clean">
+                                <label for="style-clean">Clean</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="style-deco" name="cp-style" value="decorative" checked>
+                                <label for="style-deco">Decorative</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group cp-sleep-group">
+                        <h2>Sleep Time</h2>
+                        <label class="cp-sleep-toggle">
+                            <input type="checkbox" id="sleep-enable" checked>
+                            <span>Mark sleep hours on planner</span>
+                        </label>
+                        <div id="sleep-options" class="cp-sleep-picker enabled">
+                            <div class="cp-time-box">
+                                <span class="cp-time-label">From</span>
+                                <div class="cp-timepicker" id="sleep-from-picker"></div>
+                            </div>
+                            <span class="cp-time-sep">→</span>
+                            <div class="cp-time-box">
+                                <span class="cp-time-label">To</span>
+                                <div class="cp-timepicker" id="sleep-to-picker"></div>
+                            </div>
+                        </div>
+                        <div id="sleep-extras" class="cp-sleep-extras enabled">
+                            <div class="cp-extra-row">
+                                <span class="cp-time-label">Color</span>
+                                <input type="color" id="sleep-color" value="#3c50b4">
+                            </div>
+                            <div class="cp-extra-row">
+                                <span class="cp-time-label">Moon</span>
+                                <div class="cp-moon-opts">
+                                    <button class="cp-moon-btn active" data-moon="crescent">☾</button>
+<button class="cp-moon-btn" data-moon="half">◑</button>
+                                    <button class="cp-moon-btn" data-moon="full">●</button>
+                                    <button class="cp-moon-btn" data-moon="star">★</button>
+                                    <button class="cp-moon-btn" data-moon="none">✕</button>
+                                </div>
+                            </div>
+                            <div class="cp-extra-row">
+                                <span class="cp-time-label">Place</span>
+                                <div class="cp-moon-opts">
+                                    <button class="cp-moon-btn cp-pos-btn" data-pos="p1">·</button>
+                                    <button class="cp-moon-btn cp-pos-btn active" data-pos="p2">∘</button>
+                                    <button class="cp-moon-btn cp-pos-btn" data-pos="p3">○</button>
+                                    <button class="cp-moon-btn cp-pos-btn" data-pos="p4">◯</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cp-print-notice">
+                    <i class="fas fa-info-circle"></i>
+                    The print preview screen may appear different depending on your browser. The actual printed result will accurately match the preview displayed on this page.
+                </div>
+
+                <div class="button-container">
+                    <button class="print-btn" id="print-btn" style="display:none"></button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-label">Preview</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button class="print-btn" id="print-btn-top">
+                            <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>How to Use the Circle Planner</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Simple Steps</h3>
+                    <ol>
+                        <li>Enter a title for your planner</li>
+                        <li>Enable sleep time and set your sleep hours</li>
+                        <li>Print and write your daily plans in each section</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Educational Benefits</h3>
+                    <ul>
+                        <li>Helps students visualize their daily schedule</li>
+                        <li>Great for time management activities</li>
+                        <li>Perfect for vacation or holiday planning</li>
+                        <li>Encourages creative thinking and goal setting</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Tips for Teachers</h3>
+                    <ul>
+                        <li>Use as a daily or weekly schedule template</li>
+                        <li>Great for holiday or vacation planning activities</li>
+                        <li>Have students draw or write in each section</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/circle-planner.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="checklist.html">Checklist</a></li>
+                    <li><a href="writing-paper.html">Writing Paper</a></li>
+                    <li><a href="mind-map.html">Mind Map</a></li>
+                    <li><a href="circle-planner.html">Circle Planner</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="js/mouse-fx.js"></script>
+    <script src="js/lang-selector.js"></script>
+</body>
+</html>

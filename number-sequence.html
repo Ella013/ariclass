@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate free printable number sequence worksheets. Fill in the missing numbers to practice counting and skip counting. Perfect for elementary classrooms.">
+    <title>Free Number Sequence Worksheet Generator - AriClass</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generator.css">
+    <link rel="stylesheet" href="css/number-sequence.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <h1>AriClass Worksheet Generator</h1>
+                    <p>Create custom worksheets for English, Math, and more in seconds. Perfect for teachers and students!</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">English</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">Word Search</a></li>
+                            <li><a href="unscramble.html">Unscramble</a></li>
+                            <li><a href="crossword.html">Crossword Puzzle</a></li>
+                            <li><a href="matching-lists.html">Matching Lists</a></li>
+                            <li><a href="bingo.html">Bingo Game</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Math</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">Number Sequence</a></li>
+                            <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                            <li><a href="multiplication-table.html">Multiplication &amp; Division</a></li>
+                            <li><a href="clock.html">Telling Time</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Puzzles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">Sudoku</a></li>
+                            <li><a href="maze.html">Maze Puzzle</a></li>
+                            <li><a href="map-quiz.html">Map Quiz</a></li>
+                            <li><a href="ladder-game.html">Ladder Game</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">How to Use</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="word-search.html">Word Search</a>
+        <a href="unscramble.html">Unscramble</a>
+        <a href="crossword.html">Crossword Puzzle</a>
+        <a href="matching-lists.html">Matching Lists</a>
+        <a href="bingo.html">Bingo Game</a>
+        <a href="number-sequence.html">Number Sequence</a>
+        <a href="addition-subtraction.html">Addition &amp; Subtraction</a>
+        <a href="multiplication-table.html">Multiplication &amp; Division</a>
+        <a href="clock.html">Telling Time</a>
+        <a href="sudoku.html">Sudoku</a>
+        <a href="maze.html">Maze Puzzle</a>
+        <a href="map-quiz.html">Map Quiz</a>
+        <a href="ladder-game.html">Ladder Game</a>
+        <a href="how-to-use.html">How to Use</a>
+    </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>Number Sequence</h1>
+        <div class="generator-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <!-- Title -->
+                <div class="title-input">
+                    <h2>Worksheet Title</h2>
+                    <input type="text" id="worksheet-title" placeholder="Enter worksheet title" value="Number Sequence">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            Show worksheet title
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Count By -->
+                <div class="options">
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="margin-bottom:0.2rem;">Count By</h2>
+                        <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:center;">
+                            <div class="case-options">
+                                <div class="case-option">
+                                    <input type="radio" id="by-1" name="count-by" value="1" checked>
+                                    <label for="by-1">1</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-2" name="count-by" value="2">
+                                    <label for="by-2">2</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-3" name="count-by" value="3">
+                                    <label for="by-3">3</label>
+                                </div>
+                            </div>
+                            <div class="case-options">
+                                <div class="case-option">
+                                    <input type="radio" id="by-4" name="count-by" value="4">
+                                    <label for="by-4">4</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-5" name="count-by" value="5">
+                                    <label for="by-5">5</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-10" name="count-by" value="10">
+                                    <label for="by-10">10</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Starting Number -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>Starting Number</h2>
+                        <input type="number" id="start-num" min="0" max="10000" value="1" class="ns-number-input">
+                    </div>
+
+                    <!-- Blanks -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>Blanks</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="diff-easy" name="difficulty" value="easy">
+                                <label for="diff-easy">Few</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-med" name="difficulty" value="medium" checked>
+                                <label for="diff-med">Some</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-hard" name="difficulty" value="hard">
+                                <label for="diff-hard">Many</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Size -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>Size</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="size-large" name="seq-size" value="large">
+                                <label for="size-large">Large</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="size-medium" name="seq-size" value="medium">
+                                <label for="size-medium">Medium</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="size-small" name="seq-size" value="small" checked>
+                                <label for="size-small">Small</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pages -->
+                    <div class="option-group" style="display:flex;flex-direction:column;align-items:center;">
+                        <h2>Pages</h2>
+                        <div class="player-counter">
+                            <button id="decreasePage" type="button"><i class="fas fa-minus"></i></button>
+                            <span id="pageCount">1</span>
+                            <button id="increasePage" type="button"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> Generate Worksheet
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-label">Preview</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> Print Worksheet
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> Show Answers
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>How to Create Your Number Sequence Worksheet</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>Simple Steps to Create</h3>
+                    <ol>
+                        <li>Enter a title for your worksheet</li>
+                        <li>Choose how much to count by (1, 2, 3, 4, 5, or 10)</li>
+                        <li>Set the starting number</li>
+                        <li>Choose how many blanks to include</li>
+                        <li>Click "Generate Worksheet" for a new set</li>
+                        <li>Print your worksheet using the print button</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>Educational Benefits</h3>
+                    <ul>
+                        <li>Builds number sense and counting fluency</li>
+                        <li>Practices skip counting (by 2s, 5s, 10s, etc.)</li>
+                        <li>Identifies number patterns and sequences</li>
+                        <li>Great for kindergarten through grade 3</li>
+                        <li>Printable and easy to use in any classroom</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>Tips for Teachers</h3>
+                    <ul>
+                        <li>Start with "Count by 1" for beginners</li>
+                        <li>Use "Count by 2" and "Count by 5" for early skip counting</li>
+                        <li>Increase blanks gradually as students improve</li>
+                        <li>Use "Show Answers" as a quick answer key</li>
+                        <li>Generate multiple versions for extra practice</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/number-sequence.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>Ariclass offers free printable worksheets for kids across various subjects including English, Math, and more.</p>
+            </div>
+
+            <nav class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="word-search.html">Word Search</a></li>
+                    <li><a href="unscramble.html">Unscramble</a></li>
+                    <li><a href="crossword.html">Crossword Puzzle</a></li>
+                    <li><a href="matching-lists.html">Matching Lists</a></li>
+                    <li><a href="bingo.html">Bingo Game</a></li>
+                    <li><a href="number-sequence.html">Number Sequence</a></li>
+                    <li><a href="addition-subtraction.html">Addition &amp; Subtraction</a></li>
+                    <li><a href="multiplication-table.html">Multiplication &amp; Division</a></li>
+                    <li><a href="clock.html">Telling Time</a></li>
+                </ul>
+            </nav>
+
+            <nav class="footer-nav">
+                <h3>Information</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="js/mouse-fx.js"></script>
+    <script src="js/lang-selector.js"></script>
+</body>
+</html>

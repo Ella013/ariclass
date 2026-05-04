@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="빈칸 채우기 숫자 이어적기 학습지를 무료로 만들어보세요. 배수, 시작 숫자, 난이도를 설정해 바로 출력할 수 있습니다.">
+    <title>무료 숫자 이어적기 학습지 생성기 - 아리클래스</title>
+    <link rel="canonical" href="https://ariclass.com/ko/number-sequence.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/number-sequence.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/number-sequence.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/number-sequence.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">아리클래스 : 학습지 생성기</p>
+                    <p>교사와 학생에게 맞춤 학습지를 제공합니다</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">홈</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">영어</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">단어 찾기</a></li>
+                            <li><a href="unscramble.html">문장 배열</a></li>
+                            <li><a href="crossword.html">십자말풀이</a></li>
+                            <li><a href="matching-lists.html">단어 연결</a></li>
+                            <li><a href="bingo.html">빙고 게임</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">수학</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">숫자 이어적기</a></li>
+                            <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                            <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                            <li><a href="mixed-operations.html">혼합 계산</a></li>
+                            <li><a href="clock.html">시계 읽기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">퍼즐</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">스도쿠</a></li>
+                            <li><a href="maze.html">미로 퍼즐</a></li>
+                            <li><a href="ladder-game.html">사다리타기</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">인쇄용 시트</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">체크리스트</a></li>
+                            <li><a href="mind-map.html">마인드맵</a></li>
+                            <li><a href="circle-planner.html">원형 플래너</a></li>
+                            <li><a href="vocab-test.html">노트 시트</a></li>
+                            <li><a href="writing-paper.html">쓰기 노트</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">사용 방법</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">홈</a>
+            <a href="word-search.html">단어 찾기</a>
+            <a href="unscramble.html">문장 배열</a>
+            <a href="crossword.html">십자말풀이</a>
+            <a href="matching-lists.html">단어 연결</a>
+            <a href="bingo.html">빙고 게임</a>
+            <a href="number-sequence.html">숫자 이어적기</a>
+            <a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a>
+            <a href="multiplication-table.html">곱셈 &amp; 나눗셈</a>
+            <a href="mixed-operations.html">혼합 계산</a>
+            <a href="clock.html">시계 읽기</a>
+            <a href="sudoku.html">스도쿠</a>
+            <a href="maze.html">미로 퍼즐</a>
+            <a href="ladder-game.html">사다리타기</a>
+            <a href="checklist.html">체크리스트</a>
+            <a href="mind-map.html">마인드맵</a>
+            <a href="circle-planner.html">원형 플래너</a>
+            <a href="vocab-test.html">노트 시트</a>
+            <a href="writing-paper.html">쓰기 노트</a>
+            <a href="how-to-use.html">사용 방법</a>
+        </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>숫자 이어적기</h1>
+        <div class="generator-content">
+            <!-- 설정 섹션 -->
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>학습지 제목</h2>
+                    <input type="text" id="worksheet-title" placeholder="학습지 제목을 입력하세요" value="숫자 이어적기">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            학습지 제목 보이기
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 숫자 세기 -->
+                <div class="options">
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="margin-bottom:0.2rem;">배수 선택</h2>
+                        <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:center;">
+                            <div class="case-options">
+                                <div class="case-option">
+                                    <input type="radio" id="by-1" name="count-by" value="1" checked>
+                                    <label for="by-1">1</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-2" name="count-by" value="2">
+                                    <label for="by-2">2</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-3" name="count-by" value="3">
+                                    <label for="by-3">3</label>
+                                </div>
+                            </div>
+                            <div class="case-options">
+                                <div class="case-option">
+                                    <input type="radio" id="by-4" name="count-by" value="4">
+                                    <label for="by-4">4</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-5" name="count-by" value="5">
+                                    <label for="by-5">5</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-10" name="count-by" value="10">
+                                    <label for="by-10">10</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 시작 숫자 -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>시작 숫자</h2>
+                        <input type="number" id="start-num" min="0" max="10000" value="1" class="ns-number-input">
+                    </div>
+
+                    <!-- 빈칸 수 -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>빈칸 수</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="diff-easy" name="difficulty" value="easy">
+                                <label for="diff-easy">적게</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-med" name="difficulty" value="medium" checked>
+                                <label for="diff-med">보통</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-hard" name="difficulty" value="hard">
+                                <label for="diff-hard">많이</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 크기 -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>크기</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="size-large" name="seq-size" value="large">
+                                <label for="size-large">크게</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="size-medium" name="seq-size" value="medium">
+                                <label for="size-medium">보통</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="size-small" name="seq-size" value="small" checked>
+                                <label for="size-small">작게</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 페이지 수 -->
+                    <div class="option-group" style="display:flex;flex-direction:column;align-items:center;">
+                        <h2>페이지 수</h2>
+                        <div class="player-counter">
+                            <button id="decreasePage" type="button"><i class="fas fa-minus"></i></button>
+                            <span id="pageCount">1</span>
+                            <button id="increasePage" type="button"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> 학습지 만들기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 미리보기 섹션 -->
+            <div class="preview-section">
+                <div class="preview-label">미리보기</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> 출력하기
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> 정답 보기
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>숫자 이어적기 학습지 만들기</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>만드는 방법</h3>
+                    <ol>
+                        <li>학습지 제목을 입력하세요</li>
+                        <li>배수를 선택하세요 (1, 2, 3, 4, 5, 10)</li>
+                        <li>시작 숫자를 설정하세요</li>
+                        <li>빈칸 수를 선택하세요</li>
+                        <li>"학습지 만들기" 버튼을 클릭하세요</li>
+                        <li>출력 버튼으로 학습지를 인쇄하세요</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>교육적 효과</h3>
+                    <ul>
+                        <li>수 감각과 숫자 세기 능력 향상</li>
+                        <li>배수 개념 (2, 5, 10 배수) 연습</li>
+                        <li>숫자 패턴 및 규칙 이해</li>
+                        <li>유치원~초등 3학년에 적합</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>선생님 팁</h3>
+                    <ul>
+                        <li>초보자는 1씩 세기부터 시작하세요</li>
+                        <li>2, 5 배수로 건너 세기를 연습하세요</li>
+                        <li>실력이 늘면 빈칸 수를 점차 늘리세요</li>
+                        <li>"정답 보기"로 빠르게 채점하세요</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/number-sequence.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>아리클래스는 교사와 학생을 위한 무료 학습지 생성 사이트입니다.</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>바로가기</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="word-search.html">단어 찾기</a></li>
+                    <li><a href="unscramble.html">문장 배열</a></li>
+                    <li><a href="number-sequence.html">숫자 이어적기</a></li>
+                    <li><a href="addition-subtraction.html">덧셈 &amp; 뺄셈</a></li>
+                    <li><a href="multiplication-table.html">곱셈 &amp; 나눗셈</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>정보</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">개인정보처리방침</a></li>
+                    <li><a href="../terms-of-use.html">이용약관</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>문의</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

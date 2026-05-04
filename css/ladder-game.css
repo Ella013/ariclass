@@ -1,50 +1,183 @@
 /* ── Ladder Game ── */
-.options .label-inputs-section {
+
+/* Narrow input panel to match other pages */
+.input-section {
+    flex: 0 0 340px !important;
+    max-width: 340px !important;
+}
+
+/* Option group centering */
+.options .option-group {
     display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    padding-top: 0.5rem;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-bottom: 0.6rem !important;
 }
 
-.label-inputs-group {
-    flex: 1;
-    min-width: 120px;
-    max-width: 180px;
-}
-
-.label-inputs-group h3 {
+.options .option-group h2 {
     text-align: center;
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin: 0 0 0.5rem 0;
-    color: var(--text-color, #333);
+    width: 100%;
+    margin-bottom: 0.6rem;
+    margin-top: 0;
 }
 
-.label-input-row {
+/* Player / Winner counter — Bingo style */
+.player-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+}
+
+.player-counter button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    background: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.player-counter button:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.player-counter span {
+    font-size: 1rem;
+    min-width: 30px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Winner counter disabled state */
+.counter-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* Random winner row */
+.winner-mode-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding-top: 0.3rem;
+}
+
+.winner-check-label {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 0.3rem;
+    font-weight: 500;
+    cursor: pointer;
 }
 
-.label-input-row label {
-    min-width: 18px;
-    font-size: 0.82rem;
-    color: #666;
+.winner-count-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
 }
 
-.label-input-row input {
+/* Names & Results form — matching-lists style */
+.ladder-pair-header {
+    display: flex;
+    gap: 0.8rem;
+    padding-bottom: 0.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.ladder-pair-header span:first-child { flex: 0 0 24px; }
+.ladder-pair-header span:not(:first-child) { flex: 1; text-align: center; }
+
+.ladder-pair-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    height: 228px;
+    overflow-y: auto;
+    padding-right: 0.3rem;
+}
+
+.ladder-pair {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-shrink: 0;
+}
+
+.ladder-pair-num {
+    flex: 0 0 24px;
+    font-size: 0.88rem;
+    color: #888;
+    text-align: right;
+}
+
+/* Input wrapper for char-limit indicator */
+.input-limit-wrap {
     flex: 1;
-    padding: 0.22rem 0.4rem;
-    border: 1px solid var(--border-color, #ddd);
-    border-radius: 4px;
-    font-size: 0.82rem;
+    position: relative;
+    min-width: 0;
 }
 
-/* SVG wrapper in preview */
+.input-limit-wrap .word-input-field {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.word-input-field.at-limit {
+    border-color: #e74c3c !important;
+    background: #fff5f5;
+}
+
+/* Same look as matching-lists word-input-field */
+.ladder-pair .word-input-field {
+    flex: 1;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    min-width: 0;
+}
+
+.ladder-pair .word-input-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
+/* Disabled bottom inputs */
+.bot-disabled .ladder-bot-input {
+    opacity: 0.35;
+    background: #f5f5f5;
+}
+
+/* Reset button hover */
+#reset-pairs-btn:hover {
+    color: #e74c3c !important;
+    border-color: #e74c3c !important;
+}
+#reset-pairs-btn:hover i {
+    animation: spin-once 0.45s ease;
+}
+@keyframes spin-once {
+    0%   { transform: rotate(0deg); }
+    60%  { transform: rotate(-50deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* SVG wrapper */
 .ladder-svg-wrap {
     padding: 0.5rem 0 1rem;
 }

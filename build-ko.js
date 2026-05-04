@@ -72,9 +72,9 @@ const commonKO = {
   medium: '보통',
   hard: '어려움',
   expert: '전문가',
-  level1Easy: 'Level 1 (쉬움)',
-  level2Medium: 'Level 2 (보통)',
-  level3Hard: 'Level 3 (어려움)',
+  level1Easy: 'Level 1<br>(쉬움)',
+  level2Medium: 'Level 2<br>(보통)',
+  level3Hard: 'Level 3<br>(어려움)',
 };
 
 // Per-page content replacements

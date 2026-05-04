@@ -1,5 +1,9 @@
 /* Multiplication & Division — division bracket styles */
 
+.options .case-option label {
+    text-align: center;
+}
+
 @media print {
     body > *:not(#print-pages) {
         display: none !important;

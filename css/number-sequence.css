@@ -1,0 +1,176 @@
+/* ── Number Sequence ── */
+
+/* Page counter buttons */
+.player-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+}
+.player-counter button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    background: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.player-counter button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+.player-counter span {
+    font-size: 1rem;
+    min-width: 30px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Starting-number input */
+.ns-number-input {
+    width: 110px;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+}
+.ns-number-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.15);
+}
+
+/* Page wrapper — fills A4 height, distributes rows to bottom */
+.ns-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 920px;
+}
+
+/* ── Sequence worksheet area ── */
+.seq-worksheet {
+    flex: 1;
+    padding: 0.4rem 2rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* One row — boxes grow to fill the full row width → equal margins for all sizes */
+.seq-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+/* Number box — flex:1 so all rows are the same total width */
+.seq-box {
+    flex: 1;
+    min-width: 0;
+    border: 2px solid #333;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
+/* Small (default) */
+.size-small  .seq-box { max-width: 65px;  height: 54px; font-size: 1.3rem;  }
+
+/* Medium */
+.size-medium .seq-box { max-width: 92px;  height: 68px; font-size: 1.75rem; }
+
+/* Large */
+.size-large  .seq-box { max-width: 145px; height: 80px; font-size: 2.1rem;  }
+
+/* Given (filled) box */
+.seq-given {
+    background: #fff;
+    color: #222;
+}
+
+/* Blank box */
+.seq-blank {
+    background: #fff;
+    border-style: dashed;
+    border-color: #aaa;
+}
+
+/* Answer text inside blank box — hidden until .show-answer */
+.seq-answer {
+    display: none;
+    color: #c0392b;
+    font-weight: 700;
+}
+.seq-blank.show-answer {
+    border-style: solid;
+    border-color: #c0392b;
+    background: #fff8f8;
+}
+.seq-blank.show-answer .seq-answer {
+    display: block;
+}
+
+/* Arrow between boxes */
+.seq-arrow {
+    font-size: 1.1rem;
+    color: #666;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+/* ── Print ── */
+@media print {
+    #puzzle-preview {
+        width: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .ns-page {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        padding: 20mm 20mm 15mm !important;
+        box-sizing: border-box !important;
+        page-break-after: always;
+        display: flex !important;
+        background: white !important;
+        margin: 0 !important;
+        position: relative !important;
+    }
+
+    .ns-page:last-child {
+        page-break-after: auto !important;
+    }
+
+    .seq-blank {
+        border-style: dashed;
+        border-color: #aaa;
+        background: #fff;
+    }
+    .seq-answer {
+        display: none !important;
+    }
+    .seq-blank.show-answer .seq-answer {
+        display: block !important;
+    }
+    .seq-blank.show-answer {
+        border-style: solid;
+        border-color: #c0392b;
+        background: #fff8f8;
+    }
+}

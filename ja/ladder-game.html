@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="無料のあみだくじプリントを作成。ランダム選択アクティビティとしてクラスですぐに使えます。簡単に印刷できます。">
+    <title>無料あみだくじプリント作成ツール - アリクラス</title>
+    <link rel="canonical" href="https://ariclass.com/ja/ladder-game.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/ladder-game.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/ladder-game.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/ladder-game.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/ladder-game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">アリクラス：プリント作成ツール</p>
+                    <p>教師と生徒のための無料プリント作成サービス</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">英語</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">単語探し</a></li>
+                            <li><a href="unscramble.html">文章並び替え</a></li>
+                            <li><a href="crossword.html">クロスワード</a></li>
+                            <li><a href="matching-lists.html">単語マッチング</a></li>
+                            <li><a href="bingo.html">ビンゴゲーム</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">算数</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">数の並び</a></li>
+                            <li><a href="addition-subtraction.html">足し算・引き算</a></li>
+                            <li><a href="multiplication-table.html">掛け算・割り算</a></li>
+                            <li><a href="mixed-operations.html">混合計算</a></li>
+                            <li><a href="clock.html">時計の読み方</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">パズル</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">数独</a></li>
+                            <li><a href="maze.html">迷路パズル</a></li>
+                            <li><a href="ladder-game.html">あみだくじ</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">印刷用シート</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">チェックリスト</a></li>
+                            <li><a href="mind-map.html">マインドマップ</a></li>
+                            <li><a href="circle-planner.html">サークルプランナー</a></li>
+                            <li><a href="vocab-test.html">ノートシート</a></li>
+                            <li><a href="writing-paper.html">作文用紙</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">使い方</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">ホーム</a>
+            <a href="word-search.html">単語探し</a>
+            <a href="unscramble.html">文章並び替え</a>
+            <a href="crossword.html">クロスワード</a>
+            <a href="matching-lists.html">単語マッチング</a>
+            <a href="bingo.html">ビンゴゲーム</a>
+            <a href="number-sequence.html">数の並び</a>
+            <a href="addition-subtraction.html">足し算・引き算</a>
+            <a href="multiplication-table.html">掛け算・割り算</a>
+            <a href="mixed-operations.html">混合計算</a>
+            <a href="clock.html">時計の読み方</a>
+            <a href="sudoku.html">数独</a>
+            <a href="maze.html">迷路パズル</a>
+            <a href="ladder-game.html">あみだくじ</a>
+            <a href="how-to-use.html">使い方</a>
+        </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>あみだくじ</h1>
+        <div class="generator-content">
+            <!-- 設定セクション -->
+            <div class="input-section">
+                <!-- タイトル入力 -->
+                <div class="title-input">
+                    <h2>プリントタイトル</h2>
+                    <input type="text" id="worksheet-title" placeholder="タイトルを入力してください" value="あみだくじ">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            タイトルを表示する
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 参加人数 -->
+                <div class="options">
+                    <div class="option-group">
+                        <h2>参加人数</h2>
+                        <div class="player-counter">
+                            <button id="decreasePlayer" type="button"><i class="fas fa-minus"></i></button>
+                            <span id="playerCount">4</span>
+                            <button id="increasePlayer" type="button"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 名前と結果 -->
+                <div class="word-input">
+                    <div class="section-header">
+                        <h2>名前 &amp; 結果</h2>
+                        <button id="reset-pairs-btn" class="reset-btn" title="すべてクリア">
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                    </div>
+                    <div class="ladder-pair-header">
+                        <span></span>
+                        <span>参加者</span>
+                        <span id="result-col-label">結果</span>
+                    </div>
+                    <div class="ladder-pair-container" id="pair-container"></div>
+                </div>
+
+                <!-- オプション -->
+                <div class="options">
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;">
+                        <h2>複雑さ</h2>
+                        <div class="case-options" style="gap:2.2rem;">
+                            <div class="case-option">
+                                <input type="radio" id="cplx-low" name="complexity" value="low">
+                                <label for="cplx-low">低</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="cplx-med" name="complexity" value="medium" checked>
+                                <label for="cplx-med">中</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="cplx-high" name="complexity" value="high">
+                                <label for="cplx-high">高</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <div class="winner-mode-row">
+                            <label class="winner-check-label">
+                                <input type="checkbox" id="random-winner">
+                                ランダム当選者
+                            </label>
+                            <div class="winner-count-wrap" id="winner-count-wrap">
+                                <div class="player-counter" id="winner-counter">
+                                    <button id="decreaseWinner" type="button"><i class="fas fa-minus"></i></button>
+                                    <span id="winnerCount">1</span>
+                                    <button id="increaseWinner" type="button"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn">
+                        <i class="fas fa-random"></i> ランダム生成
+                    </button>
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> あみだくじを作成
+                    </button>
+                </div>
+            </div>
+
+            <!-- プレビューセクション -->
+            <div class="preview-section">
+                <div class="preview-label">プレビュー</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> 印刷する
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> 答えを見る
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>あみだくじプリントの作り方</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>作成手順</h3>
+                    <ol>
+                        <li>プリントのタイトルを入力する</li>
+                        <li>参加人数を選ぶ（2〜8人）</li>
+                        <li>上段に参加者名、下段に結果を入力する</li>
+                        <li>「あみだくじを作成」ボタンをクリックする</li>
+                        <li>印刷ボタンでプリントする</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>遊び方</h3>
+                    <ul>
+                        <li>各参加者は上段から自分の列を選ぶ</li>
+                        <li>線に沿って下に進む</li>
+                        <li>横棒に当たったら横に移動する</li>
+                        <li>下段に到達するまで続ける</li>
+                        <li>着いた場所が結果！</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>先生へのアドバイス</h3>
+                    <ul>
+                        <li>席替えやグループ分けに活用できます</li>
+                        <li>宿題や当番をランダムに決めるのに便利</li>
+                        <li>「答えを見る」で全ルートを確認できます</li>
+                        <li>毎回新しいあみだくじを生成できます</li>
+                        <li>授業のアイスブレイクとしても最適です</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/ladder-game.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>アリクラスは教師と生徒のための無料プリント作成サービスです。</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>クイックリンク</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="word-search.html">単語探し</a></li>
+                    <li><a href="number-sequence.html">数の並び</a></li>
+                    <li><a href="addition-subtraction.html">足し算・引き算</a></li>
+                    <li><a href="ladder-game.html">あみだくじ</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>情報</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">プライバシーポリシー</a></li>
+                    <li><a href="../terms-of-use.html">利用規約</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>お問い合わせ</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

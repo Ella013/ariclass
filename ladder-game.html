@@ -108,36 +108,77 @@
                     </div>
                 </div>
 
-                <!-- Settings -->
+                <!-- Number of Players -->
                 <div class="options">
-                    <div class="option-group" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                    <div class="option-group">
                         <h2>Number of Players</h2>
-                        <div class="case-options">
-                            <div class="case-option"><input type="radio" id="n2" name="num-players" value="2"><label for="n2">2</label></div>
-                            <div class="case-option"><input type="radio" id="n3" name="num-players" value="3"><label for="n3">3</label></div>
-                            <div class="case-option"><input type="radio" id="n4" name="num-players" value="4" checked><label for="n4">4</label></div>
-                            <div class="case-option"><input type="radio" id="n5" name="num-players" value="5"><label for="n5">5</label></div>
-                            <div class="case-option"><input type="radio" id="n6" name="num-players" value="6"><label for="n6">6</label></div>
-                            <div class="case-option"><input type="radio" id="n7" name="num-players" value="7"><label for="n7">7</label></div>
-                            <div class="case-option"><input type="radio" id="n8" name="num-players" value="8"><label for="n8">8</label></div>
+                        <div class="player-counter">
+                            <button id="decreasePlayer" type="button"><i class="fas fa-minus"></i></button>
+                            <span id="playerCount">4</span>
+                            <button id="increasePlayer" type="button"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Names & Results form (matching-lists style) -->
+                <div class="word-input">
+                    <div class="section-header">
+                        <h2>Names &amp; Results</h2>
+                        <button id="reset-pairs-btn" class="reset-btn" title="Clear all">
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                    </div>
+                    <div class="ladder-pair-header">
+                        <span></span>
+                        <span>Player</span>
+                        <span id="result-col-label">Result</span>
+                    </div>
+                    <div class="ladder-pair-container" id="pair-container"></div>
+                </div>
+
+                <!-- Options -->
+                <div class="options">
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;">
+                        <h2>Complexity</h2>
+                        <div class="case-options" style="gap:2.2rem;">
+                            <div class="case-option">
+                                <input type="radio" id="cplx-low" name="complexity" value="low">
+                                <label for="cplx-low">Low</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="cplx-med" name="complexity" value="medium" checked>
+                                <label for="cplx-med">Medium</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="cplx-high" name="complexity" value="high">
+                                <label for="cplx-high">High</label>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="option-group label-inputs-section">
-                        <div class="label-inputs-group">
-                            <h3>Top (Players)</h3>
-                            <div id="top-labels"></div>
-                        </div>
-                        <div class="label-inputs-group">
-                            <h3>Bottom (Results)</h3>
-                            <div id="bot-labels"></div>
+                    <div class="option-group">
+                        <div class="winner-mode-row">
+                            <label class="winner-check-label">
+                                <input type="checkbox" id="random-winner">
+                                Random Winner
+                            </label>
+                            <div class="winner-count-wrap" id="winner-count-wrap">
+                                <div class="player-counter" id="winner-counter">
+                                    <button id="decreaseWinner" type="button"><i class="fas fa-minus"></i></button>
+                                    <span id="winnerCount">1</span>
+                                    <button id="increaseWinner" type="button"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="button-container">
+                    <button class="generate-btn" id="random-generate-btn">
+                        <i class="fas fa-random"></i> Randomly Generated
+                    </button>
                     <button class="generate-btn" id="generate-btn">
-                        <i class="fas fa-random"></i> Generate Ladder
+                        <i class="fas fa-magic"></i> Generate Ladder
                     </button>
                 </div>
             </div>

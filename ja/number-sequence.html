@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="数の並びプリントを無料で作成。空白を埋めて数の規則を学ぶ練習プリントが簡単に印刷できます。">
+    <title>無料数の並びプリント作成ツール - アリクラス</title>
+    <link rel="canonical" href="https://ariclass.com/ja/number-sequence.html">
+    <link rel="alternate" hreflang="en" href="https://ariclass.com/number-sequence.html">
+    <link rel="alternate" hreflang="ko" href="https://ariclass.com/ko/number-sequence.html">
+    <link rel="alternate" hreflang="ja" href="https://ariclass.com/ja/number-sequence.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/generator.css">
+    <link rel="stylesheet" href="../css/number-sequence.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5619502783367221"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="utility-nav">
+        <div class="container">
+            <div class="language-select"></div>
+        </div>
+    </div>
+    <header>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../images/main-logo.png" alt="AriClass Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="site-description">
+                    <p class="site-title">アリクラス：プリント作成ツール</p>
+                    <p>教師と生徒のための無料プリント作成サービス</p>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="top-menu">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#section-english">英語</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="word-search.html">単語探し</a></li>
+                            <li><a href="unscramble.html">文章並び替え</a></li>
+                            <li><a href="crossword.html">クロスワード</a></li>
+                            <li><a href="matching-lists.html">単語マッチング</a></li>
+                            <li><a href="bingo.html">ビンゴゲーム</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-math">算数</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="number-sequence.html">数の並び</a></li>
+                            <li><a href="addition-subtraction.html">足し算・引き算</a></li>
+                            <li><a href="multiplication-table.html">掛け算・割り算</a></li>
+                            <li><a href="mixed-operations.html">混合計算</a></li>
+                            <li><a href="clock.html">時計の読み方</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-puzzles">パズル</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sudoku.html">数独</a></li>
+                            <li><a href="maze.html">迷路パズル</a></li>
+                            <li><a href="ladder-game.html">あみだくじ</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#section-sheets">印刷用シート</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="checklist.html">チェックリスト</a></li>
+                            <li><a href="mind-map.html">マインドマップ</a></li>
+                            <li><a href="circle-planner.html">サークルプランナー</a></li>
+                            <li><a href="vocab-test.html">ノートシート</a></li>
+                            <li><a href="writing-paper.html">作文用紙</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="how-to-use.html">使い方</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">ホーム</a>
+            <a href="word-search.html">単語探し</a>
+            <a href="unscramble.html">文章並び替え</a>
+            <a href="crossword.html">クロスワード</a>
+            <a href="matching-lists.html">単語マッチング</a>
+            <a href="bingo.html">ビンゴゲーム</a>
+            <a href="number-sequence.html">数の並び</a>
+            <a href="addition-subtraction.html">足し算・引き算</a>
+            <a href="multiplication-table.html">掛け算・割り算</a>
+            <a href="mixed-operations.html">混合計算</a>
+            <a href="clock.html">時計の読み方</a>
+            <a href="sudoku.html">数独</a>
+            <a href="maze.html">迷路パズル</a>
+            <a href="ladder-game.html">あみだくじ</a>
+            <a href="checklist.html">チェックリスト</a>
+            <a href="mind-map.html">マインドマップ</a>
+            <a href="circle-planner.html">サークルプランナー</a>
+            <a href="vocab-test.html">ノートシート</a>
+            <a href="writing-paper.html">作文用紙</a>
+            <a href="how-to-use.html">使い方</a>
+        </nav>
+    </header>
+
+    <div class="generator-container">
+        <h1>数の並び</h1>
+        <div class="generator-content">
+            <!-- 設定セクション -->
+            <div class="input-section">
+                <div class="title-input">
+                    <h2>プリントタイトル</h2>
+                    <input type="text" id="worksheet-title" placeholder="タイトルを入力してください" value="数の並び">
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-title" checked>
+                            タイトルを表示する
+                        </label>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <!-- 数え方 -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2 style="margin-bottom:0.2rem;">数え方</h2>
+                        <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:center;">
+                            <div class="case-options">
+                                <div class="case-option">
+                                    <input type="radio" id="by-1" name="count-by" value="1" checked>
+                                    <label for="by-1">1</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-2" name="count-by" value="2">
+                                    <label for="by-2">2</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-3" name="count-by" value="3">
+                                    <label for="by-3">3</label>
+                                </div>
+                            </div>
+                            <div class="case-options">
+                                <div class="case-option">
+                                    <input type="radio" id="by-4" name="count-by" value="4">
+                                    <label for="by-4">4</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-5" name="count-by" value="5">
+                                    <label for="by-5">5</label>
+                                </div>
+                                <div class="case-option">
+                                    <input type="radio" id="by-10" name="count-by" value="10">
+                                    <label for="by-10">10</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 開始番号 -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>開始番号</h2>
+                        <input type="number" id="start-num" min="0" max="10000" value="1" class="ns-number-input">
+                    </div>
+
+                    <!-- 空欄の数 -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>空欄の数</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="diff-easy" name="difficulty" value="easy">
+                                <label for="diff-easy">少なめ</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-med" name="difficulty" value="medium" checked>
+                                <label for="diff-med">普通</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="diff-hard" name="difficulty" value="hard">
+                                <label for="diff-hard">多め</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- サイズ -->
+                    <div class="option-group" style="border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:flex;flex-direction:column;align-items:center;">
+                        <h2>サイズ</h2>
+                        <div class="case-options">
+                            <div class="case-option">
+                                <input type="radio" id="size-large" name="seq-size" value="large">
+                                <label for="size-large">大</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="size-medium" name="seq-size" value="medium">
+                                <label for="size-medium">中</label>
+                            </div>
+                            <div class="case-option">
+                                <input type="radio" id="size-small" name="seq-size" value="small" checked>
+                                <label for="size-small">小</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ページ数 -->
+                    <div class="option-group" style="display:flex;flex-direction:column;align-items:center;">
+                        <h2>ページ数</h2>
+                        <div class="player-counter">
+                            <button id="decreasePage" type="button"><i class="fas fa-minus"></i></button>
+                            <span id="pageCount">1</span>
+                            <button id="increasePage" type="button"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="generate-btn" id="generate-btn">
+                        <i class="fas fa-magic"></i> プリントを作成
+                    </button>
+                </div>
+            </div>
+
+            <!-- プレビューセクション -->
+            <div class="preview-section">
+                <div class="preview-label">プレビュー</div>
+                <div class="preview-wrapper">
+                    <div class="preview-actions">
+                        <button id="print-btn" class="print-btn">
+                            <i class="fas fa-print"></i> 印刷する
+                        </button>
+                        <button id="answer-btn" class="answer-btn">
+                            <i class="fas fa-eye"></i> 答えを見る
+                        </button>
+                    </div>
+                    <div id="puzzle-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section">
+            <h2>数の並びプリントの作り方</h2>
+            <div class="description-content">
+                <div class="instruction-block">
+                    <h3>作成手順</h3>
+                    <ol>
+                        <li>プリントのタイトルを入力する</li>
+                        <li>数え方を選ぶ（1、2、3、4、5、10）</li>
+                        <li>開始番号を設定する</li>
+                        <li>空欄の数を選ぶ</li>
+                        <li>「プリントを作成」ボタンをクリックする</li>
+                        <li>印刷ボタンでプリントする</li>
+                    </ol>
+                </div>
+                <div class="instruction-block">
+                    <h3>教育的な効果</h3>
+                    <ul>
+                        <li>数の感覚と数え方の向上</li>
+                        <li>飛び数（2、5、10）の練習</li>
+                        <li>数のパターンと規則の理解</li>
+                        <li>幼稚園〜小学3年生に最適</li>
+                    </ul>
+                </div>
+                <div class="instruction-block">
+                    <h3>先生へのアドバイス</h3>
+                    <ul>
+                        <li>初心者は1ずつ数えることから始めましょう</li>
+                        <li>2や5の飛び数で練習しましょう</li>
+                        <li>上達したら空欄を増やしましょう</li>
+                        <li>「答えを見る」で素早く採点できます</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/number-sequence.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="../images/main-logo.png" alt="AriClass Logo" class="footer-logo-img">
+                <p>アリクラスは教師と生徒のための無料プリント作成サービスです。</p>
+            </div>
+            <nav class="footer-nav">
+                <h3>クイックリンク</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="word-search.html">単語探し</a></li>
+                    <li><a href="number-sequence.html">数の並び</a></li>
+                    <li><a href="addition-subtraction.html">足し算・引き算</a></li>
+                    <li><a href="multiplication-table.html">掛け算・割り算</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-nav">
+                <h3>情報</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="../privacy-policy.html">プライバシーポリシー</a></li>
+                    <li><a href="../terms-of-use.html">利用規約</a></li>
+                    <li><a href="mailto:yourtap1000@gmail.com">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <div class="footer-contact">
+                <h3>お問い合わせ</h3>
+                <a href="mailto:yourtap1000@gmail.com">yourtap1000@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Ariclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('hamburgerBtn');
+            var nav = document.getElementById('mobileNav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function() {
+                btn.classList.toggle('open');
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+    <script src="../js/mouse-fx.js"></script>
+    <script src="../js/lang-selector.js"></script>
+</body>
+</html>

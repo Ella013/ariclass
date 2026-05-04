@@ -1,0 +1,304 @@
+/* ── Circle Planner ── */
+
+.cp-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 920px;
+}
+
+/* Student header (Name/Date) should span full width like other worksheets */
+.cp-page .student-header {
+    width: 100%;
+}
+
+.cp-circle-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 0;
+    overflow: visible;
+}
+
+.cp-svg {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+
+
+/* ── Option groups (centered layout) ── */
+.option-group.cp-style-group,
+.option-group.cp-sleep-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.option-group.cp-style-group {
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ── Sleep Time settings ── */
+.cp-sleep-group {
+    padding-top: 0.2rem;
+}
+
+.cp-sleep-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cp-sleep-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.cp-sleep-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: #f5f6fb;
+    border-radius: 14px;
+    padding: 0.9rem 1.4rem;
+    opacity: 0.35;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.cp-sleep-picker.enabled {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cp-time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.cp-time-label {
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cp-timepicker {
+    position: relative;
+    display: inline-block;
+}
+
+.cp-tp-display {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    border: 1.5px solid #d8dbe8;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    user-select: none;
+    min-width: 120px;
+    justify-content: space-between;
+}
+
+.cp-tp-display:hover {
+    border-color: var(--primary-color);
+}
+
+.cp-tp-arrow {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+.cp-tp-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: white;
+    border: 1.5px solid #d8dbe8;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    z-index: 100;
+    flex-direction: row;
+    overflow: hidden;
+    min-width: 160px;
+}
+
+.cp-tp-panel.open {
+    display: flex;
+}
+
+.cp-tp-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-right: 1px solid #f0f1f5;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.cp-tp-col:last-child {
+    border-right: none;
+}
+
+.cp-tp-item {
+    padding: 0.45rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444;
+    transition: background 0.1s;
+}
+
+.cp-tp-item:hover {
+    background: #f0f2ff;
+}
+
+.cp-tp-item.active {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 700;
+}
+
+.cp-sleep-extras {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    opacity: 0.35;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    align-items: flex-start;
+    padding-top: 0.8rem;
+}
+
+.cp-sleep-extras.enabled {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cp-extra-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.cp-extra-row.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.cp-extra-row .cp-time-label {
+    width: 40px;
+    text-align: right;
+}
+
+#sleep-color {
+    width: 44px;
+    height: 32px;
+    border: 1.5px solid #d8dbe8;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 2px;
+    background: white;
+}
+
+.cp-moon-opts {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.cp-moon-btn {
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid #d8dbe8;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.cp-moon-btn:hover {
+    border-color: var(--primary-color);
+    background: #f0f2ff;
+}
+
+.cp-moon-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.cp-moon-btn[data-moon="full"] {
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.cp-print-notice {
+    background: #f5f6fb;
+    border: 1px solid #e4e6f0;
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.6;
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+}
+
+.cp-print-notice i {
+    color: #8a9ac0;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+
+.cp-time-sep {
+    font-size: 1.1rem;
+    color: #bbb;
+    font-weight: 400;
+    padding-top: 1.1rem;
+}
+
+/* ── Print ── */
+@media print {
+    .cp-page {
+        height: 100% !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .cp-svg {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+}

@@ -1,5 +1,9 @@
 /* Addition & Subtraction Worksheet Styles */
 
+.options .case-option label {
+    text-align: center;
+}
+
 #puzzle-preview .problems-grid {
     display: grid;
     gap: 1.2rem 1.2rem;
